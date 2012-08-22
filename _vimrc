@@ -68,4 +68,8 @@ set columns=160 lines=65
 
 if has('gui_running')
   set guifont=Courier_New:h10:cANSI
+  au syntax * cal rainbow#activate()
+  " this maps the "* register to the unnamed register so you can copy/paste between instances
+  " http://superuser.com/a/296308
+  :set clipboard+=unnamed 
 endif

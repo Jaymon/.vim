@@ -45,9 +45,13 @@ let g:colors_name="mycolorscheme"
 
 " http://vim.wikia.com/wiki/Highlight_current_line
 hi cursorLine guibg=#ECF7FF
-"hi CursorColumn
 
 hi MatchParen guibg=#FFFF80
+
+if exists('+colorcolumn')
+  set colorcolumn=80
+  highlight ColorColumn ctermbg=lightgrey guibg=#ECF7FF
+endif
 
 "hi Cursor		
 "hi CursorIM	

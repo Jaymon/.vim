@@ -17,7 +17,11 @@
 $api
 
 # Command Line History (newest to oldest):
+:-10
+:+10
+:q!
 :q
+:YRShow
 :w
 :wq
 :set guifont?
@@ -46,7 +50,6 @@ $api
 :209
 :/testInsert
 :e MingoInterfaceTest.php
-:q!
 :/get_from_social_network
 :/merge
 :544
@@ -64,9 +67,6 @@ $api
 :/class DripGener
 :/class UserProfile
 :UserProfile
-:0
-:/app_version
-:/api
 
 # Search String History (newest to oldest):
 ? _get_amplify_tuple
@@ -122,9 +122,12 @@ $api
 # Input Line History (newest to oldest):
 
 # Registers:
-"0	LINE	0
-	            statuses.options.setdefault('ripples_limit', 1) # only return one ripple in lists (all ripplers are returned)
-""1	LINE	0
+""0	CHAR	0
+	  ripple_status = RippleStatus(**djfixtures.get_model_fields(RippleStatus,kwargs))
+	    ripple_status.drip_status = kwargs['drip_status']
+	    ripple_status.ripple = kwargs['ripple']
+	  
+"1	LINE	0
 	
 "2	LINE	0
 	        new_images = True
@@ -163,18 +166,29 @@ $api
 
 # File marks:
 'H  249  24  C:\Projects\Undrip\_undrip\users\fixtures.py
-'0  154  8  C:\Projects\Undrip\_undrip\undy\drizzle\views\api.py
-'1  49  0  C:\Projects\Undrip\_undrip\drips\tests\tests_dripgenerator.py
-'2  35  58  C:\Projects\Undrip\_undrip\undy\urls.py
-'3  144  0  C:\Projects\Undrip\_undrip\drips\fixtures.py
-'4  56  8  C:\Projects\Undrip\_undrip\users\management\commands\suggest_users.py
-'5  103  0  C:\Projects\Undrip\_undrip\drips\fixtures.py
-'6  1034  0  C:\Projects\Undrip\_undrip\drips\models.py
-'7  246  0  C:\Projects\Undrip\_undrip\drips\models.py
-'8  1  0  C:\Projects\Undrip\_undrip\undy\drizzle\decorators.py
-'9  1  0  C:\Projects\Undrip\_undrip\drips\views.py
+'0  52  4  ~\fixtures.py
+'1  32  2  ~\fixtures.py
+'2  40  1  ~\fixtures.py
+'3  74  27  C:\Projects\Undrip\_undrip\drips\fixtures.py
+'4  20  34  ~\fixtures.py
+'5  18  20  ~\fixtures.py
+'6  84  83  ~\fixtures.py
+'7  85  52  ~\fixtures.py
+'8  1  0  ~\fixtures.py
+'9  154  8  C:\Projects\Undrip\_undrip\undy\drizzle\views\api.py
 
 # Jumplist (newest first):
+-'  52  4  ~\fixtures.py
+-'  32  2  ~\fixtures.py
+-'  40  1  ~\fixtures.py
+-'  74  27  C:\Projects\Undrip\_undrip\drips\fixtures.py
+-'  31  52  ~\fixtures.py
+-'  67  0  ~\fixtures.py
+-'  20  34  ~\fixtures.py
+-'  18  20  ~\fixtures.py
+-'  84  83  ~\fixtures.py
+-'  85  52  ~\fixtures.py
+-'  1  0  ~\fixtures.py
 -'  154  8  C:\Projects\Undrip\_undrip\undy\drizzle\views\api.py
 -'  158  40  C:\Projects\Undrip\_undrip\undy\drizzle\views\api.py
 -'  49  0  C:\Projects\Undrip\_undrip\drips\tests\tests_dripgenerator.py
@@ -260,22 +274,110 @@ $api
 -'  432  8  C:\Projects\Mingo\test\phpunit\MingoInterfaceTest.php
 -'  559  4  C:\Projects\Mingo\test\phpunit\MingoInterfaceTest.php
 -'  565  6  C:\Projects\Mingo\test\phpunit\MingoInterfaceTest.php
--'  586  34  C:\Projects\Mingo\test\phpunit\MingoInterfaceTest.php
--'  5  1  C:\Projects\Mingo\test\phpunit\MingoInterfaceTest.php
--'  1  0  C:\Program Files (Jaymon)\gVim\gVimPortable.ini
--'  1  0  C:\Projects\Mingo\test\phpunit\MingoSQLiteInterfaceTest.php
--'  432  8  C:\Projects\Mingo\test\phpunit\MingoInterfaceTest.php
--'  559  4  C:\Projects\Mingo\test\phpunit\MingoInterfaceTest.php
--'  565  6  C:\Projects\Mingo\test\phpunit\MingoInterfaceTest.php
--'  586  34  C:\Projects\Mingo\test\phpunit\MingoInterfaceTest.php
--'  5  1  C:\Projects\Mingo\test\phpunit\MingoInterfaceTest.php
--'  1  0  C:\Program Files (Jaymon)\gVim\gVimPortable.ini
--'  1  0  C:\Projects\Mingo\test\phpunit\MingoSQLiteInterfaceTest.php
--'  432  8  C:\Projects\Mingo\test\phpunit\MingoInterfaceTest.php
--'  559  4  C:\Projects\Mingo\test\phpunit\MingoInterfaceTest.php
--'  565  6  C:\Projects\Mingo\test\phpunit\MingoInterfaceTest.php
+-'  74  27  C:\Projects\Undrip\_undrip\drips\fixtures.py
 
 # History of marks within files (newest to oldest):
+
+> ~\fixtures.py
+	"	52	4
+	.	62	0
+	+	21	0
+	+	22	0
+	+	23	0
+	+	24	0
+	+	25	0
+	+	26	0
+	+	27	0
+	+	28	0
+	+	29	0
+	+	30	0
+	+	31	0
+	+	67	0
+	+	67	0
+	+	31	0
+	+	67	0
+	+	67	0
+	+	31	0
+	+	32	0
+	+	33	0
+	+	34	0
+	+	35	0
+	+	36	0
+	+	37	0
+	+	38	0
+	+	39	0
+	+	40	2
+	+	42	0
+	+	52	0
+	+	62	0
+
+> C:\Projects\Undrip\_undrip\drips\fixtures.py
+	"	74	27
+	^	93	41
+	.	93	40
+	+	121	87
+	+	96	36
+	+	86	29
+	+	96	78
+	+	100	0
+	+	96	105
+	+	100	8
+	+	87	43
+	+	96	0
+	+	100	16
+	+	107	0
+	+	107	0
+	+	107	0
+	+	107	65
+	+	100	0
+	+	100	87
+	+	107	0
+	+	107	0
+	+	107	30
+	+	100	16
+	+	100	47
+	+	100	15
+	+	100	0
+	+	87	75
+	+	88	0
+	+	88	0
+	+	95	16
+	+	100	0
+	+	99	0
+	+	99	0
+	+	96	24
+	+	96	87
+	+	96	33
+	+	96	82
+	+	95	16
+	+	99	0
+	+	97	0
+	+	98	0
+	+	95	0
+	+	96	82
+	+	96	0
+	+	101	0
+	+	102	0
+	+	101	0
+	+	102	0
+	+	106	16
+	+	107	0
+	+	121	0
+	+	97	0
+	+	90	0
+	+	93	44
+	+	92	65
+	+	93	0
+	+	92	23
+	+	91	83
+	+	94	0
+	+	93	40
+
+> ~\[YankRing]
+	"	1	0
+	.	2	0
+	+	11	0
+	+	2	0
 
 > C:\Projects\Undrip\_undrip\undy\drizzle\views\api.py
 	"	154	8
@@ -565,68 +667,6 @@ $api
 	+	42	23
 	+	54	26
 	+	39	0
-
-> C:\Projects\Undrip\_undrip\drips\fixtures.py
-	"	74	27
-	^	93	41
-	.	93	40
-	+	121	87
-	+	96	36
-	+	86	29
-	+	96	78
-	+	100	0
-	+	96	105
-	+	100	8
-	+	87	43
-	+	96	0
-	+	100	16
-	+	107	0
-	+	107	0
-	+	107	0
-	+	107	65
-	+	100	0
-	+	100	87
-	+	107	0
-	+	107	0
-	+	107	30
-	+	100	16
-	+	100	47
-	+	100	15
-	+	100	0
-	+	87	75
-	+	88	0
-	+	88	0
-	+	95	16
-	+	100	0
-	+	99	0
-	+	99	0
-	+	96	24
-	+	96	87
-	+	96	33
-	+	96	82
-	+	95	16
-	+	99	0
-	+	97	0
-	+	98	0
-	+	95	0
-	+	96	82
-	+	96	0
-	+	101	0
-	+	102	0
-	+	101	0
-	+	102	0
-	+	106	16
-	+	107	0
-	+	121	0
-	+	97	0
-	+	90	0
-	+	93	44
-	+	92	65
-	+	93	0
-	+	92	23
-	+	91	83
-	+	94	0
-	+	93	40
 
 > C:\Projects\Undrip\_undrip\undy\drizzle\tests\tests_api.py
 	"	1475	44
@@ -1036,286 +1076,4 @@ $api
 	+	121	16
 
 > C:\Projects\Undrip\_undrip\drips\views.py
-	"	1	0
-
-> C:\Projects\Undrip\_undrip\undy\settings.py
-	"	109	29
-	^	109	30
-	.	109	29
-	+	109	29
-
-> C:\Projects\Undrip\_undrip\undy\option-window
-	"	1	0
-	.	896	0
-	+	58	0
-	+	92	0
-	+	95	0
-	+	129	0
-	+	136	0
-	+	167	0
-	+	172	0
-	+	175	0
-	+	178	0
-	+	181	0
-	+	184	0
-	+	192	0
-	+	195	0
-	+	198	0
-	+	205	0
-	+	208	0
-	+	211	0
-	+	214	0
-	+	217	0
-	+	220	0
-	+	223	0
-	+	245	0
-	+	248	0
-	+	259	0
-	+	271	0
-	+	276	0
-	+	438	0
-	+	441	0
-	+	444	0
-	+	447	0
-	+	450	0
-	+	455	0
-	+	458	0
-	+	461	0
-	+	464	0
-	+	467	0
-	+	474	0
-	+	477	0
-	+	486	0
-	+	499	0
-	+	505	0
-	+	511	0
-	+	514	0
-	+	519	0
-	+	524	0
-	+	527	0
-	+	530	0
-	+	533	0
-	+	536	0
-	+	539	0
-	+	542	0
-	+	545	0
-	+	548	0
-	+	551	0
-	+	554	0
-	+	557	0
-	+	565	0
-	+	568	0
-	+	573	0
-	+	576	0
-	+	583	0
-	+	585	0
-	+	588	0
-	+	591	0
-	+	594	0
-	+	597	0
-	+	600	0
-	+	606	0
-	+	633	0
-	+	638	0
-	+	641	0
-	+	644	0
-	+	647	0
-	+	652	0
-	+	684	0
-	+	687	0
-	+	695	0
-	+	721	0
-	+	792	0
-	+	797	0
-	+	800	0
-	+	803	0
-	+	820	0
-	+	826	0
-	+	831	0
-	+	834	0
-	+	843	0
-	+	887	0
-	+	890	0
-	+	893	0
-	+	896	0
-
-> C:\Projects\Undrip\_undrip\undy\drizzle\middleware.py
-	"	41	0
-
-> C:\Projects\Undrip\_undrip\users\middleware.py
-	"	34	12
-	^	28	27
-	.	34	0
-	+	16	89
-	+	15	0
-	+	14	0
-	+	15	0
-	+	16	0
-	+	15	0
-	+	17	25
-	+	17	27
-	+	17	94
-	+	23	7
-	+	4	8
-	+	26	55
-	+	34	23
-	+	34	0
-	+	38	15
-	+	12	35
-	+	40	0
-	+	34	44
-	+	29	53
-	+	36	0
-	+	35	11
-	+	35	37
-	+	31	43
-	+	35	43
-	+	35	20
-	+	35	20
-	+	35	0
-	+	35	12
-	+	35	0
-	+	29	47
-	+	28	26
-	+	29	0
-	+	27	0
-	+	34	0
-
-> C:\Projects\Undrip\_undrip\users\__init__.py
-	"	43	8
-	^	27	0
-	.	27	0
-	+	27	0
-
-> C:\Projects\Undrip\_undrip\drips\tests\tests_ripple.py
-	"	30	9
-	^	30	10
-	.	30	9
-	+	27	26
-	+	28	9
-	+	30	9
-
-> C:\Projects\New folder (2)\out_class.php
-	"	98	0
-
-> C:\Projects\New folder (2)\pout.py
-	"	204	4
-	^	419	2
-	.	419	1
-	+	759	6
-	+	419	1
-
-> ~\_vimrc
-	"	13	0
-
-> C:\Projects\New folder (2)\option-window
-	"	33	0
-	.	896	0
-	+	58	0
-	+	92	0
-	+	95	0
-	+	129	0
-	+	136	0
-	+	167	0
-	+	172	0
-	+	175	0
-	+	178	0
-	+	181	0
-	+	184	0
-	+	192	0
-	+	195	0
-	+	198	0
-	+	205	0
-	+	208	0
-	+	211	0
-	+	214	0
-	+	217	0
-	+	220	0
-	+	223	0
-	+	245	0
-	+	248	0
-	+	259	0
-	+	271	0
-	+	276	0
-	+	438	0
-	+	441	0
-	+	444	0
-	+	447	0
-	+	450	0
-	+	455	0
-	+	458	0
-	+	461	0
-	+	464	0
-	+	467	0
-	+	474	0
-	+	477	0
-	+	486	0
-	+	499	0
-	+	505	0
-	+	511	0
-	+	514	0
-	+	519	0
-	+	524	0
-	+	527	0
-	+	530	0
-	+	533	0
-	+	536	0
-	+	539	0
-	+	542	0
-	+	545	0
-	+	548	0
-	+	551	0
-	+	554	0
-	+	557	0
-	+	565	0
-	+	568	0
-	+	573	0
-	+	576	0
-	+	583	0
-	+	585	0
-	+	588	0
-	+	591	0
-	+	594	0
-	+	597	0
-	+	600	0
-	+	606	0
-	+	633	0
-	+	638	0
-	+	641	0
-	+	644	0
-	+	647	0
-	+	652	0
-	+	684	0
-	+	687	0
-	+	695	0
-	+	721	0
-	+	792	0
-	+	797	0
-	+	800	0
-	+	803	0
-	+	820	0
-	+	826	0
-	+	831	0
-	+	834	0
-	+	843	0
-	+	887	0
-	+	890	0
-	+	893	0
-	+	896	0
-
-> C:\Projects\Plancast\_active\lib\crypt_class.php
-	"	77	0
-
-> C:\Projects\Mingo\test\phpunit\MingoInterfaceTest.php
-	"	432	8
-	.	559	0
-	+	209	33
-	+	586	19
-	+	565	0
-	+	559	0
-
-> C:\Program Files (Jaymon)\gVim\gVimPortable.ini
-	"	1	0
-
-> C:\Projects\Mingo\test\phpunit\MingoSQLiteInterfaceTest.php
 	"	1	0
