@@ -5,6 +5,6 @@ environment consistent across multiple machines.
 
 ## Plugins
 
-### Rainbow
+### Rainbow Parenthesis
 
-http://www.vim.org/scripts/script.php?script_id=4176
+http://www.vim.org/scripts/script.php?script_id=3772
