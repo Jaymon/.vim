@@ -32,6 +32,7 @@ function MyDiff()
 endfunction
 
 " custom jay settings
+call pathogen#infect()
 set showmode
 
 " line numbering
@@ -72,5 +73,14 @@ if has('gui_running')
   au VimEnter * cal rainbow_parentheses#toggleall()
   " this maps the "* register to the unnamed register so you can copy/paste between instances
   " http://superuser.com/a/296308
-  :set clipboard+=unnamed 
+  :set clipboard+=unnamed
+  
+  if has("win32")
+    " http://stackoverflow.com/questions/7175277/using-taglist-plugin-in-gvim-on-windows
+    let Tlist_Ctags_Cmd= '"' . $HOME . '/vimfiles/bundle/taglist/ctags.exe"'
+    " save ~ files somewhere where I don't have to bother with them
+    " http://stackoverflow.com/questions/2823608/
+    set backupdir-=.
+    set backupdir^=$TEMP
+  endif
 endif
