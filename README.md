@@ -19,20 +19,19 @@ http://www.vim.org/scripts/script.php?script_id=273
 
 ## Install
 
-### In Windows, 
+### In Windows 
 
-1. Create $HOME\vimfiles
+1. Create %HOMEPATH%\vimfiles
 
-2. cd into $HOME\vimfiles
+2. cd into %HOMEPATH%\vimfiles
 
 3. clone the repo
 
-    git clone <repo> .
+    git clone [repo] .
 
 4. make a symlink for the _vimrc file
 
-    mklink $HOME\_vimrc $HOME\vimfiles\_vimrc
-
+    mklink %HOMEPATH%\_vimrc %HOMEPATH%\vimfiles\_vimrc
 
 ## Warnings
 

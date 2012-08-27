@@ -81,6 +81,10 @@ if has('gui_running')
     " save ~ files somewhere where I don't have to bother with them
     " http://stackoverflow.com/questions/2823608/
     set backupdir-=.
-    set backupdir^=$TEMP
+    set backupdir^=$TEMP//
+    " this is for the .swp files
+    " http://vim.wikia.com/wiki/Remove_swap_and_backup_files_from_your_working_directory
+    set directory-=.
+    set directory=$TEMP//
   endif
 endif
