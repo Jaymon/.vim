@@ -31,7 +31,7 @@ http://www.vim.org/scripts/script.php?script_id=273
 
 4. make a symlink for the _vimrc file
 
-    mklink %HOMEPATH%\\_vimrc %HOMEPATH%]\\vimfiles\\_vimrc
+    mklink %HOMEPATH%\\_vimrc %HOMEPATH%\\vimfiles\\_vimrc
 
 ## Warnings
 
