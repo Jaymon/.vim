@@ -33,6 +33,10 @@ http://www.vim.org/scripts/script.php?script_id=273
 
     mklink %HOMEPATH%\\_vimrc %HOMEPATH%\\vimfiles\\_vimrc
 
+5. make a symlink for the _gvimrc file
+
+    mklink %HOMEPATH%\\_gvimrc %HOMEPATH%\\vimfiles\\_gvimrc
+
 ## Warnings
 
 This currently does not work on the console version of Vim, this is *GUI* only

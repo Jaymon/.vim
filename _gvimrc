@@ -1,0 +1,9 @@
+
+"set columns=160 lines=65
+" we do our best to set cols to half the width and lines to about 2/3 height
+" http://vim.1045645.n5.nabble.com/Setting-width-to-half-screen-size-td1172185.html
+autocmd GUIEnter * let &columns = 9999 | let &columns = &columns/2 
+autocmd GUIEnter * let &lines = 999 | let &lines = &lines/2 + &lines/3
+
+set guifont=Courier_New:h10:cANSI
+

@@ -65,30 +65,26 @@ set foldlevelstart=2
 "autocmd Syntax py,php normal zR
 
 colorscheme jaymon
-set columns=160 lines=65
 
-if has('gui_running')
-  set guifont=Courier_New:h10:cANSI
-  " http://www.vim.org/scripts/script.php?script_id=3772
-  au VimEnter * cal rainbow_parentheses#toggleall()
-  " this maps the "* register to the unnamed register so you can copy/paste between instances
-  " http://superuser.com/a/296308
-  :set clipboard+=unnamed
-  
-  if has("win32")
-    " http://stackoverflow.com/questions/7175277/using-taglist-plugin-in-gvim-on-windows
-    let Tlist_Ctags_Cmd= '"' . $HOME . '/vimfiles/bundle/taglist/ctags.exe"'
-    " save ~ files somewhere where I don't have to bother with them
-    " http://stackoverflow.com/questions/2823608/
-    set backupdir-=.
-    set backupdir^=$TEMP//
-    " this is for the .swp files
-    " http://vim.wikia.com/wiki/Remove_swap_and_backup_files_from_your_working_directory
-    set directory-=.
-    set directory=$TEMP//
-  endif
+" this maps the "* register to the unnamed register so you can copy/paste between instances
+" http://superuser.com/a/296308
+:set clipboard+=unnamed
+
+if has("win32")
+  " http://stackoverflow.com/questions/7175277/using-taglist-plugin-in-gvim-on-windows
+  let Tlist_Ctags_Cmd= '"' . $HOME . '/vimfiles/bundle/taglist/ctags.exe"'
+  " save ~ files somewhere where I don't have to bother with them
+  " http://stackoverflow.com/questions/2823608/
+  set backupdir-=.
+  set backupdir^=$TEMP//
+  " this is for the .swp files
+  " http://vim.wikia.com/wiki/Remove_swap_and_backup_files_from_your_working_directory
+  set directory-=.
+  set directory=$TEMP//
 endif
 
+" http://www.vim.org/scripts/script.php?script_id=3772
+au VimEnter * cal rainbow_parentheses#toggleall()
 
 " taglist plugin config
 nnoremap :t<CR> :TlistToggle<CR>
