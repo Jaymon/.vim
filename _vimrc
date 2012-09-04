@@ -37,6 +37,7 @@ set showmode
 
 " line numbering
 set nu
+set relativenumber
 set numberwidth=5 " Set line numbering to take up 5 spaces
 set cursorline
 
@@ -47,9 +48,16 @@ set autoindent
 set smartindent
 set cindent
 set tabstop=2 " set tab character to N characters
+set softtabstop=2 " let backspace delete indent
 set expandtab " turn tabs into whitespace
 set shiftwidth=2 " indent width for autoindent
 filetype indent on " indent depends on filetype
+
+" searching (some of these are enabled in vimrc_example.vim)
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
 
 " http://wiki.python.org/moin/Vim
 au FileType python setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4
@@ -73,15 +81,27 @@ colorscheme jaymon
 if has("win32")
   " http://stackoverflow.com/questions/7175277/using-taglist-plugin-in-gvim-on-windows
   let Tlist_Ctags_Cmd= '"' . $HOME . '/vimfiles/bundle/taglist/ctags.exe"'
-  " save ~ files somewhere where I don't have to bother with them
-  " http://stackoverflow.com/questions/2823608/
-  set backupdir-=.
-  set backupdir^=$TEMP//
-  " this is for the .swp files
-  " http://vim.wikia.com/wiki/Remove_swap_and_backup_files_from_your_working_directory
-  set directory-=.
-  set directory=$TEMP//
 endif
+
+" backup stuff
+set history=1000
+set backup
+set undofile
+set undolevels=1000
+set undoreload=10000
+" save ~ files somewhere where I don't have to bother with them
+" http://stackoverflow.com/questions/2823608/
+set backupdir-=.
+set backupdir^=$TEMP//
+" this is for the .swp files
+" http://vim.wikia.com/wiki/Remove_swap_and_backup_files_from_your_working_directory
+set directory-=.
+set directory^=$TEMP//
+" http://stackoverflow.com/questions/4331776/change-vim-swap-backup-undo-file-name
+set undodir-=.
+set undodir^=$TEMP//
+au BufWinLeave * silent! mkview "make vim save view (state) (folds, cursor, etc)
+au BufWinEnter * silent! loadview "make vim load view (state) (folds, cursor, etc)
 
 " http://www.vim.org/scripts/script.php?script_id=3772
 au VimEnter * cal rainbow_parentheses#toggleall()
