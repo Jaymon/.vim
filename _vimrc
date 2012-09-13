@@ -2,12 +2,18 @@
 " http://stackoverflow.com/questions/3111351/gvim-portable-plugins
 
 set nocompatible
+
+call pathogen#infect()
+
+" https://github.com/maxbrunsfeld/vim-yankstack
+" call yankstack#setup()
+
 source $VIMRUNTIME/vimrc_example.vim
 "source $VIMRUNTIME/mswin.vim
 behave mswin
 
 set diffexpr=MyDiff()
-function MyDiff()
+function! MyDiff()
   let opt = '-a --binary '
   if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
   if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
@@ -31,8 +37,6 @@ function MyDiff()
   silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
 endfunction
 
-" custom jay settings
-call pathogen#infect()
 set showmode
 
 " line numbering
@@ -40,6 +44,7 @@ set nu
 set relativenumber
 set numberwidth=5 " Set line numbering to take up 5 spaces
 set cursorline
+set scrolloff=3 " N lines above/below cursor when scrolling
 
 " Turn on smart indent
 " http://www.jonlee.ca/hacking-vim-the-ultimate-vimrc/
@@ -74,13 +79,18 @@ set foldlevelstart=2
 
 colorscheme jaymon
 
-" this maps the "* register to the unnamed register so you can copy/paste between instances
-" http://superuser.com/a/296308
-:set clipboard+=unnamed
-
 if has("win32")
   " http://stackoverflow.com/questions/7175277/using-taglist-plugin-in-gvim-on-windows
   let Tlist_Ctags_Cmd= '"' . $HOME . '/vimfiles/bundle/taglist/ctags.exe"'
+  " doesn't work very well, use :so instead I guess
+  " http://vim.wikia.com/wiki/Change_vimrc_with_auto_reload
+  " autocmd! bufwritepost _vimrc source %
+
+else
+  " When vimrc is edited, automatically reload it!
+  " http://vimingwithbuttar.googlecode.com/hg/.vimrc
+  " autocmd! bufwritepost .vimrc source %
+
 endif
 
 " backup stuff
@@ -108,6 +118,30 @@ au VimEnter * cal rainbow_parentheses#toggleall()
 
 " taglist plugin config
 nnoremap :t<CR> :TlistToggle<CR>
+nnoremap TT :TlistToggle<CR>
 let Tlist_Exit_OnlyWindow = 1     " exit if taglist is last window open
 let Tlist_Show_One_File = 1       " Only show tags for current buffer
 let Tlist_Enable_Fold_Column = 0  " no fold column (only showing one file)
+
+" Allow us to save a file as root, if we have sudo privileges,
+" when we're not currently useing vim as root
+" http://vimingwithbuttar.googlecode.com/hg/.vimrc
+cmap w!! %!sudo tee > /dev/null %
+
+" make Y behave like D and C
+nmap Y y$
+
+""" comments.vim
+"A more elaborate comment set up. Use Ctr-C to comment and Ctr-x to uncomment
+" This will detect file types and use oneline comments accordingle. Cool
+" because you visually select regions and comment/uncomment the whole region.
+" works with marked regions to.
+" to activate, just place it in your plugins dir
+" https://github.com/vim-scripts/comments.vim
+" http://www.vim.org/scripts/script.php?script_id=1528
+
+" this maps the "* register to the unnamed register so you can copy/paste between instances
+" http://superuser.com/a/296308
+set clipboard+=unnamed
+"nnoremap yy yy"*yy
+"vnoremap y ygv"+y
