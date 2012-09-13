@@ -111,3 +111,21 @@ nnoremap :t<CR> :TlistToggle<CR>
 let Tlist_Exit_OnlyWindow = 1     " exit if taglist is last window open
 let Tlist_Show_One_File = 1       " Only show tags for current buffer
 let Tlist_Enable_Fold_Column = 0  " no fold column (only showing one file)
+
+" do some cool text moving, the only one I would like to add is to append one
+" line to the endo of another line
+" for example, suppose you have 2 lines:
+"   for x in y:
+"     print y
+"
+" I would like to able to do something like <A-H>  on the second line and end up with:
+"   for x in y: print y
+" 
+" http://vim.wikia.com/wiki/Moving_lines_up_or_down
+" http://stackoverflow.com/questions/741814/move-entire-line-up-and-down-in-vim
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
