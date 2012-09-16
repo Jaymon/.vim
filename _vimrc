@@ -38,6 +38,7 @@ function! MyDiff()
 endfunction
 
 set showmode
+:set virtualedit=onemore
 
 " line numbering
 set nu
@@ -117,7 +118,9 @@ au BufWinEnter * silent! loadview "make vim load view (state) (folds, cursor, et
 au VimEnter * cal rainbow_parentheses#toggleall()
 
 " taglist plugin config
-nnoremap :t<CR> :TlistToggle<CR>
+" this slowed down : by 1 second while vim
+" waited for key timeout, better to just have TT work
+"nnoremap :t<CR> :TlistToggle<CR>
 nnoremap TT :TlistToggle<CR>
 let Tlist_Exit_OnlyWindow = 1     " exit if taglist is last window open
 let Tlist_Show_One_File = 1       " Only show tags for current buffer
@@ -184,4 +187,15 @@ endfunction
 vnoremap <silent> * :call VisualSearch('f')<CR>
 vnoremap <silent> # :call VisualSearch('b')<CR>
 " End From an idea by Michael Nauman
+
+" http://vim.wikia.com/wiki/VimTip1066
+" http://vim.wikia.com/wiki/Insert_newline_without_entering_insert_mode
+" deletes blank line below
+nnoremap <silent><S-BS> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
+" deletes blank line above
+nnoremap <silent><C-BS> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
+" adds a blank line below
+nnoremap <silent><S-CR> :set paste<CR>m`o<Esc>``:set nopaste<CR>
+" adds a blank line above
+nnoremap <silent><C-CR> :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
