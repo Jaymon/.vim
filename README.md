@@ -17,6 +17,11 @@ http://www.vim.org/scripts/script.php?script_id=3772
 
 http://www.vim.org/scripts/script.php?script_id=273
 
+### Syntax/python.vim
+
+https://github.com/hdima/vim-scripts
+http://www.vim.org/scripts/script.php?script_id=790
+
 ## Install
 
 ### In Windows 
@@ -40,3 +45,7 @@ http://www.vim.org/scripts/script.php?script_id=273
 ## Warnings
 
 This currently does not work on the console version of Vim, this is *GUI* only
+
+## Plugins I've thought about using
+
+https://github.com/klen/python-mode

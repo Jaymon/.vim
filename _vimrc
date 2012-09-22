@@ -199,3 +199,7 @@ nnoremap <silent><S-CR> :set paste<CR>m`o<Esc>``:set nopaste<CR>
 " adds a blank line above
 nnoremap <silent><C-CR> :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
+
+" config for python highlighting plugin
+let python_highlight_all = 1
+let python_highlight_space_errors = 0
