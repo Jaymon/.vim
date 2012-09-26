@@ -17,6 +17,16 @@ http://www.vim.org/scripts/script.php?script_id=3772
 
 http://www.vim.org/scripts/script.php?script_id=273
 
+### Tagbar
+
+This has largely replaced Taglist because I like the hierarchical code tree better
+
+http://majutsushi.github.com/tagbar/
+
+### NerdTree
+
+https://github.com/scrooloose/nerdtree
+
 ### Syntax/python.vim
 
 https://github.com/hdima/vim-scripts
@@ -49,3 +59,4 @@ This currently does not work on the console version of Vim, this is *GUI* only
 ## Plugins I've thought about using
 
 https://github.com/klen/python-mode
+https://github.com/tpope/vim-surround

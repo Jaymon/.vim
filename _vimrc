@@ -4,6 +4,7 @@
 set nocompatible
 
 call pathogen#infect()
+"let &rtp .= ',' . expand("<sfile>:p:h") . "/bin"
 
 " https://github.com/maxbrunsfeld/vim-yankstack
 " call yankstack#setup()
@@ -80,20 +81,6 @@ set foldlevelstart=2
 
 colorscheme jaymon
 
-if has("win32")
-  " http://stackoverflow.com/questions/7175277/using-taglist-plugin-in-gvim-on-windows
-  let Tlist_Ctags_Cmd= '"' . $HOME . '/vimfiles/bundle/taglist/ctags.exe"'
-  " doesn't work very well, use :so instead I guess
-  " http://vim.wikia.com/wiki/Change_vimrc_with_auto_reload
-  " autocmd! bufwritepost _vimrc source %
-
-else
-  " When vimrc is edited, automatically reload it!
-  " http://vimingwithbuttar.googlecode.com/hg/.vimrc
-  " autocmd! bufwritepost .vimrc source %
-
-endif
-
 " backup stuff
 set history=1000
 set backup
@@ -116,15 +103,6 @@ au BufWinEnter * silent! loadview "make vim load view (state) (folds, cursor, et
 
 " http://www.vim.org/scripts/script.php?script_id=3772
 au VimEnter * cal rainbow_parentheses#toggleall()
-
-" taglist plugin config
-" this slowed down : by 1 second while vim
-" waited for key timeout, better to just have TT work
-"nnoremap :t<CR> :TlistToggle<CR>
-nnoremap TT :TlistToggle<CR>
-let Tlist_Exit_OnlyWindow = 1     " exit if taglist is last window open
-let Tlist_Show_One_File = 1       " Only show tags for current buffer
-let Tlist_Enable_Fold_Column = 0  " no fold column (only showing one file)
 
 " do some cool text moving, the only one I would like to add is to append one
 " line to the endo of another line
@@ -199,7 +177,40 @@ nnoremap <silent><S-CR> :set paste<CR>m`o<Esc>``:set nopaste<CR>
 " adds a blank line above
 nnoremap <silent><C-CR> :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
-
 " config for python highlighting plugin
 let python_highlight_all = 1
 let python_highlight_space_errors = 0
+
+" configure NERDTree
+" https://github.com/scrooloose/nerdtree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+nnoremap NN :NERDTreeToggle<CR>
+
+" configre Tagbar
+" http://majutsushi.github.com/tagbar/
+nnoremap TT :TagbarToggle<CR>
+let g:tagbar_left = 1
+let g:tagbar_autofocus = 1
+let g:tagbar_sort = 1
+let g:tagbar_expand = 0
+let g:tagbar_foldlevel = 1
+let g:tagbar_autoshowtag = 1
+if has("win32")
+  " for some reason, tagbar won't work if there are quotes around the path
+  let g:tagbar_ctags_bin = $HOME . '\vimfiles\bin\ctags.exe'
+else
+endif
+
+" configure taglist plugin
+" this slowed down : by 1 second while vim
+" waited for key timeout, better to just have TT work
+"nnoremap :t<CR> :TlistToggle<CR>
+nnoremap RR :TlistToggle<CR>
+let Tlist_Exit_OnlyWindow = 1     " exit if taglist is last window open
+let Tlist_Show_One_File = 1       " Only show tags for current buffer
+let Tlist_Enable_Fold_Column = 0  " no fold column (only showing one file)
+if has("win32")
+  " http://stackoverflow.com/questions/7175277/using-taglist-plugin-in-gvim-on-windows
+  let Tlist_Ctags_Cmd = '"' . $HOME . '\vimfiles\bundle\taglist\ctags.exe"'
+else
+endif
