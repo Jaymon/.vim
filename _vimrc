@@ -1,14 +1,13 @@
 " http://portablegvim.sourceforge.net/configuration.html
 " http://stackoverflow.com/questions/3111351/gvim-portable-plugins
 
-set nocompatible
-
+filetype off
 call pathogen#infect()
-"let &rtp .= ',' . expand("<sfile>:p:h") . "/bin"
 
 " https://github.com/maxbrunsfeld/vim-yankstack
 " call yankstack#setup()
 
+set nocompatible
 source $VIMRUNTIME/vimrc_example.vim
 "source $VIMRUNTIME/mswin.vim
 behave mswin
@@ -40,6 +39,17 @@ endfunction
 
 set showmode
 :set virtualedit=onemore
+
+" http://vim.wikia.com/wiki/Working_with_Unicode
+" http://vim.1045645.n5.nabble.com/what-s-a-quot-conversion-error-quot-and-how-do-I-correct-it-td4416508.html
+if has("multi_byte")
+  if &termencoding == ""
+    let &termencoding = &encoding
+  endif
+  set encoding=utf-8
+  setglobal fileencoding=utf-8
+  set fileencodings=ucs-bom,utf-8,latin1
+endif
 
 " line numbering
 set nu
@@ -79,7 +89,18 @@ set foldlevelstart=2
 "autocmd Syntax py,php setlocal foldmethod=indent
 "autocmd Syntax py,php normal zR
 
+syntax on
 colorscheme jaymon
+"set listchars=tab:>\ ,eol:¬,nbsp:<,precedes:$
+" http://vimcasts.org/episodes/show-invisibles/
+set listchars=tab:˻\ ,eol:˼,trail:˻,extends:˻,precedes:˻
+set list
+" the 2 lines work to match space, but I don't like it since it messes with
+" highlight current line, I guess I just have to hope for space: support in
+" listchars, see https://groups.google.com/forum/?fromgroups=#!topic/vim_dev/dIQHjW1g92s
+" http://stackoverflow.com/questions/1675688/make-vim-show-all-white-spaces-as-a-character
+" set conceallevel=2 concealcursor=nv
+" autocmd BufWinEnter * syntax match NonText / / conceal cchar=˻
 
 " backup stuff
 set history=1000
@@ -176,6 +197,12 @@ nnoremap <silent><C-BS> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
 nnoremap <silent><S-CR> :set paste<CR>m`o<Esc>``:set nopaste<CR>
 " adds a blank line above
 nnoremap <silent><C-CR> :set paste<CR>m`O<Esc>``:set nopaste<CR>
+
+" for switching buffers, no more Ctrl-w j, now you can just do ctrl-j
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 " config for python highlighting plugin
 let python_highlight_all = 1

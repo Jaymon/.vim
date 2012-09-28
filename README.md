@@ -27,6 +27,10 @@ http://majutsushi.github.com/tagbar/
 
 https://github.com/scrooloose/nerdtree
 
+### Surround
+
+https://github.com/tpope/vim-surround
+
 ### Syntax/python.vim
 
 https://github.com/hdima/vim-scripts
@@ -59,4 +63,3 @@ This currently does not work on the console version of Vim, this is *GUI* only
 ## Plugins I've thought about using
 
 https://github.com/klen/python-mode
-https://github.com/tpope/vim-surround

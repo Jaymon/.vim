@@ -1,5 +1,5 @@
 " Vim color file
-" Maintainer:   Your name <jay@marcyes.com>
+" Maintainer:   Jay Marcyes <jay@marcyes.com>
 " Last Change:  8-2-12
 " URL:		http://marcyes.com
 
@@ -14,7 +14,7 @@ hi clear
 if exists("syntax_on")
     syntax reset
 endif
-let g:colors_name="mycolorscheme"
+let g:colors_name="jaymon"
 
 "hi Normal
 
@@ -91,13 +91,20 @@ hi LineNr guifg=#A0A0A0 guibg=#ECF7FF
 " syntax highlighting groups
 hi Comment guifg=#DEDAE0
 hi Constant guifg=#FF0000 " string, integer
-hi Identifier	guifg=#000080 "method names, .func()
+hi Identifier	guifg=#000080 " method names, .func()
 hi Statement  guifg=#FF8000 " if, else, return, def
-hi PreProc  guifg=#FF8000 "import statements
+hi PreProc  guifg=#FF8000 " import statements
 hi Type guifg=#0000FF
 hi Special  guifg=#A0A0A0
+hi Number guifg=#000080
+hi Float guifg=#000080
 "hi Underlined	
 "hi Ignore		
 "hi Error		
 "hi Todo		
 
+" http://stackoverflow.com/questions/8309815/vim-conceal-with-more-than-one-character
+hi conceal ctermfg=DarkBlue ctermbg=NONE guifg=#D4CED4 guibg=NONE
+" for highlighting chars like newline and tab
+highlight NonText guifg=#D4CED4
+highlight SpecialKey guifg=#D4CED4
