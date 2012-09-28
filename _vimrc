@@ -10,7 +10,9 @@ call pathogen#infect()
 set nocompatible
 source $VIMRUNTIME/vimrc_example.vim
 "source $VIMRUNTIME/mswin.vim
-behave mswin
+"behave mswin
+" http://stackoverflow.com/questions/7178964/how-to-turn-off-auto-insert-when-selecting-text-with-gvim?rq=1
+behave xterm
 
 set diffexpr=MyDiff()
 function! MyDiff()
