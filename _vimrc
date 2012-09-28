@@ -238,6 +238,6 @@ let Tlist_Show_One_File = 1       " Only show tags for current buffer
 let Tlist_Enable_Fold_Column = 0  " no fold column (only showing one file)
 if has("win32")
   " http://stackoverflow.com/questions/7175277/using-taglist-plugin-in-gvim-on-windows
-  let Tlist_Ctags_Cmd = '"' . $HOME . '\vimfiles\bundle\taglist\ctags.exe"'
+  let Tlist_Ctags_Cmd = '"' . $HOME . '\vimfiles\bin\ctags.exe"'
 else
 endif
