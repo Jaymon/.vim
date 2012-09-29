@@ -9,3 +9,6 @@ syn keyword NonReservedKeyword self cls
 hi link pythonMethod	Function
 hi link pythonFormatStrTemplate Special
 hi link NonReservedKeyword Special
+
+" these things annoy me, so remove their highlighting
+syn clear PythonError
