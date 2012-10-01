@@ -109,3 +109,9 @@ hi conceal ctermfg=DarkBlue ctermbg=NONE guifg=#D4CED4 guibg=NONE
 highlight NonText guifg=#D4CED4
 highlight SpecialKey guifg=#D4CED4
 hi NonReservedKeyword guifg=black ctermfg=black cterm=bold gui=bold
+
+" python specific highlighting
+hi pythonFormatStrTemplate guifg=#800000
+"hi pythonFormatStrTemplate guifg=#660000
+hi pythonStrFormatting guifg=#CC0000
+hi pythonStrFormat guifg=#CC0000
