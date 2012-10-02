@@ -222,7 +222,7 @@ let g:tagbar_left = 1
 let g:tagbar_autofocus = 1
 let g:tagbar_sort = 1
 let g:tagbar_expand = 0
-let g:tagbar_foldlevel = 1
+let g:tagbar_foldlevel = 0
 let g:tagbar_autoshowtag = 1
 if has("win32")
   " for some reason, tagbar won't work if there are quotes around the path
