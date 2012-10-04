@@ -31,10 +31,22 @@ https://github.com/scrooloose/nerdtree
 
 https://github.com/tpope/vim-surround
 
-### Syntax/python.vim
+### syntax/python.vim
 
 https://github.com/hdima/vim-scripts
 http://www.vim.org/scripts/script.php?script_id=790
+
+### syntax/php.vim
+
+https://github.com/StanAngeloff/php.vim
+https://github.com/EvanDotPro/vim-php-syntax-check
+http://www.vim.org/scripts/script.php?script_id=2874
+
+the ctags support isn't really good for php 5.3+, these links will provide some
+help for when I finally get around to fixing that:
+
+http://mwop.net/blog/134-exuberant-ctags-with-PHP-in-Vim.html
+http://vim-taglist.sourceforge.net/extend.html
 
 ## Install
 
