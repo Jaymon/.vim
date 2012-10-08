@@ -213,7 +213,8 @@ let python_highlight_space_errors = 0
 " configure NERDTree
 " https://github.com/scrooloose/nerdtree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-nnoremap NN :NERDTreeToggle<CR>
+" NN slows down reverse search by 1 sec, which was really annoying
+nnoremap TN :NERDTreeToggle<CR>
 
 " configre Tagbar
 " http://majutsushi.github.com/tagbar/
