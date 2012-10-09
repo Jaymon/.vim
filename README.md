@@ -75,3 +75,6 @@ This currently does not work on the console version of Vim, this is *GUI* only
 ## Plugins I've thought about using
 
 https://github.com/klen/python-mode
+
+https://github.com/jistr/vim-nerdtree-tabs
+via: http://stackoverflow.com/questions/2283417/vim-and-nerd-tree-can-nerd-tree-persist-across-tabs-in-macvim

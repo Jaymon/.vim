@@ -206,6 +206,10 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" configure tabs
+" http://stackoverflow.com/questions/2468939/
+set guitablabel=\[%N\]\ %t\ %M
+
 " config for python highlighting plugin
 let python_highlight_all = 1
 let python_highlight_space_errors = 0
@@ -215,6 +219,7 @@ let python_highlight_space_errors = 0
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " NN slows down reverse search by 1 sec, which was really annoying
 nnoremap TN :NERDTreeToggle<CR>
+let NERDTreeIgnore=['\.pyc$[[file]]']
 
 " configre Tagbar
 " http://majutsushi.github.com/tagbar/
