@@ -54,8 +54,9 @@ if has("multi_byte")
 endif
 
 " line numbering
-set nu
-set relativenumber
+" nu or rnu turn linenumbering (nu - traditional numbering, rnu - relative
+" numbering) on, you should use one or the other but not both
+set rnu
 set numberwidth=5 " Set line numbering to take up 5 spaces
 set cursorline
 set scrolloff=3 " N lines above/below cursor when scrolling
@@ -209,6 +210,26 @@ nnoremap <C-l> <C-w>l
 " configure tabs
 " http://stackoverflow.com/questions/2468939/
 set guitablabel=\[%N\]\ %t\ %M
+" I also thought about using <C-<> :tabprev and <c->> :tabnext
+" http://vim.wikia.com/wiki/Alternative_tab_navigation
+" http://vim.wikia.com/wiki/Using_tab_pages
+" :tabs         list all tabs including their displayed windows
+" :tabm 0       move current tab to first
+" :tabm         move current tab to last
+" :tabm {i}     move current tab to position i+1
+" :tabn         go to next tab
+" :tabp         go to previous tab
+" :tabfirst     go to first tab
+" :tablast      go to last tab
+" Ngt           move to tab N
+nnoremap th  :tabfirst<CR>
+nnoremap tj  :tabnext<CR>
+nnoremap tk  :tabprev<CR>
+nnoremap tl  :tablast<CR>
+nnoremap tt  :tabedit<Space>
+nnoremap tn  :tabnext<Space>
+nnoremap tm  :tabm<Space>
+nnoremap td  :tabclose<CR>
 
 " config for python highlighting plugin
 let python_highlight_all = 1
@@ -218,12 +239,13 @@ let python_highlight_space_errors = 0
 " https://github.com/scrooloose/nerdtree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " NN slows down reverse search by 1 sec, which was really annoying
-nnoremap TN :NERDTreeToggle<CR>
+nnoremap RN :NERDTreeToggle<CR>
 let NERDTreeIgnore=['\.pyc$[[file]]']
+"let NERDTreeQuitOnOpen=1
 
 " configre Tagbar
 " http://majutsushi.github.com/tagbar/
-nnoremap TT :TagbarToggle<CR>
+nnoremap RR :TagbarToggle<CR>
 let g:tagbar_left = 1
 let g:tagbar_autofocus = 1
 let g:tagbar_sort = 1
@@ -240,7 +262,7 @@ endif
 " this slowed down : by 1 second while vim
 " waited for key timeout, better to just have TT work
 "nnoremap :t<CR> :TlistToggle<CR>
-nnoremap RR :TlistToggle<CR>
+nnoremap RT :TlistToggle<CR>
 let Tlist_Exit_OnlyWindow = 1     " exit if taglist is last window open
 let Tlist_Show_One_File = 1       " Only show tags for current buffer
 let Tlist_Enable_Fold_Column = 0  " no fold column (only showing one file)
