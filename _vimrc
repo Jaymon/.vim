@@ -72,15 +72,15 @@ set softtabstop=2 " let backspace delete indent
 set expandtab " turn tabs into whitespace
 set shiftwidth=2 " indent width for autoindent
 filetype indent on " indent depends on filetype
+" configure smart indenting differently for certain file types:
+" http://wiki.python.org/moin/Vim
+au FileType python setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4
 
 " searching (some of these are enabled in vimrc_example.vim)
 set incsearch
 set hlsearch
 set ignorecase
 set smartcase
-
-" http://wiki.python.org/moin/Vim
-au FileType python setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4
 
 " Enable indent folding
 " http://vimdoc.sourceforge.net/htmldoc/options.html#%27foldclose%27
@@ -96,14 +96,6 @@ syntax on
 colorscheme jaymon
 "set listchars=tab:>\ ,eol:¬,nbsp:<,precedes:$
 " http://vimcasts.org/episodes/show-invisibles/
-set listchars=tab:˻\ ,eol:˼,trail:˻,extends:˻,precedes:˻
-set list
-" the 2 lines work to match space, but I don't like it since it messes with
-" highlight current line, I guess I just have to hope for space: support in
-" listchars, see https://groups.google.com/forum/?fromgroups=#!topic/vim_dev/dIQHjW1g92s
-" http://stackoverflow.com/questions/1675688/make-vim-show-all-white-spaces-as-a-character
-" set conceallevel=2 concealcursor=nv
-" autocmd BufWinEnter * syntax match NonText / / conceal cchar=˻
 
 " backup stuff
 set history=1000
@@ -128,15 +120,7 @@ au BufWinEnter * silent! loadview "make vim load view (state) (folds, cursor, et
 " http://www.vim.org/scripts/script.php?script_id=3772
 au VimEnter * cal rainbow_parentheses#toggleall()
 
-" do some cool text moving, the only one I would like to add is to append one
-" line to the endo of another line
-" for example, suppose you have 2 lines:
-"   for x in y:
-"     print y
-"
-" I would like to able to do something like <A-H>  on the second line and end up with:
-"   for x in y: print y
-" 
+" do some cool text moving,
 " http://vim.wikia.com/wiki/Moving_lines_up_or_down
 " http://stackoverflow.com/questions/741814/move-entire-line-up-and-down-in-vim
 nnoremap <A-j> :m .+1<CR>==
@@ -168,7 +152,6 @@ nmap Y y$
 set clipboard+=unnamed
 "nnoremap yy yy"*yy
 "vnoremap y ygv"+y
-
 
 " ###From an idea by Michael Naumann
 "You press * or # to search for the current visual selection !! Really useful
@@ -207,7 +190,7 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" configure tabs
+" configure tab buffers
 " http://stackoverflow.com/questions/2468939/
 set guitablabel=\[%N\]\ %t\ %M
 " I also thought about using <C-<> :tabprev and <c->> :tabnext
@@ -243,7 +226,7 @@ nnoremap RN :NERDTreeToggle<CR>
 let NERDTreeIgnore=['\.pyc$[[file]]']
 "let NERDTreeQuitOnOpen=1
 
-" configre Tagbar
+" configure Tagbar
 " http://majutsushi.github.com/tagbar/
 nnoremap RR :TagbarToggle<CR>
 let g:tagbar_left = 1
