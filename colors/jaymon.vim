@@ -90,14 +90,19 @@ hi LineNr guifg=#A0A0A0 guibg=#ECF7FF
 
 " syntax highlighting groups
 hi Comment guifg=#DEDAE0
-hi Constant guifg=#FF0000 " string, integer
-hi Identifier	guifg=#000080 " method names, .func()
-hi Statement  guifg=#FF8000 " if, else, return, def
-hi PreProc  guifg=#FF8000 " import statements
+hi Constant guifg=#000000 cterm=bold gui=bold
+" python: method names, .func()
+hi Identifier	guifg=#000080 
+hi Operator	guifg=#000080 
+" python: if, else, return, def
+hi Statement  guifg=#FF8000 
+" python: import statements
+hi PreProc  guifg=#FF8000 
 hi Type guifg=#0000FF
 hi Special  guifg=#A0A0A0
 hi Number guifg=#000080
 hi Float guifg=#000080
+hi String guifg=#FF0000
 "hi Underlined	
 "hi Ignore		
 "hi Error		
