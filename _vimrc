@@ -138,6 +138,12 @@ cmap w!! %!sudo tee > /dev/null %
 " make Y behave like D and C
 nmap Y y$
 
+" reformat paste
+" http://www.slideshare.net/ZendCon/vim-for-php-programmers-presentation
+" (slide 27)
+nnoremap <esc>P P'[v' ]=
+nnoremap <esc>p p'[v' ]=
+
 """ comments.vim
 "A more elaborate comment set up. Use Ctr-C to comment and Ctr-x to uncomment
 " This will detect file types and use oneline comments accordingle. Cool
@@ -205,14 +211,15 @@ set guitablabel=\[%N\]\ %t\ %M
 " :tabfirst     go to first tab
 " :tablast      go to last tab
 " Ngt           move to tab N
-nnoremap th  :tabfirst<CR>
-nnoremap tj  :tabnext<CR>
-nnoremap tk  :tabprev<CR>
-nnoremap tl  :tablast<CR>
-nnoremap tt  :tabedit<Space>
-nnoremap tn  :tabnext<Space>
-nnoremap tm  :tabm<Space>
-nnoremap td  :tabclose<CR>
+" I disabled these because they slow down opening a tab in NERDTree
+"nnoremap th  :tabfirst<CR>
+"nnoremap tj  :tabnext<CR>
+"nnoremap tk  :tabprev<CR>
+"nnoremap tl  :tablast<CR>
+"nnoremap tt  :tabedit<Space>
+"nnoremap tn  :tabnext<Space>
+"nnoremap tm  :tabm<Space>
+"nnoremap td  :tabclose<CR>
 
 " config for python highlighting plugin
 let python_highlight_all = 1
