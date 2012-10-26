@@ -13,6 +13,9 @@ source $VIMRUNTIME/vimrc_example.vim
 "behave mswin
 " http://stackoverflow.com/questions/7178964/how-to-turn-off-auto-insert-when-selecting-text-with-gvim?rq=1
 behave xterm
+" tells Vim to look in the directory containing the current file (.), then the current
+" directory (empty text between two commas), then each directory under the current directory ('**')
+set path=.,,**
 
 set diffexpr=MyDiff()
 function! MyDiff()
@@ -192,14 +195,25 @@ nnoremap <silent><C-CR> :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
 " for switching buffers, no more Ctrl-w j, now you can just do ctrl-j
 nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
+"nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+nnoremap <C-j> <C-w>10>
+nnoremap <C-,> <C-w>10<
+nnoremap <C-+> <C-w>+
+nnoremap <C--> <C-w>-
+" http://vim.wikia.com/wiki/Fast_window_resizing_with_plus/minus_keys
+nnoremap <S-Up> <C-w>10+
+nnoremap <S-Down> <C-w>10-
+nnoremap <S-Right> <C-w>10>
+nnoremap <S-Left> <C-w>10<
 
 " configure tab buffers
 " http://stackoverflow.com/questions/2468939/
 set guitablabel=\[%N\]\ %t\ %M
 " I also thought about using <C-<> :tabprev and <c->> :tabnext
+nnoremap <A-.> :tabn<CR>
+nnoremap <A-,> :tabp<CR>
 " http://vim.wikia.com/wiki/Alternative_tab_navigation
 " http://vim.wikia.com/wiki/Using_tab_pages
 " :tabs         list all tabs including their displayed windows
@@ -220,6 +234,13 @@ set guitablabel=\[%N\]\ %t\ %M
 "nnoremap tn  :tabnext<Space>
 "nnoremap tm  :tabm<Space>
 "nnoremap td  :tabclose<CR>
+" :tabt to get back to the previous tab, sadly, tabp just goes to tab to the
+" left, and :tabl goes to the very last tab, so :tabt will have to do
+" http://stackoverflow.com/questions/2119754/switch-to-last-active-tab-in-vim
+let g:lasttab = 1
+nmap <leader>t :exe "tabn ".g:lasttab<CR>
+" nnoremap :tabtab<CR> :exe "tabn ".g:lasttab<CR>
+au TabLeave * let g:lasttab = tabpagenr()
 
 " config for python highlighting plugin
 let python_highlight_all = 1
