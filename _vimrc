@@ -259,6 +259,9 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 nnoremap RN :NERDTreeToggle<CR>
 let NERDTreeIgnore=['\.pyc$[[file]]']
 "let NERDTreeQuitOnOpen=1
+" move tabs to the end for new, single buffers (exclude splits)
+" http://stackoverflow.com/questions/3998752/nerdtree-open-in-a-new-tab-as-last-tab-in-gvim
+autocmd BufNew * if winnr('$') == 1 | tabmove99 | endif
 
 " configure Tagbar
 " http://majutsushi.github.com/tagbar/
