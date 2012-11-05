@@ -141,6 +141,12 @@ cmap w!! %!sudo tee > /dev/null %
 " make Y behave like D and C
 nmap Y y$
 
+" make it easy to select recently pasted stuff (similar to gv for recently
+" selected)
+" http://stackoverflow.com/questions/4312664/is-there-a-vim-command-to-select-pasted-text
+" http://stackoverflow.com/questions/4775088/vim-how-to-select-pasted-block
+nmap gp `[v`]
+
 " reformat paste
 " http://www.slideshare.net/ZendCon/vim-for-php-programmers-presentation
 " (slide 27)
