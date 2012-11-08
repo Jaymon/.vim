@@ -48,6 +48,20 @@ help for when I finally get around to fixing that:
 http://mwop.net/blog/134-exuberant-ctags-with-PHP-in-Vim.html
 http://vim-taglist.sourceforge.net/extend.html
 
+### Markdown
+
+I went with this markdown syntax plugin:
+
+https://github.com/tpope/vim-markdown
+
+I had originally installed:
+
+http://www.vim.org/scripts/script.php?script_id=1242
+
+but it would italicize the rest of the body if the word had an underscore in it (eg, sn_id caused 
+everything after the underscore until the end to be italicized) while the one I went with
+just marks it as an error, which is still not ideal, but better.
+
 ## Install
 
 ### In Windows 
