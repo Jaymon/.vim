@@ -291,3 +291,9 @@ if has("win32")
   let Tlist_Ctags_Cmd = '"' . $HOME . '\vimfiles\bin\ctags.exe"'
 else
 endif
+
+" configure camel case motion
+map <S-W> <Plug>CamelCaseMotion_w
+map <S-B> <Plug>CamelCaseMotion_b
+map <S-E> <Plug>CamelCaseMotion_e
+

@@ -62,6 +62,15 @@ but it would italicize the rest of the body if the word had an underscore in it 
 everything after the underscore until the end to be italicized) while the one I went with
 just marks it as an error, which is still not ideal, but better.
 
+### Camel Case Motion
+
+https://github.com/bkad/CamelCaseMotion
+
+see also:
+http://vim.wikia.com/wiki/Moving_through_camel_case_words
+http://www.vim.org/scripts/script.php?script_id=1905
+http://stackoverflow.com/questions/8949317/moving-through-camelcase-words-in-vim
+
 ## Install
 
 ### In Windows 
