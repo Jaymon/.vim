@@ -121,7 +121,9 @@ au BufWinLeave * silent! mkview "make vim save view (state) (folds, cursor, etc)
 au BufWinEnter * silent! loadview "make vim load view (state) (folds, cursor, etc)
 
 " http://www.vim.org/scripts/script.php?script_id=3772
-au VimEnter * cal rainbow_parentheses#toggleall()
+" doesn't work in buffers/tabs, so it's not worth even activating
+" see: https://github.com/kien/ctrlp.vim/issues/198
+"au BufEnter * cal rainbow_parentheses#toggleall()
 
 " do some cool text moving,
 " http://vim.wikia.com/wiki/Moving_lines_up_or_down
@@ -247,6 +249,9 @@ let g:lasttab = 1
 nmap <leader>t :exe "tabn ".g:lasttab<CR>
 " nnoremap :tabtab<CR> :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
+
+" re-parse the file to fix syntax errors
+nmap <leader>rs :syn sync fromstart<CR>
 
 " config for python highlighting plugin
 let python_highlight_all = 1
