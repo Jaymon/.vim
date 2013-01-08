@@ -1,6 +1,7 @@
 " http://portablegvim.sourceforge.net/configuration.html
 " http://stackoverflow.com/questions/3111351/gvim-portable-plugins
 
+filetype on " hack, to get around this: http://vim.wikia.com/wiki/Maximize_or_set_initial_window_size
 filetype off
 call pathogen#infect()
 
@@ -102,6 +103,7 @@ colorscheme jaymon
 
 " backup stuff
 set history=1000
+set backupcopy=yes
 set backup
 set undofile
 set undolevels=1000
@@ -109,14 +111,14 @@ set undoreload=10000
 " save ~ files somewhere where I don't have to bother with them
 " http://stackoverflow.com/questions/2823608/
 set backupdir-=.
-set backupdir^=$TEMP//
+set backupdir^=$TEMP//,/tmp//,$TMP//,$TMPDIR//
 " this is for the .swp files
 " http://vim.wikia.com/wiki/Remove_swap_and_backup_files_from_your_working_directory
 set directory-=.
-set directory^=$TEMP//
+set directory^=$TEMP//,/tmp//,$TMP//,$TMPDIR//
 " http://stackoverflow.com/questions/4331776/change-vim-swap-backup-undo-file-name
 set undodir-=.
-set undodir^=$TEMP//
+set undodir^=$TEMP//,/tmp//,$TMP//,$TMPDIR//
 au BufWinLeave * silent! mkview "make vim save view (state) (folds, cursor, etc)
 au BufWinEnter * silent! loadview "make vim load view (state) (folds, cursor, etc)
 
@@ -124,6 +126,9 @@ au BufWinEnter * silent! loadview "make vim load view (state) (folds, cursor, et
 " doesn't work in buffers/tabs, so it's not worth even activating
 " see: https://github.com/kien/ctrlp.vim/issues/198
 "au BufEnter * cal rainbow_parentheses#toggleall()
+
+" http://stackoverflow.com/questions/594838/is-it-possible-to-get-gvim-to-remember-window-size
+set sessionoptions+=resize,winpos
 
 " do some cool text moving,
 " http://vim.wikia.com/wiki/Moving_lines_up_or_down
@@ -218,6 +223,7 @@ nnoremap <S-Left> <C-w>10<
 
 " configure tab buffers
 " http://stackoverflow.com/questions/2468939/
+" TODO: make guitablabel work in macvim
 set guitablabel=\[%N\]\ %t\ %M
 " I also thought about using <C-<> :tabprev and <c->> :tabnext
 nnoremap <A-.> :tabn<CR>
