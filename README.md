@@ -1,6 +1,6 @@
 # My gVIM Environment Settings Files
 
-This is how I roll with gVim. Here for my convenience so I can easily keep my vim
+This is how I roll with gVim. This is here for my convenience so I can easily keep my vim
 environment consistent across multiple machines.
 
 ## Plugins
@@ -8,10 +8,6 @@ environment consistent across multiple machines.
 ### Pathogen
 
 https://github.com/tpope/vim-pathogen
-
-### Rainbow Parenthesis
-
-http://www.vim.org/scripts/script.php?script_id=3772
 
 ### Taglist
 
@@ -27,40 +23,10 @@ http://majutsushi.github.com/tagbar/
 
 https://github.com/scrooloose/nerdtree
 
-### Surround
-
-https://github.com/tpope/vim-surround
-
 ### syntax/python.vim
 
 https://github.com/hdima/vim-scripts
 http://www.vim.org/scripts/script.php?script_id=790
-
-### syntax/php.vim
-
-https://github.com/StanAngeloff/php.vim
-https://github.com/EvanDotPro/vim-php-syntax-check
-http://www.vim.org/scripts/script.php?script_id=2874
-
-the ctags support isn't really good for php 5.3+, these links will provide some
-help for when I finally get around to fixing that:
-
-http://mwop.net/blog/134-exuberant-ctags-with-PHP-in-Vim.html
-http://vim-taglist.sourceforge.net/extend.html
-
-### Markdown
-
-I went with this markdown syntax plugin:
-
-https://github.com/tpope/vim-markdown
-
-I had originally installed:
-
-http://www.vim.org/scripts/script.php?script_id=1242
-
-but it would italicize the rest of the body if the word had an underscore in it (eg, sn_id caused 
-everything after the underscore until the end to be italicized) while the one I went with
-just marks it as an error, which is still not ideal, but better.
 
 ### Camel Case Motion
 
@@ -101,3 +67,54 @@ https://github.com/klen/python-mode
 
 https://github.com/jistr/vim-nerdtree-tabs
 via: http://stackoverflow.com/questions/2283417/vim-and-nerd-tree-can-nerd-tree-persist-across-tabs-in-macvim
+
+## Things I don't like
+
+### PHP
+
+the ctags support isn't really good for php 5.3+, these links will provide some
+help for when I finally get around to fixing that:
+
+http://mwop.net/blog/134-exuberant-ctags-with-PHP-in-Vim.html
+http://vim-taglist.sourceforge.net/extend.html
+
+### Mac
+
+For some reason sizing the window on startup doesn't work with macvim, I have no idea why
+
+## Plugins I used and then removed
+
+### Rainbow Parenthesis
+
+http://www.vim.org/scripts/script.php?script_id=3772
+
+### Markdown
+
+I actually don't know what happened to this, the folder was empty which makes me
+think I forgot to add the file to git *sigh*
+
+I went with this markdown syntax plugin:
+
+https://github.com/tpope/vim-markdown
+
+I had originally installed:
+
+http://www.vim.org/scripts/script.php?script_id=1242
+
+but it would italicize the rest of the body if the word had an underscore in it (eg, sn_id caused 
+everything after the underscore until the end to be italicized) while the one I went with
+just marks it as an error, which is still not ideal, but better.
+
+### syntax/php.vim
+
+The php syntax file seemed way too complicated to me, so I rolled my own using this syntax
+file as a base
+
+https://github.com/StanAngeloff/php.vim
+https://github.com/EvanDotPro/vim-php-syntax-check
+http://www.vim.org/scripts/script.php?script_id=2874
+
+### Surround
+
+https://github.com/tpope/vim-surround
+

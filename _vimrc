@@ -1,8 +1,6 @@
 " http://portablegvim.sourceforge.net/configuration.html
 " http://stackoverflow.com/questions/3111351/gvim-portable-plugins
 
-filetype on " hack, to get around this: http://vim.wikia.com/wiki/Maximize_or_set_initial_window_size
-filetype off
 call pathogen#infect()
 
 " https://github.com/maxbrunsfeld/vim-yankstack
@@ -76,9 +74,8 @@ set softtabstop=2 " let backspace delete indent
 set expandtab " turn tabs into whitespace
 set shiftwidth=2 " indent width for autoindent
 filetype indent on " indent depends on filetype
-" configure smart indenting differently for certain file types:
-" http://wiki.python.org/moin/Vim
-au FileType python setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4
+set backspace=indent,eol,start
+" configure filetype specific stuff in ftplugin/filetype.vim
 
 " searching (some of these are enabled in vimrc_example.vim)
 set incsearch
@@ -97,7 +94,7 @@ set foldlevelstart=2
 "autocmd Syntax py,php normal zR
 
 syntax on
-colorscheme jaymon
+colorscheme jaymon_light
 "set listchars=tab:>\ ,eol:¬,nbsp:<,precedes:$
 " http://vimcasts.org/episodes/show-invisibles/
 
@@ -230,24 +227,7 @@ nnoremap <A-.> :tabn<CR>
 nnoremap <A-,> :tabp<CR>
 " http://vim.wikia.com/wiki/Alternative_tab_navigation
 " http://vim.wikia.com/wiki/Using_tab_pages
-" :tabs         list all tabs including their displayed windows
-" :tabm 0       move current tab to first
-" :tabm         move current tab to last
-" :tabm {i}     move current tab to position i+1
-" :tabn         go to next tab
-" :tabp         go to previous tab
-" :tabfirst     go to first tab
-" :tablast      go to last tab
-" Ngt           move to tab N
-" I disabled these because they slow down opening a tab in NERDTree
-"nnoremap th  :tabfirst<CR>
-"nnoremap tj  :tabnext<CR>
-"nnoremap tk  :tabprev<CR>
-"nnoremap tl  :tablast<CR>
-"nnoremap tt  :tabedit<Space>
-"nnoremap tn  :tabnext<Space>
-"nnoremap tm  :tabm<Space>
-"nnoremap td  :tabclose<CR>
+
 " :tabt to get back to the previous tab, sadly, tabp just goes to tab to the
 " left, and :tabl goes to the very last tab, so :tabt will have to do
 " http://stackoverflow.com/questions/2119754/switch-to-last-active-tab-in-vim
@@ -258,10 +238,6 @@ au TabLeave * let g:lasttab = tabpagenr()
 
 " re-parse the file to fix syntax errors
 nmap <leader>rs :syn sync fromstart<CR>
-
-" config for python highlighting plugin
-let python_highlight_all = 1
-let python_highlight_space_errors = 0
 
 " configure NERDTree
 " https://github.com/scrooloose/nerdtree

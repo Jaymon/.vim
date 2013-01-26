@@ -92,13 +92,16 @@ hi LineNr guifg=#A0A0A0 guibg=#ECF7FF
 hi Comment guifg=#DEDAE0
 hi Constant guifg=#000000 cterm=bold gui=bold
 " python: method names, .func()
-hi Identifier	guifg=#000080 
+" hi Identifier	guifg=#000080 
+hi Identifier guifg=#0000FF
 hi Operator	guifg=#000080 
 " python: if, else, return, def
-hi Statement  guifg=#FF8000 
+" hi Statement  guifg=#FF8000 
+hi Statement guifg=#000000 cterm=bold gui=bold  
 " python: import statements
 hi PreProc  guifg=#FF8000 
-hi Type guifg=#0000FF
+" hi Type guifg=#0000FF
+hi Type guifg=#000000 cterm=bold gui=bold  
 hi Special  guifg=#A0A0A0
 hi Number guifg=#000080
 hi Float guifg=#000080
