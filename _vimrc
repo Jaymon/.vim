@@ -256,3 +256,6 @@ map <S-W> <Plug>CamelCaseMotion_w
 map <S-B> <Plug>CamelCaseMotion_b
 map <S-E> <Plug>CamelCaseMotion_e
 
+" helpful for syntax highlighting, show what highlight group is under cursor
+map  <leader>sg :echo synIDattr(synID(line("."), col("."), 1), "name")<CR>
+
