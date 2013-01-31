@@ -68,6 +68,9 @@ https://github.com/klen/python-mode
 https://github.com/jistr/vim-nerdtree-tabs
 via: http://stackoverflow.com/questions/2283417/vim-and-nerd-tree-can-nerd-tree-persist-across-tabs-in-macvim
 
+https://github.com/xolox/vim-easytags
+via: http://stackoverflow.com/questions/1224838/vim-php-omni-completion
+
 ## Things I don't like
 
 ### PHP

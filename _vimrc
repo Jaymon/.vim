@@ -259,3 +259,7 @@ map <S-E> <Plug>CamelCaseMotion_e
 " helpful for syntax highlighting, show what highlight group is under cursor
 map  <leader>sg :echo synIDattr(synID(line("."), col("."), 1), "name")<CR>
 
+" map omnicompletion to PSPad's ctrl-space
+" http://stackoverflow.com/questions/7722177/how-do-i-map-ctrl-x-ctrl-o-to-ctrl-space-in-terminal-vim
+imap <C-Space> <C-x><C-o>
+imap <C-@> <C-Space>

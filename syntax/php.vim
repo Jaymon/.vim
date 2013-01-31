@@ -108,7 +108,8 @@ syn region phpRegion matchgroup=Delimiter start="<?\(php\)\=" end="?>" contains=
 syn sync match phpRegionSync grouphere phpRegion "^\s*<?\(php\)\=\s*$"
 syn sync match phpRegionSync grouphere NONE "^\s*?>\s*$"
 syn sync match phpRegionSync grouphere NONE "^\s*%>\s*$"
-syn sync maxlines=200
+" syn sync maxlines=200
+syn sync fromstart
 
 " Define the default highlighting.
 hi link phpMagicConstants   Constant
