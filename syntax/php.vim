@@ -35,10 +35,10 @@ unlet! b:current_syntax
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Magic Constants
-syn match phpMagicConstants "__[A-Z]+__" contained
+syn match phpMagicConstants "__[A-Z]\+__" contained
 
 " Magic Methods
-syn match phpMagicMethods "__[a-zA-Z0-9_]+(\@=" contained
+syn match phpMagicMethods "__[a-zA-Z0-9_]\+(\@=" contained
 
 " Control Structures
 syn keyword phpStatement if else elseif while do for foreach break switch case contained
@@ -64,12 +64,6 @@ syn keyword phpSpecial function echo print new clone contained
 syn keyword phpInclude include include_once require require_once namespace use contained
 
 " Operator
-syn match phpOperator "[-=+%^&|*!.~?:]" contained display
-syn match phpOperator "[-+*/%^&|.]="  contained display
-" the me=e-1 says end the match one char short
-syn match phpOperator "/[^*/]"me=e-1  contained display
-syn match phpOperator "&&\|\<and\>" contained display
-syn match phpOperator "||\|\<x\=or\>" contained display
 syn match phpOperator "[!=<>]=" contained display
 syn match phpOperator "[<>]"  contained display
 syn match phpMemberSelector "->"  contained display
@@ -89,17 +83,16 @@ syn keyword phpTodo todo fixme xxx note contained
 
 " Comment
 syn region phpComment start="/\*" end="\*/" contained contains=phpTodo extend
-syn region phpDocblock start="/\**" end="\*/" contained contains=phpTodo extend
-syn match phpComment  "#.\{-}\(?>\|$\)\@="  contained contains=phpTodo
-syn match phpComment  "//.\{-}\(?>\|$\)\@=" contained contains=phpTodo
+syn match phpComment "#.\{-}\(?>\|$\)\@=" contained contains=phpTodo
+syn match phpComment "//.\{-}\(?>\|$\)\@=" contained contains=phpTodo
 
 " String
-syn region phpStringDouble start=+"+ skip=+\\\\\|\\"+ end=+"+  contains=phpIdentifier contained extend keepend
-syn region phpBacktick start=+`+ skip=+\\\\\|\\"+ end=+`+  contains=phpIdentifier contained extend keepend
+syn region phpStringDouble start=+"+ skip=+\\\\\|\\"+ end=+"+ contains=phpIdentifier contained extend keepend
+syn region phpBacktick start=+`+ skip=+\\\\\|\\"+ end=+`+ contains=phpIdentifier contained extend keepend
 syn region phpStringSingle start=+'+ skip=+\\\\\|\\'+ end=+'+ contained keepend extend
 
 " contains the php code blocks
-syn cluster phpComments contains=phpComment,phpTodo,phpDocblock
+syn cluster phpComments contains=phpComment,phpTodo
 syn cluster phpString contains=phpStringDouble,phpBacktick,phpStringSingle
 syn cluster phpCodeBlock contains=phpMagicConstants,phpMagicMethods,phpStatement,phpType,phpBoolean,phpSpecial,phpInclude,phpOperator,phpMemberSelector,phpIdentifier,phpNumber,@phpComments,@phpString
 
@@ -113,7 +106,7 @@ syn sync fromstart
 
 " Define the default highlighting.
 hi link phpMagicConstants   Constant
-hi link phpMagicMethods     Identifier
+hi link phpMagicMethods     Constant
 hi link phpStatement        Statement
 hi link phpType             Type
 hi link phpBoolean          Constant
@@ -128,7 +121,6 @@ hi link phpNumber           Number
 
 hi link phpTodo             Todo
 hi link phpComment          Comment
-hi link phpDocBlock         Comment
 
 hi link phpStringSingle     String
 hi link phpStringDouble     String

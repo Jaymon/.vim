@@ -1,7 +1,9 @@
-# My gVIM Environment Settings Files
+# My VIM Environment Settings Files
 
 This is how I roll with gVim. This is here for my convenience so I can easily keep my vim
 environment consistent across multiple machines.
+
+-------------------------------------------------------------------------------
 
 ## Plugins
 
@@ -37,6 +39,18 @@ http://vim.wikia.com/wiki/Moving_through_camel_case_words
 http://www.vim.org/scripts/script.php?script_id=1905
 http://stackoverflow.com/questions/8949317/moving-through-camelcase-words-in-vim
 
+### indent/python.vim
+
+http://www.vim.org/scripts/script.php?script_id=974
+http://henry.precheur.org/vim/python
+
+### PHP Doc
+
+https://github.com/sumpygump/php-documentor-vim
+via: http://stackoverflow.com/questions/7603446/vim-insert-phpdoc-automatically
+
+-------------------------------------------------------------------------------
+
 ## Install
 
 ### In Windows 
@@ -57,6 +71,9 @@ http://stackoverflow.com/questions/8949317/moving-through-camelcase-words-in-vim
 
     mklink %HOMEPATH%\\_gvimrc %HOMEPATH%\\vimfiles\\_gvimrc
 
+
+-------------------------------------------------------------------------------
+
 ## Warnings
 
 This currently does not work on the console version of Vim, this is *GUI* only
@@ -70,6 +87,11 @@ via: http://stackoverflow.com/questions/2283417/vim-and-nerd-tree-can-nerd-tree-
 
 https://github.com/xolox/vim-easytags
 via: http://stackoverflow.com/questions/1224838/vim-php-omni-completion
+
+https://github.com/pangloss/vim-javascript
+
+
+-------------------------------------------------------------------------------
 
 ## Things I don't like
 
@@ -85,9 +107,14 @@ http://vim-taglist.sourceforge.net/extend.html
 
 For some reason sizing the window on startup doesn't work with macvim, I have no idea why
 
+-------------------------------------------------------------------------------
+
 ## Plugins I used and then removed
 
 ### Rainbow Parenthesis
+
+This doesn't work in new tabs/buffers, and it took me like a month to notice it
+didn't work in the buffers, so I figured I didn't need it
 
 http://www.vim.org/scripts/script.php?script_id=3772
 
@@ -118,6 +145,10 @@ https://github.com/EvanDotPro/vim-php-syntax-check
 http://www.vim.org/scripts/script.php?script_id=2874
 
 ### Surround
+
+I never learned how to use it, so it was there, but I never could figure out how
+to invoke it, and then there is the problem of getting too dependant on something
+that isn't standard
 
 https://github.com/tpope/vim-surround
 

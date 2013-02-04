@@ -39,8 +39,10 @@ set scrolloff=3 " N lines above/below cursor when scrolling
 " http://www.jonlee.ca/hacking-vim-the-ultimate-vimrc/
 " http://www.cs.swarthmore.edu/help/vim/indenting.html
 set autoindent
-set smartindent
-set cindent
+" Generally, 'smartindent' or 'cindent' should only be set manually if you're
+" not satisfied with how file type based indentation works. 
+" http://vim.wikia.com/wiki/Indenting_source_code
+"set smartindent
 set tabstop=2 " set tab character to N characters
 set softtabstop=2 " let backspace delete indent
 set expandtab " turn tabs into whitespace
