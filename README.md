@@ -90,6 +90,8 @@ via: http://stackoverflow.com/questions/1224838/vim-php-omni-completion
 
 https://github.com/pangloss/vim-javascript
 
+https://github.com/nathanaelkane/vim-indent-guides
+
 
 -------------------------------------------------------------------------------
 

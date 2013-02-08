@@ -41,6 +41,8 @@ set scrolloff=3 " N lines above/below cursor when scrolling
 set autoindent
 " Generally, 'smartindent' or 'cindent' should only be set manually if you're
 " not satisfied with how file type based indentation works. 
+" looks like smartindent was deprecated for cindent, and should be activated
+" in specific filetypes, not generally
 " http://vim.wikia.com/wiki/Indenting_source_code
 "set smartindent
 set tabstop=2 " set tab character to N characters
