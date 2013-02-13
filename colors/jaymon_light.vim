@@ -96,13 +96,14 @@ hi Constant guifg=#000000 cterm=bold gui=bold
 hi Identifier guifg=#0000FF
 hi Operator	guifg=#000080 
 " python: if, else, return, def
-" hi Statement  guifg=#FF8000 
-hi Statement guifg=#000000 cterm=bold gui=bold  
+hi Statement guifg=#FF8000 
+"hi Statement guifg=#FF8000 cterm=bold gui=bold  
+"hi Statement guifg=#000000 cterm=bold gui=bold  
 " python: import statements
-hi PreProc  guifg=#FF8000 
+hi PreProc guifg=#FF8000 
 " hi Type guifg=#0000FF
 hi Type guifg=#000000 cterm=bold gui=bold  
-hi Special  guifg=#A0A0A0
+hi Special guifg=#A0A0A0
 hi Number guifg=#000080
 hi Float guifg=#000080
 hi String guifg=#FF0000
