@@ -238,7 +238,9 @@ let g:tagbar_autoshowtag = 1
 if has("win32")
   " for some reason, tagbar won't work if there are quotes around the path
   let g:tagbar_ctags_bin = $HOME . '\vimfiles\bin\ctags.exe'
+  let g:tagbar_phpctags_bin = $HOME . '\vimfiles\bin\phpctags.bat'
 else
+  let g:tagbar_phpctags_bin = $HOME . '/.vim/bundle/phpctags/phpctags'
 endif
 
 " configure taglist plugin

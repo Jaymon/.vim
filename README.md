@@ -21,6 +21,21 @@ This has largely replaced Taglist because I like the hierarchical code tree bett
 
 http://majutsushi.github.com/tagbar/
 
+In order to make php support better by default, you could use this gist:
+https://gist.github.com/ecoleman/1525027
+
+but I've added some other plugins to make tagbar work better with php. As discussed on this page:
+http://stackoverflow.com/questions/11290352/vim-hack-ctags-or-tweak-tagbar-for-better-php-support
+
+- Tagbar-phpctags
+
+https://github.com/techlivezheng/tagbar-phpctags
+http://www.vim.org/scripts/script.php?script_id=4125
+
+- phpctags
+
+https://github.com/techlivezheng/phpctags
+
 ### NerdTree
 
 https://github.com/scrooloose/nerdtree
