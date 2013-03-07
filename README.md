@@ -75,7 +75,7 @@ via: http://stackoverflow.com/questions/7603446/vim-insert-phpdoc-automatically
 
 3. clone the repo
 
-    git clone [repo] .
+        git clone [repo] .
 
 4. Symlink `$HOME/.vim/vimrc` and `$HOME/.vim/gvimrc`
 
