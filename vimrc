@@ -4,7 +4,6 @@
 call pathogen#infect()
 
 set nocompatible
-source $VIMRUNTIME/vimrc_example.vim
 
 " http://stackoverflow.com/questions/7178964/how-to-turn-off-auto-insert-when-selecting-text-with-gvim?rq=1
 behave xterm
@@ -27,6 +26,13 @@ if has("multi_byte")
   set fileencodings=ucs-bom,utf-8,latin1
 endif
 
+" this is from vimrc_example.vim
+" When editing a file, always jump to the last known cursor position.
+autocmd BufReadPost *
+  \ if line("'\"") > 1 && line("'\"") <= line("$") |
+  \   exe "normal! g`\"" |
+  \ endif
+
 " line numbering
 " nu or rnu turn linenumbering (nu - traditional numbering, rnu - relative
 " numbering) on, you should use one or the other but not both
@@ -35,7 +41,7 @@ set numberwidth=5 " Set line numbering to take up 5 spaces
 set cursorline
 set scrolloff=3 " N lines above/below cursor when scrolling
 
-" Turn on smart indent
+" Indent stuff
 " http://www.jonlee.ca/hacking-vim-the-ultimate-vimrc/
 " http://www.cs.swarthmore.edu/help/vim/indenting.html
 set autoindent
@@ -53,7 +59,7 @@ filetype indent on " indent depends on filetype
 set backspace=indent,eol,start
 " configure filetype specific stuff in ftplugin/filetype.vim
 
-" searching (some of these are enabled in vimrc_example.vim)
+" searching
 set incsearch
 set hlsearch
 set ignorecase
@@ -65,9 +71,6 @@ set foldenable " toggle with zi
 set foldmethod=indent
 set foldnestmax=2
 set foldlevelstart=2
-" http://vim.wikia.com/wiki/All_folds_open_when_open_a_file
-"autocmd Syntax py,php setlocal foldmethod=indent
-"autocmd Syntax py,php normal zR
 
 syntax on
 colorscheme jaymon_light
@@ -114,15 +117,14 @@ vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
 " Allow us to save a file as root, if we have sudo privileges,
-" when we're not currently useing vim as root
+" when we're not currently using vim as root
 " http://vimingwithbuttar.googlecode.com/hg/.vimrc
 cmap w!! %!sudo tee > /dev/null %
 
 " make Y behave like D and C
 nmap Y y$
 
-" make it easy to select recently pasted stuff (similar to gv for recently
-" selected)
+" make it easy to select recently pasted stuff (similar to gv for recently selected)
 " http://stackoverflow.com/questions/4312664/is-there-a-vim-command-to-select-pasted-text
 " http://stackoverflow.com/questions/4775088/vim-how-to-select-pasted-block
 nmap gp `[v`]
@@ -145,28 +147,6 @@ nnoremap <esc>p p'[v' ]=
 " this maps the "* register to the unnamed register so you can copy/paste between instances
 " http://superuser.com/a/296308
 set clipboard+=unnamed
-"nnoremap yy yy"*yy
-"vnoremap y ygv"+y
-
-" ###From an idea by Michael Naumann
-"You press * or # to search for the current visual selection !! Really useful
-" http://vimingwithbuttar.googlecode.com/hg/.vimrc
-function! VisualSearch(direction) range
-  let l:saved_reg = @"
-  execute "normal! vgvy"
-  let l:pattern = escape(@", '\\/.*$^~[]')
-  let l:pattern = substitute(l:pattern, "\n$", "", "")
-  if a:direction == 'b'
-    execute "normal ?" . l:pattern . "^M"
-  else
-    execute "normal /" . l:pattern . "^M"
-  endif
-  let @/ = l:pattern
-  let @" = l:saved_reg
-endfunction
-vnoremap <silent> * :call VisualSearch('f')<CR>
-vnoremap <silent> # :call VisualSearch('b')<CR>
-" End From an idea by Michael Nauman
 
 " http://vim.wikia.com/wiki/VimTip1066
 " http://vim.wikia.com/wiki/Insert_newline_without_entering_insert_mode
@@ -243,20 +223,6 @@ else
   let g:tagbar_phpctags_bin = $HOME . '/.vim/bundle/phpctags/phpctags'
 endif
 
-" configure taglist plugin
-" this slowed down : by 1 second while vim
-" waited for key timeout, better to just have TT work
-"nnoremap :t<CR> :TlistToggle<CR>
-nnoremap RT :TlistToggle<CR>
-let Tlist_Exit_OnlyWindow = 1     " exit if taglist is last window open
-let Tlist_Show_One_File = 1       " Only show tags for current buffer
-let Tlist_Enable_Fold_Column = 0  " no fold column (only showing one file)
-if has("win32")
-  " http://stackoverflow.com/questions/7175277/using-taglist-plugin-in-gvim-on-windows
-  let Tlist_Ctags_Cmd = '"' . $HOME . '\vimfiles\bin\ctags.exe"'
-else
-endif
-
 " configure camel case motion
 map <S-W> <Plug>CamelCaseMotion_w
 map <S-B> <Plug>CamelCaseMotion_b
@@ -269,3 +235,4 @@ map  <leader>sg :echo synIDattr(synID(line("."), col("."), 1), "name")<CR>
 " http://stackoverflow.com/questions/7722177/how-do-i-map-ctrl-x-ctrl-o-to-ctrl-space-in-terminal-vim
 imap <C-Space> <C-x><C-o>
 imap <C-@> <C-Space>
+

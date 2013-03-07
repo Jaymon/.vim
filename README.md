@@ -1,7 +1,6 @@
 # My VIM Environment Settings Files
 
-This is how I roll with gVim. This is here for my convenience so I can easily keep my vim
-environment consistent across multiple machines.
+This is here for my convenience so I can easily keep my vim environment consistent across multiple machines.
 
 -------------------------------------------------------------------------------
 
@@ -11,10 +10,6 @@ environment consistent across multiple machines.
 
 https://github.com/tpope/vim-pathogen
 
-### Taglist
-
-http://www.vim.org/scripts/script.php?script_id=273
-
 ### Tagbar
 
 This has largely replaced Taglist because I like the hierarchical code tree better
@@ -23,6 +18,10 @@ http://majutsushi.github.com/tagbar/
 
 In order to make php support better by default, you could use this gist:
 https://gist.github.com/ecoleman/1525027
+
+These links might also help:
+http://mwop.net/blog/134-exuberant-ctags-with-PHP-in-Vim.html
+http://vim-taglist.sourceforge.net/extend.html
 
 but I've added some other plugins to make tagbar work better with php. As discussed on this page:
 http://stackoverflow.com/questions/11290352/vim-hack-ctags-or-tweak-tagbar-for-better-php-support
@@ -68,30 +67,43 @@ via: http://stackoverflow.com/questions/7603446/vim-insert-phpdoc-automatically
 
 ## Install
 
-### In Windows 
+### In Mac or Linux
 
-1. Create %HOMEPATH%\vimfiles
+1. Create `$HOME/.vim`
 
-2. cd into %HOMEPATH%\vimfiles
+2. cd into `$HOME/.vim`
 
 3. clone the repo
 
     git clone [repo] .
 
-4. make a symlink for the _vimrc file
+4. Symlink `$HOME/.vim/vimrc` and `$HOME/.vim/gvimrc`
 
-    mklink %HOMEPATH%\\_vimrc %HOMEPATH%\\vimfiles\\_vimrc
+    ln -s $HOME/.vim/vimrc $HOME/.vimrc
+    ln -s $HOME/.vim/gvimrc $HOME/.gvimrc
 
-5. make a symlink for the _gvimrc file
+### In Windows 
 
-    mklink %HOMEPATH%\\_gvimrc %HOMEPATH%\\vimfiles\\_gvimrc
+1. Create `%HOMEPATH%\vimfiles`
+
+2. cd into `%HOMEPATH%\vimfiles`
+
+3. clone the repo
+
+    git clone [repo] .
+
+4. make a symlink for the `vimrc` and `gvimrc` files
+
+    mklink %HOMEPATH%\\vimrc %HOMEPATH%\\vimfiles\\_vimrc
+    mklink %HOMEPATH%\\gvimrc %HOMEPATH%\\vimfiles\\_gvimrc
 
 
 -------------------------------------------------------------------------------
 
 ## Warnings
 
-This currently does not work on the console version of Vim, this is *GUI* only
+This currently does not work as well on the console version of Vim, I've spent time tuning the *GUI* version,
+not so much the console version.
 
 ## Plugins I've thought about using
 
@@ -112,21 +124,19 @@ https://github.com/nathanaelkane/vim-indent-guides
 
 ## Things I don't like
 
-### PHP
-
-the ctags support isn't really good for php 5.3+, these links will provide some
-help for when I finally get around to fixing that:
-
-http://mwop.net/blog/134-exuberant-ctags-with-PHP-in-Vim.html
-http://vim-taglist.sourceforge.net/extend.html
-
 ### Mac
 
-For some reason sizing the window on startup doesn't work with macvim, I have no idea why
+For some reason sizing the Macvim window on startup doesn't work, I have no idea why
 
 -------------------------------------------------------------------------------
 
 ## Plugins I used and then removed
+
+### Taglist
+
+http://www.vim.org/scripts/script.php?script_id=273
+
+I used tagbar more, no sense in having both anymore
 
 ### Rainbow Parenthesis
 
@@ -138,7 +148,8 @@ http://www.vim.org/scripts/script.php?script_id=3772
 ### Markdown
 
 I actually don't know what happened to this, the folder was empty which makes me
-think I forgot to add the file to git *sigh*
+think I forgot to add the file to git, and I originally installed it on an os I no longer
+use. *Sigh*
 
 I went with this markdown syntax plugin:
 
