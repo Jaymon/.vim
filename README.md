@@ -8,11 +8,13 @@ This is here for my convenience so I can easily keep my vim environment consiste
 
 ### Pathogen
 
+I think pretty much every vim user on the planet uses this plugin.
+
 https://github.com/tpope/vim-pathogen
 
 ### Tagbar
 
-This has largely replaced Taglist because I like the hierarchical code tree better
+This replaced Taglist because I like the hierarchical code tree better
 
 http://majutsushi.github.com/tagbar/
 
@@ -79,8 +81,8 @@ via: http://stackoverflow.com/questions/7603446/vim-insert-phpdoc-automatically
 
 4. Symlink `$HOME/.vim/vimrc` and `$HOME/.vim/gvimrc`
 
-    ln -s $HOME/.vim/vimrc $HOME/.vimrc
-    ln -s $HOME/.vim/gvimrc $HOME/.gvimrc
+        ln -s $HOME/.vim/vimrc $HOME/.vimrc
+        ln -s $HOME/.vim/gvimrc $HOME/.gvimrc
 
 ### In Windows 
 
@@ -90,12 +92,12 @@ via: http://stackoverflow.com/questions/7603446/vim-insert-phpdoc-automatically
 
 3. clone the repo
 
-    git clone [repo] .
+        git clone [repo] .
 
 4. make a symlink for the `vimrc` and `gvimrc` files
 
-    mklink %HOMEPATH%\\vimrc %HOMEPATH%\\vimfiles\\_vimrc
-    mklink %HOMEPATH%\\gvimrc %HOMEPATH%\\vimfiles\\_gvimrc
+        mklink %HOMEPATH%\\vimrc %HOMEPATH%\\vimfiles\\_vimrc
+        mklink %HOMEPATH%\\gvimrc %HOMEPATH%\\vimfiles\\_gvimrc
 
 
 -------------------------------------------------------------------------------
