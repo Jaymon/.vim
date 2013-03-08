@@ -59,7 +59,7 @@ set tabstop=2 " set tab character to N characters
 set softtabstop=2 " let backspace delete indent
 set expandtab " turn tabs into whitespace
 set shiftwidth=2 " indent width for autoindent
-filetype indent on " indent depends on filetype
+filetype plugin indent on " indent depends on filetype
 set backspace=indent,eol,start
 " configure filetype specific stuff in ftplugin/filetype.vim
 
