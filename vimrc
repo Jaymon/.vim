@@ -33,6 +33,10 @@ autocmd BufReadPost *
   \   exe "normal! g`\"" |
   \ endif
 
+" mess with the status bar
+set ruler		" show the cursor position all the time
+set showcmd		" display incomplete commands
+
 " line numbering
 " nu or rnu turn linenumbering (nu - traditional numbering, rnu - relative
 " numbering) on, you should use one or the other but not both
