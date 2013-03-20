@@ -178,30 +178,33 @@ nnoremap <S-Down> <C-w>10-
 nnoremap <S-Right> <C-w>10>
 nnoremap <S-Left> <C-w>10<
 
+
+" re-parse the file to fix syntax errors
+nmap <leader>rs :syn sync fromstart<CR>
+
 " configure tab buffers
 " http://stackoverflow.com/questions/2468939/
-" TODO: make guitablabel work in macvim
-set guitablabel=\[%N\]\ %t\ %M
+" http://stackoverflow.com/questions/11595301/controlling-tab-names-in-vim
+au bufEnter * set guitablabel=\[%N\]\ %t\ %M
 " I also thought about using <C-<> :tabprev and <c->> :tabnext
 nnoremap <A-.> :tabn<CR>
 nnoremap <A-,> :tabp<CR>
 " http://vim.wikia.com/wiki/Alternative_tab_navigation
 " http://vim.wikia.com/wiki/Using_tab_pages
 
-" :tabt to get back to the previous tab, sadly, tabp just goes to tab to the
+" go back to the previous tab, sadly, tabp just goes to tab to the
 " left, and :tabl goes to the very last tab, so :tabt will have to do
 " http://stackoverflow.com/questions/2119754/switch-to-last-active-tab-in-vim
-let g:lasttab = 1
 nmap <leader>t :exe "tabn ".g:lasttab<CR>
-" nnoremap :tabtab<CR> :exe "tabn ".g:lasttab<CR>
-au TabLeave * let g:lasttab = tabpagenr()
 
-" re-parse the file to fix syntax errors
-nmap <leader>rs :syn sync fromstart<CR>
+" put the opened tab at the end of the list, I prefer that to opening next to
+" the tab in which it was opened
+let g:lasttab = 1
+au TabLeave * let g:lasttab = tabpagenr()
 
 " configure NERDTree
 " https://github.com/scrooloose/nerdtree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+autocmd bufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " NN slows down reverse search by 1 sec, which was really annoying
 nnoremap RN :NERDTreeToggle<CR>
 let NERDTreeIgnore=['\.pyc$[[file]]']
