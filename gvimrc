@@ -64,7 +64,12 @@ autocmd VimLeavePre * if g:screen_size_restore_pos == 1 | call ScreenSave() | en
 " autocmd GUIEnter * let &columns = 9999 | let &columns = &columns/3 + &columns/4
 " autocmd GUIEnter * let &lines = 999 | let &lines = &lines/2 + &lines/3
 
-set listchars=tab:˻\ ,eol:˼,trail:˻,extends:˻,precedes:˻
+if has("win32")
+  " http://www.utf8-chartable.de/unicode-utf8-table.pl?start=688
+  set listchars=tab:˻\ ,eol:˼,trail:˻,extends:˻,precedes:˻
+else
+  set listchars=tab:˱\ ,eol:˲,trail:˱,extends:˱,precedes:˱
+endif
 set list
 " the 2 lines work to match space, but I don't like it since it messes with
 " highlight current line, I guess I just have to hope for space: support in
