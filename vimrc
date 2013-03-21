@@ -243,3 +243,24 @@ map  <leader>sg :echo synIDattr(synID(line("."), col("."), 1), "name")<CR>
 imap <C-Space> <C-x><C-o>
 imap <C-@> <C-Space>
 
+" allows * and # to search current selection just like it searchs for current
+" word under cursor
+" http://vimingwithbuttar.googlecode.com/hg/.vimrc
+" ###From an idea by Michael Naumann
+function! VisualSearch(direction) range
+  let l:saved_reg = @"
+  execute "normal! vgvy"
+  let l:pattern = escape(@", '\\/.*$^~[]')
+  let l:pattern = substitute(l:pattern, "\n$", "", "")
+  if a:direction == 'b'
+    execute "normal ?" . l:pattern . "^M"
+  else
+    execute "normal /" . l:pattern . "^M"
+  endif
+  let @/ = l:pattern
+  let @" = l:saved_reg
+endfunction
+vnoremap <silent> * :call VisualSearch('f')<CR>
+vnoremap <silent> # :call VisualSearch('b')<CR>
+" End From an idea by Michael Nauman
+
