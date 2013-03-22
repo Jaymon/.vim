@@ -44,12 +44,13 @@ let g:colors_name="jaymon"
 " Uncomment and complete the commands you want to change from the default.
 
 " http://vim.wikia.com/wiki/Highlight_current_line
-hi cursorLine guibg=#ECF7FF
+hi cursorLine guibg=#ECF7FF cterm=None term=None
 
 hi MatchParen guibg=#FFFF80
 
 if exists('+colorcolumn')
   set colorcolumn=80
+  "highlight ColorColumn ctermbg=lightgrey guibg=#ECF7FF
   highlight ColorColumn ctermbg=lightgrey guibg=#ECF7FF
 endif
 
