@@ -102,6 +102,9 @@ set directory^=$TEMP//,/tmp//,$TMP//,$TMPDIR//
 " http://stackoverflow.com/questions/4331776/change-vim-swap-backup-undo-file-name
 set undodir-=.
 set undodir^=$TEMP//,/tmp//,$TMP//,$TMPDIR//
+" vim will save view state so the same view gets reloaded on file reopen
+set viewdir-=.
+set viewdir^=$TEMP//,/tmp//,$TMP//,$TMPDIR//
 au BufWinLeave * silent! mkview "make vim save view (state) (folds, cursor, etc)
 au BufWinEnter * silent! loadview "make vim load view (state) (folds, cursor, etc)
 
