@@ -23,12 +23,12 @@ function! ScreenRestore()
   " Must set font first so columns and lines are based on font size.
   let f = ScreenFilename()
   if g:screen_size_restore_pos && filereadable(f)
-    let vim_instance = (g:screen_size_by_vim_instance==1?(v:servername):'GVIM')
+    let vim_instance = (g:screen_size_by_vim_instance==1 ? (v:servername) : 'GVIM')
     for line in readfile(f)
       let sizepos = split(line)
       if len(sizepos) == 5 && sizepos[0] == vim_instance
         silent! execute "set columns=".sizepos[1]." lines=".sizepos[2]
-        silent! execute "winpos ".sizepos[3]." ".sizepos[4]
+        " silent! execute "winpos ".sizepos[3]." ".sizepos[4]
         return
       endif
     endfor
@@ -38,7 +38,7 @@ endfunction
 function! ScreenSave()
   " Save window size and position.
   if g:screen_size_restore_pos
-    let vim_instance = (g:screen_size_by_vim_instance==1?(v:servername):'GVIM')
+    let vim_instance = (g:screen_size_by_vim_instance==1 ? (v:servername) : 'GVIM')
     let data = vim_instance . ' ' . &columns . ' ' . &lines . ' ' .
           \ (getwinposx()<0?0:getwinposx()) . ' ' .
           \ (getwinposy()<0?0:getwinposy())
@@ -68,7 +68,8 @@ if has("win32")
   " http://www.utf8-chartable.de/unicode-utf8-table.pl?start=688
   set listchars=tab:˻\ ,eol:˼,trail:˻,extends:˻,precedes:˻
 else
-  set listchars=tab:˱\ ,eol:˲,trail:˱,extends:˱,precedes:˱
+  " http://www.utf8-chartable.de/unicode-utf8-table.pl?start=8192
+  set listchars=tab:‧\ ,eol:․,trail:‧,extends:‧,precedes:‧
 endif
 set list
 " the 2 lines work to match space, but I don't like it since it messes with
