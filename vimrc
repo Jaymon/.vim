@@ -2,6 +2,7 @@
 " http://stackoverflow.com/questions/3111351/gvim-portable-plugins
 
 call pathogen#infect()
+call env#setup()
 
 set nocompatible
 
@@ -44,9 +45,14 @@ set rnu
 " for normal numbering, something like 5 is appropriate to easily handle files
 " up to 99999 lines long, but for relative numbering, I think 2-3 is
 " sufficient
-set numberwidth=3 " Set line numbering to take up N spaces
+set numberwidth=4 " Set line numbering to take up N spaces
 set cursorline
 set scrolloff=3 " N lines above/below cursor when scrolling
+
+" turn on go stuff if it is available
+if !empty($GOROOT)
+  set rtp+=$GOROOT/misc/vim
+endif
 
 " Indent stuff
 " http://www.jonlee.ca/hacking-vim-the-ultimate-vimrc/
@@ -94,17 +100,16 @@ set undoreload=10000
 " save ~ files somewhere where I don't have to bother with them
 " http://stackoverflow.com/questions/2823608/
 set backupdir-=.
-set backupdir^=$TEMP//,/tmp//,$TMP//,$TMPDIR//
+set backupdir^=$VIMTEMP//
 " this is for the .swp files
 " http://vim.wikia.com/wiki/Remove_swap_and_backup_files_from_your_working_directory
 set directory-=.
-set directory^=$TEMP//,/tmp//,$TMP//,$TMPDIR//
+set directory^=$VIMTEMP//
 " http://stackoverflow.com/questions/4331776/change-vim-swap-backup-undo-file-name
 set undodir-=.
-set undodir^=$TEMP//,/tmp//,$TMP//,$TMPDIR//
+set undodir^=$VIMTEMP//
 " vim will save view state so the same view gets reloaded on file reopen
-set viewdir-=.
-set viewdir^=$TEMP//,/tmp//,$TMP//,$TMPDIR//
+set viewdir=$VIMTEMP//
 au BufWinLeave * silent! mkview "make vim save view (state) (folds, cursor, etc)
 au BufWinEnter * silent! loadview "make vim load view (state) (folds, cursor, etc)
 
@@ -114,9 +119,10 @@ au BufWinEnter * silent! loadview "make vim load view (state) (folds, cursor, et
 "au BufEnter * cal rainbow_parentheses#toggleall()
 
 " http://stackoverflow.com/questions/594838/is-it-possible-to-get-gvim-to-remember-window-size
-set sessionoptions+=resize,winpos
+set sessionoptions+=resize
 
 " do some cool text moving,
+" I don't think I've ever used these, it might be worth removing them
 " http://vim.wikia.com/wiki/Moving_lines_up_or_down
 " http://stackoverflow.com/questions/741814/move-entire-line-up-and-down-in-vim
 nnoremap <A-j> :m .+1<CR>==
@@ -230,10 +236,11 @@ let g:tagbar_foldlevel = 0
 let g:tagbar_autoshowtag = 1
 if has("win32")
   " for some reason, tagbar won't work if there are quotes around the path
-  let g:tagbar_ctags_bin = $HOME . '\vimfiles\bin\ctags.exe'
-  let g:tagbar_phpctags_bin = $HOME . '\vimfiles\bin\phpctags.bat'
+  let g:tagbar_ctags_bin = $VIMHOME . '\bin\ctags.exe'
+  let g:tagbar_phpctags_bin = $VIMHOME . '\bin\phpctags.bat'
 else
-  let g:tagbar_phpctags_bin = $HOME . '/.vim/bundle/phpctags/phpctags'
+  " ctags should be on the PATH for everything else
+  let g:tagbar_phpctags_bin = $VIMHOME . '/bundle/phpctags/phpctags'
 endif
 
 " configure camel case motion
