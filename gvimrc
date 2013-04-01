@@ -13,17 +13,22 @@ let g:screen_size_restore = (exists("g:screen_size_restore")) ? g:screen_size_re
 let g:screen_size_restore_pos = (exists("g:screen_size_restore_pos")) ? g:screen_size_restore_pos : 0
 " set this to restore by window name instead of one global size for all windows
 let g:screen_size_by_vim_instance = (exists("g:screen_size_by_vim_instance")) ? g:screen_size_by_vim_instance : 1
-" set this if you want to name the window something other than the default,
-" this renders g:screen_size_by_vim_instance useless if set
-if !exists("g:vim_instance")
-  let g:vim_instance = (g:screen_size_by_vim_instance==1 ? (v:servername) : 'GVIM')
-endif
+
+" we have to call this from a function since it didn't work to set a var on
+" startup on Mac OS, g:vim_instance ended up being set to ""
+function! GetVimInstance()
+  if !exists("g:vim_instance")
+    let g:vim_instance = (g:screen_size_by_vim_instance==1) ? (v:servername) : 'GVIM'
+  endif
+  return g:vim_instance
+endfunction
 
 function! ScreenFilename()
+  let vim_instance = GetVimInstance()
   if has("win32")
-    return $VIMTEMP . '\vimsize_' . g:vim_instance . '.txt'
+    return $VIMTEMP . '\vimsize_' . vim_instance . '.txt'
   else
-    return $VIMTEMP . '/vimsize_' . g:vim_instance . '.txt'
+    return $VIMTEMP . '/vimsize_' . vim_instance . '.txt'
   endif
 endfunction
 
@@ -35,10 +40,10 @@ function! ScreenRestore()
   if g:screen_size_restore && filereadable(f)
     for line in readfile(f)
       let sizepos = split(line)
-      if len(sizepos) == 5 && sizepos[0] == g:vim_instance
-        silent! execute "set columns=".sizepos[1]." lines=".sizepos[2]
-        if g:screen_size_restore_pos
-          silent! execute "winpos ".sizepos[3]." ".sizepos[4]
+      if len(sizepos) >= 2
+        silent! execute "set columns=".sizepos[0]." lines=".sizepos[1]
+        if g:screen_size_restore_pos && (len(sizepos) >= 4)
+          silent! execute "winpos ".sizepos[2]." ".sizepos[3]
         endif
         return
       endif
@@ -49,7 +54,7 @@ endfunction
 function! ScreenSave()
   " Save window size and position.
   if g:screen_size_restore
-    let data = g:vim_instance . ' ' . &columns . ' ' . &lines . ' ' .
+    let data = '' . &columns . ' ' . &lines . ' ' .
           \ (getwinposx()<0?0:getwinposx()) . ' ' .
           \ (getwinposy()<0?0:getwinposy())
     let f = ScreenFilename()
