@@ -14,17 +14,8 @@ let g:screen_size_restore_pos = (exists("g:screen_size_restore_pos")) ? g:screen
 " set this to restore by window name instead of one global size for all windows
 let g:screen_size_by_vim_instance = (exists("g:screen_size_by_vim_instance")) ? g:screen_size_by_vim_instance : 1
 
-" we have to call this from a function since it didn't work to set a var on
-" startup on Mac OS, g:vim_instance ended up being set to ""
-function! GetVimInstance()
-  if !exists("g:vim_instance")
-    let g:vim_instance = (g:screen_size_by_vim_instance==1) ? (v:servername) : 'GVIM'
-  endif
-  return g:vim_instance
-endfunction
-
 function! ScreenFilename()
-  let vim_instance = GetVimInstance()
+  let vim_instance = (g:screen_size_by_vim_instance==1) ? (v:servername) : 'GVIM'
   if has("win32")
     return $VIMTEMP . '\vimsize_' . vim_instance . '.txt'
   else
@@ -35,39 +26,54 @@ endfunction
 function! ScreenRestore()
   " Restore window size (columns and lines) and position
   " from values stored in vimsize file.
-  " Must set font first so columns and lines are based on font size.
-  let f = ScreenFilename()
-  if g:screen_size_restore && filereadable(f)
-    for line in readfile(f)
-      let sizepos = split(line)
-      if len(sizepos) >= 2
-        silent! execute "set columns=".sizepos[0]." lines=".sizepos[1]
-        if g:screen_size_restore_pos && (len(sizepos) >= 4)
-          silent! execute "winpos ".sizepos[2]." ".sizepos[3]
-        endif
-        return
-      endif
-    endfor
-  endif
+  " Must set font first so columns and lines are based on font size
 
+  " for comparison, get default values, and we will only save values if they
+  " have changed
   let s:screen_size_ocolumns = &columns
   let s:screen_size_olines = &lines
-
+  let s:screen_size_ox = getwinposx()<0?0:getwinposx()
+  let s:screen_size_oy = getwinposy()<0?0:getwinposy()
+  let f = ScreenFilename()
+  if g:screen_size_restore || g:screen_size_restore_pos
+    if filereadable(f)
+      for line in readfile(f)
+        let sizepos = split(line)
+        if len(sizepos) >= 3
+          if sizepos[0] == "size"
+            silent! execute "set columns=".sizepos[1]." lines=".sizepos[2]
+          endif
+          if sizepos[0] == "pos"
+            silent! execute "winpos ".sizepos[1]." ".sizepos[2]
+          endif
+        endif
+      endfor
+    endif
+  endif
 endfunction
 
 function! ScreenSave()
   " Save window size and position if it has changed
+  let lines = []
   if g:screen_size_restore
     let s:screen_size_columns = &columns
     let s:screen_size_lines = &lines
     if (s:screen_size_columns != s:screen_size_ocolumns) || (s:screen_size_lines != s:screen_size_olines)
-      let data = '' . s:screen_size_columns . ' ' . s:screen_size_lines . ' ' .
-            \ (getwinposx()<0?0:getwinposx()) . ' ' .
-            \ (getwinposy()<0?0:getwinposy())
-      let f = ScreenFilename()
-      let lines = [data]
-      call writefile(lines, f)
+      let data = 'size ' . s:screen_size_columns . ' ' . s:screen_size_lines
+      call add(lines, data)
     endif
+  endif
+  if g:screen_size_restore_pos
+    let s:screen_size_x = getwinposx()<0?0:getwinposx()
+    let s:screen_size_y = getwinposy()<0?0:getwinposy()
+    if (s:screen_size_x != s:screen_size_ox) || (s:screen_size_y != s:screen_size_oy)
+      let data = 'pos ' . s:screen_size_x . ' ' . s:screen_size_y
+      call add(lines, data)
+    endif
+  endif
+  if len(lines) > 0
+    let f = ScreenFilename()
+    call writefile(lines, f)
   endif
 endfunction
 
