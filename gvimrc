@@ -49,17 +49,25 @@ function! ScreenRestore()
       endif
     endfor
   endif
+
+  let s:screen_size_ocolumns = &columns
+  let s:screen_size_olines = &lines
+
 endfunction
 
 function! ScreenSave()
-  " Save window size and position.
+  " Save window size and position if it has changed
   if g:screen_size_restore
-    let data = '' . &columns . ' ' . &lines . ' ' .
-          \ (getwinposx()<0?0:getwinposx()) . ' ' .
-          \ (getwinposy()<0?0:getwinposy())
-    let f = ScreenFilename()
-    let lines = [data]
-    call writefile(lines, f)
+    let s:screen_size_columns = &columns
+    let s:screen_size_lines = &lines
+    if (s:screen_size_columns != s:screen_size_ocolumns) || (s:screen_size_lines != s:screen_size_olines)
+      let data = '' . s:screen_size_columns . ' ' . s:screen_size_lines . ' ' .
+            \ (getwinposx()<0?0:getwinposx()) . ' ' .
+            \ (getwinposy()<0?0:getwinposy())
+      let f = ScreenFilename()
+      let lines = [data]
+      call writefile(lines, f)
+    endif
   endif
 endfunction
 
