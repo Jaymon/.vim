@@ -113,6 +113,10 @@ hi String guifg=#FF0000
 "hi Error		
 "hi Todo		
 
+" completely ignore error highlighting, individual syntax files can turn it on
+" but I absolutely hate it
+syn clear Error
+
 " http://stackoverflow.com/questions/8309815/vim-conceal-with-more-than-one-character
 hi conceal ctermfg=DarkBlue ctermbg=NONE guifg=#D4CED4 guibg=NONE
 " for highlighting chars like newline and tab
