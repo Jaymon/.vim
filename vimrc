@@ -1,5 +1,6 @@
 " http://portablegvim.sourceforge.net/configuration.html
 " http://stackoverflow.com/questions/3111351/gvim-portable-plugins
+" https://github.com/spf13/spf13-vim
 
 call pathogen#infect()
 call env#setup()
