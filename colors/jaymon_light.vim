@@ -46,12 +46,12 @@ let g:colors_name="jaymon"
 " http://vim.wikia.com/wiki/Highlight_current_line
 hi cursorLine guibg=#ECF7FF cterm=None term=None
 
-hi MatchParen guibg=#FFFF80
+hi MatchParen guibg=#FFFF80 ctermbg=yellow
 
 if exists('+colorcolumn')
   set colorcolumn=80
   "highlight ColorColumn ctermbg=lightgrey guibg=#ECF7FF
-  highlight ColorColumn ctermbg=lightgrey guibg=#ECF7FF
+  highlight ColorColumn ctermbg=None guibg=#ECF7FF
 endif
 
 "hi Cursor		
@@ -90,12 +90,12 @@ hi LineNr guifg=#A0A0A0 guibg=#ECF7FF
 " dark blue: #000080
 
 " syntax highlighting groups
-hi Comment guifg=#DEDAE0
+hi Comment guifg=#DEDAE0 ctermfg=lightgrey
 hi Constant guifg=#000000 cterm=bold gui=bold
 " python: method names, .func()
 " hi Identifier	guifg=#000080 
-hi Identifier guifg=#0000FF
-hi Operator	guifg=#000080 
+hi Identifier guifg=#0000FF ctermfg=blue
+hi Operator	guifg=#000080 ctermfg=darkblue
 " python: if, else, return, def
 hi Statement guifg=#FF8000 
 "hi Statement guifg=#FF8000 cterm=bold gui=bold  
@@ -105,13 +105,14 @@ hi PreProc guifg=#FF8000
 " hi Type guifg=#0000FF
 hi Type guifg=#000000 cterm=bold gui=bold  
 hi Special guifg=#A0A0A0
-hi Number guifg=#000080
-hi Float guifg=#000080
-hi String guifg=#FF0000
+hi Number guifg=#000080 ctermfg=darkblue
+hi Float guifg=#000080 ctermfg=darkblue
+hi String guifg=#FF0000 ctermfg=red
 "hi Underlined	
 "hi Ignore		
 "hi Error		
 "hi Todo		
+hi Structure ctermfg=black cterm=bold
 
 " completely ignore error highlighting, individual syntax files can turn it on
 " but I absolutely hate it
@@ -125,7 +126,7 @@ highlight SpecialKey guifg=#D4CED4
 hi NonReservedKeyword guifg=black ctermfg=black cterm=bold gui=bold
 
 " python specific highlighting
-hi pythonFormatStrTemplate guifg=#800000
+hi pythonFormatStrTemplate guifg=#800000 ctermfg=magenta
 "hi pythonFormatStrTemplate guifg=#660000
-hi pythonStrFormatting guifg=#CC0000
-hi pythonStrFormat guifg=#CC0000
+hi pythonStrFormatting guifg=#CC0000 ctermfg=magenta
+hi pythonStrFormat guifg=#CC0000 ctermfg=magenta
