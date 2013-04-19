@@ -1,6 +1,9 @@
 " http://portablegvim.sourceforge.net/configuration.html
 " http://stackoverflow.com/questions/3111351/gvim-portable-plugins
 " https://github.com/spf13/spf13-vim
+"
+"
+" stuff I always forget: g:, l:, s: variables definitions :help internal-variables
 
 call pathogen#infect()
 call env#setup()
@@ -51,6 +54,9 @@ set cursorline
 set scrolloff=3 " N lines above/below cursor when scrolling
 
 " turn on go stuff if it is available
+if empty($GOROOT) && executable('go')
+  let $GOROOT = fnamemodify(system('which go'), ':p:h:h')
+endif
 if !empty($GOROOT)
   set rtp+=$GOROOT/misc/vim
 endif
@@ -69,7 +75,6 @@ set tabstop=2 " set tab character to N characters
 set softtabstop=2 " let backspace delete indent
 set expandtab " turn tabs into whitespace
 set shiftwidth=2 " indent width for autoindent
-filetype plugin indent on " indent depends on filetype
 set backspace=indent,eol,start
 " configure filetype specific stuff in ftplugin/filetype.vim
 
@@ -86,6 +91,8 @@ set foldmethod=indent
 set foldnestmax=2
 set foldlevelstart=2
 
+" turn on syntax highlighting
+filetype plugin indent on " indent depends on filetype
 syntax on
 colorscheme jaymon_light
 "set listchars=tab:>\ ,eol:¬,nbsp:<,precedes:$
@@ -194,6 +201,7 @@ nnoremap <S-Left> <C-w>10<
 
 " re-parse the file to fix syntax errors
 nmap <leader>rs :syn sync fromstart<CR>
+nmap <leader>parse :syn sync fromstart<CR>
 
 " configure tab buffers
 " http://stackoverflow.com/questions/2468939/
@@ -250,7 +258,9 @@ map <S-B> <Plug>CamelCaseMotion_b
 map <S-E> <Plug>CamelCaseMotion_e
 
 " helpful for syntax highlighting, show what highlight group is under cursor
+" once again, I can never remember what I map this to
 map  <leader>sg :echo synIDattr(synID(line("."), col("."), 1), "name")<CR>
+map  <leader>hl :echo synIDattr(synID(line("."), col("."), 1), "name")<CR>
 
 " map omnicompletion to PSPad's ctrl-space
 " http://stackoverflow.com/questions/7722177/how-do-i-map-ctrl-x-ctrl-o-to-ctrl-space-in-terminal-vim
@@ -277,4 +287,26 @@ endfunction
 vnoremap <silent> * :call VisualSearch('f')<CR>
 vnoremap <silent> # :call VisualSearch('b')<CR>
 " End From an idea by Michael Nauman
+
+" this will launch the default browser window with the first url found on line
+" http://waoewaoe.wordpress.com/2009/05/05/open-a-website-in-a-browser-from-commandline/
+" http://vim.wikia.com/wiki/Open_a_web-browser_with_the_URL_in_the_current_line
+function! LaunchBrowser()
+  if has('gui')
+    let l:uri = matchstr(getline("."), 'https\?:\/\/\S\+\c')
+    if l:uri != ""
+      if has("win32")
+        exec "!start \"\" \"" . l:uri . "\""
+      elseif has("mac")
+        exec ":silent !open \"" . l:uri . "\""
+      else
+        echo "OS Not currently supported"
+        " TODO: wrapping this in the has('gui') should keep this from firing in linux, maybe?
+        " this should work, but I almost never have a gui in Linux computers
+        "exec "!xdg-open \"" . l:uri . "\""
+      endif
+    endif
+  endif
+endfunction
+map <silent> <leader>b :call LaunchBrowser()<CR>:redraw!<CR>
 
