@@ -5,6 +5,9 @@ syn match pythonMethod "\.[a-zA-Z0-9_]*(\@="
 syn keyword NonReservedKeyword self cls None
 syn keyword pythonBuiltinObj	__class__
 
+" I like these (eg, and in is not or) better as the same color as for loops and stuff
+hi link pythonOperator Statement
+
 " multi-line strings not assigned to a variable should be treated as comments
 syn region pythonDocBlock start=/^\s*\zs'''/ end=+'''+ keepend contains=pythonEscape,pythonEscapeError,pythonDocTest,pythonSpaceError,@Spell
 syn region pythonDocBlock start=/^\s*\zs"""/ end=+"""+ keepend contains=pythonEscape,pythonEscapeError,pythonDocTest2,pythonSpaceError,@Spell
