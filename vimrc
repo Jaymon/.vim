@@ -294,16 +294,17 @@ vnoremap <silent> # :call VisualSearch('b')<CR>
 function! LaunchBrowser()
   if has('gui')
     let l:uri = matchstr(getline("."), 'https\?:\/\/\S\+\c')
+    let l:uri = shellescape(l:uri, 1)
     if l:uri != ""
       if has("win32")
-        exec "!start \"\" \"" . l:uri . "\""
+        exec "!start \"\" " . l:uri
       elseif has("mac")
-        exec ":silent !open \"" . l:uri . "\""
+        exec ":silent !open " . l:uri
       else
         echo "OS Not currently supported"
         " TODO: wrapping this in the has('gui') should keep this from firing in linux, maybe?
         " this should work, but I almost never have a gui in Linux computers
-        "exec "!xdg-open \"" . l:uri . "\""
+        "exec "!xdg-open " . l:uri
       endif
     endif
   endif

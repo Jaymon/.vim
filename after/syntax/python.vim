@@ -2,7 +2,7 @@ syn match pythonFormatStrTemplate	"{[a-zA-Z0-9_]*}" contained containedin=python
 
 " http://ssiaf.blogspot.com/2009/07/negative-lookbehind-in-vim.html
 syn match pythonMethod "\.[a-zA-Z0-9_]*(\@="
-syn keyword NonReservedKeyword self cls
+syn keyword NonReservedKeyword self cls None
 syn keyword pythonBuiltinObj	__class__
 
 " multi-line strings not assigned to a variable should be treated as comments
