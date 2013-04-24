@@ -112,7 +112,7 @@ hi String guifg=#FF0000 ctermfg=red
 "hi Ignore		
 "hi Error		
 "hi Todo		
-hi Structure ctermfg=black cterm=bold
+hi Structure ctermfg=black cterm=bold guifg=black gui=bold
 
 " completely ignore error highlighting, individual syntax files can turn it on
 " but I absolutely hate it

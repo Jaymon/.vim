@@ -2,8 +2,8 @@ syn match pythonFormatStrTemplate	"{[a-zA-Z0-9_]*}" contained containedin=python
 
 " http://ssiaf.blogspot.com/2009/07/negative-lookbehind-in-vim.html
 syn match pythonMethod "\.[a-zA-Z0-9_]*(\@="
-syn keyword NonReservedKeyword self cls None
-syn keyword pythonBuiltinObj	__class__
+syn keyword NonReservedKeyword self cls
+syn keyword pythonBuiltinObj	__class__ __builtin__
 
 " I like these (eg, and in is not or) better as the same color as for loops and stuff
 hi link pythonOperator Statement
