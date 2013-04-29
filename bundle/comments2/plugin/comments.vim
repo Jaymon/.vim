@@ -14,7 +14,7 @@
 " http://learnvimscriptthehardway.stevelosh.com/chapters/27.html
 " http://learnvimscriptthehardway.stevelosh.com/chapters/19.html
 " http://www.ibm.com/developerworks/linux/library/l-vim-script-1/
-"
+" http://stackoverflow.com/questions/1162611/vim-getting-the-current-value-of-vim-foldmarker
 
 " Exit if already loaded
 if exists("loaded_comments_plugin")
