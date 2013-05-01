@@ -101,3 +101,26 @@ set list
 " http://stackoverflow.com/questions/1675688/make-vim-show-all-white-spaces-as-a-character
 " set conceallevel=2 concealcursor=nv
 " autocmd BufWinEnter * syntax match NonText / / conceal cchar=˻
+
+" set the status line
+" http://stackoverflow.com/questions/5375240/a-more-useful-statusline-in-vim
+" http://got-ravings.blogspot.com/2008/08/vim-pr0n-making-statuslines-that-own.html
+hi User1 guibg=#ECF7FF guifg=#A0A0A0
+" hi User2 ctermbg=red   ctermfg=blue  guibg=red   guifg=blue
+set laststatus=2
+set statusline=   " clear the statusline for when vimrc is reloaded
+set statusline+=%1*
+set statusline+=\ \ \ \  " 4 spaces, matches up with line number width TODO: make this automatic
+"set statusline+=%f\                          " file name
+set statusline+=%.70F\ 
+set statusline+=%h%m%r%w                     " flags
+set statusline+=[%{strlen(&ft)?&ft:'none'},\  " filetype
+set statusline+=%{strlen(&fenc)?&fenc:&enc},\  " encoding
+set statusline+=%{&fileformat}]              " file format
+set statusline+=%=                           " right align
+set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\  " highlight
+" set statusline+=%b,0x%-8B\                   " current char
+" set statusline+=%-14.(%l,%c%V%)\ %<%P        " offset
+"set statusline+=%l/%L\   "cursor line/total lines
+set statusline+=%15.15(%c\ %l/%L%)\   "cursor line/total lines
+

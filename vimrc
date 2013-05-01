@@ -54,7 +54,7 @@ set cursorline
 set scrolloff=3 " N lines above/below cursor when scrolling
 
 " turn on go stuff if it is available
-if empty($GOROOT) && executable('go')
+if empty($GOROOT) && (!empty($GOPATH) || executable('go'))
   let $GOROOT = fnamemodify(system('which go'), ':p:h:h')
 endif
 if !empty($GOROOT)
@@ -95,9 +95,6 @@ set foldlevelstart=2
 filetype plugin indent on " indent depends on filetype
 syntax on
 colorscheme jaymon_light
-set nolist " turn listchars off by default (this seemed to get turned on somewhere, but not in my stuff)
-"set listchars=tab:>\ ,eol:¬,nbsp:<,precedes:$
-" http://vimcasts.org/episodes/show-invisibles/
 
 " backup stuff
 set history=1000
@@ -118,28 +115,14 @@ set directory^=$VIMTEMP//
 set undodir-=.
 set undodir^=$VIMTEMP//
 " vim will save view state so the same view gets reloaded on file reopen
+" http://vim.wikia.com/wiki/Make_views_automatic
+set viewoptions-=options " preserving option state was annoying me, cursor and folding good, options bad
 set viewdir=$VIMTEMP//
 au BufWinLeave * silent! mkview "make vim save view (state) (folds, cursor, etc)
 au BufWinEnter * silent! loadview "make vim load view (state) (folds, cursor, etc)
 
-" http://www.vim.org/scripts/script.php?script_id=3772
-" doesn't work in buffers/tabs, so it's not worth even activating
-" see: https://github.com/kien/ctrlp.vim/issues/198
-"au BufEnter * cal rainbow_parentheses#toggleall()
-
 " http://stackoverflow.com/questions/594838/is-it-possible-to-get-gvim-to-remember-window-size
 set sessionoptions+=resize
-
-" do some cool text moving,
-" I don't think I've ever used these, it might be worth removing them
-" http://vim.wikia.com/wiki/Moving_lines_up_or_down
-" http://stackoverflow.com/questions/741814/move-entire-line-up-and-down-in-vim
-nnoremap <A-j> :m .+1<CR>==
-nnoremap <A-k> :m .-2<CR>==
-inoremap <A-j> <Esc>:m .+1<CR>==gi
-inoremap <A-k> <Esc>:m .-2<CR>==gi
-vnoremap <A-j> :m '>+1<CR>gv=gv
-vnoremap <A-k> :m '<-2<CR>gv=gv
 
 " Allow us to save a file as root, if we have sudo privileges,
 " when we're not currently using vim as root
@@ -268,10 +251,8 @@ map  <leader>hl :echo synIDattr(synID(line("."), col("."), 1), "name")<CR>
 imap <C-Space> <C-x><C-o>
 imap <C-@> <C-Space>
 
-" allows * and # to search current selection just like it searchs for current
-" word under cursor
+" allows * and # to search current selection just like it searchs for current word under cursor
 " http://vimingwithbuttar.googlecode.com/hg/.vimrc
-" ###From an idea by Michael Naumann
 function! VisualSearch(direction) range
   let l:saved_reg = @"
   execute "normal! vgvy"
@@ -287,7 +268,6 @@ function! VisualSearch(direction) range
 endfunction
 vnoremap <silent> * :call VisualSearch('f')<CR>
 vnoremap <silent> # :call VisualSearch('b')<CR>
-" End From an idea by Michael Nauman
 
 " this will launch the default browser window with the first url found on line
 " http://waoewaoe.wordpress.com/2009/05/05/open-a-website-in-a-browser-from-commandline/
@@ -298,14 +278,14 @@ function! LaunchBrowser()
     let l:uri = shellescape(l:uri, 1)
     if l:uri != ""
       if has("win32")
-        exec "!start \"\" " . l:uri
+        exec ":silent !start \"\" " . l:uri
       elseif has("mac")
         exec ":silent !open " . l:uri
       else
         echo "OS Not currently supported"
         " TODO: wrapping this in the has('gui') should keep this from firing in linux, maybe?
         " this should work, but I almost never have a gui in Linux computers
-        "exec "!xdg-open " . l:uri
+        "exec ":silent !xdg-open " . l:uri
       endif
     endif
   endif
