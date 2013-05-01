@@ -95,6 +95,7 @@ set foldlevelstart=2
 filetype plugin indent on " indent depends on filetype
 syntax on
 colorscheme jaymon_light
+set nolist " turn listchars off by default (this seemed to get turned on somewhere, but not in my stuff)
 "set listchars=tab:>\ ,eol:¬,nbsp:<,precedes:$
 " http://vimcasts.org/episodes/show-invisibles/
 
