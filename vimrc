@@ -292,3 +292,15 @@ function! LaunchBrowser()
 endfunction
 map <silent> <leader>b :call LaunchBrowser()<CR>:redraw!<CR>
 
+" display what's changed since last save (uses diff command, so not cross-platform)
+" http://vim.wikia.com/wiki/Diff_current_buffer_and_the_original_file
+" http://stackoverflow.com/questions/749297/can-i-see-changes-before-i-save-my-file-in-vim
+map <leader>d1 :w !diff % -
+" this one is way more involved, it splits the screen and puts the original in the left buffer
+" from vimrc_example 
+if !exists(":DiffOrig")
+  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+          \ | wincmd p | diffthis
+endif
+map <leader>d2 :DiffOrig
+
