@@ -27,6 +27,9 @@ endif
 
 let loaded_comments_plugin="v3.0"
 
+noremap  <silent> <C-D> :call Commentify()<CR>
+vnoremap  <silent> <C-D> :call RangeCommentify()<CR>
+
 " key-mappings for comment line in normal mode
 noremap  <silent> <C-C> :call CommentLine()<CR>
 " key-mappings for range comment lines in visual <Shift-V> mode
@@ -41,17 +44,37 @@ function! EscapeInput(input)
   return escape(a:input, '\\/.*$^~[]')
 endfunction
 
+" x out any current comments (we do this by changing things */ to * /)
+" (this will fail on multiline comments that are only one char, not sure what language has that though)
 function! EscapeComment(start, stop)
-    " x out any current comments (we do this by changing things */ -> * /)
-    " (this will fail on multiline comments that are only one char, not sure
-    " what language has that though)
     execute ":silent! normal :'<,'>s/" . EscapeInput(a:start) . "/" . EscapeInput(a:start[0]) . " " . EscapeInput(a:start[1]) ."/\<ESC>"
     execute ":silent! normal :'<,'>s/" . EscapeInput(a:stop) . "/" . EscapeInput(a:stop[0]) . " " . EscapeInput(a:stop[1]) ."/\<ESC>"
 endfunction
 
+" basically unperform the EscapeComment operation
 function! UnescapeComment(start, stop)
     execute ":silent! normal :'<,'>s/" . EscapeInput(a:start[0]) . " " . EscapeInput(a:start[1]) ."/" . EscapeInput(a:start) . "/\<ESC>"
     execute ":silent! normal :'<,'>s/" . EscapeInput(a:stop[0]) . " " . EscapeInput(a:stop[1]) ."/" . EscapeInput(a:stop) . "/\<ESC>"
+endfunction
+
+function! GetVisual()
+  let [lnum1, col1] = getpos("'<")[1:2]
+  let [lnum2, col2] = getpos("'>")[1:2]
+  let lines = getline(lnum1, lnum2)
+  let lines[-1] = lines[-1][: col2 - 2]
+  let lines[0] = lines[0][col1 - 1:]
+  execute ":silent! normal gv"
+  return join(lines, "\n")
+endfunction
+
+function! Commentify()
+  let l:comment_bits = split(&commentstring, "%s")
+  if match(getline("."), "^\\s*" . EscapeInput(l:comment_bits[0])) == 0
+    call UnCommentLine()
+  else
+    call CommentLine()
+  endif
+
 endfunction
 
 " function to comment line in normal mode
@@ -59,7 +82,6 @@ function! CommentLine()
   let l:comment_bits = split(&commentstring, "%s")
 
   if len(l:comment_bits) == 1
-    "execute ":silent! normal 0i" . l:comment_bits[0] . "\<ESC>==\<down>^"
     execute ":silent! normal 0i" . l:comment_bits[0] . "\<ESC>\<down>"
 
   else
@@ -81,9 +103,23 @@ function! UnCommentLine()
   else
     let l:start = l:comment_bits[0]
     let l:stop = l:comment_bits[1]
-    execute ":silent! normal :nohlsearch\<CR>:s/". EscapeInput(l:start) . "//\<CR>"
+    execute ":silent! normal :nohlsearch\<CR>:s/" . EscapeInput(l:start) . "//\<CR>"
     execute ":silent! normal :nohlsearch\<CR>:s/" . EscapeInput(l:stop) . "//\<CR>"
 
+  endif
+
+endfunction
+
+" TODO: this does not work
+function! RangeCommentify() range
+  let l:comment_bits = split(&commentstring, "%s")
+  echo "here"
+  if match(GetVisual(), "^\\s*" . EscapeInput(l:comment_bits[0])) == 0
+    echo "here 1"
+    call RangeUnCommentLine()
+  else
+    echo "here 2"
+    call RangeCommentLine()
   endif
 
 endfunction
@@ -93,14 +129,13 @@ function! RangeCommentLine() range
   let l:comment_bits = split(&commentstring, "%s")
 
   if len(l:comment_bits) == 1
-    "execute ":silent! normal :" . a:firstline . "," . a:lastline . "s/\\S/" . EscapeInput(l:comment_bits[0]) . "\\0/\<CR>:nohlsearch<CR><down>"
-    execute ":silent! normal :" . a:firstline . "," . a:lastline . "s/\\S/" . EscapeInput(l:comment_bits[0]) . "/\<CR>:nohlsearch<CR><down>"
-
+    " TODO: change this to do '< for the first line, then a:firstline + 1 for
+    " all other lines, that way you could do a visual selection in the middle
+    " of one line and have it work
+    execute ":silent! normal :" . a:firstline . "," . a:lastline . "s/^/" . EscapeInput(l:comment_bits[0]) . "/\<CR>:nohlsearch<CR><down>"
   else
     let l:start = l:comment_bits[0]
     let l:stop = l:comment_bits[1]
-    "execute ":silent! normal :s/\\(\\S.*$\\)/" . EscapeInput(l:start) . "\\1" . EscapeInput(l:stop) . "/\<CR>:nohlsearch\<CR>=="
-    "execute ":silent! normal `<i" . l:start . "\<ESC>`>a" . l:stop . "\<ESC>\<down>"
 
     call EscapeComment(l:start, l:stop)
     execute ":silent! normal \<ESC>`<i" . l:start . "\<ESC>`>a" . l:stop . "\<ESC>"
