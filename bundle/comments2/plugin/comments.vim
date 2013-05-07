@@ -15,6 +15,10 @@
 " http://learnvimscriptthehardway.stevelosh.com/chapters/19.html
 " http://www.ibm.com/developerworks/linux/library/l-vim-script-1/
 " http://stackoverflow.com/questions/1162611/vim-getting-the-current-value-of-vim-foldmarker
+" http://www.mail-archive.com/vim@vim.org/msg00178.html
+"
+" Handy :help
+" :help function-range-example
 
 " Exit if already loaded
 if exists("loaded_comments_plugin")
@@ -33,12 +37,30 @@ noremap  <silent> <C-X> :call UnCommentLine()<CR>
 " key-mappings for range un-comment lines in visual <Shift-V> mode
 vnoremap <silent> <C-X> :call RangeUnCommentLine()<CR>
 
+function! EscapeInput(input)
+  return escape(a:input, '\\/.*$^~[]')
+endfunction
+
+function! EscapeComment(start, stop)
+    " x out any current comments (we do this by changing things */ -> * /)
+    " (this will fail on multiline comments that are only one char, not sure
+    " what language has that though)
+    execute ":silent! normal :'<,'>s/" . EscapeInput(a:start) . "/" . EscapeInput(a:start[0]) . " " . EscapeInput(a:start[1]) ."/\<ESC>"
+    execute ":silent! normal :'<,'>s/" . EscapeInput(a:stop) . "/" . EscapeInput(a:stop[0]) . " " . EscapeInput(a:stop[1]) ."/\<ESC>"
+endfunction
+
+function! UnescapeComment(start, stop)
+    execute ":silent! normal :'<,'>s/" . EscapeInput(a:start[0]) . " " . EscapeInput(a:start[1]) ."/" . EscapeInput(a:start) . "/\<ESC>"
+    execute ":silent! normal :'<,'>s/" . EscapeInput(a:stop[0]) . " " . EscapeInput(a:stop[1]) ."/" . EscapeInput(a:stop) . "/\<ESC>"
+endfunction
+
 " function to comment line in normal mode
 function! CommentLine()
   let l:comment_bits = split(&commentstring, "%s")
 
   if len(l:comment_bits) == 1
-    execute ":silent! normal 0i" . l:comment_bits[0] . "\<ESC>==\<down>^"
+    "execute ":silent! normal 0i" . l:comment_bits[0] . "\<ESC>==\<down>^"
+    execute ":silent! normal 0i" . l:comment_bits[0] . "\<ESC>\<down>"
 
   else
     let l:start = l:comment_bits[0]
@@ -54,47 +76,54 @@ function! UnCommentLine()
   let l:comment_bits = split(&commentstring, "%s")
 
   if len(l:comment_bits) == 1
-    execute ":silent! normal :nohlsearch\<CR>:s/" . escape(l:comment_bits[0], '\\/.*$^~[]') . "//\<CR>:nohlsearch\<CR>=="
+    execute ":silent! normal :nohlsearch\<CR>:s/" . EscapeInput(l:comment_bits[0]) . "//\<CR>:nohlsearch\<CR>=="
 
   else
     let l:start = l:comment_bits[0]
     let l:stop = l:comment_bits[1]
-    execute ":silent! normal :nohlsearch\<CR>:s/". escape(l:start, '\\/.*$^~[]') . "//\<CR>=="
-    execute ":silent! normal :nohlsearch\<CR>:s/" . escape(l:stop, '\\/.*$^~[]') . "//\<CR>=="
+    execute ":silent! normal :nohlsearch\<CR>:s/". EscapeInput(l:start) . "//\<CR>"
+    execute ":silent! normal :nohlsearch\<CR>:s/" . EscapeInput(l:stop) . "//\<CR>"
 
   endif
 
 endfunction
 
 " function to range comment lines in visual mode
-function! RangeCommentLine()
+function! RangeCommentLine() range
   let l:comment_bits = split(&commentstring, "%s")
 
   if len(l:comment_bits) == 1
-    execute ":silent! normal :s/\\S/" . escape(l:comment_bits[0], '\\/.*$^~[]') . "\\0/\<CR>:nohlsearch<CR>=="
+    "execute ":silent! normal :" . a:firstline . "," . a:lastline . "s/\\S/" . EscapeInput(l:comment_bits[0]) . "\\0/\<CR>:nohlsearch<CR><down>"
+    execute ":silent! normal :" . a:firstline . "," . a:lastline . "s/\\S/" . EscapeInput(l:comment_bits[0]) . "/\<CR>:nohlsearch<CR><down>"
 
   else
     let l:start = l:comment_bits[0]
     let l:stop = l:comment_bits[1]
-    execute ":silent! normal :s/\\(\\S.*$\\)/" . escape(l:start, '\\/.*$^~[]') . "\\1" . escape(l:stop, '\\/.*$^~[]') . "/\<CR>:nohlsearch\<CR>=="
-    " execute ":normal :nohlsearch\<CR>:s/\\([^" . escape(l:start, '\\/.*$^~[]') . "]*\\)\\(" . escape(l:start, '\\/.*$^~[]') . ".*" . escape(l:stop, '\\/.*$^~[]') . "\\)/\\1" . escape(l:stop, '\\/.*$^~[]') . "\\2/\<CR>:s/\\([^[:blank:]]\\+\\)/" . escape(l:start, '\\/.*$^~[]') . "\\1/\<CR>:nohlsearch\<CR>=="
+    "execute ":silent! normal :s/\\(\\S.*$\\)/" . EscapeInput(l:start) . "\\1" . EscapeInput(l:stop) . "/\<CR>:nohlsearch\<CR>=="
+    "execute ":silent! normal `<i" . l:start . "\<ESC>`>a" . l:stop . "\<ESC>\<down>"
+
+    call EscapeComment(l:start, l:stop)
+    execute ":silent! normal \<ESC>`<i" . l:start . "\<ESC>`>a" . l:stop . "\<ESC>"
 
   endif
 
 endfunction
 
 " function to range un-comment lines in visual mode
-function! RangeUnCommentLine()
+function! RangeUnCommentLine() range
   let l:comment_bits = split(&commentstring, "%s")
 
   if len(l:comment_bits) == 1
-    execute ":silent! normal :s/" . escape(l:comment_bits[0], '\\/.*$^~[]') . "//\<CR>:nohlsearch\<CR>=="
+    execute ":silent! normal :" . a:firstline . "," . a:lastline . "s/" . EscapeInput(l:comment_bits[0]) . "//\<CR>:nohlsearch\<CR>=="
 
   else
     let l:start = l:comment_bits[0]
     let l:stop = l:comment_bits[1]
-    execute ":silent! normal :nohlsearch\<CR>:s/" . escape(l:start, '\\/.*$^~[]') . "//\<CR>=="
-    execute ":silent! normal :nohlsearch\<CR>:s/" . escape(l:stop, '\\/.*$^~[]') . "//\<CR>=="
+
+    " restore any comment strings
+    execute ":silent! normal :nohlsearch\<CR>:'<,'>s/" . EscapeInput(l:start) . "//\<CR>"
+    execute ":silent! normal :nohlsearch\<CR>:'<,'>s/" . EscapeInput(l:stop) . "//\<CR>"
+    call UnescapeComment(l:start, l:stop)
 
   endif
 
