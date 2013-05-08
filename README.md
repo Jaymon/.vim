@@ -2,6 +2,10 @@
 
 This is here for my convenience so I can easily keep my vim environment consistent across multiple machines.
 
+There are some original things though that might be useful for people, like the `commentify` plugin
+to easily comment/uncomment lines of code, and the `syntax/php.vim` file that I think is easier to understand
+than the traditional php syntax file.
+
 -------------------------------------------------------------------------------
 
 ## Plugins
@@ -64,6 +68,12 @@ http://henry.precheur.org/vim/python
 
 https://github.com/sumpygump/php-documentor-vim
 via: http://stackoverflow.com/questions/7603446/vim-insert-phpdoc-automatically
+
+### Commentify
+
+A really lightweight plugin to comment/uncomment code, basically a lightweight
+[NERD Commenter](https://github.com/scrooloose/nerdcommenter) or an updated
+[comments] (http://www.vim.org/scripts/script.php?script_id=1528)
 
 -------------------------------------------------------------------------------
 
@@ -182,3 +192,6 @@ that isn't standard
 
 https://github.com/tpope/vim-surround
 
+### comments
+
+http://www.vim.org/scripts/script.php?script_id=1528
