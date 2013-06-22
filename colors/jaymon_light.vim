@@ -115,7 +115,7 @@ hi String guifg=#FF0000 ctermfg=red
 hi Structure ctermfg=black cterm=bold guifg=black gui=bold
 
 " completely ignore error highlighting, individual syntax files can turn it on
-" but I absolutely hate it
+" but I absolutely hate it, I don't think this does anything though
 syn clear Error
 
 " http://stackoverflow.com/questions/8309815/vim-conceal-with-more-than-one-character
@@ -130,3 +130,12 @@ hi pythonFormatStrTemplate guifg=#800000 ctermfg=magenta
 "hi pythonFormatStrTemplate guifg=#660000
 hi pythonStrFormatting guifg=#CC0000 ctermfg=magenta
 hi pythonStrFormat guifg=#CC0000 ctermfg=magenta
+
+" markdown specific highlighting
+highlight markdownH1 ctermfg=5 guifg=#800080
+highlight markdownH2 ctermfg=4 guifg=#000080
+highlight markdownH3 ctermfg=13 guifg=#FF00FF
+highlight markdownH4 ctermfg=12 guifg=#0000FF
+highlight markdownH5 ctermfg=163 guifg=#D700AF
+highlight markdownH6 ctermfg=56 guifg=#5F00D7
+

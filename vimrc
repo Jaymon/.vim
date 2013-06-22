@@ -6,6 +6,7 @@
 " stuff I always forget: g:, l:, s: variables definitions :help internal-variables
 
 call pathogen#infect()
+call pathogen#helptags()
 call env#setup()
 
 set nocompatible
