@@ -75,6 +75,16 @@ A really lightweight plugin to comment/uncomment code, basically a lightweight
 [NERD Commenter](https://github.com/scrooloose/nerdcommenter) or an updated
 [comments] (http://www.vim.org/scripts/script.php?script_id=1528)
 
+### Surround
+
+trying this again
+
+https://github.com/tpope/vim-surround
+
+### markdown
+
+https://github.com/tpope/vim-markdown
+
 -------------------------------------------------------------------------------
 
 ## Install
@@ -183,14 +193,6 @@ file as a base
 https://github.com/StanAngeloff/php.vim
 https://github.com/EvanDotPro/vim-php-syntax-check
 http://www.vim.org/scripts/script.php?script_id=2874
-
-### Surround
-
-I never learned how to use it, so it was there, but I never could figure out how
-to invoke it, and then there is the problem of getting too dependant on something
-that isn't standard
-
-https://github.com/tpope/vim-surround
 
 ### comments
 
