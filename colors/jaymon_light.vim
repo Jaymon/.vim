@@ -7,6 +7,10 @@
 " :he group-name
 " :he highlight-groups
 " :he cterm-colors
+"
+" a list of the 256 available colors
+" http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
+" http://www.vim.org/scripts/script.php?script_id=3412
 
 " your pick:
 set background=light
@@ -132,10 +136,10 @@ hi pythonStrFormatting guifg=#CC0000 ctermfg=magenta
 hi pythonStrFormat guifg=#CC0000 ctermfg=magenta
 
 " markdown specific highlighting
-highlight markdownH1 ctermfg=5 guifg=#800080
-highlight markdownH2 ctermfg=4 guifg=#000080
+highlight markdownH1 ctermfg=5 guifg=#FF00AF
+highlight markdownH2 ctermfg=4 guifg=#FF00D7
 highlight markdownH3 ctermfg=13 guifg=#FF00FF
-highlight markdownH4 ctermfg=12 guifg=#0000FF
-highlight markdownH5 ctermfg=163 guifg=#D700AF
-highlight markdownH6 ctermfg=56 guifg=#5F00D7
+highlight markdownH4 ctermfg=12 guifg=#FF0087
+highlight markdownH5 ctermfg=163 guifg=#FF005F
+highlight markdownH6 ctermfg=56 guifg=#FF5FFF
 
