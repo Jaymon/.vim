@@ -7,6 +7,10 @@
 " :he group-name
 " :he highlight-groups
 " :he cterm-colors
+"
+" a list of the 256 available colors
+" http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
+" http://www.vim.org/scripts/script.php?script_id=3412
 
 " your pick:
 set background=light
@@ -115,7 +119,7 @@ hi String guifg=#FF0000 ctermfg=red
 hi Structure ctermfg=black cterm=bold guifg=black gui=bold
 
 " completely ignore error highlighting, individual syntax files can turn it on
-" but I absolutely hate it
+" but I absolutely hate it, I don't think this does anything though
 syn clear Error
 
 " http://stackoverflow.com/questions/8309815/vim-conceal-with-more-than-one-character
@@ -130,3 +134,12 @@ hi pythonFormatStrTemplate guifg=#800000 ctermfg=magenta
 "hi pythonFormatStrTemplate guifg=#660000
 hi pythonStrFormatting guifg=#CC0000 ctermfg=magenta
 hi pythonStrFormat guifg=#CC0000 ctermfg=magenta
+
+" markdown specific highlighting
+highlight markdownH1 ctermfg=5 guifg=#FF00AF
+highlight markdownH2 ctermfg=4 guifg=#FF00D7
+highlight markdownH3 ctermfg=13 guifg=#FF00FF
+highlight markdownH4 ctermfg=12 guifg=#FF0087
+highlight markdownH5 ctermfg=163 guifg=#FF005F
+highlight markdownH6 ctermfg=56 guifg=#FF5FFF
+

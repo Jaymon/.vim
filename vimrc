@@ -6,6 +6,7 @@
 " stuff I always forget: g:, l:, s: variables definitions :help internal-variables
 
 call pathogen#infect()
+call pathogen#helptags()
 call env#setup()
 
 set nocompatible
@@ -100,6 +101,7 @@ colorscheme jaymon_light
 set history=1000
 set backupcopy=yes
 set backup
+set writebackup
 set undofile
 set undolevels=1000
 set undoreload=10000
@@ -107,6 +109,10 @@ set undoreload=10000
 " http://stackoverflow.com/questions/2823608/
 set backupdir-=.
 set backupdir^=$VIMTEMP//
+" sadly, backupdir doesn't respect the //, but this hack using the 'backupext' will make unique backup files
+" The path is appended on the end of the file: '/home/docwhat/.vimrc' becomes '.vimrc%home%docwhat~'
+" http://stackoverflow.com/a/9528517
+au BufWritePre * let &backupext ='@'.substitute(substitute(substitute(expand('%:p:h'), '/', '%', 'g'), '\', '%', 'g'),  ':', '', 'g').'~'
 " this is for the .swp files
 " http://vim.wikia.com/wiki/Remove_swap_and_backup_files_from_your_working_directory
 set directory-=.
