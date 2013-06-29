@@ -104,10 +104,10 @@ A really lightweight plugin to comment/uncomment code, basically a lightweight
 
         git clone [repo] .
 
-4. make a symlink for the `vimrc` and `gvimrc` files
+4. make a symlink for the `vimrc` and `gvimrc` files (you need an admin console cmd shell for this):
 
-        mklink %HOMEPATH%\\vimrc %HOMEPATH%\\vimfiles\\_vimrc
-        mklink %HOMEPATH%\\gvimrc %HOMEPATH%\\vimfiles\\_gvimrc
+        mklink %HOMEPATH%\\_vimrc %HOMEPATH%\\vimfiles\\vimrc
+        mklink %HOMEPATH%\\_gvimrc %HOMEPATH%\\vimfiles\\gvimrc
 
 
 -------------------------------------------------------------------------------
