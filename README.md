@@ -41,6 +41,17 @@ http://www.vim.org/scripts/script.php?script_id=4125
 
 https://github.com/techlivezheng/phpctags
 
+You might need to install the dependencies for this, so you can get in the directory that contains this plugin:
+
+    $ cd ~/.vim/bundle/phpctags
+
+and run:
+
+    $ curl -s http://getcomposer.org/installer | php -d detect_unicode=Off
+    $ php composer.phar install
+
+That will create a `vendor` directory that contains the dependencies and a `composer.lock` file, you can then delete the downloaded `composer.phar` file.
+
 ### NerdTree
 
 https://github.com/scrooloose/nerdtree
@@ -63,11 +74,6 @@ http://stackoverflow.com/questions/8949317/moving-through-camelcase-words-in-vim
 
 http://www.vim.org/scripts/script.php?script_id=974
 http://henry.precheur.org/vim/python
-
-### PHP Doc
-
-https://github.com/sumpygump/php-documentor-vim
-via: http://stackoverflow.com/questions/7603446/vim-insert-phpdoc-automatically
 
 ### Commentify
 
@@ -197,3 +203,11 @@ http://www.vim.org/scripts/script.php?script_id=2874
 ### comments
 
 http://www.vim.org/scripts/script.php?script_id=1528
+
+### PHP Doc
+
+I am not doing a lot of php right now, and when I did, I hardly ever used this plugin since it wasn't as flexible as I would've liked and so I spent a lot of time deleting things it put it
+
+https://github.com/sumpygump/php-documentor-vim
+via: http://stackoverflow.com/questions/7603446/vim-insert-phpdoc-automatically
+
