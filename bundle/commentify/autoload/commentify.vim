@@ -36,7 +36,7 @@ function! commentify#RangeCommentify() range
     " COMMENT
     if len(l:comment_bits) == 1
       execute ":silent! normal! \<ESC>`<i" . l:comment_bits[0] . "\<ESC>"
-      execute ":silent! normal! :" . (a:firstline + 1). "," . a:lastline . "s/^/" . EscapeInput(l:comment_bits[0]) . "/\<CR>:nohlsearch\<CR>\<down>"
+      execute ":silent! normal! :" . (a:firstline + 1). "," . a:lastline . "s/^/" . EscapeInput(l:comment_bits[0]) . "/\<CR>:nohlsearch\<CR>"
     else
       let l:start = l:comment_bits[0]
       let l:stop = l:comment_bits[1]
