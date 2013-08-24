@@ -284,7 +284,11 @@ function! LaunchBrowser()
     let l:uri = shellescape(l:uri, 1)
     if l:uri != ""
       if has("win32")
-        exec ":silent !start \"\" " . l:uri
+        " if urls with & fail, we'll need to escape them with ^
+        " https://github.com/copiousfreetime/launchy/issues/5
+        " http://vim.wikia.com/wiki/Execute_external_programs_asynchronously_under_Windows
+        " !start didn't work, there needs to be a space between the ! and the start
+        exec ":silent ! start \"\" " . l:uri
       elseif has("mac")
         exec ":silent !open " . l:uri
       else
