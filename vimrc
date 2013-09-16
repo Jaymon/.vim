@@ -216,10 +216,12 @@ au TabLeave * let g:lasttab = tabpagenr()
 " configure NERDTree
 " https://github.com/scrooloose/nerdtree
 autocmd bufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-" NN slows down reverse search by 1 sec, which was really annoying
-nnoremap RN :NERDTreeToggle<CR>
-let NERDTreeIgnore=['\.pyc$[[file]]']
-let NERDTreeQuitOnOpen=1
+"nnoremap RN :NERDTreeToggle<CR>
+nnoremap RN :NERDTreeTabsToggle<CR>
+let NERDTreeIgnore = ['\.pyc$[[file]]']
+let NERDTreeQuitOnOpen = 1
+let g:nerdtree_tabs_open_on_gui_startup = 0
+let g:nerdtree_tabs_open_on_new_tab = 0
 " move tabs to the end for new, single buffers (exclude splits)
 " http://stackoverflow.com/questions/3998752/nerdtree-open-in-a-new-tab-as-last-tab-in-gvim
 autocmd BufNew * if winnr('$') == 1 | tabmove99 | endif

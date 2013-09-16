@@ -56,6 +56,12 @@ That will create a `vendor` directory that contains the dependencies and a `comp
 
 https://github.com/scrooloose/nerdtree
 
+I've also added the Nerdtree tab plugin
+
+https://github.com/jistr/vim-nerdtree-tabs
+
+via: stackoverflow.com/questions/2283417/vim-and-nerd-tree-can-nerd-tree-persist-across-tabs-in-macvim
+
 ### syntax/python.vim
 
 https://github.com/hdima/vim-scripts
