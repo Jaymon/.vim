@@ -46,7 +46,9 @@ set showcmd		" display incomplete commands
 " line numbering
 " nu or rnu turn linenumbering (nu - traditional numbering, rnu - relative
 " numbering) on, you should use one or the other but not both
-set rnu
+" http://jeffkreeftmeijer.com/2013/vims-new-hybrid-line-number-mode/
+set number
+set relativenumber
 " for normal numbering, something like 5 is appropriate to easily handle files
 " up to 99999 lines long, but for relative numbering, I think 2-3 is
 " sufficient
