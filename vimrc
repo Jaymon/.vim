@@ -209,6 +209,15 @@ nnoremap <A-,> :tabp<CR>
 " left, and :tabl goes to the very last tab, so :tabt will have to do
 " http://stackoverflow.com/questions/2119754/switch-to-last-active-tab-in-vim
 nmap <leader>t :exe "tabn ".g:lasttab<CR>
+nmap <leader>1 1gt<CR>
+nmap <leader>2 2gt<CR>
+nmap <leader>3 3gt<CR>
+nmap <leader>4 4gt<CR>
+nmap <leader>5 5gt<CR>
+nmap <leader>6 6gt<CR>
+nmap <leader>7 7gt<CR>
+nmap <leader>8 8gt<CR>
+nmap <leader>9 9gt<CR>
 
 " put the opened tab at the end of the list, I prefer that to opening next to
 " the tab in which it was opened
@@ -224,6 +233,7 @@ let NERDTreeIgnore = ['\.pyc$[[file]]']
 let NERDTreeQuitOnOpen = 1
 let g:nerdtree_tabs_open_on_gui_startup = 0
 let g:nerdtree_tabs_open_on_new_tab = 0
+
 " move tabs to the end for new, single buffers (exclude splits)
 " http://stackoverflow.com/questions/3998752/nerdtree-open-in-a-new-tab-as-last-tab-in-gvim
 autocmd BufNew * if winnr('$') == 1 | tabmove99 | endif
