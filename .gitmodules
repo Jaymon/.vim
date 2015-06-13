@@ -2,3 +2,7 @@
 	path = bundle/commentify
 	url = git@github.com:Jaymon/vim-commentify.git
 	branch = master
+[submodule "bundle/nerdtree"]
+	path = bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
+	branch = master

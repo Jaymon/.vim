@@ -22,35 +22,6 @@ This replaced Taglist because I like the hierarchical code tree better
 
 http://majutsushi.github.com/tagbar/
 
-In order to make php support better by default, you could use this gist:
-https://gist.github.com/ecoleman/1525027
-
-These links might also help:
-http://mwop.net/blog/134-exuberant-ctags-with-PHP-in-Vim.html
-http://vim-taglist.sourceforge.net/extend.html
-
-but I've added some other plugins to make tagbar work better with php. As discussed on this page:
-http://stackoverflow.com/questions/11290352/vim-hack-ctags-or-tweak-tagbar-for-better-php-support
-
-- Tagbar-phpctags
-
-https://github.com/techlivezheng/tagbar-phpctags
-http://www.vim.org/scripts/script.php?script_id=4125
-
-- phpctags
-
-https://github.com/techlivezheng/phpctags
-
-You might need to install the dependencies for this, so you can get in the directory that contains this plugin:
-
-    $ cd ~/.vim/bundle/phpctags
-
-and run:
-
-    $ curl -s http://getcomposer.org/installer | php -d detect_unicode=Off
-    $ php composer.phar install
-
-That will create a `vendor` directory that contains the dependencies and a `composer.lock` file, you can then delete the downloaded `composer.phar` file.
 
 ### NerdTree
 
@@ -61,6 +32,11 @@ I've also added the Nerdtree tab plugin
 https://github.com/jistr/vim-nerdtree-tabs
 
 via: stackoverflow.com/questions/2283417/vim-and-nerd-tree-can-nerd-tree-persist-across-tabs-in-macvim
+
+I set this up with:
+
+    $ git submodule add -b master https://github.com/scrooloose/nerdtree.git bundle/nerdtree
+
 
 ### syntax/python.vim
 
@@ -216,4 +192,37 @@ I am not doing a lot of php right now, and when I did, I hardly ever used this p
 
 https://github.com/sumpygump/php-documentor-vim
 via: http://stackoverflow.com/questions/7603446/vim-insert-phpdoc-automatically
+
+
+### PHP support plugins
+
+In order to make php support better by default, you could use this gist:
+https://gist.github.com/ecoleman/1525027
+
+These links might also help:
+http://mwop.net/blog/134-exuberant-ctags-with-PHP-in-Vim.html
+http://vim-taglist.sourceforge.net/extend.html
+
+but I've added some other plugins to make tagbar work better with php. As discussed on this page:
+http://stackoverflow.com/questions/11290352/vim-hack-ctags-or-tweak-tagbar-for-better-php-support
+
+- Tagbar-phpctags
+
+https://github.com/techlivezheng/tagbar-phpctags
+http://www.vim.org/scripts/script.php?script_id=4125
+
+- phpctags
+
+https://github.com/techlivezheng/phpctags
+
+You might need to install the dependencies for this, so you can get in the directory that contains this plugin:
+
+    $ cd ~/.vim/bundle/phpctags
+
+and run:
+
+    $ curl -s http://getcomposer.org/installer | php -d detect_unicode=Off
+    $ php composer.phar install
+
+That will create a `vendor` directory that contains the dependencies and a `composer.lock` file, you can then delete the downloaded `composer.phar` file.
 
