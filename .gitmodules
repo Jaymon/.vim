@@ -18,3 +18,7 @@
 	path = bundle/surround
 	url = https://github.com/tpope/vim-surround.git
 	branch = master
+[submodule "bundle/markdown"]
+	path = bundle/markdown
+	url = https://github.com/tpope/vim-markdown.git
+	branch = master
