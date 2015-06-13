@@ -73,6 +73,11 @@ trying this again
 
 https://github.com/tpope/vim-surround
 
+I set this up with:
+
+    $ git submodule add -b master https://github.com/tpope/vim-surround.git bundle/surround
+
+
 ### markdown
 
 https://github.com/tpope/vim-markdown
