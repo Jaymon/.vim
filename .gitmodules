@@ -6,3 +6,7 @@
 	path = bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
 	branch = master
+[submodule "bundle/nerdtree-tabs"]
+	path = bundle/nerdtree-tabs
+	url = https://github.com/jistr/vim-nerdtree-tabs.git
+	branch = master
