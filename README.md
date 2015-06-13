@@ -16,12 +16,16 @@ I think pretty much every vim user on the planet uses this plugin.
 
 https://github.com/tpope/vim-pathogen
 
+
 ### Tagbar
 
 This replaced Taglist because I like the hierarchical code tree better
 
 http://majutsushi.github.com/tagbar/
 
+I set this up with:
+
+    $ git submodule add -b master https://github.com/scrooloose/nerdtree.git bundle/nerdtree
 
 ### NerdTree
 
@@ -36,7 +40,7 @@ via: stackoverflow.com/questions/2283417/vim-and-nerd-tree-can-nerd-tree-persist
 I set this up with:
 
     $ git submodule add -b master https://github.com/scrooloose/nerdtree.git bundle/nerdtree
-
+    $ git submodule add -b master https://github.com/jistr/vim-nerdtree-tabs.git bundle/nerdtree-tabs
 
 ### syntax/python.vim
 
