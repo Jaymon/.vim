@@ -2,19 +2,22 @@
 
 This is here for my convenience so I can easily keep my vim environment consistent across multiple machines.
 
-There are some original things though that might be useful for people, like the `commentify` plugin
-to easily comment/uncomment lines of code, and the `syntax/php.vim` file that I think is easier to understand
-than the traditional php syntax file.
+There are some original things though that might be useful for people, like the `syntax/php.vim` file that I think is easier to understand than the traditional php syntax file.
 
 -------------------------------------------------------------------------------
 
 ## Plugins
+
 
 ### Pathogen
 
 I think pretty much every vim user on the planet uses this plugin.
 
 https://github.com/tpope/vim-pathogen
+
+I set this up with:
+
+    $ git submodule add -b master https://github.com/tpope/vim-pathogen.git bundle/pathogen
 
 
 ### Tagbar
@@ -26,6 +29,7 @@ http://majutsushi.github.com/tagbar/
 I set this up with:
 
     $ git submodule add -b master https://github.com/majutsushi/tagbar.git bundle/tagbar
+
 
 ### NerdTree
 
@@ -42,10 +46,12 @@ I set this up with:
     $ git submodule add -b master https://github.com/scrooloose/nerdtree.git bundle/nerdtree
     $ git submodule add -b master https://github.com/jistr/vim-nerdtree-tabs.git bundle/nerdtree-tabs
 
+
 ### syntax/python.vim
 
 https://github.com/hdima/vim-scripts
 http://www.vim.org/scripts/script.php?script_id=790
+
 
 ### Camel Case Motion
 
@@ -56,10 +62,12 @@ http://vim.wikia.com/wiki/Moving_through_camel_case_words
 http://www.vim.org/scripts/script.php?script_id=1905
 http://stackoverflow.com/questions/8949317/moving-through-camelcase-words-in-vim
 
+
 ### indent/python.vim
 
 http://www.vim.org/scripts/script.php?script_id=974
 http://henry.precheur.org/vim/python
+
 
 ### Commentify
 
@@ -67,9 +75,14 @@ A really lightweight plugin to comment/uncomment code, basically a lightweight
 [NERD Commenter](https://github.com/scrooloose/nerdcommenter) or an updated
 [comments] (http://www.vim.org/scripts/script.php?script_id=1528)
 
+I set this up with:
+
+    $ git submodule add -b master git@github.com:Jaymon/vim-commentify.git bundle/commentify
+
+
 ### Surround
 
-trying this again
+trying this again. I've had this bundle for years and never remember the shortcut to run it, but I decided to keep it one more time.
 
 https://github.com/tpope/vim-surround
 
@@ -81,6 +94,11 @@ I set this up with:
 ### markdown
 
 https://github.com/tpope/vim-markdown
+
+I set this up with:
+
+    $ git submodule add -b master https://github.com/tpope/vim-markdown.git bundle/markdown
+
 
 -------------------------------------------------------------------------------
 
@@ -147,6 +165,7 @@ https://github.com/nathanaelkane/vim-indent-guides
 
 For some reason sizing the Macvim window on startup doesn't work, I have no idea why
 
+
 -------------------------------------------------------------------------------
 
 ## Plugins I used and then removed
@@ -157,12 +176,14 @@ http://www.vim.org/scripts/script.php?script_id=273
 
 I used tagbar more, no sense in having both anymore
 
+
 ### Rainbow Parenthesis
 
 This doesn't work in new tabs/buffers, and it took me like a month to notice it
 didn't work in the buffers, so I figured I didn't need it
 
 http://www.vim.org/scripts/script.php?script_id=3772
+
 
 ### Markdown
 
@@ -182,6 +203,7 @@ but it would italicize the rest of the body if the word had an underscore in it 
 everything after the underscore until the end to be italicized) while the one I went with
 just marks it as an error, which is still not ideal, but better.
 
+
 ### syntax/php.vim
 
 The php syntax file seemed way too complicated to me, so I rolled my own using this syntax
@@ -191,13 +213,17 @@ https://github.com/StanAngeloff/php.vim
 https://github.com/EvanDotPro/vim-php-syntax-check
 http://www.vim.org/scripts/script.php?script_id=2874
 
+
 ### comments
 
 http://www.vim.org/scripts/script.php?script_id=1528
 
+I replaced this with my commentify plugin.
+
+
 ### PHP Doc
 
-I am not doing a lot of php right now, and when I did, I hardly ever used this plugin since it wasn't as flexible as I would've liked and so I spent a lot of time deleting things it put it
+I am not doing a lot of php right now, and when I did, I hardly ever used this plugin since it wasn't as flexible as I would've liked and so I spent a lot of time deleting things it put in
 
 https://github.com/sumpygump/php-documentor-vim
 via: http://stackoverflow.com/questions/7603446/vim-insert-phpdoc-automatically
