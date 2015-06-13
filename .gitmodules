@@ -1,0 +1,4 @@
+[submodule "bundle/commentify"]
+	path = bundle/commentify
+	url = git@github.com:Jaymon/vim-commentify.git
+	branch = master
