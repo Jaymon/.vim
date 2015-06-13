@@ -25,7 +25,7 @@ http://majutsushi.github.com/tagbar/
 
 I set this up with:
 
-    $ git submodule add -b master https://github.com/scrooloose/nerdtree.git bundle/nerdtree
+    $ git submodule add -b master https://github.com/majutsushi/tagbar.git bundle/tagbar
 
 ### NerdTree
 
