@@ -1,5 +1,7 @@
 " http://wiki.python.org/moin/Vim
 "au FileType python setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4
+" TODO -- I think this is all set in the pymode indentation, so I can get rid
+" of this if I keep pymode indentation
 setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4
 
 " config for python highlighting plugin
