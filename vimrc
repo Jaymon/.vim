@@ -58,6 +58,7 @@ set cursorline
 set scrolloff=3 " N lines above/below cursor when scrolling
 
 " turn on go stuff if it is available
+" TODO -- move this into its own bundle
 if empty($GOROOT) && (!empty($GOPATH) || executable('go'))
   let $GOROOT = fnamemodify(system('which go'), ':p:h:h')
 endif
@@ -225,8 +226,10 @@ nmap <leader>9 9gt<CR>
 let g:lasttab = 1
 au TabLeave * let g:lasttab = tabpagenr()
 
+"##############################################################################
 " configure NERDTree
 " https://github.com/scrooloose/nerdtree
+"##############################################################################
 autocmd bufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 "nnoremap RN :NERDTreeToggle<CR>
 nnoremap RN :NERDTreeTabsToggle<CR>
@@ -239,8 +242,36 @@ let g:nerdtree_tabs_open_on_new_tab = 0
 " http://stackoverflow.com/questions/3998752/nerdtree-open-in-a-new-tab-as-last-tab-in-gvim
 autocmd BufNew * if winnr('$') == 1 | tabmove99 | endif
 
+" NERDTress File highlighting
+" https://github.com/scrooloose/nerdtree/issues/433#issuecomment-92590696
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+ exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+ exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+endfunction
+
+" I don't like any of these colors, so I'm disabling this for right now, it
+" does work though
+"call NERDTreeHighlightFile('ini', 'green', 'none', 'green', 'NONE')
+"call NERDTreeHighlightFile('md', 'green', 'none', 'green', 'NONE')
+"call NERDTreeHighlightFile('yml', 'green', 'none', 'green', 'NONE')
+"call NERDTreeHighlightFile('config', 'green', 'none', 'green', 'NONE')
+"call NERDTreeHighlightFile('conf', 'green', 'none', 'green', 'NONE')
+"
+"call NERDTreeHighlightFile('py', 'blue', 'none', '#3366FF', 'NONE')
+"call NERDTreeHighlightFile('php', 'blue', 'none', '#3366FF', 'NONE')
+"call NERDTreeHighlightFile('rb', 'blue', 'none', '#3366FF', 'NONE')
+"call NERDTreeHighlightFile('sh', 'blue', 'none', '#3366FF', 'NONE')
+"
+"call NERDTreeHighlightFile('json', 'Magenta', 'none', '#ff00ff', 'NONE')
+"call NERDTreeHighlightFile('html', 'Magenta', 'none', '#ff00ff', 'NONE')
+"call NERDTreeHighlightFile('css', 'Magenta', 'none', '#ff00ff', 'NONE')
+"call NERDTreeHighlightFile('js', 'Magenta', 'none', '#ff00ff', 'NONE')
+"##############################################################################
+
+"##############################################################################
 " configure Tagbar
 " http://majutsushi.github.com/tagbar/
+"##############################################################################
 nnoremap RR :TagbarToggle<CR>
 let g:tagbar_left = 1
 let g:tagbar_autofocus = 1
@@ -256,11 +287,7 @@ else
   " ctags should be on the PATH for everything else
   let g:tagbar_phpctags_bin = $VIMHOME . '/bundle/phpctags/phpctags'
 endif
-
-" configure camel case motion
-map <S-W> <Plug>CamelCaseMotion_w
-map <S-B> <Plug>CamelCaseMotion_b
-map <S-E> <Plug>CamelCaseMotion_e
+"##############################################################################
 
 " helpful for syntax highlighting, show what highlight group is under cursor
 " once again, I can never remember what I map this to
