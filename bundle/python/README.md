@@ -19,6 +19,8 @@ This file should never be touched by me, so it should be safe to update
 
 ### Pymode
 
+https://github.com/klen/python-mode
+
 Some of the stuff from Pymode like the motion commands are great.
 
 This will update motion:
@@ -40,6 +42,15 @@ This hasn't been updated in a decade, so...
 
 http://www.vim.org/scripts/script.php?script_id=974
 
+http://henry.precheur.org/vim/python
+
 **NOTE** -- I've replaced this with Pymode's indentaion implementation.
 
+
+## Installation
+
+Use Pathogen, and then run these (if you want it to be a submodule):
+
+    $ cd path/to/.vim
+    $ git submodule add -b master <ADD GITHUB CLONE> bundle/python
 

@@ -47,29 +47,9 @@ I set this up with:
     $ git submodule add -b master https://github.com/jistr/vim-nerdtree-tabs.git bundle/nerdtree-tabs
 
 
-### syntax/python.vim
-
-https://github.com/hdima/vim-scripts
-http://www.vim.org/scripts/script.php?script_id=790
-
-
-### Camel Case Motion
-
-https://github.com/bkad/CamelCaseMotion
-
-see also:
-http://vim.wikia.com/wiki/Moving_through_camel_case_words
-http://www.vim.org/scripts/script.php?script_id=1905
-http://stackoverflow.com/questions/8949317/moving-through-camelcase-words-in-vim
-
-
-### indent/python.vim
-
-http://www.vim.org/scripts/script.php?script_id=974
-http://henry.precheur.org/vim/python
-
-
 ### Commentify
+
+https://github.com/Jaymon/vim-commentify
 
 A really lightweight plugin to comment/uncomment code, basically a lightweight
 [NERD Commenter](https://github.com/scrooloose/nerdcommenter) or an updated
@@ -98,6 +78,16 @@ https://github.com/tpope/vim-markdown
 I set this up with:
 
     $ git submodule add -b master https://github.com/tpope/vim-markdown.git bundle/markdown
+
+
+### Python
+
+Currently an internal syntax plugin that brings together the good parts of some other plugins into a python environment that I like to use.
+
+
+### Utils
+
+Internal plugin that contains misc functions and commands that I love, compiled from around the internet, and maybe even kind of written by me, in order to make this a little more portable.
 
 
 -------------------------------------------------------------------------------
@@ -221,6 +211,19 @@ http://www.vim.org/scripts/script.php?script_id=1528
 
 I replaced this with my commentify plugin.
 
+#### What I had in my vimrc
+
+```vimL
+""" comments.vim
+"A more elaborate comment set up. Use Ctr-C to comment and Ctr-x to uncomment
+" This will detect file types and use oneline comments accordingle. Cool
+" because you visually select regions and comment/uncomment the whole region.
+" works with marked regions to.
+" to activate, just place it in your plugins dir
+" https://github.com/vim-scripts/comments.vim
+" http://www.vim.org/scripts/script.php?script_id=1528
+```
+
 
 ### PHP Doc
 
@@ -261,4 +264,36 @@ and run:
     $ php composer.phar install
 
 That will create a `vendor` directory that contains the dependencies and a `composer.lock` file, you can then delete the downloaded `composer.phar` file.
+
+Php specific configuration that was in `.vimrc`:
+
+```vimL
+if has("win32")
+  " for some reason, tagbar won't work if there are quotes around the path
+  let g:tagbar_ctags_bin = $VIMHOME . '\bin\ctags.exe'
+  let g:tagbar_phpctags_bin = $VIMHOME . '\bin\phpctags.bat'
+else
+  " ctags should be on the PATH for everything else
+  let g:tagbar_phpctags_bin = $VIMHOME . '/bundle/phpctags/phpctags'
+endif
+```
+
+
+### Camel Case Motion
+
+https://github.com/bkad/CamelCaseMotion
+
+see also:
+http://vim.wikia.com/wiki/Moving_through_camel_case_words
+http://www.vim.org/scripts/script.php?script_id=1905
+http://stackoverflow.com/questions/8949317/moving-through-camelcase-words-in-vim
+
+I configured this plugin in my `.vimrc` like this:
+
+```vimL
+" configure camel case motion
+map <S-W> <Plug>CamelCaseMotion_w
+map <S-B> <Plug>CamelCaseMotion_b
+map <S-E> <Plug>CamelCaseMotion_e
+```
 

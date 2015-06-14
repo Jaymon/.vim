@@ -153,15 +153,6 @@ nmap gp `[v`]
 nnoremap <esc>P P'[v' ]=
 nnoremap <esc>p p'[v' ]=
 
-""" comments.vim
-"A more elaborate comment set up. Use Ctr-C to comment and Ctr-x to uncomment
-" This will detect file types and use oneline comments accordingle. Cool
-" because you visually select regions and comment/uncomment the whole region.
-" works with marked regions to.
-" to activate, just place it in your plugins dir
-" https://github.com/vim-scripts/comments.vim
-" http://www.vim.org/scripts/script.php?script_id=1528
-
 " this maps the "* register to the unnamed register so you can copy/paste between instances
 " http://superuser.com/a/296308
 set clipboard+=unnamed
@@ -197,9 +188,12 @@ nnoremap <S-Left> <C-w>10<
 nmap <leader>rs :syn sync fromstart<CR>
 nmap <leader>parse :syn sync fromstart<CR>
 
+
+"##############################################################################
 " configure tab buffers
 " http://stackoverflow.com/questions/2468939/
 " http://stackoverflow.com/questions/11595301/controlling-tab-names-in-vim
+"##############################################################################
 au bufEnter * set guitablabel=\[%N\]\ %t\ %M
 " I also thought about using <C-<> :tabprev and <c->> :tabnext
 nnoremap <A-.> :tabn<CR>
@@ -225,6 +219,8 @@ nmap <leader>9 9gt<CR>
 " the tab in which it was opened
 let g:lasttab = 1
 au TabLeave * let g:lasttab = tabpagenr()
+"##############################################################################
+
 
 "##############################################################################
 " configure NERDTree
@@ -279,14 +275,6 @@ let g:tagbar_sort = 1
 let g:tagbar_expand = 0
 let g:tagbar_foldlevel = 0
 let g:tagbar_autoshowtag = 1
-if has("win32")
-  " for some reason, tagbar won't work if there are quotes around the path
-  let g:tagbar_ctags_bin = $VIMHOME . '\bin\ctags.exe'
-  let g:tagbar_phpctags_bin = $VIMHOME . '\bin\phpctags.bat'
-else
-  " ctags should be on the PATH for everything else
-  let g:tagbar_phpctags_bin = $VIMHOME . '/bundle/phpctags/phpctags'
-endif
 "##############################################################################
 
 " helpful for syntax highlighting, show what highlight group is under cursor
@@ -298,51 +286,6 @@ map  <leader>hl :echo synIDattr(synID(line("."), col("."), 1), "name")<CR>
 " http://stackoverflow.com/questions/7722177/how-do-i-map-ctrl-x-ctrl-o-to-ctrl-space-in-terminal-vim
 imap <C-Space> <C-x><C-o>
 imap <C-@> <C-Space>
-
-" allows * and # to search current selection just like it searchs for current word under cursor
-" http://vimingwithbuttar.googlecode.com/hg/.vimrc
-function! VisualSearch(direction) range
-  let l:saved_reg = @"
-  execute "normal! vgvy"
-  let l:pattern = escape(@", '\\/.*$^~[]')
-  let l:pattern = substitute(l:pattern, "\n$", "", "")
-  if a:direction == 'b'
-    execute "normal ?" . l:pattern . "^M"
-  else
-    execute "normal /" . l:pattern . "^M"
-  endif
-  let @/ = l:pattern
-  let @" = l:saved_reg
-endfunction
-vnoremap <silent> * :call VisualSearch('f')<CR>
-vnoremap <silent> # :call VisualSearch('b')<CR>
-
-" this will launch the default browser window with the first url found on line
-" http://waoewaoe.wordpress.com/2009/05/05/open-a-website-in-a-browser-from-commandline/
-" http://vim.wikia.com/wiki/Open_a_web-browser_with_the_URL_in_the_current_line
-function! LaunchBrowser()
-  if has('gui')
-    let l:uri = matchstr(getline("."), 'https\?:\/\/\S\+\c')
-    let l:uri = shellescape(l:uri, 1)
-    if l:uri != ""
-      if has("win32")
-        " if urls with & fail, we'll need to escape them with ^
-        " https://github.com/copiousfreetime/launchy/issues/5
-        " http://vim.wikia.com/wiki/Execute_external_programs_asynchronously_under_Windows
-        " !start didn't work, there needs to be a space between the ! and the start
-        exec ":silent ! start \"\" " . l:uri
-      elseif has("mac")
-        exec ":silent !open " . l:uri
-      else
-        echo "OS Not currently supported"
-        " TODO: wrapping this in the has('gui') should keep this from firing in linux, maybe?
-        " this should work, but I almost never have a gui in Linux computers
-        "exec ":silent !xdg-open " . l:uri
-      endif
-    endif
-  endif
-endfunction
-map <silent> <leader>b :call LaunchBrowser()<CR>:redraw!<CR>
 
 " display what's changed since last save (uses diff command, so not cross-platform)
 " http://vim.wikia.com/wiki/Diff_current_buffer_and_the_original_file
