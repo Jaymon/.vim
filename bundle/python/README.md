@@ -26,8 +26,8 @@ http://www.vim.org/scripts/script.php?script_id=974
 
 Some of the stuff from Pymode like the motion commands are great.
 
-    $ curl https://github.com/klen/python-mode/raw/develop/after/ftplugin/python.vim -o ~/.vim/bundle/python/after/ftplugin/python.vim
-    $ curl https://raw.githubusercontent.com/klen/python-mode/develop/autoload/pymode/motion.vim -o ~/.vim/bundle/python/autoload/pymode/motion.vim
+    $ curl -L https://github.com/klen/python-mode/raw/develop/after/ftplugin/python.vim -o ~/.vim/bundle/python/after/ftplugin/python.vim
+    $ curl -L https://raw.githubusercontent.com/klen/python-mode/develop/autoload/pymode/motion.vim -o ~/.vim/bundle/python/autoload/pymode/motion.vim
 
-    $ curl https://github.com/klen/python-mode/raw/develop/autoload/pymode/indent.vim -o ~/.vim/bundle/python/autoload/pymode/indent.vim
-    $ curl https://github.com/klen/python-mode/raw/develop/after/indent/python.vim -o ~/.vim/bundle/python/after/indent/python.vim
+    $ curl -L https://github.com/klen/python-mode/raw/develop/autoload/pymode/indent.vim -o ~/.vim/bundle/python/autoload/pymode/indent.vim
+    $ curl -L https://github.com/klen/python-mode/raw/develop/after/indent/python.vim -o ~/.vim/bundle/python/after/indent/python.vim
