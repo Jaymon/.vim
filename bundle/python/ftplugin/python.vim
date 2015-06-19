@@ -4,10 +4,11 @@
 " of this if I keep pymode indentation
 setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4
 
-" config for python highlighting plugin
+" config for python syntax highlighting plugin
 let python_highlight_all = 1
 let python_highlight_space_errors = 0
 let python_slow_sync = 1
+let python_version_2 = 1
 
 " From pymode https://github.com/klen/python-mode/blob/develop/after/ftplugin/python.vim
 let g:pymode = 1
