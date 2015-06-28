@@ -46,7 +46,7 @@ set showcmd		" display incomplete commands
 
 " line numbering
 " nu or rnu turn linenumbering (nu - traditional numbering, rnu - relative
-" numbering) on, you should use one or the other but not both
+" numbering) on
 " http://jeffkreeftmeijer.com/2013/vims-new-hybrid-line-number-mode/
 set number
 set relativenumber
@@ -169,17 +169,18 @@ nnoremap <silent><S-CR> :set paste<CR>m`o<Esc>``:set nopaste<CR>
 nnoremap <silent><C-CR> :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
 " for switching buffers, no more Ctrl-w j, now you can just do ctrl-j
-nnoremap <C-h> <C-w>h
+"nnoremap <C-h> <C-w>h
 "nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-nnoremap <C-j> <C-w>10>
-nnoremap <C-,> <C-w>10<
-nnoremap <C-+> <C-w>+
-nnoremap <C--> <C-w>-
+"nnoremap <C-k> <C-w>k
+"nnoremap <C-l> <C-w>l
+
+"nnoremap <C-j> <C-w>10>
+"nnoremap <C-,> <C-w>10<
+"nnoremap <C-+> <C-w>+
+"nnoremap <C--> <C-w>-
 " http://vim.wikia.com/wiki/Fast_window_resizing_with_plus/minus_keys
-nnoremap <S-Up> <C-w>10+
-nnoremap <S-Down> <C-w>10-
+nnoremap <S-Up> <C-w>10-
+nnoremap <S-Down> <C-w>10+
 nnoremap <S-Right> <C-w>10>
 nnoremap <S-Left> <C-w>10<
 
@@ -191,13 +192,13 @@ nmap <leader>parse :syn sync fromstart<CR>
 
 "##############################################################################
 " configure tab buffers
+"##############################################################################
 " http://stackoverflow.com/questions/2468939/
 " http://stackoverflow.com/questions/11595301/controlling-tab-names-in-vim
-"##############################################################################
 au bufEnter * set guitablabel=\[%N\]\ %t\ %M
 " I also thought about using <C-<> :tabprev and <c->> :tabnext
-nnoremap <A-.> :tabn<CR>
-nnoremap <A-,> :tabp<CR>
+"nnoremap <A-.> :tabn<CR>
+"nnoremap <A-,> :tabp<CR>
 " http://vim.wikia.com/wiki/Alternative_tab_navigation
 " http://vim.wikia.com/wiki/Using_tab_pages
 
@@ -233,6 +234,8 @@ let NERDTreeIgnore = ['\.pyc$[[file]]']
 let NERDTreeQuitOnOpen = 1
 let g:nerdtree_tabs_open_on_gui_startup = 0
 let g:nerdtree_tabs_open_on_new_tab = 0
+" default is 31...
+let g:NERDTreeWinSize = 40
 
 " move tabs to the end for new, single buffers (exclude splits)
 " http://stackoverflow.com/questions/3998752/nerdtree-open-in-a-new-tab-as-last-tab-in-gvim
@@ -240,11 +243,11 @@ autocmd BufNew * if winnr('$') == 1 | tabmove99 | endif
 
 " NERDTress File highlighting
 " https://github.com/scrooloose/nerdtree/issues/433#issuecomment-92590696
-function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
- exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
- exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
-endfunction
-
+"function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+" exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+" exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+"endfunction
+"
 " I don't like any of these colors, so I'm disabling this for right now, it
 " does work though
 "call NERDTreeHighlightFile('ini', 'green', 'none', 'green', 'NONE')
@@ -284,6 +287,7 @@ map  <leader>hl :echo synIDattr(synID(line("."), col("."), 1), "name")<CR>
 
 " map omnicompletion to PSPad's ctrl-space
 " http://stackoverflow.com/questions/7722177/how-do-i-map-ctrl-x-ctrl-o-to-ctrl-space-in-terminal-vim
+" http://vim.wikia.com/wiki/Omni_completion
 imap <C-Space> <C-x><C-o>
 imap <C-@> <C-Space>
 

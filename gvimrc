@@ -95,7 +95,8 @@ else
   set listchars=tab:‧\ ,eol:․,trail:‧,extends:‧,precedes:‧
 endif
 set list
-" the 2 lines work to match space, but I don't like it since it messes with
+
+" these 2 lines work to match space, but I don't like it since it messes with
 " highlight current line, I guess I just have to hope for space: support in
 " listchars, see https://groups.google.com/forum/?fromgroups=#!topic/vim_dev/dIQHjW1g92s
 " http://stackoverflow.com/questions/1675688/make-vim-show-all-white-spaces-as-a-character
@@ -110,9 +111,11 @@ hi User1 guibg=#ECF7FF guifg=#A0A0A0
 set laststatus=2
 set statusline=   " clear the statusline for when vimrc is reloaded
 set statusline+=%1*
-set statusline+=\ \ \ \  " 4 spaces, matches up with line number width TODO: make this automatic
+"set statusline+=\ \ \ \  " 4 spaces, matches up with line number width TODO: make this automatic
+"set statusline+=%{repeat('\ ',&numberwidth)}
+set statusline+=%{repeat('\ ',max(range(len(line('$')),&numberwidth)))}
 "set statusline+=%f\                          " file name
-set statusline+=%.70F\ 
+set statusline+=%.80F\ 
 set statusline+=%h%m%r%w                     " flags
 set statusline+=[%{strlen(&ft)?&ft:'none'},\  " filetype
 set statusline+=%{strlen(&fenc)?&fenc:&enc},\  " encoding
