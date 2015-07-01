@@ -142,6 +142,10 @@ cmap w!! %!sudo tee > /dev/null %
 " make Y behave like D and C
 nmap Y y$
 
+"##############################################################################
+" Handle copy/paste better
+"##############################################################################
+
 " make it easy to select recently pasted stuff (similar to gv for recently selected)
 " http://stackoverflow.com/questions/4312664/is-there-a-vim-command-to-select-pasted-text
 " http://stackoverflow.com/questions/4775088/vim-how-to-select-pasted-block
@@ -153,9 +157,16 @@ nmap gp `[v`]
 nnoremap <esc>P P'[v' ]=
 nnoremap <esc>p p'[v' ]=
 
+" map ctrl-p to paste after the current line and match indent
+" this makes p paste after cursor, P paste before current line, and ctrl-p
+" paste after current line, all should match current indent
+map  <C-p> :pu<CR>`[v`]==<CR>
+
 " this maps the "* register to the unnamed register so you can copy/paste between instances
 " http://superuser.com/a/296308
 set clipboard+=unnamed
+"##############################################################################
+
 
 " http://vim.wikia.com/wiki/VimTip1066
 " http://vim.wikia.com/wiki/Insert_newline_without_entering_insert_mode
