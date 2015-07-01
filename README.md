@@ -47,6 +47,19 @@ I set this up with:
     $ git submodule add -b master https://github.com/jistr/vim-nerdtree-tabs.git bundle/nerdtree-tabs
 
 
+### CtrlP
+
+https://github.com/kien/ctrlp.vim
+
+found via: http://www.bestofvim.com/plugin/ctrl-p/
+
+configured to always open in a tab using this: https://github.com/kien/ctrlp.vim/issues/160
+
+I set this up with:
+
+    $ git submodule add -b master https://github.com/kien/ctrlp.vim.git bundle/ctrlp
+
+
 ### Commentify
 
 https://github.com/Jaymon/vim-commentify
@@ -63,6 +76,8 @@ I set this up with:
 ### Surround
 
 trying this again. I've had this bundle for years and never remember the shortcut to run it, but I decided to keep it one more time.
+
+I'm pretty sure this uses `s` as the command to "surround".
 
 https://github.com/tpope/vim-surround
 

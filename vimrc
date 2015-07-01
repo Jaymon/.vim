@@ -291,6 +291,19 @@ let g:tagbar_foldlevel = 0
 let g:tagbar_autoshowtag = 1
 "##############################################################################
 
+"##############################################################################
+" configure ctrlp
+" http://kien.github.io/ctrlp.vim/
+"##############################################################################
+let g:ctrlp_map = '<leader>r'
+" https://github.com/kien/ctrlp.vim/issues/119
+" https://github.com/kien/ctrlp.vim/issues/160
+let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<c-t>'],
+    \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
+    \ }
+
+
 " helpful for syntax highlighting, show what highlight group is under cursor
 " once again, I can never remember what I map this to
 map  <leader>sg :echo synIDattr(synID(line("."), col("."), 1), "name")<CR>
