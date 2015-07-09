@@ -19,3 +19,5 @@ hi link pythonDocBlock Comment
 
 " these things annoy me, so remove their highlighting
 syn clear PythonError
+
+syn keyword pythonTodo DEPRECATED ??? !!!

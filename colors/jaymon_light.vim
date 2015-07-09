@@ -131,6 +131,7 @@ hi NonReservedKeyword guifg=black ctermfg=black cterm=bold gui=bold
 
 " python specific highlighting
 hi pythonFormatStrTemplate guifg=#800000 ctermfg=magenta
+hi pythonBytesEscape guifg=#800000 ctermfg=magenta
 "hi pythonFormatStrTemplate guifg=#660000
 hi pythonStrFormatting guifg=#CC0000 ctermfg=magenta
 hi pythonStrFormat guifg=#CC0000 ctermfg=magenta
