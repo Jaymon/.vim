@@ -20,4 +20,6 @@ hi link pythonDocBlock Comment
 " these things annoy me, so remove their highlighting
 syn clear PythonError
 
-syn keyword pythonTodo DEPRECATED ??? !!!
+syn keyword pythonTodo DEPRECATED WARNING
+" sadly, these don't work :(
+syn keyword pythonTodo ??? !!!
