@@ -30,3 +30,7 @@
 	path = bundle/ctrlp
 	url = https://github.com/kien/ctrlp.vim.git
 	branch = master
+[submodule "bundle/pydiction"]
+	path = bundle/pydiction
+	url = https://github.com/rkulla/pydiction.git
+	branch = master

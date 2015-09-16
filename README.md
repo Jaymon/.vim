@@ -105,6 +105,14 @@ Currently an internal syntax plugin that brings together the good parts of some 
 Internal plugin that contains misc functions and commands that I love, compiled from around the internet, and maybe even kind of written by me, in order to make this a little more portable.
 
 
+### Pydiction
+
+https://github.com/rkulla/pydiction
+
+Setup:
+
+    $ git submodule add -b master https://github.com/rkulla/pydiction.git bundle/pydiction
+
 -------------------------------------------------------------------------------
 
 ## Install

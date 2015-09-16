@@ -327,3 +327,10 @@ if !exists(":DiffOrig")
 endif
 map <leader>d2 :DiffOrig
 
+
+"##############################################################################
+" configure ctrlp
+" https://github.com/rkulla/pydiction
+"##############################################################################
+let g:pydiction_location = $VIMHOME . '/bundle/pydiction/complete-dict'
+
