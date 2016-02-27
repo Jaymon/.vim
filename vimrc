@@ -328,8 +328,15 @@ endif
 map <leader>d2 :DiffOrig
 
 
+" make it easier to change current working directory pwd to current file's dir
+" http://vim.wikia.com/wiki/Set_working_directory_to_the_current_file
+nnoremap <leader>cd :cd %:p:h<CR>
+" CDC = Change to Directory of Current file
+command CDC cd %:p:h
+
+
 "##############################################################################
-" configure ctrlp
+" configure pydiction
 " https://github.com/rkulla/pydiction
 "##############################################################################
 let g:pydiction_location = $VIMHOME . '/bundle/pydiction/complete-dict'
