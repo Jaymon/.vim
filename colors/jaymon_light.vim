@@ -53,7 +53,7 @@ hi cursorLine guibg=#ECF7FF cterm=None term=None
 hi MatchParen guibg=#FFFF80 ctermbg=yellow
 
 if exists('+colorcolumn')
-  set colorcolumn=80
+  set colorcolumn=80,121
   "highlight ColorColumn ctermbg=lightgrey guibg=#ECF7FF
   highlight ColorColumn ctermbg=None guibg=#ECF7FF
 endif

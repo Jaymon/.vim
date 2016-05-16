@@ -128,6 +128,10 @@ set undodir^=$VIMTEMP//
 " http://vim.wikia.com/wiki/Make_views_automatic
 set viewoptions-=options " preserving option state was annoying me, cursor and folding good, options bad
 set viewdir=$VIMTEMP//
+
+" get rid of .netrwhist file in vim home
+let g:netrw_home=$VIMTEMP
+
 au BufWinLeave * silent! mkview "make vim save view (state) (folds, cursor, etc)
 au BufWinEnter * silent! loadview "make vim load view (state) (folds, cursor, etc)
 
@@ -166,7 +170,6 @@ map  <C-p> :pu<CR>`[v`]==<CR>
 " http://superuser.com/a/296308
 set clipboard+=unnamed
 "##############################################################################
-
 
 " http://vim.wikia.com/wiki/VimTip1066
 " http://vim.wikia.com/wiki/Insert_newline_without_entering_insert_mode
@@ -285,6 +288,7 @@ autocmd BufNew * if winnr('$') == 1 | tabmove99 | endif
 nnoremap RR :TagbarToggle<CR>
 let g:tagbar_left = 1
 let g:tagbar_autofocus = 1
+let g:tagbar_autoclose = 1
 let g:tagbar_sort = 1
 let g:tagbar_expand = 0
 let g:tagbar_foldlevel = 0
