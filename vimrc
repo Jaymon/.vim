@@ -129,9 +129,6 @@ set undodir^=$VIMTEMP//
 set viewoptions-=options " preserving option state was annoying me, cursor and folding good, options bad
 set viewdir=$VIMTEMP//
 
-" get rid of .netrwhist file in vim home
-let g:netrw_home=$VIMTEMP
-
 au BufWinLeave * silent! mkview "make vim save view (state) (folds, cursor, etc)
 au BufWinEnter * silent! loadview "make vim load view (state) (folds, cursor, etc)
 
@@ -232,54 +229,74 @@ nmap <leader>9 9gt<CR>
 
 " put the opened tab at the end of the list, I prefer that to opening next to
 " the tab in which it was opened
+" TODO -- I'm not sure the following 2 lines do anything, but the tabmove99
+" works
 let g:lasttab = 1
 au TabLeave * let g:lasttab = tabpagenr()
-"##############################################################################
 
-
-"##############################################################################
-" configure NERDTree
-" https://github.com/scrooloose/nerdtree
-"##############################################################################
-autocmd bufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-"nnoremap RN :NERDTreeToggle<CR>
-nnoremap RN :NERDTreeTabsToggle<CR>
-let NERDTreeIgnore = ['\.pyc$[[file]]']
-let NERDTreeQuitOnOpen = 1
-let g:nerdtree_tabs_open_on_gui_startup = 0
-let g:nerdtree_tabs_open_on_new_tab = 0
-" default is 31...
-let g:NERDTreeWinSize = 40
-
-" move tabs to the end for new, single buffers (exclude splits)
-" http://stackoverflow.com/questions/3998752/nerdtree-open-in-a-new-tab-as-last-tab-in-gvim
+" this puts the tab always on the far right, not next to the last tab
 autocmd BufNew * if winnr('$') == 1 | tabmove99 | endif
 
-" NERDTress File highlighting
-" https://github.com/scrooloose/nerdtree/issues/433#issuecomment-92590696
-"function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
-" exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
-" exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
-"endfunction
-"
-" I don't like any of these colors, so I'm disabling this for right now, it
-" does work though
-"call NERDTreeHighlightFile('ini', 'green', 'none', 'green', 'NONE')
-"call NERDTreeHighlightFile('md', 'green', 'none', 'green', 'NONE')
-"call NERDTreeHighlightFile('yml', 'green', 'none', 'green', 'NONE')
-"call NERDTreeHighlightFile('config', 'green', 'none', 'green', 'NONE')
-"call NERDTreeHighlightFile('conf', 'green', 'none', 'green', 'NONE')
-"
-"call NERDTreeHighlightFile('py', 'blue', 'none', '#3366FF', 'NONE')
-"call NERDTreeHighlightFile('php', 'blue', 'none', '#3366FF', 'NONE')
-"call NERDTreeHighlightFile('rb', 'blue', 'none', '#3366FF', 'NONE')
-"call NERDTreeHighlightFile('sh', 'blue', 'none', '#3366FF', 'NONE')
-"
-"call NERDTreeHighlightFile('json', 'Magenta', 'none', '#ff00ff', 'NONE')
-"call NERDTreeHighlightFile('html', 'Magenta', 'none', '#ff00ff', 'NONE')
-"call NERDTreeHighlightFile('css', 'Magenta', 'none', '#ff00ff', 'NONE')
-"call NERDTreeHighlightFile('js', 'Magenta', 'none', '#ff00ff', 'NONE')
 "##############################################################################
+
+
+"##############################################################################
+" configure netrw to work more like NERDTree
+"##############################################################################
+let g:netrw_list_hide = '\.pyc$'
+let g:netrw_liststyle = 3
+nnoremap RN :call ToggleNetrw()<CR>
+"nnoremap NN :call ToggleNetrw()<CR>
+"nnoremap RN :E<CR>
+"nnoremap RN :Rexplore<CR>
+
+" these functions eliminate the (R)ename mapping in the netrw buffer so I can
+" continue to use the RN and RR mappings that I've grown so accustomed to
+" http://vi.stackexchange.com/a/5532
+augroup netrw_mapping
+    autocmd!
+    autocmd filetype netrw call NetrwMapping()
+augroup END
+function! NetrwMapping()
+    nunmap <buffer> R
+endfunction
+
+" This will toggle netrw on/off
+function! ToggleNetrw()
+  let l:bn = bufnr('%')
+  if getbufvar(l:bn, '&filetype') == "netrw"
+    "silent exe :q
+    :q
+  else
+    "silent exe :Texplore
+    :Texplore
+  endif
+
+endfunction
+
+" we do this to try and get rid of ghost netrw buffers
+" https://github.com/tpope/vim-vinegar/issues/13#issuecomment-39539835
+function! QuitNetrw()
+  " http://stackoverflow.com/questions/2974192/how-can-i-pare-down-vims-buffer-list-to-only-include-active-buffers
+  " http://stackoverflow.com/a/1534979/5006
+  " http://vim.wikia.com/wiki/Deleting_a_buffer_without_closing_the_window
+  for t in range(1, tabpagenr('$'))
+    for b in tabpagebuflist(t)
+      if buflisted(b)
+        echon getbufvar(b, '&filetype')
+        if getbufvar(b, '&filetype') == "netrw"
+          silent exe 'bwipeout ' . b
+          "silent exe 'Rexplore'
+        endif
+      endif
+    endfor
+  endfor
+endfunction
+autocmd VimLeavePre * call QuitNetrw()
+
+" get rid of .netrwhist file in vim home
+let g:netrw_home = $VIMTEMP
+
 
 "##############################################################################
 " configure Tagbar

@@ -47,6 +47,10 @@ I set this up with:
     $ git submodule add -b master https://github.com/jistr/vim-nerdtree-tabs.git bundle/nerdtree-tabs
 
 
+5-17-2016  - I'm currently trying to use netrw instead of NERDTree:
+
+https://blog.mozhu.info/vimmers-you-dont-need-nerdtree-18f627b561c3#.6p2s7r8ir
+
 ### CtrlP
 
 https://github.com/kien/ctrlp.vim
@@ -157,7 +161,18 @@ not so much the console version.
 
 ## Plugins I've thought about using
 
+### Python Mode
+
 https://github.com/klen/python-mode
+
+### Vim Sneak
+
+https://github.com/justinmk/vim-sneak
+discovered via: https://news.ycombinator.com/item?id=11700906
+
+### Vim vertical
+
+https://github.com/rbong/vim-vertical
 
 ### plugin to make developing plugins easier
 
