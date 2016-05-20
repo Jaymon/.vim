@@ -47,9 +47,13 @@ I set this up with:
     $ git submodule add -b master https://github.com/jistr/vim-nerdtree-tabs.git bundle/nerdtree-tabs
 
 
-5-17-2016  - I'm currently trying to use netrw instead of NERDTree:
+5-17-2016 - I'm currently trying to use netrw instead of NERDTree:
+5-18-2016 - I couldn't do it, I re-activated NERDTree
+
+#### Netrw info
 
 https://blog.mozhu.info/vimmers-you-dont-need-nerdtree-18f627b561c3#.6p2s7r8ir
+
 
 ### CtrlP
 

@@ -227,15 +227,78 @@ nmap <leader>7 7gt<CR>
 nmap <leader>8 8gt<CR>
 nmap <leader>9 9gt<CR>
 
-" put the opened tab at the end of the list, I prefer that to opening next to
-" the tab in which it was opened
-" TODO -- I'm not sure the following 2 lines do anything, but the tabmove99
-" works
+" everytime we leave a tab update the lasttab value so the leader t command above works
 let g:lasttab = 1
 au TabLeave * let g:lasttab = tabpagenr()
 
+" put the opened tab at the end of the list, I prefer that to opening next to
+" the tab in which it was opened
 " this puts the tab always on the far right, not next to the last tab
+" move tabs to the end for new, single buffers (exclude splits)
+" http://stackoverflow.com/questions/3998752/nerdtree-open-in-a-new-tab-as-last-tab-in-gvim
 autocmd BufNew * if winnr('$') == 1 | tabmove99 | endif
+
+"##############################################################################
+
+"cnoreabbrev <expr> tabnew getcmdtype() == ":" && getcmdline() == "tabnew" ? "tab drop" : "tabnew" 
+
+" automatically open a file in readonly mode when swap exists
+" http://apple.stackexchange.com/questions/53732/
+"autocmd SwapExists * :let v:swapchoice='q'
+autocmd SwapExists * call IgnoreSwapDialog()
+
+function! IgnoreSwapDialog()
+  "echom expand('%:p') 
+  :let v:swapchoice='o'
+  " TODO -- 5-18-2016 - I tried and tried to figure out a way to close the tab after
+  " using 'q' to quit on the new tab, but I couldn't figure out any way to do
+  " it :(
+  "echom "buffer number ".bufnr('')
+  ":tabclose tabpagenr()
+  ":tabclose
+  "tabpagenr()
+  "silent exe 'bwipeout ' . bufnr('')
+
+
+
+
+"  echom expand('%') 
+"  echom tabpagenr('$')
+"  for t in range(1, tabpagenr('$'))
+"    echo "start tab list"
+"    for b in tabpagebuflist(t)
+"      echom "bufname ".bufname(b)
+"      if !buflisted(b)
+"        echom "quitting the buffer"
+"        :q
+"        "echom getbufvar(b, '&filetype')
+""        if getbufvar(b, '&filetype') == "netrw"
+""          silent exe 'bwipeout ' . b
+""          "silent exe 'Rexplore'
+""        endif
+"      endif
+"    endfor
+"    echo "stop tab list"
+"  endfor
+"  echom "done with buffer iteration"
+endfunction
+
+
+
+
+"##############################################################################
+" configure NERDTree
+" https://github.com/scrooloose/nerdtree
+"##############################################################################
+"autocmd bufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+nnoremap RN :NERDTreeTabsToggle<CR>
+let NERDTreeIgnore = ['\.pyc$[[file]]']
+let NERDTreeQuitOnOpen = 1
+let g:nerdtree_tabs_open_on_gui_startup = 0
+let g:nerdtree_tabs_open_on_new_tab = 0
+"#let g:nerdtree_tabs_autoclose = 1
+" default is 31...
+let NERDTreeWinSize = 40
 
 "##############################################################################
 
@@ -245,7 +308,7 @@ autocmd BufNew * if winnr('$') == 1 | tabmove99 | endif
 "##############################################################################
 let g:netrw_list_hide = '\.pyc$'
 let g:netrw_liststyle = 3
-nnoremap RN :call ToggleNetrw()<CR>
+"nnoremap RN :call ToggleNetrw()<CR>
 "nnoremap NN :call ToggleNetrw()<CR>
 "nnoremap RN :E<CR>
 "nnoremap RN :Rexplore<CR>

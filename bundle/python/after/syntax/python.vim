@@ -19,7 +19,12 @@ hi link pythonDocBlock Comment
 
 " these things annoy me, so remove their highlighting
 syn clear PythonError
+syn clear PythonNumberError
 
-syn keyword pythonTodo DEPRECATED WARNING
-" sadly, these don't work :(
-syn keyword pythonTodo ??? !!!
+" more hilighting of special comments I tend to use
+" http://stackoverflow.com/a/1819151/5006
+" http://learnvimscriptthehardway.stevelosh.com/chapters/46.html
+syn keyword pythonTodo DEPRECATED WARNING NOTE WARN
+" allow ??? or !!! similar to XCode
+syn match pythonNote "[?!]\{3,\}" containedin=PythonComment
+hi link pythonNote pythonTodo
