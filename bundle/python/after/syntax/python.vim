@@ -9,8 +9,8 @@ syn keyword pythonBuiltinObj	__class__ __builtin__
 hi link pythonOperator Statement
 
 " multi-line strings not assigned to a variable should be treated as comments
-syn region pythonDocBlock start=/^\s*\zs'''/ end=+'''+ keepend contains=pythonEscape,pythonEscapeError,pythonDocTest,pythonSpaceError,@Spell
-syn region pythonDocBlock start=/^\s*\zs"""/ end=+"""+ keepend contains=pythonEscape,pythonEscapeError,pythonDocTest2,pythonSpaceError,@Spell
+syn region pythonDocBlock start=/^\s*\zs'''/ end=+'''+ keepend contains=pythonEscape,pythonEscapeError,pythonDocTest,pythonSpaceError,@Spell,pythonTodo
+syn region pythonDocBlock start=/^\s*\zs"""/ end=+"""+ keepend contains=pythonEscape,pythonEscapeError,pythonDocTest2,pythonSpaceError,@Spell,pythonTodo
 
 hi link pythonMethod	Function
 hi link pythonFormatStrTemplate Special
@@ -26,5 +26,6 @@ syn clear PythonNumberError
 " http://learnvimscriptthehardway.stevelosh.com/chapters/46.html
 syn keyword pythonTodo DEPRECATED WARNING NOTE WARN
 " allow ??? or !!! similar to XCode
-syn match pythonNote "[?!]\{3,\}" containedin=PythonComment
+syn match pythonNote "[?!]\{3,\}" containedin=PythonComment,pythonDocBlock
 hi link pythonNote pythonTodo
+
