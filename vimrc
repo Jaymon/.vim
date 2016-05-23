@@ -291,7 +291,8 @@ endfunction
 " https://github.com/scrooloose/nerdtree
 "##############################################################################
 "autocmd bufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-nnoremap RN :NERDTreeTabsToggle<CR>
+"nnoremap RN :NERDTreeTabsToggle<CR>
+nnoremap RN :NERDTreeMirrorToggle<CR>
 let NERDTreeIgnore = ['\.pyc$[[file]]']
 let NERDTreeQuitOnOpen = 1
 let g:nerdtree_tabs_open_on_gui_startup = 0
