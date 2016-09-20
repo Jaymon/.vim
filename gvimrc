@@ -92,6 +92,7 @@ if has("win32")
   set listchars=tab:˻\ ,eol:˼,trail:˻,extends:˻,precedes:˻
 else
   " http://www.utf8-chartable.de/unicode-utf8-table.pl?start=8192
+  "set listchars=tab:‧\ ,space:‧,eol:․,trail:‧,extends:‧,precedes:‧
   set listchars=tab:‧\ ,eol:․,trail:‧,extends:‧,precedes:‧
 endif
 set list
