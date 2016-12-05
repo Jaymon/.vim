@@ -207,7 +207,7 @@ nmap <leader>parse :syn sync fromstart<CR>
 " http://stackoverflow.com/questions/2468939/
 " http://stackoverflow.com/questions/11595301/controlling-tab-names-in-vim
 " `:help statusline` for a description of the modifiers
-au bufEnter * set guitablabel=\[%N\]\ %t\ %M
+au bufEnter * set guitablabel=\[%N\]\ %t\ %M\[%N\]
 " I also thought about using <C-<> :tabprev and <c->> :tabnext
 "nnoremap <A-.> :tabn<CR>
 "nnoremap <A-,> :tabp<CR>
