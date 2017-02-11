@@ -163,6 +163,15 @@ nnoremap <esc>p p'[v' ]=
 " paste after current line, all should match current indent
 map  <C-p> :pu<CR>`[v`]==<CR>
 
+" http://superuser.com/questions/321547/how-do-i-replace-paste-yanked-text-in-vim-without-yanking-the-deleted-lines
+" delete without yanking
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+
+" replace currently selected text with default register
+" without yanking it
+vnoremap <leader>p "_dP
+
 " this maps the "* register to the unnamed register so you can copy/paste between instances
 " http://superuser.com/a/296308
 set clipboard+=unnamed
@@ -388,6 +397,7 @@ let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("e")': ['<c-t>'],
     \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
     \ }
+"##############################################################################
 
 
 " helpful for syntax highlighting, show what highlight group is under cursor
@@ -404,14 +414,14 @@ imap <C-@> <C-Space>
 " display what's changed since last save (uses diff command, so not cross-platform)
 " http://vim.wikia.com/wiki/Diff_current_buffer_and_the_original_file
 " http://stackoverflow.com/questions/749297/can-i-see-changes-before-i-save-my-file-in-vim
-map <leader>d1 :w !diff % -
+map <leader>diff1 :w !diff % -
 " this one is way more involved, it splits the screen and puts the original in the left buffer
 " from vimrc_example 
 if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
           \ | wincmd p | diffthis
 endif
-map <leader>d2 :DiffOrig
+map <leader>diff2 :DiffOrig
 
 
 " make it easier to change current working directory pwd to current file's dir

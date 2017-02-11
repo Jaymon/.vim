@@ -42,6 +42,15 @@ if g:pymode_motion
     vnoremap <buffer> aM :<C-U>call pymode#motion#select('^<Bslash>s*def<Bslash>s', 0)<CR>
     vnoremap <buffer> iM :<C-U>call pymode#motion#select('^<Bslash>s*def<Bslash>s', 1)<CR>
 
+    " added by Jay on 12-13-2016 because I can never remember [M etc
+    nnoremap <buffer> ]}  :<C-U>call pymode#motion#move('^<Bslash>s*def<Bslash>s', '')<CR>
+    nnoremap <buffer> [{  :<C-U>call pymode#motion#move('^<Bslash>s*def<Bslash>s', 'b')<CR>
+    onoremap <buffer> ]}  :<C-U>call pymode#motion#move('^<Bslash>s*def<Bslash>s', '')<CR>
+    onoremap <buffer> [{  :<C-U>call pymode#motion#move('^<Bslash>s*def<Bslash>s', 'b')<CR>
+    vnoremap <buffer> ]}  :call pymode#motion#vmove('^<Bslash>s*def<Bslash>s', '')<CR>
+    vnoremap <buffer> [{  :call pymode#motion#vmove('^<Bslash>s*def<Bslash>s', 'b')<CR>
+
+
 endif
 
 if g:pymode_rope && g:pymode_rope_completion

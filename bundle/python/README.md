@@ -28,6 +28,8 @@ This will update motion:
     $ curl -L https://github.com/klen/python-mode/raw/develop/after/ftplugin/python.vim -o ~/.vim/bundle/python/after/ftplugin/python.vim
     $ curl -L https://raw.githubusercontent.com/klen/python-mode/develop/autoload/pymode/motion.vim -o ~/.vim/bundle/python/autoload/pymode/motion.vim
 
+**NOTE** - in December 2016 I maded changes to `after/ftplugin/python.vim` so you might not want to just update it willy nilly.
+
 This will update indentation:
 
     $ curl -L https://github.com/klen/python-mode/raw/develop/autoload/pymode/indent.vim -o ~/.vim/bundle/python/autoload/pymode/indent.vim
