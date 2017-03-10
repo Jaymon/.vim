@@ -121,6 +121,22 @@ Setup:
 
     $ git submodule add -b master https://github.com/rkulla/pydiction.git bundle/pydiction
 
+
+### SnipMate
+
+https://github.com/garbas/vim-snipmate
+
+This actually has dependencies, so setup was a bit more involved:
+
+    $ git submodule add -b master https://github.com/tomtom/tlib_vim.git bundle/tlib
+    $ git submodule add -b master https://github.com/MarcWeber/vim-addon-mw-utils.git bundle/addon_mw_utils
+    $ git submodule add -b master https://github.com/garbas/vim-snipmate.git bundle/snipmate
+
+I thought about using [ultisnips](https://github.com/SirVer/ultisnips) instead but that requires python and I prefer to use pure vimscript plugins when I can.
+
+[vim-snippets](https://github.com/honza/vim-snippets/blob/master/snippets/python.snippets) contains lots of snippet files for referencea.
+
+
 -------------------------------------------------------------------------------
 
 ## Install

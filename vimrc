@@ -437,3 +437,16 @@ command CDC cd %:p:h
 "##############################################################################
 let g:pydiction_location = $VIMHOME . '/bundle/pydiction/complete-dict'
 
+
+"##############################################################################
+" configure snip-mate
+" https://github.com/garbas/vim-snipmate
+"##############################################################################
+" Remap snipmate's trigger key from tab to <C-J>
+" cntl-tab was hard to do with my hands
+"imap <C-Tab> <Plug>snipMateNextOrTrigger
+"smap <C-Tab> <Plug>snipMateNextOrTrigger
+imap <C-J> <Plug>snipMateNextOrTrigger
+smap <C-J> <Plug>snipMateNextOrTrigger
+
+

@@ -34,3 +34,15 @@
 	path = bundle/pydiction
 	url = https://github.com/rkulla/pydiction.git
 	branch = master
+[submodule "bundle/tlib"]
+	path = bundle/tlib
+	url = https://github.com/tomtom/tlib_vim.git
+	branch = master
+[submodule "bundle/addon_mw_utils"]
+	path = bundle/addon_mw_utils
+	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
+	branch = master
+[submodule "bundle/snipmate"]
+	path = bundle/snipmate
+	url = https://github.com/garbas/vim-snipmate.git
+	branch = master
