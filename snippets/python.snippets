@@ -1,3 +1,21 @@
+# https://github.com/honza/vim-snippets/blob/master/snippets/python.snippets
 snippet #3
 	# -*- coding: utf-8 -*-
 	from __future__ import unicode_literals, division, print_function, absolute_import
+
+snippet fullpath
+	os.path.abspath(os.path.expanduser(str(${0:path})))
+
+snippet walkpath
+	for root_dir, dirs, files in os.walk(${0:path}, topdown=True):
+		for basename in files:
+			filepath = os.path.join(root_dir, basename)
+
+snippet cacheproperty
+	@property
+	def ${0:name}(self):
+			${0} = getattr(self, "_${0}", "")
+			if not ${0}:
+				self._${0} = ${0}
+			return ${0}
+
