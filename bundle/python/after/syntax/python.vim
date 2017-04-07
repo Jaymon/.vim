@@ -3,7 +3,7 @@ syn match pythonFormatStrTemplate	"{[a-zA-Z0-9_]*}" contained containedin=python
 " http://ssiaf.blogspot.com/2009/07/negative-lookbehind-in-vim.html
 syn match pythonMethod "\.[a-zA-Z0-9_]*(\@="
 syn keyword NonReservedKeyword self cls
-syn keyword pythonBuiltinObj	__class__ __builtin__
+syn keyword pythonBuiltinObj	__class__ __builtin__ __module__ __dict__
 
 " I like these (eg, and in is not or) better as the same color as for loops and stuff
 hi link pythonOperator Statement
@@ -18,8 +18,17 @@ hi link NonReservedKeyword Special
 hi link pythonDocBlock Comment
 
 " these things annoy me, so remove their highlighting
-syn clear PythonError
-syn clear PythonNumberError
+syn clear pythonError
+syn clear pythonSpaceError
+syn clear pythonIndentError
+syn clear pythonBytesError
+syn clear pythonBytesEscapeError
+syn clear pythonUniEscapeError
+syn clear pythonUniRawEscapeError
+syn clear pythonNumberError
+syn clear pythonOctError
+syn clear pythonHexError
+syn clear pythonBinError
 
 " more hilighting of special comments I tend to use
 " http://stackoverflow.com/a/1819151/5006

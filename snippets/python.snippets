@@ -19,3 +19,32 @@ snippet cacheproperty
 				self._${0} = ${0}
 			return ${0}
 
+# make logging easier to instantiate
+snippet logbasic
+	import sys
+	import logging
+	logging.basicConfig(format="[%(levelname).1s] %(message)s", level=logging.DEBUG, stream=sys.stdout)
+	logger = logging.getLogger(__name__)
+snippet logadvanced
+	import sys
+	import logging
+	logger = logging.getLogger()
+	logger.setLevel(logging.DEBUG)
+	log_handler = logging.StreamHandler(stream=sys.stderr)
+	log_formatter = logging.Formatter('[%(levelname).1s] %(message)s')
+	log_handler.setFormatter(log_formatter)
+	logger.addHandler(log_handler)
+snippet log
+	logger = logging.getLogger(__name__)
+snippet logd
+	logger.debug("${0:errmsg}".format())
+snippet logi
+	logger.info("${0:errmsg}".format())
+snippet logw
+	logger.warn("${0:errmsg}".format(), sys_exc=True)
+snippet loge
+	logger.error("${0:errmsg}".format(), sys_exc=True)
+snippet logx
+	logger.exception(e)
+
+
