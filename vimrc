@@ -246,7 +246,7 @@ au TabLeave * let g:lasttab = tabpagenr()
 " this puts the tab always on the far right, not next to the last tab
 " move tabs to the end for new, single buffers (exclude splits)
 " http://stackoverflow.com/questions/3998752/nerdtree-open-in-a-new-tab-as-last-tab-in-gvim
-autocmd BufNew * if winnr('$') == 1 | tabmove99 | endif
+autocmd BufNew * if winnr('$') == 1 | tabmove | endif
 
 "##############################################################################
 
