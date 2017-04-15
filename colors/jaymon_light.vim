@@ -4,6 +4,7 @@
 " URL:		http://marcyes.com
 
 " cool help screens
+" :he highlight
 " :he group-name
 " :he highlight-groups
 " :he cterm-colors
@@ -135,6 +136,7 @@ hi pythonBytesEscape guifg=#800000 ctermfg=magenta
 "hi pythonFormatStrTemplate guifg=#660000
 hi pythonStrFormatting guifg=#CC0000 ctermfg=magenta
 hi pythonStrFormat guifg=#CC0000 ctermfg=magenta
+hi pythonMagicMethod guifg=#0000FF ctermfg=blue cterm=bold gui=bold
 
 " markdown specific highlighting
 highlight markdownH1 ctermfg=5 guifg=#FF00AF
