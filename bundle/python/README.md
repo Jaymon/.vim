@@ -49,6 +49,11 @@ http://henry.precheur.org/vim/python
 **NOTE** -- I've replaced this with Pymode's indentaion implementation.
 
 
+### python_match
+
+[via](https://vim.sourceforge.io/scripts/script.php?script_id=386)
+
+
 ## Installation
 
 Use Pathogen, and then run these (if you want it to be a submodule):
