@@ -11,13 +11,19 @@ snippet walkpath
 		for basename in files:
 			filepath = os.path.join(root_dir, basename)
 
+snippet normpath
+	path = os.path.abspath(os.path.expanduser(${0:path}))
+
 snippet cacheproperty
 	@property
-	def ${0:name}(self):
-			${0} = getattr(self, "_${0}", "")
-			if not ${0}:
-				self._${0} = ${0}
-			return ${0}
+	def ${1:name}(self):
+		v = getattr(self, "_${2:name}", None)
+		if v is None:
+			self._${3:name} = 
+		return self._${4:name}
+
+snippet ld
+	${1:var} = lambda ${2:vars} : ${0:action}
 
 # make logging easier to instantiate
 snippet logbasic
