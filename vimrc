@@ -303,7 +303,7 @@ endfunction
 "autocmd bufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 "nnoremap RN :NERDTreeTabsToggle<CR>
 nnoremap RN :NERDTreeMirrorToggle<CR>
-let NERDTreeIgnore = ['\.pyc$[[file]]']
+let NERDTreeIgnore = ['\.pyc$[[file]]', '__pycache__$[[dir]]']
 let NERDTreeQuitOnOpen = 1
 let g:nerdtree_tabs_open_on_gui_startup = 0
 let g:nerdtree_tabs_open_on_new_tab = 0
