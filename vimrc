@@ -450,3 +450,13 @@ imap <C-J> <Plug>snipMateNextOrTrigger
 smap <C-J> <Plug>snipMateNextOrTrigger
 
 
+"##############################################################################
+" session management
+" https://bocoup.com/blog/sessions-the-vim-feature-you-probably-arent-using
+"##############################################################################
+" there also is a plugin but it has dependencies I didn't want to deal with:
+" http://peterodding.com/code/vim/session/
+" https://github.com/xolox/vim-session/blob/master/INSTALL.md
+command SS mks $VIMTEMP/session.vim
+command RS source $VIMTEMP/session.vim
+
