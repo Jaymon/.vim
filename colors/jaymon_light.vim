@@ -1,6 +1,6 @@
 " Vim color file
 " Maintainer:   Jay Marcyes <jay@marcyes.com>
-" Last Change:  8-2-12
+" Since:  8-2-12
 " URL:		http://marcyes.com
 
 " cool help screens
@@ -19,7 +19,7 @@ hi clear
 if exists("syntax_on")
     syntax reset
 endif
-let g:colors_name="jaymon"
+let g:colors_name="jaymon_light"
 
 "hi Normal
 

@@ -45,13 +45,18 @@ function! LaunchBrowser()
         " http://vim.wikia.com/wiki/Execute_external_programs_asynchronously_under_Windows
         " !start didn't work, there needs to be a space between the ! and the start
         exec ":silent ! start \"\" " . l:uri
+
       elseif has("mac")
         exec ":silent !open " . l:uri
+
+      elseif has("unix")
+        " this should work, but I almost never have a gui in Linux computers
+        " so I've never tested it
+        exec ":silent !xdg-open " . l:uri
+
       else
         echo "OS Not currently supported"
-        " TODO: wrapping this in the has('gui') should keep this from firing in linux, maybe?
-        " this should work, but I almost never have a gui in Linux computers
-        "exec ":silent !xdg-open " . l:uri
+
       endif
     endif
   endif

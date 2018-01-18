@@ -140,12 +140,17 @@ set sessionoptions+=resize
 " http://vimingwithbuttar.googlecode.com/hg/.vimrc
 cmap w!! %!sudo tee > /dev/null %
 
-" make Y behave like D and C
-nmap Y y$
+" reload the vimrc file in this window
+" https://stackoverflow.com/questions/2400264/
+command! Vimreload so $MYVIMRC
+
 
 "##############################################################################
 " Handle copy/paste better
 "##############################################################################
+
+" make Y behave like D and C
+nmap Y y$
 
 " make it easy to select recently pasted stuff (similar to gv for recently selected)
 " http://stackoverflow.com/questions/4312664/is-there-a-vim-command-to-select-pasted-text
@@ -428,7 +433,7 @@ map <leader>diff2 :DiffOrig
 " http://vim.wikia.com/wiki/Set_working_directory_to_the_current_file
 nnoremap <leader>cd :cd %:p:h<CR>
 " CDC = Change to Directory of Current file
-command CDC cd %:p:h
+command! CDC cd %:p:h
 
 
 "##############################################################################
@@ -449,6 +454,15 @@ let g:pydiction_location = $VIMHOME . '/bundle/pydiction/complete-dict'
 imap <C-J> <Plug>snipMateNextOrTrigger
 smap <C-J> <Plug>snipMateNextOrTrigger
 
+" This function will load the context.snippet file located in VIMHOME/snippets
+function! LoadSnippetsInBuffer()
+  let l:path = $VIMHOME . '/snippets/' . &filetype . '.snippets'
+  if filereadable(l:path)
+    silent exe 'sp ' . l:path
+  endif
+endfunction
+command! Snippets exec LoadSnippetsInBuffer()
+
 
 "##############################################################################
 " session management
@@ -457,6 +471,6 @@ smap <C-J> <Plug>snipMateNextOrTrigger
 " there also is a plugin but it has dependencies I didn't want to deal with:
 " http://peterodding.com/code/vim/session/
 " https://github.com/xolox/vim-session/blob/master/INSTALL.md
-command SS mks $VIMTEMP/session.vim
-command RS source $VIMTEMP/session.vim
+command! SS mks $VIMTEMP/session.vim
+command! RS source $VIMTEMP/session.vim
 
