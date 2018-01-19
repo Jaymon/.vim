@@ -15,17 +15,17 @@ function! VisualSearch(direction) range
   execute "normal! vgvy"
   let l:pattern = escape(@", '\\/.*$^~[]')
   let l:pattern = substitute(l:pattern, "\n$", "", "")
-  if a:direction == 'b'
+  if a:direction == '?' " backwards
     execute "normal ?" . l:pattern . "^M"
-  else
+  else " forwards
     execute "normal /" . l:pattern . "^M"
   endif
   let @/ = l:pattern
   let @" = l:saved_reg
 endfunction
 
-vnoremap <silent> * :call VisualSearch('f')<CR>
-vnoremap <silent> # :call VisualSearch('b')<CR>
+vnoremap <silent> * :call VisualSearch('/')<CR>:set hlsearch<CR>
+vnoremap <silent> # :call VisualSearch('?')<CR>:set hlsearch<CR>
 "##############################################################################
 
 
@@ -64,3 +64,4 @@ endfunction
 
 map <silent> <leader>b :call LaunchBrowser()<CR>:redraw!<CR>
 "##############################################################################
+

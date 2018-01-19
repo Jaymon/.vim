@@ -17,6 +17,7 @@ let g:loaded_env = 1
 
 " sfile has to be expanded outside of any functions, otherwise it will return
 " the wrong filepath, found this out at: http://tech.groups.yahoo.com/group/vim/message/51381
+" :help filename-modifiers
 let s:vimhome=expand('<sfile>:p:h:h')
 
 function! env#setup()
@@ -41,3 +42,4 @@ function! env#setup()
   endif
 
 endfunction
+

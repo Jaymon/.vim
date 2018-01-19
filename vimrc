@@ -41,8 +41,8 @@ autocmd BufReadPost *
   \ endif
 
 " mess with the status bar
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
+set ruler " show the cursor position all the time
+set showcmd " display incomplete commands
 
 " line numbering
 " nu or rnu turn linenumbering (nu - traditional numbering, rnu - relative
@@ -95,6 +95,12 @@ set foldenable " toggle with zi
 set foldmethod=indent
 set foldnestmax=2
 set foldlevelstart=2
+" <CR> in a comment will trigger a new line, and comments will fold to a new
+" line at textwidth for all syntax types
+" :help fo-table for the values of c, r, and l
+" Set 'formatoptions' to break comment lines but not other lines,
+" and insert the comment leader when hitting <CR>
+setlocal fo+=crl
 
 " turn on syntax highlighting
 filetype plugin indent on " indent depends on filetype
@@ -142,8 +148,20 @@ cmap w!! %!sudo tee > /dev/null %
 
 " reload the vimrc file in this window
 " https://stackoverflow.com/questions/2400264/
-command! Vimreload so $MYVIMRC
-
+" https://stackoverflow.com/a/5794800/5006
+" NOTE: this does reload this file, but you have other issues when editing
+" other files like `g:loaded_PLUGIN` variables that will keep those files from
+" getting reloaded also
+"command! Vimreload so echom resolve(expand($MYVIMRC))
+if !exists(":Vimreload")
+  function ReloadVimrc()
+    let l:path = resolve(expand($MYVIMRC))
+    if filereadable(l:path)
+      silent exe 'so ' . l:path
+    endif
+  endfunction
+  command! Vimreload exec ReloadVimrc()
+endif
 
 "##############################################################################
 " Handle copy/paste better

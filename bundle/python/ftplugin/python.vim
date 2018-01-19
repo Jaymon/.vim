@@ -4,6 +4,13 @@
 " of this if I keep pymode indentation
 setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4
 
+" python comments should auto-wrap and if you hit enter it should add a new
+" comment. I got this from ftplugin/vim.vim in vim proper
+setlocal fo+=crl
+if &tw == 0
+  setlocal tw=80
+endif
+
 " config for python syntax highlighting plugin
 let python_highlight_all = 1
 let python_highlight_space_errors = 0
