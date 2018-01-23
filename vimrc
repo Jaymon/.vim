@@ -76,10 +76,13 @@ set autoindent
 " in specific filetypes, not generally
 " http://vim.wikia.com/wiki/Indenting_source_code
 "set smartindent
-set tabstop=2 " set tab character to N characters
-set softtabstop=2 " let backspace delete indent
+" until 1-23-2018 I had all these set at 2 but python has made anything less
+" than 4 look strange, so I'm switching this to match python for all filetypes
+" unless specifically overridden
+set tabstop=4 " set tab character to N characters
+set softtabstop=4 " let backspace delete indent
 set expandtab " turn tabs into whitespace
-set shiftwidth=2 " indent width for autoindent
+set shiftwidth=4 " indent width for autoindent
 set backspace=indent,eol,start
 " configure filetype specific stuff in ftplugin/filetype.vim
 
@@ -100,7 +103,7 @@ set foldlevelstart=2
 " :help fo-table for the values of c, r, and l
 " Set 'formatoptions' to break comment lines but not other lines,
 " and insert the comment leader when hitting <CR>
-setlocal fo+=crl
+set fo-=t fo+=crl
 
 " turn on syntax highlighting
 filetype plugin indent on " indent depends on filetype
