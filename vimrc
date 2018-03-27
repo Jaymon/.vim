@@ -452,9 +452,10 @@ map <leader>diff2 :DiffOrig
 
 " make it easier to change current working directory pwd to current file's dir
 " http://vim.wikia.com/wiki/Set_working_directory_to_the_current_file
-nnoremap <leader>cd :cd %:p:h<CR>
 " CDC = Change to Directory of Current file
-command! CDC cd %:p:h
+command! CDC lcd %:p:h
+" to get NerdTree to change to the directory also, open the NT buffer and type
+" CD
 
 
 "##############################################################################
