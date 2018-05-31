@@ -142,6 +142,7 @@ hi pythonStrFormatting guifg=#CC0000 ctermfg=magenta
 hi pythonStrFormat guifg=#CC0000 ctermfg=magenta
 hi pythonMagicMethod guifg=#0000FF ctermfg=blue cterm=bold gui=bold
 
+
 " markdown specific highlighting
 highlight markdownH1 ctermfg=5 guifg=#FF00AF
 highlight markdownH2 ctermfg=4 guifg=#FF00D7
@@ -149,4 +150,8 @@ highlight markdownH3 ctermfg=13 guifg=#FF00FF
 highlight markdownH4 ctermfg=12 guifg=#FF0087
 highlight markdownH5 ctermfg=163 guifg=#FF005F
 highlight markdownH6 ctermfg=56 guifg=#FF5FFF
+
+
+" Ruby specific highlighting
+hi rubyStringDelimiter guifg=#CC0000 ctermfg=magenta
 
