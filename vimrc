@@ -49,7 +49,11 @@ set showcmd " display incomplete commands
 " numbering) on
 " http://jeffkreeftmeijer.com/2013/vims-new-hybrid-line-number-mode/
 set number
-set relativenumber
+" I've been having really slow scrolling, turns out turning off relativenumber
+" restores holding down j or k speed to really fast, not sure why but I'm
+" disabling this for right now, see the SO answer for more insight:
+" https://stackoverflow.com/a/34159294/5006
+"set relativenumber
 " for normal numbering, something like 5 is appropriate to easily handle files
 " up to 99999 lines long, but for relative numbering, I think 2-3 is
 " sufficient
