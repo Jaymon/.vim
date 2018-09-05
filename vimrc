@@ -202,6 +202,15 @@ vnoremap <leader>d "_d
 " without yanking it
 vnoremap <leader>p "_dP
 
+" when pasting over selected text don't replace the pasted text with the
+" replaced text, this was what <leader>p was basically doing (I think) but
+" I've never internalized that command and this is one of the things that bugs
+" me the most
+" https://unix.stackexchange.com/a/390905/118750
+" search: vim replace highlighted text with copied text and put pasted text back into main register
+"vnoremap p p:let @"=@0 <CR>
+vnoremap p p:let @*=@0<CR>
+
 " this maps the "* register to the unnamed register so you can copy/paste between instances
 " http://superuser.com/a/296308
 set clipboard+=unnamed
