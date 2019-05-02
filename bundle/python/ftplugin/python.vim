@@ -2,7 +2,7 @@
 "au FileType python setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4
 " TODO -- I think this is all set in the pymode indentation, so I can get rid
 " of this if I keep pymode indentation
-setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4
+"setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4
 
 " python comments should auto-wrap and if you hit enter it should add a new
 " comment. I got this from ftplugin/vim.vim in vim proper
