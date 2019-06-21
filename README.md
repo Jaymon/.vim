@@ -8,6 +8,10 @@ There are some original things though that might be useful for people, like the 
 
 ## Plugins
 
+to update all the submodules:
+
+    $ git submodule foreach git pull origin master
+
 
 ### Pathogen
 
