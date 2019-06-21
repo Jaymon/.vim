@@ -46,3 +46,7 @@
 	path = bundle/snipmate
 	url = https://github.com/garbas/vim-snipmate.git
 	branch = master
+[submodule "bundle/rainbow"]
+	path = bundle/rainbow
+	url = https://github.com/luochen1990/rainbow.git
+	branch = master

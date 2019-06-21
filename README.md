@@ -139,6 +139,21 @@ I thought about using [ultisnips](https://github.com/SirVer/ultisnips) instead b
 When in *insert* mode you can do `ctrl-R tab` (`<C-R><Tab>`) to get all the matching snippets. I've also added `:Snippets` to open the corresponding `$VIMHOME/snippets/<FILETYPE>.snippets` file.
 
 
+### Rainbow Parenthesis
+
+https://github.com/luochen1990/rainbow
+
+I've actually installed this previously, but decided to give it another try (6-20-2019)
+
+    $ git submodule add -b master https://github.com/luochen1990/rainbow.git bundle/rainbow
+
+
+#### Previous comments
+
+This doesn't work in new tabs/buffers, and it took me like a month to notice it didn't work in the buffers, so I figured I didn't need it
+
+http://www.vim.org/scripts/script.php?script_id=3772
+
 -------------------------------------------------------------------------------
 
 ## Install
@@ -226,14 +241,6 @@ For some reason sizing the Macvim window on startup doesn't work, I have no idea
 http://www.vim.org/scripts/script.php?script_id=273
 
 I used tagbar more, no sense in having both anymore
-
-
-### Rainbow Parenthesis
-
-This doesn't work in new tabs/buffers, and it took me like a month to notice it
-didn't work in the buffers, so I figured I didn't need it
-
-http://www.vim.org/scripts/script.php?script_id=3772
 
 
 ### Markdown

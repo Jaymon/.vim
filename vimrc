@@ -500,6 +500,13 @@ command! Snippets exec LoadSnippetsInBuffer()
 
 
 "##############################################################################
+" configure Rainbow
+" https://github.com/luochen1990/rainbow
+"##############################################################################
+let g:rainbow_active = 1
+
+
+"##############################################################################
 " session management
 " https://bocoup.com/blog/sessions-the-vim-feature-you-probably-arent-using
 "##############################################################################
