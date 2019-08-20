@@ -158,6 +158,18 @@ This doesn't work in new tabs/buffers, and it took me like a month to notice it 
 
 http://www.vim.org/scripts/script.php?script_id=3772
 
+
+### Applescript syntax
+
+[permalink](https://www.vim.org/scripts/script.php?script_id=1736)
+
+    $ git submodule add -b master https://github.com/vim-scripts/applescript.vim bundle/applescript
+
+search: vim applescript syntax
+
+Added 2019-08-20.
+
+
 -------------------------------------------------------------------------------
 
 ## Install

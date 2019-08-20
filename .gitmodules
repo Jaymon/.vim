@@ -50,3 +50,7 @@
 	path = bundle/rainbow
 	url = https://github.com/luochen1990/rainbow.git
 	branch = master
+[submodule "bundle/applescript"]
+	path = bundle/applescript
+	url = https://github.com/vim-scripts/applescript.vim
+	branch = master
