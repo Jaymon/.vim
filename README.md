@@ -154,9 +154,11 @@ I've actually installed this previously, but decided to give it another try (6-2
 
 #### Previous comments
 
-This doesn't work in new tabs/buffers, and it took me like a month to notice it didn't work in the buffers, so I figured I didn't need it
+> This doesn't work in new tabs/buffers, and it took me like a month to notice it didn't work in the buffers, so I figured I didn't need it
+>
+> http://www.vim.org/scripts/script.php?script_id=3772
 
-http://www.vim.org/scripts/script.php?script_id=3772
+Disabled this again on 9-2-2019 because it totally borks php syntax highlighting and it was pretty subtle with python so I doubt I'll really miss it
 
 
 ### Applescript syntax
