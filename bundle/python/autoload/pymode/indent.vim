@@ -20,15 +20,27 @@ function! pymode#indent#get_indent(lnum)
     if parlnum > 0
         let parcol = col('.')
         let closing_paren = match(getline(a:lnum), '^\s*[])}]') != -1
-        if match(getline(parlnum), '[([{]\s*$', parcol - 1) != -1
-            if closing_paren
-                return indent(parlnum)
-            else
-                return indent(parlnum) + &shiftwidth
-            endif
+"        if match(getline(parlnum), '[([{]\s*$', parcol - 1) != -1
+"            if closing_paren
+"                return indent(parlnum)
+"            else
+"                let l:indent_width = (g:pymode_indent_hanging_width > 0 ?
+"                            \ g:pymode_indent_hanging_width : &shiftwidth)
+"                return indent(parlnum) + l:indent_width
+"            endif
+"        else
+"            return parcol
+"        endif
+
+        " ADDED BY JAY ON 2021-01-04, I also commented out the previous lines
+        if closing_paren
+            return indent(parlnum)
         else
-            return parcol
+            let l:indent_width = (g:pymode_indent_hanging_width > 0 ?
+                        \ g:pymode_indent_hanging_width : &shiftwidth)
+            return indent(parlnum) + l:indent_width
         endif
+
     endif
 
     " Examine this line
@@ -62,9 +74,17 @@ function! pymode#indent#get_indent(lnum)
     let sslnum = s:StatementStart(plnum)
 
     " If the previous line is blank, keep the same indentation
-    if pline =~ '^\s*$'
-        return -1
-    endif
+"    if pline =~ '^\s*$'
+"        return -1
+"    endif
+
+    " ADDED BY JAY ON 2021-01-04, I also commented out the previous 3 lines
+    " If the previous line is blank, find the first non-blank to figure out indent
+    while pline =~ '^\s*$'
+        let plnum = plnum - 1
+        let pline = getline(plnum)
+        let sslnum = s:StatementStart(plnum)
+    endwhile
 
     " If this line is explicitly joined, find the first indentation that is a
     " multiple of four and will distinguish itself from next logical line.
@@ -110,7 +130,7 @@ function! s:SearchParensPair() " {{{
     " Skip strings and comments and don't look too far
     let skip = "line('.') < " . (line - 50) . " ? dummy :" .
                 \ 'synIDattr(synID(line("."), col("."), 0), "name") =~? ' .
-                \ '"string\\|comment"'
+                \ '"string\\|comment\\|doctest"'
 
     " Search for parentheses
     call cursor(line, col)

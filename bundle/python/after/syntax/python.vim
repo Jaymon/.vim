@@ -42,6 +42,7 @@ syn keyword pythonMagicMethod __new__ __init__ __del__ __cmp__ __eq__ __ne__ __l
 " I like these (eg, and in is not or) better as the same color as for loops and stuff
 hi link pythonOperator Statement
 
+
 " multi-line strings not assigned to a variable should be treated as comments
 syn region pythonDocBlock start=/^\s*\zs'''/ end=+'''+ keepend contains=pythonEscape,pythonEscapeError,pythonDocTest,pythonSpaceError,@Spell,pythonTodo
 syn region pythonDocBlock start=/^\s*\zs"""/ end=+"""+ keepend contains=pythonEscape,pythonEscapeError,pythonDocTest2,pythonSpaceError,@Spell,pythonTodo
@@ -51,6 +52,7 @@ hi link pythonMagicMethod pythonMethod
 hi link pythonFormatStrTemplate Special
 hi link NonReservedKeyword Special
 hi link pythonDocBlock Comment
+hi link pythonBuiltinObj Structure
 
 " these things annoy me, so remove their highlighting
 syn clear pythonError
@@ -65,6 +67,8 @@ syn clear pythonOctError
 syn clear pythonHexError
 syn clear pythonBinError
 syn clear pythonStrTemplate
+syn clear pythonClass
+
 
 " more hilighting of special comments I tend to use
 " http://stackoverflow.com/a/1819151/5006
@@ -73,4 +77,10 @@ syn keyword pythonTodo DEPRECATED WARNING NOTE WARN
 " allow ??? or !!! similar to XCode
 syn match pythonNote "[?!]\{3,\}" containedin=PythonComment,pythonDocBlock
 hi link pythonNote pythonTodo
+
+"syn keyword pythonStatement   await
+"syn match   pythonStatement   "\<async\s\+def\>" display
+"syn match   pythonStatement   "\<async\s\+with\>" display
+"syn match   pythonStatement   "\<async\s\+for\>" display
+"syn match   pythonStatement   "\<async\s\+with\>" display
 
