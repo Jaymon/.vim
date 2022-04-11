@@ -15,6 +15,14 @@ set nocompatible
 " http://stackoverflow.com/questions/7178964/how-to-turn-off-auto-insert-when-selecting-text-with-gvim?rq=1
 behave xterm
 
+" When I upgraded to macos montery (March 2022) I all of a sudden had a a sound when
+" doing certain things (it was the Funky system sound), I figured out how to reproduce
+" it (hit j when on the last line of a file) and this was what turned it off. Not
+" sure why this was now a problem
+" https://stackoverflow.com/questions/18589352/how-to-disable-vim-bells-sounds
+" https://stackoverflow.com/questions/16047146/disable-bell-in-macvim
+set belloff=all
+
 " tells Vim to look in the directory containing the current file (.), then the current
 " directory (empty text between two commas), then each directory under the current directory ('**')
 set path=.,,**
