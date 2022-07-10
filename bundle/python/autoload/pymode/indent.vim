@@ -5,7 +5,16 @@
 " Original Author:  David Bustos <bustos@caltech.edu> (address invalid)
 " Last Change:      2012-06-21
 " License:          Public Domain
-
+"
+" Jay started modifying this file on 2021-01-04, it is now pretty different
+" than the original file
+"
+" helpful links:
+"   https://github.com/vim/vim/blob/master/runtime/doc/usr_41.txt
+"   https://psy.swansea.ac.uk/staff/carter/vim/vim_indent.htm
+"   https://github.com/vim/vim/tree/master/runtime/indent
+"   https://github.com/vim/vim/blob/master/runtime/doc/indent.txt
+"   https://learnvimscriptthehardway.stevelosh.com/chapters/01.html
 
 function! pymode#indent#get_indent(lnum)
 
@@ -20,19 +29,8 @@ function! pymode#indent#get_indent(lnum)
     if parlnum > 0
         let parcol = col('.')
         let closing_paren = match(getline(a:lnum), '^\s*[])}]') != -1
-"        if match(getline(parlnum), '[([{]\s*$', parcol - 1) != -1
-"            if closing_paren
-"                return indent(parlnum)
-"            else
-"                let l:indent_width = (g:pymode_indent_hanging_width > 0 ?
-"                            \ g:pymode_indent_hanging_width : &shiftwidth)
-"                return indent(parlnum) + l:indent_width
-"            endif
-"        else
-"            return parcol
-"        endif
 
-        " ADDED BY JAY ON 2021-01-04, I also commented out the previous lines
+        " ADDED BY JAY ON 2021-01-04
         if closing_paren
             return indent(parlnum)
         else
@@ -68,30 +66,22 @@ function! pymode#indent#get_indent(lnum)
         endif
     endif
 
-    " Examine previous line
-    let plnum = a:lnum - 1
-    let pline = getline(plnum)
-    let sslnum = s:StatementStart(plnum)
-
-    " If the previous line is blank, keep the same indentation
-"    if pline =~ '^\s*$'
-"        return -1
-"    endif
-
-    " ADDED BY JAY ON 2021-01-04, I also commented out the previous 3 lines
-    " If the previous line is blank, find the first non-blank to figure out indent
-    while pline =~ '^\s*$'
-        let plnum = plnum - 1
-        let pline = getline(plnum)
-        let sslnum = s:StatementStart(plnum)
-    endwhile
+    " Examine previous (first non blank) line
+    let plstartnum = a:lnum - 1 " previous line starting number
+    " http://vimdoc.sourceforge.net/htmldoc/eval.html#prevnonblank()
+    let plnum = prevnonblank(plstartnum) " previous (first non blank) line number
+    let pline = getline(plnum) "previous (first non blank) actual line (string)
+    let plbuffer = 1 " buffer lines
+    let ssline = getline(sslnum) " statement start actual line (string)
+    let sslnum = s:StatementStart(plnum) " statement start line number
+    let sslindent = indent(sslnum) "statement start indent
 
     " If this line is explicitly joined, find the first indentation that is a
     " multiple of four and will distinguish itself from next logical line.
     if pline =~ '\\$'
-        let maybe_indent = indent(sslnum) + &sw
+        let maybe_indent = sslindent + &sw
         let control_structure = '^\s*\(if\|while\|for\s.*\sin\|except\)\s*'
-        if match(getline(sslnum), control_structure) != -1
+        if match(ssline, control_structure) != -1
             " add extra indent to avoid E125
             return maybe_indent + &sw
         else
@@ -103,18 +93,48 @@ function! pymode#indent#get_indent(lnum)
     " If the previous line ended with a colon and is not a comment, indent
     " relative to statement start.
     if pline =~ '^[^#]*:\s*\(#.*\)\?$'
-        return indent(sslnum) + &sw
+        return sslindent + &sw
     endif
 
     " If the previous line was a stop-execution statement or a pass
-    if getline(sslnum) =~ '^\s*\(break\|continue\|raise\|return\|pass\)\>'
-        " See if the user has already dedented
-        if indent(a:lnum) > indent(sslnum) - &sw
+    if ssline =~ '^\s*\(break\|continue\|raise\|return\|pass\)\>'
+        if thisindent == 0
+            return sslindent - &sw
+        elseif thisindent > sslindent - &sw
+            " See if the user has already dedented
             " If not, recommend one dedent
-            return indent(sslnum) - &sw
+            return sslindent - &sw
         endif
         " Otherwise, trust the user
         return -1
+    endif
+
+    " We are more than BUFFER blank lines from the previous (first non blank) line
+    if (plstartnum - plbuffer) > plnum
+        if thisindent != 0
+            " trust the user
+            return -1
+        else
+            " we failed all the other checks so let's line up with the next (non blank) line
+            let nlnum = nextnonblank(a:lnum) " http://vimdoc.sourceforge.net/htmldoc/eval.html#nextnonblank()
+            let nlindent = indent(nlnum)
+
+            if nlindent > 0
+                return nlindent
+            else
+                " trust the user
+                return -1
+            endif
+        endif
+    else
+        " We are within BUFFER blank lines from the previous (first non blank) line
+        " but we don't want to mess with the indent if the user has alreay
+        " changed it (eg, you hit I and then indent back one (go from 3 tabs
+        " to 2 tabs) and hit enter you don't want to reset to 3 tabs
+        if thisindent != 0
+            " trust the user
+            return -1
+        endif
     endif
 
     " In all other cases, line up with the start of the previous statement.

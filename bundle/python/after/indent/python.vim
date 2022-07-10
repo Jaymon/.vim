@@ -11,3 +11,7 @@ setlocal expandtab
 setlocal autoindent
 setlocal indentexpr=pymode#indent#get_indent(v:lnum)
 setlocal indentkeys=!^F,o,O,<:>,0),0],0},=elif,=except
+
+" Ignore files matching these patterns when opening files based on a glob pattern.
+set wildignore+=.pyc
+

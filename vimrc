@@ -95,6 +95,7 @@ set tabstop=4 " set tab character to N characters
 set softtabstop=4 " let backspace delete indent
 set expandtab " turn tabs into whitespace
 set shiftwidth=4 " indent width for autoindent
+set shiftround " When shifting lines, round indentation to the nearest multiple of “shiftwidth.”
 set backspace=indent,eol,start
 " configure filetype specific stuff in ftplugin/filetype.vim
 
@@ -155,6 +156,12 @@ au BufWinEnter * silent! loadview "make vim load view (state) (folds, cursor, et
 
 " http://stackoverflow.com/questions/594838/is-it-possible-to-get-gvim-to-remember-window-size
 set sessionoptions+=resize
+
+" Automatically re-read files if unmodified inside Vim.
+set autoread
+
+" Delete comment characters when joining lines
+set formatoptions+=j
 
 " Allow us to save a file as root, if we have sudo privileges,
 " when we're not currently using vim as root
