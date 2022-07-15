@@ -365,6 +365,10 @@ let g:nerdtree_tabs_open_on_new_tab = 0
 " default is 31...
 let NERDTreeWinSize = 40
 
+" https://stackoverflow.com/a/5057406/5006
+" you can toggle this behavior with shift+i
+let NERDTreeShowHidden=1
+
 "##############################################################################
 
 
