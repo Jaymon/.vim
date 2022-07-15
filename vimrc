@@ -373,64 +373,6 @@ let NERDTreeShowHidden=1
 
 
 "##############################################################################
-" configure netrw to work more like NERDTree
-"##############################################################################
-let g:netrw_list_hide = '\.pyc$'
-let g:netrw_liststyle = 3
-"nnoremap RN :call ToggleNetrw()<CR>
-"nnoremap NN :call ToggleNetrw()<CR>
-"nnoremap RN :E<CR>
-"nnoremap RN :Rexplore<CR>
-
-" these functions eliminate the (R)ename mapping in the netrw buffer so I can
-" continue to use the RN and RR mappings that I've grown so accustomed to
-" http://vi.stackexchange.com/a/5532
-augroup netrw_mapping
-    autocmd!
-    autocmd filetype netrw call NetrwMapping()
-augroup END
-function! NetrwMapping()
-    nunmap <buffer> R
-endfunction
-
-" This will toggle netrw on/off
-function! ToggleNetrw()
-  let l:bn = bufnr('%')
-  if getbufvar(l:bn, '&filetype') == "netrw"
-    "silent exe :q
-    :q
-  else
-    "silent exe :Texplore
-    :Texplore
-  endif
-
-endfunction
-
-" we do this to try and get rid of ghost netrw buffers
-" https://github.com/tpope/vim-vinegar/issues/13#issuecomment-39539835
-function! QuitNetrw()
-  " http://stackoverflow.com/questions/2974192/how-can-i-pare-down-vims-buffer-list-to-only-include-active-buffers
-  " http://stackoverflow.com/a/1534979/5006
-  " http://vim.wikia.com/wiki/Deleting_a_buffer_without_closing_the_window
-  for t in range(1, tabpagenr('$'))
-    for b in tabpagebuflist(t)
-      if buflisted(b)
-        echon getbufvar(b, '&filetype')
-        if getbufvar(b, '&filetype') == "netrw"
-          silent exe 'bwipeout ' . b
-          "silent exe 'Rexplore'
-        endif
-      endif
-    endfor
-  endfor
-endfunction
-autocmd VimLeavePre * call QuitNetrw()
-
-" get rid of .netrwhist file in vim home
-let g:netrw_home = $VIMTEMP
-
-
-"##############################################################################
 " configure Tagbar
 " http://majutsushi.github.com/tagbar/
 "##############################################################################
