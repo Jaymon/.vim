@@ -197,16 +197,21 @@ nmap Y y$
 " http://stackoverflow.com/questions/4775088/vim-how-to-select-pasted-block
 nmap gp `[v`]
 
-" reformat paste
-" http://www.slideshare.net/ZendCon/vim-for-php-programmers-presentation
-" (slide 27)
-nnoremap <esc>P P'[v' ]=
-nnoremap <esc>p p'[v' ]=
+" reformat paste (paste and reformat/reindent)
+" http://www.slideshare.net/zendcon/vim-for-php-programmers-presentation (slide 27)
+" !!! 7-17-2022 - Using the standard CLI vim this was causing whatever was in the
+" buffer to be pasted into the top of the opened file, it didn't seem to play
+" nice with `set clipboard+=unnamed`, this was for actual vim, not macvim
+" which seemed to work just fine, I tracked it down to this command and so I'm
+" disabling it to see if I even notice what it does (it was the lowercase p
+" line specifically)
+"nnoremap <esc>p p'[v' ]=
+"nnoremap <esc>P P'[v' ]=
 
 " map ctrl-p to paste after the current line and match indent
-" this makes p paste after cursor, P paste before current line, and ctrl-p
+" this makes P paste after cursor, p paste before current line, and ctrl-p
 " paste after current line, all should match current indent
-map  <C-p> :pu<CR>`[v`]==<CR>
+map <C-p> :pu<CR>`[v`]==<CR>
 
 " http://superuser.com/questions/321547/how-do-i-replace-paste-yanked-text-in-vim-without-yanking-the-deleted-lines
 " delete without yanking
@@ -223,12 +228,12 @@ vnoremap <leader>p "_dP
 " me the most
 " https://unix.stackexchange.com/a/390905/118750
 " search: vim replace highlighted text with copied text and put pasted text back into main register
-"vnoremap p p:let @"=@0 <CR>
 vnoremap p p:let @*=@0<CR>
 
 " this maps the "* register to the unnamed register so you can copy/paste between instances
 " http://superuser.com/a/296308
 set clipboard+=unnamed
+
 "##############################################################################
 
 " http://vim.wikia.com/wiki/VimTip1066
@@ -304,50 +309,10 @@ autocmd BufNew * if winnr('$') == 1 | tabmove | endif
 
 "##############################################################################
 
-"cnoreabbrev <expr> tabnew getcmdtype() == ":" && getcmdline() == "tabnew" ? "tab drop" : "tabnew" 
 
 " automatically open a file in readonly mode when swap exists
 " http://apple.stackexchange.com/questions/53732/
-"autocmd SwapExists * :let v:swapchoice='q'
-autocmd SwapExists * call IgnoreSwapDialog()
-
-function! IgnoreSwapDialog()
-  "echom expand('%:p') 
-  :let v:swapchoice='o'
-  " TODO -- 5-18-2016 - I tried and tried to figure out a way to close the tab after
-  " using 'q' to quit on the new tab, but I couldn't figure out any way to do
-  " it :(
-  "echom "buffer number ".bufnr('')
-  ":tabclose tabpagenr()
-  ":tabclose
-  "tabpagenr()
-  "silent exe 'bwipeout ' . bufnr('')
-
-
-
-
-"  echom expand('%') 
-"  echom tabpagenr('$')
-"  for t in range(1, tabpagenr('$'))
-"    echo "start tab list"
-"    for b in tabpagebuflist(t)
-"      echom "bufname ".bufname(b)
-"      if !buflisted(b)
-"        echom "quitting the buffer"
-"        :q
-"        "echom getbufvar(b, '&filetype')
-""        if getbufvar(b, '&filetype') == "netrw"
-""          silent exe 'bwipeout ' . b
-""          "silent exe 'Rexplore'
-""        endif
-"      endif
-"    endfor
-"    echo "stop tab list"
-"  endfor
-"  echom "done with buffer iteration"
-endfunction
-
-
+autocmd SwapExists * :let v:swapchoice='o'
 
 
 "##############################################################################
@@ -458,13 +423,6 @@ function! LoadSnippetsInBuffer()
   endif
 endfunction
 command! Snippets exec LoadSnippetsInBuffer()
-
-
-"##############################################################################
-" configure Rainbow
-" https://github.com/luochen1990/rainbow
-"##############################################################################
-let g:rainbow_active = 1
 
 
 "##############################################################################
