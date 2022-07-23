@@ -53,6 +53,7 @@ hi link pythonFormatStrTemplate Special
 hi link NonReservedKeyword Special
 hi link pythonDocBlock Comment
 hi link pythonBuiltinObj Structure
+hi link PythonClassVar NonReservedKeyword
 
 " these things annoy me, so remove their highlighting
 syn clear pythonError
