@@ -134,8 +134,10 @@ nmap <leader>parse :syn sync fromstart<CR>
 
 " helpful for syntax highlighting, show what highlight group is under cursor
 " once again, I can never remember what I map this to
-map  <leader>sg :echo synIDattr(synID(line("."), col("."), 1), "name")<CR>
-map  <leader>hl :echo synIDattr(synID(line("."), col("."), 1), "name")<CR>
+" Disabled these on 8-26-2022 because I actually display the highlight group
+" in the status line in gvimrc and so I never use these
+"map  <leader>sg :echo synIDattr(synID(line("."), col("."), 1), "name")<CR>
+"map  <leader>hl :echo synIDattr(synID(line("."), col("."), 1), "name")<CR>
 
 " Added 8-26-2022, I'm sick of dealing with wonky syntax, I think my computer is
 " fast enough that syntax highlighting should never be a problem
