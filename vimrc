@@ -118,10 +118,37 @@ set foldlevelstart=2
 " and insert the comment leader when hitting <CR>
 set fo-=t fo+=crl
 
+
+"##############################################################################
+" Syntax and Highlighting
+"##############################################################################
+
 " turn on syntax highlighting
 filetype plugin indent on " indent depends on filetype
 syntax on
 colorscheme jaymon_light
+
+" re-parse the file to fix syntax errors
+nmap <leader>rs :syn sync fromstart<CR>
+nmap <leader>parse :syn sync fromstart<CR>
+
+" helpful for syntax highlighting, show what highlight group is under cursor
+" once again, I can never remember what I map this to
+map  <leader>sg :echo synIDattr(synID(line("."), col("."), 1), "name")<CR>
+map  <leader>hl :echo synIDattr(synID(line("."), col("."), 1), "name")<CR>
+
+" Added 8-26-2022, I'm sick of dealing with wonky syntax, I think my computer is
+" fast enough that syntax highlighting should never be a problem
+" https://vim.fandom.com/wiki/Fix_syntax_highlighting
+" https://stackoverflow.com/a/43419018/5006
+"syn sync minlines=2000
+autocmd BufEnter * :syntax sync fromstart
+" ...To ensure syntax highlighting always works on large files, simply increase
+" the redraw time in your .vimrc file
+set redrawtime=10000
+
+"##############################################################################
+
 
 " backup stuff
 set history=1000
@@ -264,11 +291,6 @@ nnoremap <S-Right> <C-w>10>
 nnoremap <S-Left> <C-w>10<
 
 
-" re-parse the file to fix syntax errors
-nmap <leader>rs :syn sync fromstart<CR>
-nmap <leader>parse :syn sync fromstart<CR>
-
-
 "##############################################################################
 " configure tab buffers
 "##############################################################################
@@ -364,11 +386,6 @@ let g:ctrlp_prompt_mappings = {
     \ }
 "##############################################################################
 
-
-" helpful for syntax highlighting, show what highlight group is under cursor
-" once again, I can never remember what I map this to
-map  <leader>sg :echo synIDattr(synID(line("."), col("."), 1), "name")<CR>
-map  <leader>hl :echo synIDattr(synID(line("."), col("."), 1), "name")<CR>
 
 " map omnicompletion to PSPad's ctrl-space
 " http://stackoverflow.com/questions/7722177/how-do-i-map-ctrl-x-ctrl-o-to-ctrl-space-in-terminal-vim
