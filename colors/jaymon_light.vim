@@ -57,9 +57,9 @@ if exists('+colorcolumn')
     " tw is textwidth and controls the wrap width you would like to use, it's
     " zero when you don't have a text width set
     if &tw == 0
-        set colorcolumn=80,121
+        set colorcolumn=80,120
     else
-        set colorcolumn=&tw,&tw+41
+        set colorcolumn=&tw,&tw+40
     endif
     "highlight ColorColumn ctermbg=lightgrey guibg=#ECF7FF
     highlight ColorColumn ctermbg=None guibg=#ECF7FF
@@ -77,7 +77,7 @@ endif
 "hi Folded		
 "hi FoldColumn	
 "hi IncSearch	
-hi LineNr guifg=#A0A0A0 guibg=#ECF7FF
+hi LineNr guifg=#bcbcbc guibg=#ECF7FF
 "hi ModeMsg		
 "hi MoreMsg		
 "hi NonText		
@@ -132,8 +132,9 @@ syn clear Error
 " http://stackoverflow.com/questions/8309815/vim-conceal-with-more-than-one-character
 hi conceal ctermfg=DarkBlue ctermbg=NONE guifg=#D4CED4 guibg=NONE
 " for highlighting chars like newline and tab
-highlight NonText guifg=#D4CED4
-highlight SpecialKey guifg=#D4CED4
+highlight NonText guifg=#b9e2ff
+highlight SpecialKey guifg=#b9e2ff
+
 hi NonReservedKeyword guifg=black ctermfg=black cterm=bold gui=bold
 
 " python specific highlighting

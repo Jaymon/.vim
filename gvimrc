@@ -80,36 +80,21 @@ endfunction
 autocmd VimEnter * if g:screen_size_restore == 1 | call ScreenRestore() | endif
 autocmd VimLeavePre * if g:screen_size_restore == 1 | call ScreenSave() | endif
 
-"set columns=160 lines=65
-" we do our best to set cols to half the width and lines to about 2/3 height
-" http://vim.1045645.n5.nabble.com/Setting-width-to-half-screen-size-td1172185.html
-" TODO: make work in macvim
-" autocmd GUIEnter * let &columns = 9999 | let &columns = &columns/3 + &columns/4
-" autocmd GUIEnter * let &lines = 999 | let &lines = &lines/2 + &lines/3
 
-if has("win32")
-  " http://www.utf8-chartable.de/unicode-utf8-table.pl?start=688
-  set listchars=tab:˻\ ,eol:˼,trail:˻,extends:˻,precedes:˻
-else
-  " http://www.utf8-chartable.de/unicode-utf8-table.pl?start=8192
-  "set listchars=tab:‧\ ,space:‧,eol:․,trail:‧,extends:‧,precedes:‧
-  set listchars=tab:‧\ ,eol:․,trail:‧,extends:‧,precedes:‧
-endif
+" http://www.utf8-chartable.de/unicode-utf8-table.pl?start=8192
+"set listchars=tab:‧\ ,space:‧,eol:․,trail:‧,extends:‧,precedes:‧
+set listchars=tab:‧\ ,leadmultispace:‧\ \ \ ,eol:․,trail:‧,extends:‧,precedes:‧
 set list
 
-" these 2 lines work to match space, but I don't like it since it messes with
-" highlight current line, I guess I just have to hope for space: support in
-" listchars, see https://groups.google.com/forum/?fromgroups=#!topic/vim_dev/dIQHjW1g92s
-" http://stackoverflow.com/questions/1675688/make-vim-show-all-white-spaces-as-a-character
-" set conceallevel=2 concealcursor=nv
-" autocmd BufWinEnter * syntax match NonText / / conceal cchar=˻
 
+"##############################################################################
 " set the status line
 " :help statusline
 " http://learnvimscriptthehardway.stevelosh.com/chapters/17.html
 " http://stackoverflow.com/questions/5375240/a-more-useful-statusline-in-vim
 " http://got-ravings.blogspot.com/2008/08/vim-pr0n-making-statuslines-that-own.html
 " http://vim.wikia.com/wiki/Writing_a_valid_statusline
+"##############################################################################
 
 " this function is used to figure out how much left side space buffering is
 " needed to position the start of the status line at the end of the line

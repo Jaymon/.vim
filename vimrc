@@ -65,7 +65,7 @@ set number
 " for normal numbering, something like 5 is appropriate to easily handle files
 " up to 99999 lines long, but for relative numbering, I think 2-3 is
 " sufficient
-set numberwidth=4 " Set line numbering to take up N spaces
+set numberwidth=5 " Set line numbering to take up N spaces
 set cursorline
 set scrolloff=3 " N lines above/below cursor when scrolling
 
