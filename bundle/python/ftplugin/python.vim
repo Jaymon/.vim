@@ -13,9 +13,9 @@ endif
 
 " config for python syntax highlighting plugin
 let python_highlight_all = 1
-let python_highlight_space_errors = 0
-let python_slow_sync = 1
-let python_version_2 = 0
+let python_space_error_highlight = 0
+"let python_slow_sync = 1
+"let python_version_2 = 0
 
 " From pymode https://github.com/klen/python-mode/blob/develop/after/ftplugin/python.vim
 let g:pymode = 1

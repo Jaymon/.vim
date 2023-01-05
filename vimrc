@@ -145,6 +145,9 @@ nmap <leader>parse :syn sync fromstart<CR>
 " https://stackoverflow.com/a/43419018/5006
 "syn sync minlines=2000
 autocmd BufEnter * :syntax sync fromstart
+" disabled 1-3-2023, these caused noticeable lag
+"autocmd Insertleave * :syntax sync minlines=200 maxlines=200
+"autocmd CursorMoved * :syntax sync minlines=100 maxlines=100
 " ...To ensure syntax highlighting always works on large files, simply increase
 " the redraw time in your .vimrc file
 set redrawtime=10000
