@@ -7,8 +7,6 @@
 " http://learnvimscriptthehardway.stevelosh.com/chapters/45.html
 " http://learnvimscriptthehardway.stevelosh.com/chapters/46.html
 
-"syn match pythonFormatStrTemplate	"{[a-zA-Z0-9_]*}" contained containedin=pythonString,pythonUniString,pythonRawString,pythonUniRawString
-
 " http://ssiaf.blogspot.com/2009/07/negative-lookbehind-in-vim.html
 syn match pythonMethod "\.[a-zA-Z0-9_]*(\@="
 syn keyword NonReservedKeyword self cls
@@ -43,28 +41,11 @@ syn keyword pythonMagicMethod __new__ __init__ __del__ __cmp__ __eq__ __ne__ __l
 hi link pythonOperator Statement
 
 
-"syn region pythonString start=+^#\@!\zs"""+ skip=+\\"+ end=+"""+ contains=pythonBytesEscape,pythonBytesEscapeError,pythonUniEscape,pythonUniEscapeError,pythonDocTest2,pythonSpaceError,@Spell
-"syn region pythonString start=+^#\@!\zs'''+ skip=+\\'+ end=+'''+ contains=pythonBytesEscape,pythonBytesEscapeError,pythonUniEscape,pythonUniEscapeError,pythonDocTest2,pythonSpaceError,@Spell
-
-
 " multi-line strings not assigned to a variable should be treated as comments
+" the \zs in the regex means start the matching right before the next match (so it
+" will highlight the starting triple quotes and ignore the matching whitespace)
 syn region pythonDocBlock start=+^\s*\zs'''+ skip=+\\'+ end=+'''+ contains=pythonDocTest,pythonSpaceError,@Spell,pythonTodo
 syn region pythonDocBlock start=+^\s*\zs"""+ skip=+\\"+ end=+"""+ contains=pythonDocTest,pythonSpaceError,@Spell,pythonTodo
-
-"syn region pythonString start=+'''+ skip=+\\'+ end=+'''+ contains=pythonBytesEscape,pythonBytesEscapeError,pythonUniEscape,pythonUniEscapeError,pythonDocTest,pythonSpaceError,@Spell skip=pythonComment
-"syn region pythonString start=+"""+ skip=+\\"+ end=+"""+ contains=pythonBytesEscape,pythonBytesEscapeError,pythonUniEscape,pythonUniEscapeError,pythonDocTest2,pythonSpaceError,@Spell
-
-"syn match pythonComment '#.*$' display contains=ALL
-"syn match pythonComment2 '^#.*$' display
-"hi link pythonComment2 Comment
-
-"syn clear pythonStrFormatting
-"syn clear pythonStrFormat
-"syn clear pythonStrInterpRegion
-"syn clear pythonRun
-"syn clear pythonCoding
-"syn clear pythonString
-
 
 hi link pythonMethod Function
 hi link pythonMagicMethod pythonMethod
@@ -74,22 +55,6 @@ hi link pythonDocBlock Comment
 hi link pythonBuiltinObj Structure
 hi link PythonClassVar NonReservedKeyword
 
-" these things annoy me, so remove their highlighting
-"syn clear pythonError
-"syn clear pythonSpaceError
-"syn clear pythonIndentError
-"syn clear pythonBytesError
-"syn clear pythonBytesEscapeError
-"syn clear pythonUniEscapeError
-"syn clear pythonUniRawEscapeError
-"syn clear pythonNumberError
-"syn clear pythonOctError
-"syn clear pythonHexError
-"syn clear pythonBinError
-"syn clear pythonStrTemplate
-"syn clear pythonClass
-
-
 " more hilighting of special comments I tend to use
 " http://stackoverflow.com/a/1819151/5006
 " http://learnvimscriptthehardway.stevelosh.com/chapters/46.html
@@ -97,10 +62,4 @@ syn keyword pythonTodo DEPRECATED WARNING NOTE WARN
 " allow ??? or !!! similar to XCode
 syn match pythonNote "[?!]\{3,\}" containedin=PythonComment,pythonDocBlock
 hi link pythonNote pythonTodo
-
-"syn keyword pythonStatement   await
-"syn match   pythonStatement   "\<async\s\+def\>" display
-"syn match   pythonStatement   "\<async\s\+with\>" display
-"syn match   pythonStatement   "\<async\s\+for\>" display
-"syn match   pythonStatement   "\<async\s\+with\>" display
 

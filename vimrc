@@ -93,7 +93,7 @@ set autoindent
 " unless specifically overridden
 set tabstop=4 " set tab character to N characters
 set softtabstop=4 " let backspace delete indent
-set expandtab " turn tabs into whitespace
+set expandtab " turn tabs into spaces
 set shiftwidth=4 " indent width for autoindent
 set shiftround " When shifting lines, round indentation to the nearest multiple of “shiftwidth.”
 set backspace=indent,eol,start
