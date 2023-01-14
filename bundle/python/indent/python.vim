@@ -1,8 +1,23 @@
-" Python indent file
-" Language:	    Python
-" Maintainer:	    Eric Mc Sween <em@tomcom.de>
-" Original Author:  David Bustos <bustos@caltech.edu> 
-" Last Change:      2004 Jun 07
+" Vim indent file
+" Language:         Python
+" Maintainer:	    Jay Marcyes <vim@marcyes.com>
+" Last Change:      2023 Jan 13
+" Credits:          David Bustos <bustos@caltech.edu>
+"                   Eric Mc Sween <em@tomcom.de>
+"                   Bram Moolenaar <Bram@vim.org>
+"
+" I originally got this file years ago and used it without modification, then
+" I started to modify it around 2021. Then towards the end of 2022 and early
+" 2023 I disabled it in an attempt to use Vim's builtin python indent script.
+" Turns out I didn't like it and so I'm back to using this old file but I'm
+" marking myself as the maintainer because I don't know what I've changed and
+" haven't touched anymore. I did move the parts that seemed useful from the
+" builtin vim indent found at:
+"
+"    /Applications/MacVim.app/Contents/Resources/vim/runtime/autoload/python.vim
+"
+" I tried to name my indentexpr python#GetIndent but it didn't work (1-13-2023)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Only load this indent file when no other was loaded.
 if exists("b:did_indent")
@@ -10,13 +25,16 @@ if exists("b:did_indent")
 endif
 let b:did_indent = 1
 
+
 setlocal expandtab
 setlocal nolisp
 setlocal autoindent
 setlocal indentexpr=GetPythonIndent(v:lnum)
-setlocal indentkeys=!^F,o,O,<:>,0),0],0},=elif,=except
+setlocal indentkeys+=<:>,=elif,=except
 
+let b:undo_indent = "setl ai< inde< indk< lisp<"
 let s:maxoff = 50
+
 
 " Find backwards the closest open parenthesis/bracket/brace.
 function! s:SearchParensPair()
@@ -25,8 +43,8 @@ function! s:SearchParensPair()
     
     " Skip strings and comments and don't look too far
     let skip = "line('.') < " . (line - s:maxoff) . " ? dummy :" .
-                \ 'synIDattr(synID(line("."), col("."), 0), "name") =~? ' .
-                \ '"string\\|comment"'
+        \ 'synIDattr(synIDtrans(synID(line("."), col("."), 0)), "name") =~? ' .
+        \ '"string\\|comment"'
 
     " Search for parentheses
     call cursor(line, col)
@@ -60,6 +78,7 @@ function! s:SearchParensPair()
     return parlnum
 endfunction
 
+
 " Find the start of a multi-line statement
 function! s:StatementStart(lnum)
     let lnum = a:lnum
@@ -77,6 +96,7 @@ function! s:StatementStart(lnum)
         endif
     endwhile
 endfunction
+
 
 " Find the block starter that matches the current line
 function! s:BlockStarter(lnum, block_start_re)
@@ -98,7 +118,8 @@ function! s:BlockStarter(lnum, block_start_re)
     endwhile
     return -1
 endfunction
-                
+
+
 function! GetPythonIndent(lnum)
 
     " First line has indent 0
@@ -194,3 +215,12 @@ function! GetPythonIndent(lnum)
     " In all other cases, line up with the start of the previous statement.
     return indent(sslnum)
 endfunction
+
+
+" Keep this for backward compatibility, new scripts should use python#GetIndent()
+" ripped from /Applications/MacVim.app/Contents/Resources/vim/runtime/indent/python.vim
+"function GetPythonIndent(lnum)
+"  return python#GetIndent(a:lnum)
+"endfunction
+
+

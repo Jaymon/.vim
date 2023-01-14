@@ -11,6 +11,8 @@ let python_highlight_all = 1
 let python_space_error_highlight = 0
 "let python_slow_sync = 1
 "let python_version_2 = 0
+"let pyindent_disable_parentheses_indenting = 1
+"let g:pyindent_disable_parentheses_indenting = 1
 
 " From pymode https://github.com/klen/python-mode/blob/develop/after/ftplugin/python.vim
 let g:pymode = 1

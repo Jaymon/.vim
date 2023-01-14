@@ -105,6 +105,21 @@ function! LineNumberBuffer()
   return l:line_number_len > &numberwidth ? l:line_number_len + 1 : &numberwidth + 1
 endfunction
 
+function! SyntaxInfo()
+  " https://stackoverflow.com/a/36993989
+  let l:s = synID(line('.'),col('.'),1)
+  let l:syntax_name = synIDattr(s, 'name')
+  let l:syntax_group = synIDattr(synIDtrans(s), 'name')
+  if len(l:syntax_group) > 0
+    let l:syntax_info = l:syntax_name . ' (' . l:syntax_group . ')'
+  else
+    let l:syntax_info = l:syntax_name
+  endif
+  return l:syntax_info
+  "return synIDattr(s, 'name') . ' (' . synIDattr(synIDtrans(s), 'name') . ')' 
+
+endfunction
+
 hi User1 guibg=#ECF7FF guifg=#A0A0A0
 " hi User2 ctermbg=red   ctermfg=blue  guibg=red   guifg=blue
 set laststatus=2
@@ -124,9 +139,10 @@ set statusline+=%{&fileformat}]              " file format
 set statusline+=%=                           " right align
 "set statusline+=%-2.10{v:register}
 set statusline+=%{v:register}\ 
-set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\  " highlight
+"set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\  " highlight
+set statusline+=%{SyntaxInfo()}
 " set statusline+=%b,0x%-8B\                   " current char
 " set statusline+=%-14.(%l,%c%V%)\ %<%P        " offset
 "set statusline+=%l/%L\   "cursor line/total lines
-set statusline+=%15.15(%c\ %l/%L%)\   "cursor line/total lines
+set statusline+=%15.15(%c\ %l/%L%)\   "cursor_column current_line/total_lines
 

@@ -4,6 +4,18 @@ This is my preferred python environment for Vim. I've taken what I think are the
 
 You can customize values for startup in the `bundle/python/ftplugin/python.vim` file. For example, that's where you would set whether you wanted space errors to be highlighted.
 
+You can find the Syntax file at:
+
+```
+/Applications/MacVim.app/Contents/Resources/vim/runtime/syntax/python.vim
+```
+
+And the indent file at:
+
+```
+/Applications/MacVim.app/Contents/Resources/vim/runtime/indent/python.vim
+```
+
 
 ## The Good parts
 
@@ -43,6 +55,10 @@ Use Pathogen, and then run these (if you want it to be a submodule):
     $ cd path/to/.vim
     $ git submodule add -b master <ADD GITHUB CLONE> bundle/python
 
+## Links
+
+* https://github.com/sheerun/vim-polyglot - bundle that has syntax and indent for a bunch of languages. I checked out the python and it was using outdated stuff, so this doesn't inspire me to use it. Good place to start when I'm looking to highlight a new language though.
+* https://github.com/Vimjas/vim-python-pep8-indent - A more opinionated vim indent script, but I'm not sure I like the author's opinions.
 
 
 ## Dead
