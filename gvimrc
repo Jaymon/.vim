@@ -87,14 +87,14 @@ set listchars=tab:‧\ ,leadmultispace:‧\ \ \ ,eol:․,trail:‧,extends:‧,p
 set list
 
 
-"##############################################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " set the status line
 " :help statusline
 " http://learnvimscriptthehardway.stevelosh.com/chapters/17.html
 " http://stackoverflow.com/questions/5375240/a-more-useful-statusline-in-vim
 " http://got-ravings.blogspot.com/2008/08/vim-pr0n-making-statuslines-that-own.html
 " http://vim.wikia.com/wiki/Writing_a_valid_statusline
-"##############################################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " this function is used to figure out how much left side space buffering is
 " needed to position the start of the status line at the end of the line
@@ -105,6 +105,7 @@ function! LineNumberBuffer()
   return l:line_number_len > &numberwidth ? l:line_number_len + 1 : &numberwidth + 1
 endfunction
 
+" Get a string of the syntax rule and any linked syntax rule
 function! SyntaxInfo()
   " https://stackoverflow.com/a/36993989
   let l:s = synID(line('.'),col('.'),1)
@@ -116,18 +117,13 @@ function! SyntaxInfo()
     let l:syntax_info = l:syntax_name
   endif
   return l:syntax_info
-  "return synIDattr(s, 'name') . ' (' . synIDattr(synIDtrans(s), 'name') . ')' 
 
 endfunction
 
 hi User1 guibg=#ECF7FF guifg=#A0A0A0
-" hi User2 ctermbg=red   ctermfg=blue  guibg=red   guifg=blue
 set laststatus=2
 set statusline=   " clear the statusline for when vimrc is reloaded
 set statusline+=%1* " switch to User1 highlight
-"set statusline+=\ \ \ \  " 4 spaces, matches up with line number width TODO: make this automatic
-"set statusline+=%{repeat('\ ',&numberwidth)}
-"set statusline+=%{repeat('\ ',max([len(line('$')),&numberwidth]))}
 set statusline+=%{repeat('\ ',LineNumberBuffer())}
 "set statusline+=%f\                          " file name
 set statusline+=[%n]\ %.80F\                  " buffer number and file (max 80 chars of path)
@@ -139,10 +135,6 @@ set statusline+=%{&fileformat}]              " file format
 set statusline+=%=                           " right align
 "set statusline+=%-2.10{v:register}
 set statusline+=%{v:register}\ 
-"set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\  " highlight
 set statusline+=%{SyntaxInfo()}
-" set statusline+=%b,0x%-8B\                   " current char
-" set statusline+=%-14.(%l,%c%V%)\ %<%P        " offset
-"set statusline+=%l/%L\   "cursor line/total lines
 set statusline+=%15.15(%c\ %l/%L%)\   "cursor_column current_line/total_lines
 

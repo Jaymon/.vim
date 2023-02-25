@@ -40,7 +40,7 @@ let s:maxoff = 50
 function! s:SearchParensPair()
     let line = line('.')
     let col = col('.')
-    
+
     " Skip strings and comments and don't look too far
     let skip = "line('.') < " . (line - s:maxoff) . " ? dummy :" .
         \ 'synIDattr(synIDtrans(synID(line("."), col("."), 0)), "name") =~? ' .
@@ -126,7 +126,7 @@ function! GetPythonIndent(lnum)
     if a:lnum == 1
         return 0
     endif
-    
+
     " If we can find an open parenthesis/bracket/brace, line up with it.
     call cursor(a:lnum, 1)
     let parlnum = s:SearchParensPair()
@@ -147,7 +147,7 @@ function! GetPythonIndent(lnum)
             endif
         endif
     endif
-    
+
     " Examine this line
     let thisline = getline(a:lnum)
     let thisindent = indent(a:lnum)
@@ -172,17 +172,17 @@ function! GetPythonIndent(lnum)
             return -1
         endif
     endif
-    
+
     " Examine previous line
     let plnum = a:lnum - 1
     let pline = getline(plnum)
     let sslnum = s:StatementStart(plnum)
-    
+
     " If the previous line is blank, keep the same indentation
     if pline =~ '^\s*$'
         return -1
     endif
-    
+
     " If this line is explicitly joined, try to find an indentation that looks
     " good. 
     if pline =~ '\\$'
@@ -194,7 +194,7 @@ function! GetPythonIndent(lnum)
             return indent(sslnum) + &sw * 2
         endif
     endif
-    
+
     " If the previous line ended with a colon, indent relative to
     " statement start.
     if pline =~ ':\s*$'
@@ -215,12 +215,4 @@ function! GetPythonIndent(lnum)
     " In all other cases, line up with the start of the previous statement.
     return indent(sslnum)
 endfunction
-
-
-" Keep this for backward compatibility, new scripts should use python#GetIndent()
-" ripped from /Applications/MacVim.app/Contents/Resources/vim/runtime/indent/python.vim
-"function GetPythonIndent(lnum)
-"  return python#GetIndent(a:lnum)
-"endfunction
-
 

@@ -3,16 +3,12 @@
 " comment. I got this from ftplugin/vim.vim in vim proper
 setlocal fo-=t fo+=crl
 if &tw == 0
-  setlocal tw=80
+  setlocal tw=90
 endif
 
 " config for python syntax highlighting plugin
 let python_highlight_all = 1
 let python_space_error_highlight = 0
-"let python_slow_sync = 1
-"let python_version_2 = 0
-"let pyindent_disable_parentheses_indenting = 1
-"let g:pyindent_disable_parentheses_indenting = 1
 
 " From pymode https://github.com/klen/python-mode/blob/develop/after/ftplugin/python.vim
 let g:pymode = 1
