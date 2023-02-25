@@ -69,14 +69,6 @@ set numberwidth=5 " Set line numbering to take up N spaces
 set cursorline
 set scrolloff=3 " N lines above/below cursor when scrolling
 
-" turn on go stuff if it is available
-" TODO -- move this into its own bundle
-if empty($GOROOT) && (!empty($GOPATH) || executable('go'))
-  let $GOROOT = fnamemodify(system('which go'), ':p:h:h')
-endif
-if !empty($GOROOT)
-  set rtp+=$GOROOT/misc/vim
-endif
 
 " Indent stuff
 " http://www.jonlee.ca/hacking-vim-the-ultimate-vimrc/

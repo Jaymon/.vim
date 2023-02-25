@@ -26,6 +26,8 @@ let g:pymode_rope_completion = 0
 " https://github.com/vim/vim/issues/1696
 " setlocal comments=s:\"\"\",m3:\ ,eb:\"\"\",b:#,fb:-
 
+" Ignore files matching these patterns when opening files based on a glob pattern.
+set wildignore+=.pyc
 
 " other values like this are mapped in after/ftplugin/python.vim but I don't
 " want to modify that file because it can be replaced, so I put them here
