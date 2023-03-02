@@ -2,7 +2,41 @@
 
 This is here for my convenience so I can easily keep my vim environment consistent across multiple machines.
 
-There are some original things though that might be useful for people, like the `syntax/php.vim` file that I think is easier to understand than the traditional php syntax file.
+
+-------------------------------------------------------------------------------
+
+## Install
+
+### In Mac or Linux
+
+1. Create `$HOME/.vim`
+
+2. cd into `$HOME/.vim`
+
+3. clone the repo
+
+    $ git clone --recursive [repo] .
+
+4. Run the install script
+
+    $ $HOME/.vim/install.sh
+
+
+### In Windows 
+
+1. Create `%HOMEPATH%\vimfiles`
+
+2. cd into `%HOMEPATH%\vimfiles`
+
+3. clone the repo
+
+    $ git clone [repo] .
+
+4. make a symlink for the `vimrc` and `gvimrc` files (you need an admin console cmd shell for this):
+
+    $ mklink %HOMEPATH%\\_vimrc %HOMEPATH%\\vimfiles\\vimrc
+    $ mklink %HOMEPATH%\\_gvimrc %HOMEPATH%\\vimfiles\\gvimrc
+
 
 -------------------------------------------------------------------------------
 
@@ -170,41 +204,6 @@ Disabled this again on 9-2-2019 because it totally borks php syntax highlighting
 search: vim applescript syntax
 
 Added 2019-08-20.
-
-
--------------------------------------------------------------------------------
-
-## Install
-
-### In Mac or Linux
-
-1. Create `$HOME/.vim`
-
-2. cd into `$HOME/.vim`
-
-3. clone the repo
-
-        git clone [repo] .
-
-4. Symlink `$HOME/.vim/vimrc` and `$HOME/.vim/gvimrc`
-
-        ln -s $HOME/.vim/vimrc $HOME/.vimrc
-        ln -s $HOME/.vim/gvimrc $HOME/.gvimrc
-
-### In Windows 
-
-1. Create `%HOMEPATH%\vimfiles`
-
-2. cd into `%HOMEPATH%\vimfiles`
-
-3. clone the repo
-
-        git clone [repo] .
-
-4. make a symlink for the `vimrc` and `gvimrc` files (you need an admin console cmd shell for this):
-
-        mklink %HOMEPATH%\\_vimrc %HOMEPATH%\\vimfiles\\vimrc
-        mklink %HOMEPATH%\\_gvimrc %HOMEPATH%\\vimfiles\\gvimrc
 
 
 -------------------------------------------------------------------------------
