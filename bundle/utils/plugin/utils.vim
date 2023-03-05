@@ -79,7 +79,7 @@ map <silent> <leader>b :call LaunchBrowser()<CR>:redraw!<CR>
 " to do it because Vim plugins are often inscrutable and I wasn't sure how to
 " approach the problem.
 "##############################################################################
-function! Min(a, b)
+function! s:Min(a, b)
   if a:a < a:b
     return a:a
   else
@@ -88,39 +88,115 @@ function! Min(a, b)
 endfunction
 
 
-" Goes through `lines` of the current file to decide the actual tabstop value
-" of the file. If the file has no indentation then returns soft_tab_stop
-function! InferTabstop(soft_tab_stop, lines=100)
-  let l:max_lines = Min(a:lines, line('$'))
+function! s:InferIndentation(lines=100)
+  let l:max_lines = s:Min(a:lines, line('$'))
   let l:file_indent = 0
+  let l:uses_tabs = 0
 
   for i in range(1, l:max_lines)
     let l:line_indent = indent(i)
     if l:line_indent > 0
-        if l:file_indent == 0
-            let l:file_indent = l:line_indent
+      if l:file_indent == 0
+        let l:file_indent = l:line_indent
 
-        else
-            let l:file_indent = Min(l:line_indent, l:file_indent)
+      else
+        let l:file_indent = s:Min(l:line_indent, l:file_indent)
 
-        endif
+      endif
 
-    endif
+      if getline(i) =~ '^\t'
+        let l:uses_tabs = 1
 
-    if l:file_indent == 0
-        let l:file_indent = a:soft_tab_stop
+      else
+        let l:uses_tabs = 0
+
+      endif
 
     endif
 
   endfor
 
-  return l:file_indent
+  if l:file_indent == 0
+    let l:file_indent = a:soft_tab_stop
+
+  endif
+
+  return [l:file_indent, l:uses_tabs]
 endfunction
 
 
+" Goes through `lines` of the current file to decide the actual tabstop value
+" of the file. If the file has no indentation then returns soft_tab_stop
+"function! InferTabstop(soft_tab_stop, lines=100)
+"  let l:max_lines = Min(a:lines, line('$'))
+"  let l:file_indent = 0
+"
+"  for i in range(1, l:max_lines)
+"    let l:line_indent = indent(i)
+"    if l:line_indent > 0
+"        if l:file_indent == 0
+"            let l:file_indent = l:line_indent
+"
+"        else
+"            let l:file_indent = Min(l:line_indent, l:file_indent)
+"
+"        endif
+"
+"    endif
+"
+"    if l:file_indent == 0
+"        let l:file_indent = a:soft_tab_stop
+"
+"    endif
+"
+"  endfor
+"
+"  return l:file_indent
+"endfunction
+
+
+function! s:OverrideIndentation()
+
+  let l:result = s:InferIndentation()
+  let l:file_indent = l:result[0]
+  let l:uses_tabs = l:result[1]
+
+  "echom l:file_indent
+  "echom l:uses_tabs
+
+  if l:file_indent != &tabstop
+    "echom "file indent does not equal tabstop"
+    execute "set tabstop=" . l:file_indent
+    execute "set softtabstop=" . &tabstop
+    execute "set shiftwidth=" . &tabstop
+
+  endif
+
+  if l:uses_tabs > 0
+    "echom "file uses tabs"
+    set noexpandtab
+    "execute "set expandtab=off"
+
+  endif
+
+endfunction
+
+
+augroup utils
+  autocmd!
+
+  " Run after all other ftplugins
+  autocmd FileType * nested call s:OverrideIndentation()
+augroup END
+
+
+"autocmd FileType * nested call s:OverrideIndentation()
+
+
+
 " auto-discover the tabstop value based on the actual indentation of the file
-execute "set tabstop=" . InferTabstop(&tabstop)
-execute "set softtabstop=" . &tabstop
-execute "set shiftwidth=" . &tabstop
+"execute "set tabstop=" . InferTabstop(&tabstop)
+"execute "set softtabstop=" . &tabstop
+"execute "set shiftwidth=" . &tabstop
 "##############################################################################
 
