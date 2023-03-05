@@ -65,3 +65,43 @@ endfunction
 map <silent> <leader>b :call LaunchBrowser()<CR>:redraw!<CR>
 "##############################################################################
 
+
+"##############################################################################
+" This will infer the indent of the file based on the first N lines of the
+" file, the idea is that it will check the indent of each of the first N lines
+" of the file and find the minimum tabstop count and then set tabstop to that
+"
+" I've wanted to do this for a long time but never bothered to figure out how
+" to do it because Vim plugins are often inscrutable and I wasn't sure how to
+" approach the problem.
+"##############################################################################
+function! Min(a, b)
+  if a:a < a:b
+    return a:a
+  else
+    return a:b
+  endif
+endfunction
+
+
+" If you set this to 2 then it will basically always return 2, which is less
+" than ideal
+function! InferIndent(soft_tab_stop)
+  let l:max_lines = Min(100, line('$'))
+  let l:file_indent = a:soft_tab_stop
+
+  for i in range(1, l:max_lines)
+    let l:line_indent = indent(i)
+    if l:line_indent > 0
+      let l:file_indent = Min(l:line_indent, l:file_indent)
+    endif
+  endfor
+
+  return l:file_indent
+endfunction
+
+
+execute "set tabstop=" . InferIndent(&tabstop)
+execute "set softtabstop=" . &tabstop
+execute "set shiftwidth=" . &tabstop
+

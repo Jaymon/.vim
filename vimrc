@@ -80,13 +80,16 @@ set autoindent
 " in specific filetypes, not generally
 " http://vim.wikia.com/wiki/Indenting_source_code
 "set smartindent
-" until 1-23-2018 I had all these set at 2 but python has made anything less
-" than 4 look strange, so I'm switching this to match python for all filetypes
-" unless specifically overridden
-set tabstop=4 " set tab character to N characters
-set softtabstop=4 " let backspace delete indent
+"execute 'set tabstop=' . InferIndent(2)
+
+"set tabstop=&InferIndent(2) " set tab character to N characters
+set tabstop=2 " set tab character to N characters
+"set tabstop=InferIndent(2) " set tab character to N characters
+"set softtabstop=&tabstop " let backspace delete indent
+execute "set softtabstop=" . &tabstop
 set expandtab " turn tabs into spaces
-set shiftwidth=4 " indent width for autoindent
+"set shiftwidth=&tabstop " indent width for autoindent
+execute "set shiftwidth=" . &tabstop
 set shiftround " When shifting lines, round indentation to the nearest multiple of “shiftwidth.”
 set backspace=indent,eol,start
 " configure filetype specific stuff in ftplugin/filetype.vim
