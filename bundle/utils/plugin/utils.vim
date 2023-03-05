@@ -24,6 +24,7 @@ function! VisualSearch(direction) range
   let @" = l:saved_reg
 endfunction
 
+
 vnoremap <silent> * :call VisualSearch('/')<CR>:set hlsearch<CR>
 vnoremap <silent> # :call VisualSearch('?')<CR>:set hlsearch<CR>
 "##############################################################################
@@ -62,11 +63,14 @@ function! LaunchBrowser()
   endif
 endfunction
 
+
 map <silent> <leader>b :call LaunchBrowser()<CR>:redraw!<CR>
 "##############################################################################
 
 
 "##############################################################################
+" auto-discover the tabstop value based on the actual indentation of the file
+"
 " This will infer the indent of the file based on the first N lines of the
 " file, the idea is that it will check the indent of each of the first N lines
 " of the file and find the minimum tabstop count and then set tabstop to that
@@ -84,24 +88,39 @@ function! Min(a, b)
 endfunction
 
 
-" If you set this to 2 then it will basically always return 2, which is less
-" than ideal
-function! InferIndent(soft_tab_stop)
-  let l:max_lines = Min(100, line('$'))
-  let l:file_indent = a:soft_tab_stop
+" Goes through `lines` of the current file to decide the actual tabstop value
+" of the file. If the file has no indentation then returns soft_tab_stop
+function! InferTabstop(soft_tab_stop, lines=100)
+  let l:max_lines = Min(a:lines, line('$'))
+  let l:file_indent = 0
 
   for i in range(1, l:max_lines)
     let l:line_indent = indent(i)
     if l:line_indent > 0
-      let l:file_indent = Min(l:line_indent, l:file_indent)
+        if l:file_indent == 0
+            let l:file_indent = l:line_indent
+
+        else
+            let l:file_indent = Min(l:line_indent, l:file_indent)
+
+        endif
+
     endif
+
+    if l:file_indent == 0
+        let l:file_indent = a:soft_tab_stop
+
+    endif
+
   endfor
 
   return l:file_indent
 endfunction
 
 
-execute "set tabstop=" . InferIndent(&tabstop)
+" auto-discover the tabstop value based on the actual indentation of the file
+execute "set tabstop=" . InferTabstop(&tabstop)
 execute "set softtabstop=" . &tabstop
 execute "set shiftwidth=" . &tabstop
+"##############################################################################
 

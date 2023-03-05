@@ -70,35 +70,28 @@ set cursorline
 set scrolloff=3 " N lines above/below cursor when scrolling
 
 
-" Indent stuff
-" http://www.jonlee.ca/hacking-vim-the-ultimate-vimrc/
-" http://www.cs.swarthmore.edu/help/vim/indenting.html
-set autoindent
-" Generally, 'smartindent' or 'cindent' should only be set manually if you're
-" not satisfied with how file type based indentation works. 
-" looks like smartindent was deprecated for cindent, and should be activated
-" in specific filetypes, not generally
-" http://vim.wikia.com/wiki/Indenting_source_code
-"set smartindent
-"execute 'set tabstop=' . InferIndent(2)
-
-"set tabstop=&InferIndent(2) " set tab character to N characters
-set tabstop=2 " set tab character to N characters
-"set tabstop=InferIndent(2) " set tab character to N characters
-"set softtabstop=&tabstop " let backspace delete indent
-execute "set softtabstop=" . &tabstop
-set expandtab " turn tabs into spaces
-"set shiftwidth=&tabstop " indent width for autoindent
-execute "set shiftwidth=" . &tabstop
-set shiftround " When shifting lines, round indentation to the nearest multiple of “shiftwidth.”
-set backspace=indent,eol,start
-" configure filetype specific stuff in ftplugin/filetype.vim
-
 " searching
 set incsearch
 set hlsearch
 set ignorecase
 set smartcase
+
+
+"##############################################################################
+" Indentation stuff
+"##############################################################################
+" http://www.jonlee.ca/hacking-vim-the-ultimate-vimrc/
+" http://www.cs.swarthmore.edu/help/vim/indenting.html
+set autoindent
+set tabstop=2 " set tab character to N characters
+"set softtabstop=4 " let backspace delete indent
+execute "set softtabstop=" . &tabstop
+set expandtab " turn tabs into spaces
+"set shiftwidth=4 " indent width for autoindent
+execute "set shiftwidth=" . &tabstop
+set shiftround " When shifting lines, round indentation to the nearest multiple of “shiftwidth.”
+set backspace=indent,eol,start
+" configure filetype specific stuff in ftplugin/filetype.vim
 
 " Enable indent folding
 " http://vimdoc.sourceforge.net/htmldoc/options.html#%27foldclose%27
@@ -127,13 +120,6 @@ colorscheme jaymon_light
 nmap <leader>rs :syn sync fromstart<CR>
 nmap <leader>parse :syn sync fromstart<CR>
 
-" helpful for syntax highlighting, show what highlight group is under cursor
-" once again, I can never remember what I map this to
-" Disabled these on 8-26-2022 because I actually display the highlight group
-" in the status line in gvimrc and so I never use these
-"map  <leader>sg :echo synIDattr(synID(line("."), col("."), 1), "name")<CR>
-"map  <leader>hl :echo synIDattr(synID(line("."), col("."), 1), "name")<CR>
-
 " Added 8-26-2022, I'm sick of dealing with wonky syntax, I think my computer is
 " fast enough that syntax highlighting should never be a problem
 " https://vim.fandom.com/wiki/Fix_syntax_highlighting
@@ -147,10 +133,10 @@ autocmd BufEnter * :syntax sync fromstart
 " the redraw time in your .vimrc file
 set redrawtime=10000
 
+
 "##############################################################################
-
-
-" backup stuff
+" Backup and saving stuff
+"##############################################################################
 set history=1000
 set backupcopy=yes
 set backup
@@ -211,6 +197,7 @@ if !exists(":Vimreload")
   endfunction
   command! Vimreload exec ReloadVimrc()
 endif
+
 
 "##############################################################################
 " Handle copy/paste better
