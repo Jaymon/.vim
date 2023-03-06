@@ -15,16 +15,24 @@ This is here for my convenience so I can easily keep my vim environment consiste
 
 3. clone the repo
 
-    ```bash
+    ```
     $ git clone --recursive [repo] .
     ```
 
 4. Run the install script
 
-    ```bash
+    ```
     $ $HOME/.vim/install.sh
     ```
 
+### Re-initialize Submodules
+
+I moved (March 2023) the submodules from `bundle` to `pack/third-party/start` and this is how I re-initialized the modules:
+
+```
+$ git submodule init
+$ git submodule update
+```
 
 -------------------------------------------------------------------------------
 

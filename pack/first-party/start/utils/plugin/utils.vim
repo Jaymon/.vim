@@ -78,6 +78,8 @@ map <silent> <leader>b :call LaunchBrowser()<CR>:redraw!<CR>
 " I've wanted to do this for a long time but never bothered to figure out how
 " to do it because Vim plugins are often inscrutable and I wasn't sure how to
 " approach the problem.
+"
+" https://psy.swansea.ac.uk/staff/carter/vim/vim_indent.htm
 "##############################################################################
 function! s:Min(a, b)
   if a:a < a:b
