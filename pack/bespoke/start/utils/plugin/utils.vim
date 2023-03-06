@@ -119,11 +119,6 @@ function! s:InferIndentation(lines=100)
 
   endfor
 
-  if l:file_indent == 0
-    let l:file_indent = a:soft_tab_stop
-
-  endif
-
   return [l:file_indent, l:uses_tabs]
 endfunction
 
@@ -135,7 +130,7 @@ function! s:OverrideIndentation()
   let l:file_indent = l:result[0]
   let l:uses_tabs = l:result[1]
 
-  if l:file_indent != &tabstop
+  if l:file_indent > 0 && l:file_indent != &tabstop
     execute "set tabstop=" . l:file_indent
     execute "set softtabstop=" . &tabstop
     execute "set shiftwidth=" . &tabstop
