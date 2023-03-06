@@ -1,3 +1,4 @@
+# This file should have tabstop=2 and expandtab=on
 def foo():
   return "foo"
 

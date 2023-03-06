@@ -37,6 +37,8 @@ to update all the submodules:
 
 ### [Pathogen](https://github.com/tpope/vim-pathogen)
 
+Moved to `pack/third-party/opt` on 3-2023, I don't think this is needed anymore because I'm now using Vim's built-in package (see `:help package`) functionality now.
+
 I think pretty much every vim user on the planet uses this plugin.
 
 I set this up with:
@@ -74,8 +76,10 @@ I set this up with:
 
 ### [CtrlP](https://github.com/kien/ctrlp.vim)
 
+Moved to `pack/third-party/opt` on 3-5-2023, I don't think I've ever used this plugin, this just isn't how I open files. If I don't miss it then I will probably remove it.
 
-found via: http://www.bestofvim.com/plugin/ctrl-p/
+
+found [via](http://www.bestofvim.com/plugin/ctrl-p/)
 
 configured to always open in a tab using [this](https://github.com/kien/ctrlp.vim/issues/160)
 
@@ -97,6 +101,8 @@ I set this up with:
 
 ### [Surround](https://github.com/tpope/vim-surround)
 
+While moving this into the `pack` directory I was going to just disable it, but I've decided to give it one final final chance. I always forget this exists.
+
 trying this again. I've had this bundle for years and never remember the shortcut to run it, but I decided to keep it one more time.
 
 I'm pretty sure this uses `s` as the command to "surround".
@@ -107,6 +113,12 @@ I set this up with:
 
 
 ### [markdown](https://github.com/tpope/vim-markdown)
+
+From the repo:
+
+> This is the development version of Vim's included syntax highlighting and filetype plugins for Markdown. Generally you don't need to install these if you are running a recent version of Vim.
+
+So I removed this on 3-5-2023
 
 I set this up with:
 
@@ -124,6 +136,8 @@ Internal plugin that contains misc functions and commands that I love, compiled 
 
 
 ### [Pydiction](https://github.com/rkulla/pydiction)
+
+Moved to `pack/third-party/opt` on 3-5-2023. I just don't use this much.
 
 Setup:
 
@@ -146,6 +160,8 @@ When in *insert* mode you can do `ctrl-R tab` (`<C-R><Tab>`) to get all the matc
 
 
 ### [Applescript syntax](https://www.vim.org/scripts/script.php?script_id=1736)
+
+Moved to `pack/third-party/opt` on 3-5-2023. I don't think I'll miss it so I will most likely delete it in the future.
 
     $ git submodule add -b master https://github.com/vim-scripts/applescript.vim bundle/applescript
 
