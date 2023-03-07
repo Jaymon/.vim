@@ -279,12 +279,12 @@ nnoremap <S-Right> <C-w>10>
 nnoremap <S-Left> <C-w>10<
 
 
-# maps jumping 10 lines/characters ahead to ALT (OPTION) + movement key, so
-# <A-j> would jump 10 lines down. Sadly, <A-j> and <M-j> didn't work for me,
-# but I was able to run `sed -n l` and type ALT+j and get the value it
-# emitted, as described here: 
-#   * https://vi.stackexchange.com/a/18080
-#   * https://stackoverflow.com/a/49053064
+" maps jumping 10 lines/characters ahead to ALT (OPTION) + movement key, so
+" <A-j> would jump 10 lines down. Sadly, <A-j> and <M-j> didn't work for me,
+" but I was able to run `sed -n l` and type ALT+j and get the value it
+" emitted, as described here: 
+"   * https://vi.stackexchange.com/a/18080
+"   * https://stackoverflow.com/a/49053064
 nnoremap ∆ 10j
 nnoremap ˚ 10k
 nnoremap ˙ 10h
