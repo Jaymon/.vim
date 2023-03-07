@@ -279,6 +279,18 @@ nnoremap <S-Right> <C-w>10>
 nnoremap <S-Left> <C-w>10<
 
 
+# maps jumping 10 lines/characters ahead to ALT (OPTION) + movement key, so
+# <A-j> would jump 10 lines down. Sadly, <A-j> and <M-j> didn't work for me,
+# but I was able to run `sed -n l` and type ALT+j and get the value it
+# emitted, as described here: 
+#   * https://vi.stackexchange.com/a/18080
+#   * https://stackoverflow.com/a/49053064
+nnoremap ∆ 10j
+nnoremap ˚ 10k
+nnoremap ˙ 10h
+nnoremap ¬ 10l
+
+
 "##############################################################################
 " configure tab buffers
 "##############################################################################
@@ -324,57 +336,6 @@ autocmd BufNew * if winnr('$') == 1 | tabmove | endif
 " http://apple.stackexchange.com/questions/53732/
 autocmd SwapExists * :let v:swapchoice='o'
 
-"
-""##############################################################################
-"" configure NERDTree
-"" https://github.com/scrooloose/nerdtree
-""##############################################################################
-""autocmd bufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-""nnoremap RN :NERDTreeTabsToggle<CR>
-"nnoremap RN :NERDTreeMirrorToggle<CR>
-"let NERDTreeIgnore = ['\.pyc$[[file]]', '__pycache__$[[dir]]']
-"let NERDTreeQuitOnOpen = 1
-"let g:nerdtree_tabs_open_on_gui_startup = 0
-"let g:nerdtree_tabs_open_on_new_tab = 0
-""#let g:nerdtree_tabs_autoclose = 1
-"" default is 31...
-"let NERDTreeWinSize = 40
-"
-"" https://stackoverflow.com/a/5057406/5006
-"" you can toggle this behavior with shift+i
-"let NERDTreeShowHidden=1
-"
-""##############################################################################
-"
-"
-""##############################################################################
-"" configure Tagbar
-"" http://majutsushi.github.com/tagbar/
-""##############################################################################
-"nnoremap RR :TagbarToggle<CR>
-"let g:tagbar_left = 1
-"let g:tagbar_autofocus = 1
-"let g:tagbar_autoclose = 1
-"let g:tagbar_sort = 1
-"let g:tagbar_expand = 0
-"let g:tagbar_foldlevel = 0
-"let g:tagbar_autoshowtag = 1
-""##############################################################################
-"
-"
-""##############################################################################
-"" configure ctrlp
-"" http://kien.github.io/ctrlp.vim/
-""##############################################################################
-"let g:ctrlp_map = '<leader>r'
-"" https://github.com/kien/ctrlp.vim/issues/119
-"" https://github.com/kien/ctrlp.vim/issues/160
-"let g:ctrlp_prompt_mappings = {
-"    \ 'AcceptSelection("e")': ['<c-t>'],
-"    \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
-"    \ }
-""##############################################################################
-"
 
 " display what's changed since last save (uses diff command, so not cross-platform)
 " http://vim.wikia.com/wiki/Diff_current_buffer_and_the_original_file
@@ -395,35 +356,6 @@ map <leader>diff2 :DiffOrig
 command! CDC lcd %:p:h
 " to get NerdTree to change to the directory also, open the NT buffer and type
 " CD
-
-"
-""##############################################################################
-"" configure pydiction
-"" https://github.com/rkulla/pydiction
-""##############################################################################
-"let g:pydiction_location = $VIMHOME . '/bundle/pydiction/complete-dict'
-"
-"
-""##############################################################################
-"" configure snip-mate
-"" https://github.com/garbas/vim-snipmate
-""##############################################################################
-"" Remap snipmate's trigger key from tab to <C-J>
-"" cntl-tab was hard to do with my hands
-""imap <C-Tab> <Plug>snipMateNextOrTrigger
-""smap <C-Tab> <Plug>snipMateNextOrTrigger
-"imap <C-J> <Plug>snipMateNextOrTrigger
-"smap <C-J> <Plug>snipMateNextOrTrigger
-"
-"" This function will load the context.snippet file located in VIMHOME/snippets
-"function! LoadSnippetsInBuffer()
-"  let l:path = $VIMHOME . '/snippets/' . &filetype . '.snippets'
-"  if filereadable(l:path)
-"    silent exe 'sp ' . l:path
-"  endif
-"endfunction
-"command! Snippets exec LoadSnippetsInBuffer()
-"
 
 "##############################################################################
 " session management
