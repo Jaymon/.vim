@@ -106,7 +106,11 @@ hi Constant guifg=#000000 cterm=bold gui=bold
 " python: method names, .func()
 " hi Identifier	guifg=#000080 
 hi Identifier guifg=#0000FF ctermfg=blue
-hi Operator	guifg=#000080 ctermfg=darkblue
+
+" python: for and or in
+"hi Operator	guifg=#000080 ctermfg=darkblue
+hi Operator	guifg=#FF8000 cterm=bold gui=bold
+
 " python: if, else, return, def
 hi Statement guifg=#FF8000 
 "hi Statement guifg=#FF8000 cterm=bold gui=bold  
@@ -116,7 +120,10 @@ hi PreProc guifg=#FF8000
 " hi Type guifg=#0000FF
 hi Type guifg=#000000 cterm=bold gui=bold  
 hi Special guifg=#A0A0A0
-hi Number guifg=#000080 ctermfg=darkblue
+
+"hi Number guifg=#000080 ctermfg=darkblue
+hi Number guifg=#267f99
+
 hi Float guifg=#000080 ctermfg=darkblue
 hi String guifg=#FF0000 ctermfg=red
 "hi Underlined	
@@ -144,6 +151,7 @@ hi pythonBytesEscape guifg=#800000 ctermfg=magenta
 hi pythonStrFormatting guifg=#CC0000 ctermfg=magenta
 hi pythonStrFormat guifg=#CC0000 ctermfg=magenta
 hi pythonMagicMethod guifg=#0000FF ctermfg=blue cterm=bold gui=bold
+hi pythonMathOperator guifg=#AF00DB
 
 
 " markdown specific highlighting

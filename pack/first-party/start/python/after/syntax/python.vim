@@ -69,10 +69,17 @@ syn region pythonFormatString matchgroup=pythonQuotes start=+[rR]\=[fF]\z(['"]\)
 " 1-26-2023 - even crazier it doesn't support byte strings
 syn region pythonByteString matchgroup=pythonQuotes start=+[bB]\z(['"]\)+ end="\z1" skip="\\\\\|\\\z1"
 
-
 " 1-6-2023 - matches {...} inside a string (as long as the first { isn't preceded by {
 " update 1-28-2023 to remove the \zs in favor of a negative look-behind
 syn match pythonFormatStrTemplate "{\@<!{[^}{]*}" contained containedin=pythonString,pythonRawString,pythonFormatString
+
+
+" 3-17-2023 - highlight operators
+"syn keyword pythonMathOperator + - * / % = > < ! contains=ALLBUT,String,Comment
+"setlocal iskeyword+=1-250
+"syn keyword pythonMathOperator + += - -= * *= / /= // //= % %= = == > >= < <= ! !=
+syn match pythonMathOperator "[+=*/%><!^|\-]\+"
+syn match pythonStatementOperator "[:]"
 
 
 " more hilighting of special comments I tend to use
@@ -84,7 +91,9 @@ syn match pythonNote "[?!]\{3,\}" containedin=PythonComment,pythonDocBlock
 
 
 " I like these (eg, and in is not or) better as the same color as for loops and stuff
-hi link pythonOperator Statement
+"hi link pythonOperator Statement
+hi link pythonMathOperator Operator
+hi link pythonStatementOperator Operator
 
 hi link pythonMethod Function
 hi link pythonFunctionCall Function
