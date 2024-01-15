@@ -3,7 +3,7 @@
 " comment. I got this from ftplugin/vim.vim in vim proper
 setlocal fo-=t fo+=crl
 if &tw == 0
-  setlocal tw=83
+    setlocal tw=80
 endif
 
 " config for python syntax highlighting plugin

@@ -53,17 +53,26 @@ hi cursorLine guibg=#ECF7FF cterm=None term=None
 
 hi MatchParen guibg=#FFFF80 ctermbg=yellow
 
-if exists('+colorcolumn')
-    " tw is textwidth and controls the wrap width you would like to use, it's
-    " zero when you don't have a text width set
-    if &tw == 0
-        set colorcolumn=80,120
-    else
-        set colorcolumn=&tw,&tw+40
-    endif
-    "highlight ColorColumn ctermbg=lightgrey guibg=#ECF7FF
-    highlight ColorColumn ctermbg=None guibg=#ECF7FF
-endif
+hi ColorColumn ctermbg=None guibg=#ECF7FF
+
+hi User1 guibg=#ECF7FF guifg=#A0A0A0
+
+
+
+"if exists('+colorcolumn')
+"    " tw is textwidth and controls the wrap width you would like to use, it's
+"    " zero when you don't have a text width set.
+"    "
+"    " I'm pretty sure where this is located that &tw is always 0, this should
+"    " really be moved to an after script
+"    if &tw == 0
+"        set colorcolumn=81,121
+"    else
+"        set colorcolumn=&tw,&tw+40
+"    endif
+"    "highlight ColorColumn ctermbg=lightgrey guibg=#ECF7FF
+"    highlight ColorColumn ctermbg=None guibg=#ECF7FF
+"endif
 
 "hi Cursor		
 "hi CursorIM	

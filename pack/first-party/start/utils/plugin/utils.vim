@@ -7,7 +7,9 @@ let g:loaded_utils="v0.1"
 
 
 "##############################################################################
-" allows * and # to search current selection just like it searchs for current word under cursor
+" allows * and # to search current selection just like it searchs for current
+" word under cursor
+"
 " http://vimingwithbuttar.googlecode.com/hg/.vimrc
 "##############################################################################
 function! VisualSearch(direction) range
@@ -32,6 +34,7 @@ vnoremap <silent> # :call VisualSearch('?')<CR>:set hlsearch<CR>
 
 "##############################################################################
 " this will launch the default browser window with the first url found on line
+"
 " http://waoewaoe.wordpress.com/2009/05/05/open-a-website-in-a-browser-from-commandline/
 " http://vim.wikia.com/wiki/Open_a_web-browser_with_the_URL_in_the_current_line
 "##############################################################################
@@ -81,11 +84,27 @@ map <silent> <leader>b :call LaunchBrowser()<CR>:redraw!<CR>
 "
 " https://psy.swansea.ac.uk/staff/carter/vim/vim_indent.htm
 "##############################################################################
-function! s:Min(a, b)
-  if a:a < a:b
-    return a:a
+
+" get the minimum value from `a` and `b` but don't go lower than `minimum`
+function! s:Min(a, b, minimum=2)
+	if a:a < a:b
+		if a:a < a:minimum
+			return a:minimum
+
+		else
+			return a:a
+
+		endif
+
   else
-    return a:b
+		if a:b < a:minimum
+			return a:minimum
+
+		else
+			return a:b
+
+		endif
+
   endif
 endfunction
 
@@ -111,6 +130,7 @@ function! s:InferIndentation(lines=100)
 
       if getline(i) =~ '^\t'
         let l:uses_tabs = 1
+				break
 
       else
         let l:uses_tabs = 0
@@ -132,17 +152,21 @@ function! s:OverrideIndentation()
   let l:file_indent = l:result[0]
   let l:uses_tabs = l:result[1]
 
-  if l:file_indent > 0 && l:file_indent != &tabstop
-    execute "set tabstop=" . l:file_indent
-    execute "set softtabstop=" . &tabstop
-    execute "set shiftwidth=" . &tabstop
-
-  endif
-
   if l:uses_tabs > 0
+		" this is the recommended setting for tabs in `:help tabstop`
+		execute "set tabstop=8"
+		execute "set softtabstop=4"
+		execute "set shiftwidth=4"
     set noexpandtab
 
-  endif
+	else
+		if l:file_indent > 0 && l:file_indent != &tabstop
+			execute "set tabstop=" . l:file_indent
+			execute "set softtabstop=" . &tabstop
+			execute "set shiftwidth=" . &tabstop
+
+		endif
+	endif
 
 endfunction
 

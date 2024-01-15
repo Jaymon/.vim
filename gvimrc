@@ -120,7 +120,7 @@ function! SyntaxInfo()
 
 endfunction
 
-hi User1 guibg=#ECF7FF guifg=#A0A0A0
+"hi User1 guibg=#ECF7FF guifg=#A0A0A0
 set laststatus=2
 set statusline=   " clear the statusline for when vimrc is reloaded
 set statusline+=%1* " switch to User1 highlight
@@ -137,4 +137,21 @@ set statusline+=%=                           " right align
 set statusline+=%{v:register}\ 
 set statusline+=%{SyntaxInfo()}
 set statusline+=%15.15(%c\ %l/%L%)\   "cursor_column current_line/total_lines
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Set the colort column
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if exists('+colorcolumn')
+  " the columns should be 1 and 41 after the set textwidth setting
+  set colorcolumn=+1,+41
+
+
+"    if &tw == 0
+"        set colorcolumn=81,121
+"    else
+"        set colorcolumn=&tw,&tw+40
+"    endif
+endif
 
