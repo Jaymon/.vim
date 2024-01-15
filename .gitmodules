@@ -18,10 +18,6 @@
 	path = pack/third-party/start/surround
 	url = https://github.com/tpope/vim-surround.git
 	branch = master
-[submodule "bundle/pathogen"]
-	path = pack/third-party/opt/pathogen
-	url = https://github.com/tpope/vim-pathogen.git
-	branch = master
 [submodule "bundle/ctrlp"]
 	path = pack/third-party/opt/ctrlp
 	url = https://github.com/kien/ctrlp.vim.git
