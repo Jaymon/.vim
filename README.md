@@ -43,17 +43,6 @@ to update all the submodules:
     $ git submodule foreach git pull origin master
 
 
-### [Pathogen](https://github.com/tpope/vim-pathogen)
-
-Moved to `pack/third-party/opt` on 3-2023, I don't think this is needed anymore because I'm now using Vim's built-in package (see `:help package`) functionality now.
-
-I think pretty much every vim user on the planet uses this plugin.
-
-I set this up with:
-
-    $ git submodule add -b master https://github.com/tpope/vim-pathogen.git bundle/pathogen
-
-
 ### [Tagbar](https://github.com/preservim/tagbar)
 
 This replaced Taglist because I like the hierarchical code tree better.
@@ -118,19 +107,6 @@ I'm pretty sure this uses `s` as the command to "surround".
 I set this up with:
 
     $ git submodule add -b master https://github.com/tpope/vim-surround.git bundle/surround
-
-
-### [markdown](https://github.com/tpope/vim-markdown)
-
-From the repo:
-
-> This is the development version of Vim's included syntax highlighting and filetype plugins for Markdown. Generally you don't need to install these if you are running a recent version of Vim.
-
-So I removed this on 3-5-2023
-
-I set this up with:
-
-    $ git submodule add -b master https://github.com/tpope/vim-markdown.git bundle/markdown
 
 
 ### Python

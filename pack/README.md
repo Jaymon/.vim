@@ -45,7 +45,6 @@ $ git rm submodule/path
 ```
 
 
-
 ## Links and Searches
 
 * https://dev.to/iggredible/how-to-use-vim-packages-3gil
