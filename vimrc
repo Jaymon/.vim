@@ -5,10 +5,6 @@
 "
 " stuff I always forget: g:, l:, s: variables definitions :help internal-variables
 
-"runtime bundle/pathogen/autoload/pathogen.vim
-"call pathogen#infect()
-"call pathogen#helptags()
-"call helptags ALL
 call env#setup()
 
 set nocompatible

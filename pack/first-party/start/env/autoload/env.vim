@@ -15,28 +15,29 @@ if exists("g:loaded_env")
 endif
 let g:loaded_env = 1
 
+
 " sfile has to be expanded outside of any functions, otherwise it will return
-" the wrong filepath, found this out at: http://tech.groups.yahoo.com/group/vim/message/51381
+" the wrong filepath, found this out at:
+" http://tech.groups.yahoo.com/group/vim/message/51381
 " :help filename-modifiers
-"let s:vimhome=expand('<sfile>:p:h:h')
-"echom s:vimhome
-"let s:vh = finddir("pack", ".;")
-"echom fnamemodify(s:vh, ':p:h:h')
+let s:envdir=expand('<sfile>:p:h:h')
+
 
 function! env#setup()
   " where the .vim or vimfiles directory is located
   " http://superuser.com/questions/119991/how-do-i-get-vim-home-directory
   if empty($VIMHOME)
     " we find the pack directory since if you have this plugin you have a pack
-    " directory, the . means start in this directory and the ; measn work
-    " backwards until it finds the `pack` directory
+    " directory, s:envdir was calculated when the script loaded, that's the 
+    " folder we will start in. The ; means work backwards until it finds the
+    " `pack` directory
     " https://vimdoc.sourceforge.net/htmldoc/eval.html#finddir%28%29
-    let a:pack_dir = finddir("pack", ".;")
+    let l:packdir = finddir("pack", s:envdir . ";")
 
     " the parent of the pack directory will be the home directory
-    let a:vimhome = fnamemodify(a:packdir, ':p:h:h')
+    let l:vimhome = fnamemodify(l:packdir, ':p:h:h')
 
-    let $VIMHOME=a:vimhome
+    let $VIMHOME=l:vimhome
 
   endif
 
