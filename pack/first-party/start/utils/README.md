@@ -1,12 +1,12 @@
 # Utils plugin
 
-Just some handy functions and commands in an easy to add bundle
+Just some handy functions and commands in an easy to add package.
 
 
 ## Installation
 
-Use Pathogen, and then run these (if you want it to be a submodule):
+You can just dump this directory into `<VIMHOME>/pack/*/start/` and it should auto-load. You can verify by opening a file and running:
 
-    $ cd <VIMRC>
-    $ git submodule add -b master <GIT URL> pack/<NAME>/start
-
+    :scriptnames
+    
+You should see the `utils.vim` file loaded somewhere in the list.

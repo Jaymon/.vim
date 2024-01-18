@@ -25,6 +25,7 @@ This is here for my convenience so I can easily keep my vim environment consiste
     $ $HOME/.vim/install.sh
     ```
 
+
 ### Re-initialize Submodules
 
 I moved (March 2023) the submodules from `bundle` to `pack/third-party/start` and this is how I re-initialized the modules:
