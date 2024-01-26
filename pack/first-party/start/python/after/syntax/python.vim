@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language:         Python
 " Maintainer:	    Jay Marcyes <vim@marcyes.com>
-" Last Change:      2023 Jan 26
+" Last Change:      2024 Jan 23
 "
 " This is Jay's python syntax customization file
 "
@@ -27,6 +27,7 @@ syn keyword NonReservedKeyword self cls
 syn keyword pythonBuiltinObj __class__ __builtin__ __module__ __dict__ __metaclass__
     \ __file__ __name__ __qualname__
 
+" https://docs.python.org/3/reference/datamodel.html#special-method-names
 syn keyword pythonMagicMethod __new__ __init__ __del__
     \ __cmp__ __eq__ __ne__ __lt__ __gt__ __le__ __ge__
     \ __pos__ __neg__ __abs__ __invert__ __round__ __floor__ __ceil__ __trunc__
@@ -37,19 +38,24 @@ syn keyword pythonMagicMethod __new__ __init__ __del__
     \ __iadd__ __isub__ __imul__ __ifloordiv__ __idiv__ __itruediv__ __imod__ __idivmod__
     \ __ipow__ __ilshift__ __irshift__ __iand__ __ior__ __ixor__
     \ __int__ __long__ __float__ __complex__ __oct__ __hex__ __bool__
-    \ __index__ __trunc__ __coerce__ __format__ __hash__ __nonzero__
-    \ __str__ __bytes__ __repr__ __unicode__
-    \ __dir__ __sizeof__ __len__ __contains__
+    \ __index__ __trunc__ __coerce__ __hash__ __nonzero__
+    \ __str__ __bytes__ __repr__ __unicode__ __format__ 
+    \ __dir__ __sizeof__ __len__ __length_hint__ __contains__
     \ __iter__ __next__ __reversed__
+    \ __aiter__ __anext__
     \ __getattr__ __setattr__ __delattr__ __getattribute__
-    \ __getitem__ __setitem__ __delitem__ __missing__
+    \ __getitem__ __class_getitem__ __setitem__ __delitem__ __missing__
     \ __instancecheck__ __subclasscheck__
     \ __call__ __enter__ __exit__
-    \ __get__ __set__ __delete__
+    \ __aenter__ __aexit__
+    \ __get__ __set__ __delete__ __objclass__
     \ __copy__ __deepcopy__
     \ __getinitargs__ __getnewargs__ __getstate__ __setstate__
     \ __reduce__ __reduce_ex__
-    \ __set_name__ __init_subclass__
+    \ __set_name__ __init_subclass__ __mro_entries__ __prepare__
+    \ __await__
+    \ __buffer__ __release_buffer__
+    \ __match_args__
     \ containedin=pythonFunction,pythonMethod
 
 
