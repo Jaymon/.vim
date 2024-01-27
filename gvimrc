@@ -1,4 +1,7 @@
-set guifont=Courier_New:h10:cANSI
+"set guifont=Courier_New:h10:cANSI
+" use the default apple monospace font, these are the different weights:
+" https://developer.apple.com/documentation/appkit/nsfontweight
+set guifont=-monospace-Light:h10:cANSI
 
 " based off of this script:
 " http://vim.wikia.com/wiki/Restore_screen_size_and_position
