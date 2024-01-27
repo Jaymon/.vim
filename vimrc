@@ -3,7 +3,8 @@
 " https://github.com/spf13/spf13-vim
 "
 "
-" stuff I always forget: g:, l:, s: variables definitions :help internal-variables
+" stuff I always forget: g:, l:, s: variables definitions can be found by
+" running `:help internal-variables`
 
 call env#setup()
 
@@ -12,16 +13,17 @@ set nocompatible
 " http://stackoverflow.com/questions/7178964/how-to-turn-off-auto-insert-when-selecting-text-with-gvim?rq=1
 behave xterm
 
-" When I upgraded to macos montery (March 2022) I all of a sudden had a a sound when
-" doing certain things (it was the Funky system sound), I figured out how to reproduce
-" it (hit j when on the last line of a file) and this was what turned it off. Not
-" sure why this was now a problem
+" When I upgraded to macos montery (March 2022) I all of a sudden had a a
+" sound when doing certain things (it was the Funky system sound), I figured
+" out how to reproduce it (hit j when on the last line of a file) and this was
+" what turned it off. Not sure why this was now a problem
 " https://stackoverflow.com/questions/18589352/how-to-disable-vim-bells-sounds
 " https://stackoverflow.com/questions/16047146/disable-bell-in-macvim
 set belloff=all
 
-" tells Vim to look in the directory containing the current file (.), then the current
-" directory (empty text between two commas), then each directory under the current directory ('**')
+" tells Vim to look in the directory containing the current file (.), then the
+" current directory (empty text between two commas), then each directory under
+" the current directory ('**')
 set path=.,,**
 
 set showmode
@@ -66,6 +68,10 @@ set numberwidth=5 " Set line numbering to take up N spaces
 set cursorline
 set scrolloff=3 " N lines above/below cursor when scrolling
 
+" on opening a new file we will only set the textwidth if it hasn't been set
+" by something else
+autocmd BufRead * if &textwidth == 0 | set textwidth=80 | endif
+
 
 " searching
 set incsearch
@@ -86,7 +92,9 @@ execute "set softtabstop=" . &tabstop
 set expandtab " turn tabs into spaces
 "set shiftwidth=4 " indent width for autoindent
 execute "set shiftwidth=" . &tabstop
-set shiftround " When shifting lines, round indentation to the nearest multiple of “shiftwidth.”
+" When shifting lines, round indentation to the nearest multiple of
+" “shiftwidth.”
+set shiftround
 set backspace=indent,eol,start
 " configure filetype specific stuff in ftplugin/filetype.vim
 
@@ -293,7 +301,7 @@ nnoremap ¬ 10l
 " http://stackoverflow.com/questions/2468939/
 " http://stackoverflow.com/questions/11595301/controlling-tab-names-in-vim
 " `:help statusline` for a description of the modifiers
-au bufEnter * set guitablabel=\[%N\]\ %t\ %M\[%N\]
+autocmd bufEnter * set guitablabel=\[%N\]\ %t\ %M\[%N\]
 " I also thought about using <C-<> :tabprev and <c->> :tabnext
 "nnoremap <A-.> :tabn<CR>
 "nnoremap <A-,> :tabp<CR>
@@ -314,9 +322,10 @@ nmap <leader>7 7gt<CR>
 nmap <leader>8 8gt<CR>
 nmap <leader>9 9gt<CR>
 
-" everytime we leave a tab update the lasttab value so the leader t command above works
+" everytime we leave a tab update the lasttab value so the leader t command
+" above works
 let g:lasttab = 1
-au TabLeave * let g:lasttab = tabpagenr()
+autocmd TabLeave * let g:lasttab = tabpagenr()
 
 " put the opened tab at the end of the list, I prefer that to opening next to
 " the tab in which it was opened
@@ -333,12 +342,13 @@ autocmd BufNew * if winnr('$') == 1 | tabmove | endif
 autocmd SwapExists * :let v:swapchoice='o'
 
 
-" display what's changed since last save (uses diff command, so not cross-platform)
+" display what's changed since last save (uses diff command, so not
+" cross-platform)
 " http://vim.wikia.com/wiki/Diff_current_buffer_and_the_original_file
 " http://stackoverflow.com/questions/749297/can-i-see-changes-before-i-save-my-file-in-vim
 map <leader>diff1 :w !diff % -
-" this one is way more involved, it splits the screen and puts the original in the left buffer
-" from vimrc_example 
+" this one is way more involved, it splits the screen and puts the original in
+" the left buffer, from vimrc_example 
 if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
           \ | wincmd p | diffthis
