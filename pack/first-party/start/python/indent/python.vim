@@ -1,7 +1,7 @@
 " Vim indent file
 " Language:         Python
 " Maintainer:	    Jay Marcyes <vim@marcyes.com>
-" Last Change:      2023 Jan 13
+" Last Change:      2024 Mar 5
 " Credits:          David Bustos <bustos@caltech.edu>
 "                   Eric Mc Sween <em@tomcom.de>
 "                   Bram Moolenaar <Bram@vim.org>
@@ -138,6 +138,40 @@ function! s:BlockStarter(lnum, block_start_re)
 endfunction
 
 
+" Find the block matching lnum's indent and see if it is a match, fallback to
+" s:BlockStarter if needed
+function! s:BlockMatcher(lnum, block_start_re)
+    let lnum = a:lnum
+    let lindent = indent(lnum)
+    while lnum > 1
+        echom "lnum: ".lnum
+        let lnum = prevnonblank(lnum - 1)
+        let pindent = indent(lnum)
+        if pindent <= lindent
+            if getline(lnum) =~ a:block_start_re
+                return lnum
+
+            else 
+                if pindent == 0
+                    return -1
+
+                else
+                    " we're done if we've gone passed the indent we're looking
+                    " for
+                    return s:BlockStarter(a:lnum, a:block_start_re)
+
+                endif
+            endif
+
+        endif
+
+    endwhile
+
+    return -1
+
+endfunction
+
+
 function! GetPythonIndent(lnum)
 
     " First line has indent 0
@@ -170,22 +204,26 @@ function! GetPythonIndent(lnum)
     " If the line starts with 'elif' or 'else', line up with 'if', 'elif', or
     " 'except'
     if thisline =~ '^\s*\(elif\|else\)\>'
-        let bslnum = s:BlockStarter(a:lnum, '^\s*\(if\|elif\|except\)\>')
+        let bslnum = s:BlockMatcher(a:lnum, '^\s*\(if\|elif\|except\)\>')
         if bslnum > 0
             return indent(bslnum)
+
         else
             return -1
+
         endif
     endif
 
     " If the line starts with 'except' or 'finally', line up with 'try'
     " or 'except'
     if thisline =~ '^\s*\(except\|finally\)\>'
-        let bslnum = s:BlockStarter(a:lnum, '^\s*\(try\|except\)\>')
+        let bslnum = s:BlockMatcher(a:lnum, '^\s*\(try\|except\)\>')
         if bslnum > 0
             return indent(bslnum)
+
         else
             return -1
+
         endif
     endif
 
@@ -195,8 +233,8 @@ function! GetPythonIndent(lnum)
     let plnum = prevnonblank(plstartnum) " previous (first non blank) line number
     let pline = getline(plnum) "previous (first non blank) actual line (string)
     let plbuffer = 1 " buffer lines
-    let ssline = getline(sslnum) " statement start actual line (string)
     let sslnum = s:StatementStart(plnum) " statement start line number
+    let ssline = getline(sslnum) " statement start actual line (string)
     let sslindent = indent(sslnum) "statement start indent
 
     " If this line is explicitly joined, find the first indentation that is a
@@ -217,46 +255,58 @@ function! GetPythonIndent(lnum)
     " relative to statement start.
     if pline =~ '^[^#]*:\s*\(#.*\)\?$'
         return sslindent + &sw
+
     endif
 
     " If the previous line was a stop-execution statement or a pass
     if ssline =~ '^\s*\(break\|continue\|raise\|return\|pass\)\>'
         if thisindent == 0
             return sslindent - &sw
+
         elseif thisindent > sslindent - &sw
             " See if the user has already dedented
             " If not, recommend one dedent
             return sslindent - &sw
+
         endif
+
         " Otherwise, trust the user
         return -1
     endif
 
-    " We are more than BUFFER blank lines from the previous (first non blank) line
+    " We are more than BUFFER blank lines from the previous (first non blank)
+    " line
     if (plstartnum - plbuffer) > plnum
         if thisindent != 0
             " trust the user
             return -1
+
         else
-            " we failed all the other checks so let's line up with the next (non blank) line
-            let nlnum = nextnonblank(a:lnum) " http://vimdoc.sourceforge.net/htmldoc/eval.html#nextnonblank()
+            " we failed all the other checks so let's line up with the next
+            " (non blank) line
+            let nlnum = nextnonblank(a:lnum)
+            " http://vimdoc.sourceforge.net/htmldoc/eval.html#nextnonblank()
             let nlindent = indent(nlnum)
 
             if nlindent > 0
                 return nlindent
+
             else
                 " trust the user
                 return -1
+
             endif
         endif
+
     else
-        " We are within BUFFER blank lines from the previous (first non blank) line
-        " but we don't want to mess with the indent if the user has alreay
+        " We are within BUFFER blank lines from the previous (first non blank)
+        " line but we don't want to mess with the indent if the user has alreay
         " changed it (eg, you hit I and then indent back one (go from 3 tabs
         " to 2 tabs) and hit enter you don't want to reset to 3 tabs
         if thisindent != 0
             " trust the user
             return -1
+
         endif
     endif
 
