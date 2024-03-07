@@ -148,5 +148,6 @@ set statusline+=%15.15(%c\ %l/%L%)\   "cursor_column current_line/total_lines
 if exists('+colorcolumn')
   " the columns should be 1 and 41 after the set textwidth setting
   set colorcolumn=+1,+41
+
 endif
 

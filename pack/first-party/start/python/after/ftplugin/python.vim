@@ -2,6 +2,18 @@ if !g:pymode
     finish
 endif
 
+" this is the correct command but it doesn't work in vim8 :( maybe someday
+" :help format-comments
+" https://github.com/vim/vim/issues/1696
+" setlocal comments=s:\"\"\",m3:\ ,eb:\"\"\",b:#,fb:-
+
+" This is so close to working in vim9, the first line wraps just fine but then
+" it doesn't wrap correctly after that, I've already spent too much time trying 
+" to get it to work so I'm commenting it out again for another N years :(
+" https://www.reddit.com/r/vim/comments/9kz5rk/
+" set comments+=sf:\"\"\",eb:\"\"\"
+
+
 if g:pymode_motion
 
     if !&magic

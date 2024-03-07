@@ -68,11 +68,6 @@ set numberwidth=5 " Set line numbering to take up N spaces
 set cursorline
 set scrolloff=3 " N lines above/below cursor when scrolling
 
-" on opening a new file we will only set the textwidth if it hasn't been set
-" by something else
-autocmd BufRead * if &textwidth == 0 | set textwidth=80 | endif
-
-
 " searching
 set incsearch
 set hlsearch
@@ -104,12 +99,30 @@ set foldenable " toggle with zi
 set foldmethod=indent
 set foldnestmax=2
 set foldlevelstart=2
+
 " <CR> in a comment will trigger a new line, and comments will fold to a new
 " line at textwidth for all syntax types
 " :help fo-table for the values of c, r, and l
 " Set 'formatoptions' to break comment lines but not other lines,
 " and insert the comment leader when hitting <CR>
 set fo-=t fo+=crl
+
+" don't automatically insert a comment leader if hitting o in a comment
+set fo-=o
+
+" Delete comment characters when joining lines
+set formatoptions+=j
+
+" recognize numbered lists (NOTE this doesn't play nice with `2` see :h fo-n
+" and :h fo-2)
+set formatoptions+=n
+
+" allow dashes to be used as a list also
+let &formatlistpat .= '\|^\s*-\s*'
+
+" on opening a new file we will only set the textwidth if it hasn't been set
+" by something else
+autocmd BufRead * if &textwidth == 0 | set textwidth=79 | endif
 
 
 "##############################################################################
@@ -178,31 +191,6 @@ set sessionoptions+=resize
 " Automatically re-read files if unmodified inside Vim.
 set autoread
 
-" Delete comment characters when joining lines
-set formatoptions+=j
-
-" Allow us to save a file as root, if we have sudo privileges,
-" when we're not currently using vim as root
-" http://vimingwithbuttar.googlecode.com/hg/.vimrc
-cmap w!! %!sudo tee > /dev/null %
-
-" reload the vimrc file in this window
-" https://stackoverflow.com/questions/2400264/
-" https://stackoverflow.com/a/5794800/5006
-" NOTE: this does reload this file, but you have other issues when editing
-" other files like `g:loaded_PLUGIN` variables that will keep those files from
-" getting reloaded also
-"command! Vimreload so echom resolve(expand($MYVIMRC))
-if !exists(":Vimreload")
-  function ReloadVimrc()
-    let l:path = resolve(expand($MYVIMRC))
-    if filereadable(l:path)
-      silent exe 'so ' . l:path
-    endif
-  endfunction
-  command! Vimreload exec ReloadVimrc()
-endif
-
 
 "##############################################################################
 " Handle copy/paste better
@@ -246,7 +234,8 @@ vnoremap <leader>p "_dP
 " I've never internalized that command and this is one of the things that bugs
 " me the most
 " https://unix.stackexchange.com/a/390905/118750
-" search: vim replace highlighted text with copied text and put pasted text back into main register
+" search: vim replace highlighted text with copied text and put pasted text back
+" into main register
 vnoremap p p:let @*=@0<CR>
 
 " this maps the "* register to the unnamed register so you can copy/paste between instances
@@ -312,6 +301,14 @@ autocmd bufEnter * set guitablabel=\[%N\]\ %t\ %M\[%N\]
 " left, and :tabl goes to the very last tab, so :tabt will have to do
 " http://stackoverflow.com/questions/2119754/switch-to-last-active-tab-in-vim
 nmap <leader>t :exe "tabn ".g:lasttab<CR>
+
+" everytime we leave a tab update the lasttab value so the leader t command
+" above works
+let g:lasttab = 1
+autocmd TabLeave * let g:lasttab = tabpagenr()
+
+" Number keys map to the same tab, over the years, this has become the primary
+" way I jump between tabs
 nmap <leader>1 1gt<CR>
 nmap <leader>2 2gt<CR>
 nmap <leader>3 3gt<CR>
@@ -321,11 +318,6 @@ nmap <leader>6 6gt<CR>
 nmap <leader>7 7gt<CR>
 nmap <leader>8 8gt<CR>
 nmap <leader>9 9gt<CR>
-
-" everytime we leave a tab update the lasttab value so the leader t command
-" above works
-let g:lasttab = 1
-autocmd TabLeave * let g:lasttab = tabpagenr()
 
 " put the opened tab at the end of the list, I prefer that to opening next to
 " the tab in which it was opened
@@ -342,34 +334,10 @@ autocmd BufNew * if winnr('$') == 1 | tabmove | endif
 autocmd SwapExists * :let v:swapchoice='o'
 
 
-" display what's changed since last save (uses diff command, so not
-" cross-platform)
-" http://vim.wikia.com/wiki/Diff_current_buffer_and_the_original_file
-" http://stackoverflow.com/questions/749297/can-i-see-changes-before-i-save-my-file-in-vim
-map <leader>diff1 :w !diff % -
-" this one is way more involved, it splits the screen and puts the original in
-" the left buffer, from vimrc_example 
-if !exists(":DiffOrig")
-  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-          \ | wincmd p | diffthis
-endif
-map <leader>diff2 :DiffOrig
-
-
 " make it easier to change current working directory pwd to current file's dir
 " http://vim.wikia.com/wiki/Set_working_directory_to_the_current_file
 " CDC = Change to Directory of Current file
 command! CDC lcd %:p:h
 " to get NerdTree to change to the directory also, open the NT buffer and type
 " CD
-
-"##############################################################################
-" session management
-" https://bocoup.com/blog/sessions-the-vim-feature-you-probably-arent-using
-"##############################################################################
-" there also is a plugin but it has dependencies I didn't want to deal with:
-" http://peterodding.com/code/vim/session/
-" https://github.com/xolox/vim-session/blob/master/INSTALL.md
-command! SS mks $VIMTEMP/session.vim
-command! RS source $VIMTEMP/session.vim
 

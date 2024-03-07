@@ -1,9 +1,6 @@
 
-" python comments should auto-wrap and if you hit enter it should add a new
-" comment. I got this from ftplugin/vim.vim in vim proper
-setlocal fo-=t fo+=crl
 if &tw == 0
-    setlocal tw=80
+    setlocal tw=79
 endif
 
 " config for python syntax highlighting plugin
@@ -20,11 +17,6 @@ let g:pymode_indent_hanging_width = 0
 " we don't support these, but we need to turn them off to avoid errors
 let g:pymode_rope = 0
 let g:pymode_rope_completion = 0
-
-" this is the correct command but it doesn't work in vim8 :( maybe someday
-" :help format-comments
-" https://github.com/vim/vim/issues/1696
-" setlocal comments=s:\"\"\",m3:\ ,eb:\"\"\",b:#,fb:-
 
 " Ignore files matching these patterns when opening files based on a glob pattern.
 set wildignore+=.pyc
@@ -44,3 +36,4 @@ if g:pymode_motion
     vnoremap <buffer> [{  :call pymode#motion#vmove('^<Bslash>s*<Bslash>(async<Bslash>s<Bslash>+<Bslash>)<Bslash>=def<Bslash>s', 'b')<CR>
 
 end
+
