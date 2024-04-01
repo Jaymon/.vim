@@ -21,7 +21,11 @@
 " http://ssiaf.blogspot.com/2009/07/negative-lookbehind-in-vim.html
 syn match pythonMethod "\.[a-zA-Z0-9_]*(\@="
 "syn match pythonFunctionCall "\(def\s\+\|[\S\.]\)\@<!\(\s\)\@<![a-z][a-zA-Z0-9_]\+(\@="
-syn match pythonFunctionCall "\(def\s\+\|[\.]\)\@<!\(\s\|^\)\@<=[a-z][a-zA-Z0-9_]\+(\@="
+
+" A function call is a method call that doesn't start with `def `, a period.
+" Basically, it has to be proceeded by the start of the file, a whitespace, or
+" a non-alphanum character. The call must end with a left paren
+syn match pythonFunctionCall "\(def\s\+\|[\.]\)\@<!\(\s\|^\|[^0-9A-Za-z_]\)\@<=[a-z][a-zA-Z0-9_]\+(\@="
 
 syn keyword NonReservedKeyword self cls
 syn keyword pythonBuiltinObj __class__ __builtin__ __module__ __dict__ __metaclass__
