@@ -2,7 +2,7 @@
 if exists("g:loaded_indentify")
   finish
 endif
-let g:loaded_indentify="v0.2"
+let g:loaded_indentify="v0.3"
 
 
 "##############################################################################
@@ -18,6 +18,13 @@ let g:loaded_indentify="v0.2"
 "
 " https://psy.swansea.ac.uk/staff/carter/vim/vim_indent.htm
 "##############################################################################
+
+" the default tab width (how many spaces a tab should visually occupy)
+if !exists("g:indentify_tabwidth")
+  let g:indentify_tabwidth = 4
+
+endif
+
 
 " get the minimum value from `a` and `b` but don't go lower than `minimum`
 function! s:Min(a, b, minimum=2)
@@ -85,11 +92,30 @@ function! s:OverrideIndentation()
   let l:file_indent = l:result[0]
   let l:uses_tabs = l:result[1]
 
+	" https://tedlogan.com/techblog3.html
+	"
+	" tabstop Set tabstop to tell vim how many columns a tab counts for. Linux
+	" kernel code expects each tab to be eight columns wide. Visual Studio
+	" expects each tab to be four columns wide.  This is the only command here
+	" that will affect how existing text displays.
+	"
+	" expandtab When expandtab is set, hitting Tab in insert mode will produce
+	" the appropriate number of spaces.
+	"
+	" shiftwidth Set shiftwidth to control how many columns text is indented with
+	" the reindent operations (<< and >>) and automatic C-style indentation.
+	"
+	" softtabstop Set softtabstop to control how many columns vim uses when you
+	" hit Tab in insert mode. If softtabstop is less than tabstop and expandtab
+	" is not set, vim will use a combination of tabs and spaces to make up the
+	" desired spacing. If softtabstop equals tabstop and expandtab is not set,
+	" vim will always use tabs. When expandtab is set, vim will always use the
+	" appropriate number of spaces.
+
   if l:uses_tabs > 0
-    " this is the recommended setting for tabs in `:help tabstop`
-    execute "set tabstop=8"
-    execute "set softtabstop=4"
-    execute "set shiftwidth=4"
+    execute "set tabstop=" . g:indentify_tabwidth
+    execute "set softtabstop=" . g:indentify_tabwidth
+    execute "set shiftwidth=" . g:indentify_tabwidth
     set noexpandtab
 
   else
@@ -97,8 +123,10 @@ function! s:OverrideIndentation()
       execute "set tabstop=" . l:file_indent
       execute "set softtabstop=" . &tabstop
       execute "set shiftwidth=" . &tabstop
+			set expandtab
 
     endif
+
   endif
 
 endfunction
