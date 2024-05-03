@@ -56,7 +56,8 @@ syn keyword pythonMagicMethod __new__ __init__ __del__
     \ __copy__ __deepcopy__
     \ __getinitargs__ __getnewargs__ __getstate__ __setstate__
     \ __reduce__ __reduce_ex__
-    \ __set_name__ __init_subclass__ __mro_entries__ __prepare__
+    \ __set_name__ __init_subclass__
+    \ __mro_entries__ __prepare__ __mro__ __bases__
     \ __await__
     \ __buffer__ __release_buffer__
     \ __match_args__
