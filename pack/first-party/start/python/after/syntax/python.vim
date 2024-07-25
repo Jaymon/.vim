@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language:         Python
 " Maintainer:	    Jay Marcyes <vim@marcyes.com>
-" Last Change:      2024 Jan 23
+" Last Change:      2024 July 19
 "
 " This is Jay's python syntax customization file
 "
@@ -61,6 +61,7 @@ syn keyword pythonMagicMethod __new__ __init__ __del__
     \ __await__
     \ __buffer__ __release_buffer__
     \ __match_args__
+    \ __self__ __func__ __wrapped__ __annotations__
     \ containedin=pythonFunction,pythonMethod
 
 
