@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language:         Python
 " Maintainer:	    Jay Marcyes <vim@marcyes.com>
-" Last Change:      2024 July 19
+" Last Change:      2024 August 5
 "
 " This is Jay's python syntax customization file
 "
@@ -11,6 +11,7 @@
 "
 " http://learnvimscriptthehardway.stevelosh.com/chapters/45.html
 " http://learnvimscriptthehardway.stevelosh.com/chapters/46.html
+" https://learnbyexample.gitbooks.io/vim-reference/content/Regular_Expressions.html
 "
 " This is meant to customize the builtin python syntax file found at:
 "
@@ -65,14 +66,6 @@ syn keyword pythonMagicMethod __new__ __init__ __del__
     \ containedin=pythonFunction,pythonMethod
 
 
-" multi-line strings not assigned to a variable should be treated as comments
-" the \zs in the regex means start the matching right before the next match (so it
-" will highlight the starting triple quotes and ignore the matching whitespace)
-"syn region pythonDocBlock start=+^\s*\zs'''+ skip=+\\'+ end=+'''+ contains=pythonDocTest,pythonSpaceError,@Spell,pythonTodo
-"syn region pythonDocBlock start=+^\s*\zs"""+ skip=+\\"+ end=+"""+ contains=pythonDocTest,pythonSpaceError,@Spell,pythonTodo
-syn region pythonDocBlock start=+^\s*\zs\z('''\|"""\)+ end="\z1" keepend contains=pythonDocTest,pythonSpaceError,@Spell,pythonTodo
-
-
 " 1-6-2023 - crazy that the default python syntax file doesn't support format strings
 " the \= means 'matches 0 or 1 more of the preceding characters'
 syn region pythonFormatString matchgroup=pythonQuotes start=+[fF]\=[rR]\z(['"]\)+ end="\z1" skip="\\\\\|\\\z1"
@@ -85,6 +78,15 @@ syn region pythonByteString matchgroup=pythonQuotes start=+[bB]\z(['"]\)+ end="\
 " update 1-28-2023 to remove the \zs in favor of a negative look-behind
 syn match pythonFormatStrTemplate "{\@<!{[^}{]*}" contained containedin=pythonString,pythonRawString,pythonFormatString
 
+" multi-line strings not assigned to a variable should be treated as comments
+" the \zs in the regex means start the matching right before the next match (so it
+" will highlight the starting triple quotes and ignore the matching whitespace)
+" Updated 8-5-2024, I added support for r-string docblocks but that means this
+" needs to be below pythonFormatStrings because otherwise those will take
+" precedence over the docblock
+"syn region pythonDocBlock start=+^\s*\zs'''+ skip=+\\'+ end=+'''+ contains=pythonDocTest,pythonSpaceError,@Spell,pythonTodo
+"syn region pythonDocBlock start=+^\s*\zs"""+ skip=+\\"+ end=+"""+ contains=pythonDocTest,pythonSpaceError,@Spell,pythonTodo
+syn region pythonDocBlock start=+^\s*\zs[rR]\?\z('''\|"""\)+ end="\z1" keepend contains=pythonDocTest,pythonSpaceError,@Spell,pythonTodo
 
 " 3-17-2023 - highlight operators
 "syn keyword pythonMathOperator + - * / % = > < ! contains=ALLBUT,String,Comment
