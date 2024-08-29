@@ -261,13 +261,7 @@ function! GetPythonIndent(lnum)
 
     " If the previous line was a stop-execution statement or a pass
     if ssline =~ '^\s*\(break\|continue\|raise\|return\|pass\)\>'
-        if thisindent == 0
-            if match(thisline, '^class') == -1
-                return sslindent - &sw
-
-            endif
-
-        elseif thisindent > sslindent - &sw
+        if thisindent > sslindent - &sw
             " See if the user has already dedented
             " If not, recommend one dedent
             return sslindent - &sw
