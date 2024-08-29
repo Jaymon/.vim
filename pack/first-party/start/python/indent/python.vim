@@ -236,6 +236,7 @@ function! GetPythonIndent(lnum)
     let sslnum = s:StatementStart(plnum) " statement start line number
     let ssline = getline(sslnum) " statement start actual line (string)
     let sslindent = indent(sslnum) "statement start indent
+    " &sw = shiftwidth, Number of spaces to use for each step of indent
 
     " If this line is explicitly joined, find the first indentation that is a
     " multiple of four and will distinguish itself from next logical line.
@@ -261,7 +262,10 @@ function! GetPythonIndent(lnum)
     " If the previous line was a stop-execution statement or a pass
     if ssline =~ '^\s*\(break\|continue\|raise\|return\|pass\)\>'
         if thisindent == 0
-            return sslindent - &sw
+            if match(thisline, '^class') == -1
+                return sslindent - &sw
+
+            endif
 
         elseif thisindent > sslindent - &sw
             " See if the user has already dedented
