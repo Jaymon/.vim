@@ -1,17 +1,42 @@
 " Python-mode motion functions
 
 
+" Jay has completely changed this method (9-18-2024)
 fun! pymode#motion#move(pattern, flags, ...) "{{{
-    let cnt = v:count1 - 1
-    let [line, column] = searchpos(a:pattern, a:flags . 'sW')
-    let indent = indent(line)
-    while cnt && line
-        let [line, column] = searchpos(a:pattern, a:flags . 'W')
-        if indent(line) == indent
-            let cnt = cnt - 1
-        endif
-    endwhile
-    return [line, column]
+    let [lnum, column] = searchpos(a:pattern, a:flags . 'sW')
+	if lnum == 0
+		if stridx(a:flags, 'b') != -1
+			let lnum = 1
+
+		else
+			let lnum = line('$')
+
+		endif
+
+		let column = 1
+		" I'm not sure why this needs to call cursor to move the cursor while
+		" the else block doesn't
+		call cursor(lnum, column)
+
+	else
+		" v:count1 is a special variable that holds the count value for a
+		" command, but with a default value of 1 when no count is given.
+		" When you provide a count before a command (e.g., 5j to move down
+		" 5 lines), v:count1 will hold that value (5 in this case).
+		let cnt = v:count1 - 1
+		let indent = indent(lnum)
+
+		while cnt && lnum
+			let [lnum, column] = searchpos(a:pattern, a:flags . 'W')
+			if indent(lnum) == indent
+				let cnt = cnt - 1
+
+			endif
+		endwhile
+	endif
+
+	"echom 'line: '.lnum.', column: '.column
+    return [lnum, column]
 endfunction "}}}
 
 
