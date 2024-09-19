@@ -3,8 +3,15 @@
 
 " Jay has completely changed this method (9-18-2024)
 fun! pymode#motion#move(pattern, flags, ...) "{{{
+	" flags:
+	" * W: Do not wrap around the end of the file (search only in the direction
+	" without wrapping).
+	" * s: Allow the match to start where the cursor is.
+	" * b: Search backward.
     let [lnum, column] = searchpos(a:pattern, a:flags . 'sW')
 	if lnum == 0
+		" there was no match so move cursor to either the bottom or top of the
+		" file
 		if stridx(a:flags, 'b') != -1
 			let lnum = 1
 
