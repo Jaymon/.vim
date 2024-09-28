@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language:         Python
 " Maintainer:	    Jay Marcyes <vim@marcyes.com>
-" Last Change:      2024 August 5
+" Last Change:      2024 September 28
 "
 " This is Jay's python syntax customization file
 "
@@ -19,10 +19,9 @@
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"syn match pythonClass "\h\w*" display contained
+" Single out python class definitions so they can be highlighted differently
+" than python functions
 syn match pythonClass "\(class\s\+\)\@<=\h\w*"
-"syn match   pythonFunction	"\h\w*" display contained
-"syn keyword pythonStatement	def nextgroup=pythonFunction skipwhite
 syn keyword pythonStatement	class nextgroup=pythonClass skipwhite
 
 
