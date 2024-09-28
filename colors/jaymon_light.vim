@@ -147,6 +147,7 @@ hi pythonStrFormatting guifg=#CC0000 ctermfg=magenta
 hi pythonStrFormat guifg=#CC0000 ctermfg=magenta
 hi pythonMagicMethod guifg=#0000FF ctermfg=blue cterm=bold gui=bold
 hi pythonMathOperator guifg=#AF00DB
+hi pythonClass guifg=#AF00DB ctermfg=DarkMagenta
 
 
 " markdown specific highlighting

@@ -19,6 +19,13 @@
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+"syn match pythonClass "\h\w*" display contained
+syn match pythonClass "\(class\s\+\)\@<=\h\w*"
+"syn match   pythonFunction	"\h\w*" display contained
+"syn keyword pythonStatement	def nextgroup=pythonFunction skipwhite
+syn keyword pythonStatement	class nextgroup=pythonClass skipwhite
+
+
 " http://ssiaf.blogspot.com/2009/07/negative-lookbehind-in-vim.html
 syn match pythonMethod "\.[a-zA-Z0-9_]*(\@="
 "syn match pythonFunctionCall "\(def\s\+\|[\S\.]\)\@<!\(\s\)\@<![a-z][a-zA-Z0-9_]\+(\@="
