@@ -95,10 +95,16 @@ set backspace=indent,eol,start
 
 " Enable indent folding
 " http://vimdoc.sourceforge.net/htmldoc/options.html#%27foldclose%27
-set foldenable " toggle with zi
+"set foldenable " toggle with zi
 set foldmethod=indent
 set foldnestmax=2
-set foldlevelstart=2
+" start each new file with all fold levels expanded, this is affected by mkview
+" and loadview
+set foldlevelstart=99
+" https://stackoverflow.com/a/360634
+" space will collapse/expand the current fold in normal mode
+nnoremap <space> za
+"vnoremap <space> zf
 
 " <CR> in a comment will trigger a new line, and comments will fold to a new
 " line at textwidth for all syntax types
@@ -182,6 +188,7 @@ set undodir^=$VIMTEMP//
 set viewoptions-=options " preserving option state was annoying me, cursor and folding good, options bad
 set viewdir=$VIMTEMP//
 
+" NOTE -- these might need to be commented out when writing/testing vimscript
 au BufWinLeave * silent! mkview "make vim save view (state) (folds, cursor, etc)
 au BufWinEnter * silent! loadview "make vim load view (state) (folds, cursor, etc)
 

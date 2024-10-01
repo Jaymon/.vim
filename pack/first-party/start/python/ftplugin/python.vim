@@ -21,6 +21,15 @@ let g:pymode_rope_completion = 0
 " Ignore files matching these patterns when opening files based on a glob pattern.
 set wildignore+=.pyc
 
+
+" python folding
+" https://stackoverflow.com/a/360634
+"set foldmethod=indent
+"set foldnestmax=2
+set foldmethod=expr
+set foldexpr=pyfold#fold(v:lnum)
+
+
 " other values like this are mapped in after/ftplugin/python.vim but I don't
 " want to modify that file because it can be replaced, so I put them here
 if g:pymode_motion
