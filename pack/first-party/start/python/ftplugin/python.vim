@@ -27,6 +27,8 @@ set wildignore+=.pyc
 "set foldmethod=indent
 "set foldnestmax=2
 set foldmethod=expr
+" corresponds to autoload/pyfold.vim:fold, this is evaluated for each line in
+" the buffer
 set foldexpr=pyfold#fold(v:lnum)
 
 
