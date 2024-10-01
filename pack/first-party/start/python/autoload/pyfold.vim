@@ -7,6 +7,12 @@
 "
 "let g:fold_debug = []
 
+" set to 1 if a decorator is encountered, it's flipped back to zero when the
+" class/function signature is found. The other way this could be done is to
+" check the previous line for an @ in the class/def if block, that would get
+" rid of this global variable
+let g:fold_decorated = 0
+
 " Fold python on class and function/method breaks
 "
 " The algo is pretty simple since this is called for each line in the buffer
@@ -18,8 +24,20 @@ function! pyfold#fold(lnum)
     let cind=indent(a:lnum)
 
     let ret = '='
-    if cline =~ '^\s*\(class\|def\|async def\)\s'
-        let ret = ">" . (cind / &shiftwidth + 1)
+    if cline =~ '^\s*@\S'
+        if g:fold_decorated == 0
+            let ret = ">" . (cind / &shiftwidth + 1)
+            let g:fold_decorated = 1
+
+        endif
+
+    elseif cline =~ '^\s*\(class\|def\|async def\)\s'
+        if g:fold_decorated == 0
+            let ret = ">" . (cind / &shiftwidth + 1)
+
+        endif
+
+        let g:fold_decorated = 0
 
     elseif cline =~ '^\s*$'
         let ret = "="
