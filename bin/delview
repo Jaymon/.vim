@@ -1,0 +1,55 @@
+#!/bin/bash
+# -*- mode: sh -*-
+# vi: set ft=sh :
+###############################################################################
+
+if [[ $1 == "--help" ]] || [[ $1 == "-h" ]]; then
+
+    echo "usage: $(basename $0) [[--dry-run] [<NAME>]]"
+    echo ""
+    cat <<EOF
+Removes the vim view file that is loaded when a file is loaded
+
+The .vimrc does mkview when exiting and loadview when loading a file but
+when modifying plugins or making changes those files can keep the changes
+from being reflected in the file, in order to get the changes to show up,
+the view file needs to be deleted, which is what this script does.
+EOF
+
+    exit 0
+
+fi
+
+
+# this statement will run if no arguments are passed in
+if [[ "$#" -eq 0 ]]; then
+    set -x
+    find "${TMPDIR}" -type f -name "*=" -delete
+    set +x
+
+# this statement will run if at least one argument is passed in
+elif [[ "$#" -gt 0 ]]; then
+    if [[ $1 == "--dry-run" ]]; then
+        v="${@:2}"
+        if [[ -n $v ]]; then
+            v=$(printf "%s*" "${v}")
+
+        fi
+        v="*${v}="
+
+        set -x
+        find "${TMPDIR}" -type f -name "${v}"
+        set +x
+
+    else
+        v=$(printf "%s*" "$@")
+        v="*${v}="
+
+        set -x
+        find "${TMPDIR}" -type f -name "${v}" -delete
+        set +x
+
+    fi
+
+fi
+
