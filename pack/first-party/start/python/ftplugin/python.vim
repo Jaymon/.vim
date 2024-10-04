@@ -29,7 +29,7 @@ set wildignore+=.pyc
 set foldmethod=expr
 " corresponds to autoload/pyfold.vim:fold, this is evaluated for each line in
 " the buffer
-set foldexpr=pyfold#fold(v:lnum)
+set foldexpr=pyfold#fold()
 
 
 " other values like this are mapped in after/ftplugin/python.vim but I don't

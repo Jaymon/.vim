@@ -13,17 +13,29 @@
 " rid of this global variable
 let g:fold_decorated = 0
 
+" Keeps track of current fold level so the function can easily backtrack
+" levels when it finds a line with a lower indent than the current fold
+" indent
+let g:fold_depth = 0
+
 " Fold python on class and function/method breaks
 "
 " The algo is pretty simple since this is called for each line in the buffer
 " when a new buffer is loaded/changed, basically, it just marks a new buffer as
 " starting when it finds a class or def block and inherits when it isn't one
 " of those blocks
-function! pyfold#fold(lnum)
-    let cline = getline(a:lnum)
-    let cind=indent(a:lnum)
+function! pyfold#fold()
+    let cline = getline(v:lnum)
+    let cind=indent(v:lnum)
 
-    let ret = '='
+    " we reset our global variables if we are back at the top of the file
+    if v:lnum == 1
+        let g:fold_depth = 0
+        let g:fold_decorated = 0
+
+    endif
+
+    let ret = g:fold_depth
     if cline =~ '^\s*@\S'
         if g:fold_decorated == 0
             let ret = ">" . (cind / &shiftwidth + 1)
@@ -33,17 +45,38 @@ function! pyfold#fold(lnum)
 
     elseif cline =~ '^\s*\(class\|def\|async def\)\s'
         if g:fold_decorated == 0
-            let ret = ">" . (cind / &shiftwidth + 1)
+            let g:fold_depth = (cind / &shiftwidth + 1)
+            let ret = ">" . g:fold_depth
 
         endif
 
         let g:fold_decorated = 0
 
     elseif cline =~ '^\s*$'
-        let ret = "="
+        "let ret = "="
+        let ret = g:fold_depth
+
+    elseif cline =~ '^\s*#'
+        "let ret = "="
+        let ret = g:fold_depth
+
+	else
+        let depth = (cind / &shiftwidth + 1)
+        if depth < g:fold_depth
+            "let ret = 's' . (g:fold_depth - depth)
+            let g:fold_depth = (depth - 1)
+            if g:fold_depth < 0
+                let g:fold_depth = 0
+
+            endif
+
+            let ret = g:fold_depth
+
+        endif
 
     endif
-    "call add(g:fold_debug, a:lnum.". ".ret." line: ".cline."\n")
+
+    "call add(g:fold_debug, v:lnum.". ".ret." line: ".cline."\n")
     return ret
 
 endfunction
