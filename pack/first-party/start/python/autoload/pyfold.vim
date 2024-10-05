@@ -26,7 +26,6 @@ let g:fold_depth = 0
 " of those blocks
 function! pyfold#fold()
     let cline = getline(v:lnum)
-    let cind=indent(v:lnum)
 
     " we reset our global variables if we are back at the top of the file
     if v:lnum == 1
@@ -35,16 +34,17 @@ function! pyfold#fold()
 
     endif
 
-    let ret = g:fold_depth
-    if cline =~ '^\s*@\S'
+    if cline =~ '^\s*@\S' " decorator fold line
         if g:fold_decorated == 0
+            let cind=indent(v:lnum)
             let ret = ">" . (cind / &shiftwidth + 1)
             let g:fold_decorated = 1
 
         endif
 
-    elseif cline =~ '^\s*\(class\|def\|async def\)\s'
+    elseif cline =~ '^\s*\(class\|def\|async def\)\s' " fold line
         if g:fold_decorated == 0
+            let cind=indent(v:lnum)
             let g:fold_depth = (cind / &shiftwidth + 1)
             let ret = ">" . g:fold_depth
 
@@ -52,24 +52,25 @@ function! pyfold#fold()
 
         let g:fold_decorated = 0
 
-    elseif cline =~ '^\s*$'
-        "let ret = "="
+    elseif cline =~ '^\s*$' " blank line
         let ret = g:fold_depth
 
-    elseif cline =~ '^\s*#'
-        "let ret = "="
+    elseif cline =~ '^\s*#' " comment line
         let ret = g:fold_depth
 
-	else
+	else " normal line
+        let cind=indent(v:lnum)
         let depth = (cind / &shiftwidth + 1)
         if depth < g:fold_depth
-            "let ret = 's' . (g:fold_depth - depth)
             let g:fold_depth = (depth - 1)
             if g:fold_depth < 0
                 let g:fold_depth = 0
 
             endif
 
+            let ret = g:fold_depth
+
+        else
             let ret = g:fold_depth
 
         endif
