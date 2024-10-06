@@ -46,18 +46,6 @@ function pyfold#isComment(line)
 endfunction
 
 
-"function pyfold#getPrevDepth(depth)
-"	let prev_depth = a:depth - 1
-"	if prev_depth < 0
-"		let prev_depth = 0
-"
-"	endif
-"
-"	return prev_depth
-"
-"endfunction
-
-
 " Get the depth of the line number, this is the fold level
 function pyfold#getDepth(lnum)
 	let ind = indent(a:lnum)
@@ -107,7 +95,6 @@ function! pyfold#fold()
 				let depth = pyfold#getDepth(nnum)
 				if depth <= g:fold_depth
 					let g:fold_depth = max([0, depth - 1])
-					"let g:fold_depth = pyfold#getPrevDepth(depth)
 
 				endif
 			endif
@@ -121,7 +108,6 @@ function! pyfold#fold()
 	else " normal line
 		let depth = pyfold#getDepth(v:lnum)
         if depth < g:fold_depth
-			"let g:fold_depth = pyfold#getPrevDepth(depth)
 			let g:fold_depth = max([0, depth - 1])
 
         endif
