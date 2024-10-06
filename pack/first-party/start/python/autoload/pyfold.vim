@@ -1,10 +1,9 @@
 
 " NOTE -- echom doesn't work when this function is called when folding, you can
-" only get it to print when calling this method manually `:call
-" pyfold#fold(v:lnum), to see what the function is doing, uncomment
-" `g:fold_debug` and the `call add(g:fold_debug, ...)` line and then when you
-" open a file just echo it `echo g:fold_debug`
-"
+" only get it to print when calling this method manually `:call or setting
+" debug for the messages pyfold#fold(v:lnum), to see what the function is
+" doing, uncomment `g:fold_debug` and the `call add(g:fold_debug, ...)` line
+" and then when you open a file just echo it `echo g:fold_debug`
 "let g:fold_debug = []
 
 " set to 1 if a decorator is encountered, it's flipped back to zero when the
@@ -17,6 +16,55 @@ let g:fold_decorated = 0
 " levels when it finds a line with a lower indent than the current fold
 " indent
 let g:fold_depth = 0
+
+
+" Return 1 if this line is a decorator line (start of new fold)
+function! pyfold#isDecorator(line)
+    return a:line =~ '^\s*@\S'
+
+endfunction
+
+
+" Return 1 if this line is a definition line (start of new fold)
+function pyfold#isDefinition(line)
+    return a:line =~ '^\s*\(class\|def\|async def\)\s'
+
+endfunction
+
+
+" Return 1 if this line is a blank line (only whitespace)
+function pyfold#isBlank(line)
+    return a:line =~ '^\s*$'
+
+endfunction
+
+
+" Return 1 if this line is only a comment
+function pyfold#isComment(line)
+    return a:line =~ '^\s*#'
+
+endfunction
+
+
+"function pyfold#getPrevDepth(depth)
+"	let prev_depth = a:depth - 1
+"	if prev_depth < 0
+"		let prev_depth = 0
+"
+"	endif
+"
+"	return prev_depth
+"
+"endfunction
+
+
+" Get the depth of the line number, this is the fold level
+function pyfold#getDepth(lnum)
+	let ind = indent(a:lnum)
+	return (ind / &shiftwidth) + 1
+
+endfunction
+
 
 " Fold python on class and function/method breaks
 "
@@ -34,46 +82,51 @@ function! pyfold#fold()
 
     endif
 
-    if cline =~ '^\s*@\S' " decorator fold line
+	if pyfold#isDecorator(cline)
         if g:fold_decorated == 0
-            let cind=indent(v:lnum)
-            let ret = ">" . (cind / &shiftwidth + 1)
+			let g:fold_depth = pyfold#getDepth(v:lnum)
+            let ret = ">" . g:fold_depth
             let g:fold_decorated = 1
 
         endif
 
-    elseif cline =~ '^\s*\(class\|def\|async def\)\s' " fold line
+	elseif pyfold#isDefinition(cline)
         if g:fold_decorated == 0
-            let cind=indent(v:lnum)
-            let g:fold_depth = (cind / &shiftwidth + 1)
+			let g:fold_depth = pyfold#getDepth(v:lnum)
             let ret = ">" . g:fold_depth
 
         endif
 
         let g:fold_decorated = 0
 
-    elseif cline =~ '^\s*$' " blank line
-        let ret = g:fold_depth
+	elseif pyfold#isBlank(cline)
+		if g:fold_depth > 0
+			let nnum = nextnonblank(v:lnum + 1)
+			let nline = getline(nnum)
+			if pyfold#isDefinition(nline) || pyfold#isDecorator(nline)
+				let depth = pyfold#getDepth(nnum)
+				if depth <= g:fold_depth
+					let g:fold_depth = max([0, depth - 1])
+					"let g:fold_depth = pyfold#getPrevDepth(depth)
 
-    elseif cline =~ '^\s*#' " comment line
+				endif
+			endif
+		endif
+
+		let ret = g:fold_depth
+
+	elseif pyfold#isComment(cline)
         let ret = g:fold_depth
 
 	else " normal line
-        let cind=indent(v:lnum)
-        let depth = (cind / &shiftwidth + 1)
+		let depth = pyfold#getDepth(v:lnum)
         if depth < g:fold_depth
-            let g:fold_depth = (depth - 1)
-            if g:fold_depth < 0
-                let g:fold_depth = 0
-
-            endif
-
-            let ret = g:fold_depth
-
-        else
-            let ret = g:fold_depth
+			"let g:fold_depth = pyfold#getPrevDepth(depth)
+			let g:fold_depth = max([0, depth - 1])
 
         endif
+
+		let ret = g:fold_depth
 
     endif
 
