@@ -57,7 +57,7 @@ endfunction
 " Fold python on class and function/method breaks
 "
 " The algo is pretty simple since this is called for each line in the buffer
-" when a new buffer is loaded/changed, basically, it just marks a new buffer as
+" when a new buffer is loaded/changed. Basically, it just marks a new buffer as
 " starting when it finds a class or def block and inherits when it isn't one
 " of those blocks
 function! pyfold#fold()
@@ -69,6 +69,8 @@ function! pyfold#fold()
         let g:fold_decorated = 0
 
     endif
+
+	let ret = g:fold_depth
 
 	if pyfold#isDecorator(cline)
         if g:fold_decorated == 0
@@ -116,6 +118,8 @@ function! pyfold#fold()
 
     endif
 
+	" This should work with: `vim -D <PATH>` but it didn't print
+    "echom v:lnum.". ".ret." line: ".cline
     "call add(g:fold_debug, v:lnum.". ".ret." line: ".cline."\n")
     return ret
 
