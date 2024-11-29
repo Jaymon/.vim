@@ -86,7 +86,8 @@ autocmd VimLeavePre * if g:screen_size_restore == 1 | call ScreenSave() | endif
 
 " http://www.utf8-chartable.de/unicode-utf8-table.pl?start=8192
 "set listchars=tab:‧\ ,space:‧,eol:․,trail:‧,extends:‧,precedes:‧
-set listchars=tab:‧\ ,leadmultispace:‧\ \ \ ,eol:․,trail:‧,extends:‧,precedes:‧
+"set listchars=tab:‧\ ,leadmultispace:‧\ \ \ ,eol:․,trail:‧,extends:‧,precedes:‧
+set listchars=tab:܁\ ,leadmultispace:܁\ \ \ ,eol:․,trail:܁,extends:܁,precedes:܁
 set list
 
 
