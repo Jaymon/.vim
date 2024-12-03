@@ -1,19 +1,22 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vim color file
-" Maintainer:   Jay Marcyes <jay@marcyes.com>
-" Since:  8-2-12
-" URL:		http://marcyes.com
-
-" cool help screens
-" :he highlight
-" :he group-name
-" :he highlight-groups
-" :he cterm-colors
+" Maintainer: Jay Marcyes <jay@marcyes.com>
+" Since: 8-2-12
+"
+" cool help screens:
+" * :he highlight
+" * :he group-name
+" * :he highlight-groups
+" * :he cterm-colors
 "
 " a list of the 256 available colors
 " http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
 " http://www.vim.org/scripts/script.php?script_id=3412
+"
+" It doesn't look like you can set colors in a variable without a bit of hassle
+"   https://vi.stackexchange.com/questions/10020/how-to-use-a-variable-value-in-a-colorscheme
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" your pick:
 set background=light
 hi clear
 if exists("syntax_on")
@@ -47,19 +50,6 @@ let g:colors_name="jaymon_light"
 "	Cursor         xxx guifg=bg guibg=fg 
  	
 " Uncomment and complete the commands you want to change from the default.
-
-" http://vim.wikia.com/wiki/Highlight_current_line
-hi cursorLine guibg=#ECF7FF cterm=None term=None
-
-hi MatchParen guibg=#FFFF80 ctermbg=yellow
-
-hi ColorColumn ctermbg=None guibg=#ECF7FF
-
-" this was previously in the status line section of my gvimrc, I have no idea
-" what it highlights
-hi User1 guibg=#ECF7FF guifg=#A0A0A0
-
-
 "hi Cursor		
 "hi CursorIM	
 "hi Directory	
@@ -72,7 +62,6 @@ hi User1 guibg=#ECF7FF guifg=#A0A0A0
 "hi Folded		
 "hi FoldColumn	
 "hi IncSearch	
-hi LineNr guifg=#bcbcbc guibg=#ECF7FF
 "hi ModeMsg		
 "hi MoreMsg		
 "hi NonText		
@@ -89,11 +78,41 @@ hi LineNr guifg=#bcbcbc guibg=#ECF7FF
 "hi Menu		
 "hi Scrollbar	
 "hi Tooltip		
+"hi Underlined	
+"hi Ignore		
+"hi Error		
+"hi Todo		
 
 " orange: #FF8000
 " red: #FF0000
 " light grey: #DEDAE0
 " dark blue: #000080
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" background highlight color
+"
+" Previous color was: #ECF7FF (changed 12-3-2024)
+"   https://www.color-hex.com/color/ecf7ff
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" http://vim.wikia.com/wiki/Highlight_current_line
+hi cursorLine guibg=#F3FAFF cterm=None term=None
+
+hi ColorColumn ctermbg=None guibg=#F3FAFF
+
+" this was previously in the status line section of my gvimrc, I have no idea
+" what it highlights
+hi User1 guibg=#F3FAFF guifg=#A0A0A0
+
+" style unhighlighted line numbers
+hi LineNr guifg=#BCBCBC guibg=#F3FAFF
+" style highlighted line number
+" https://stackoverflow.com/questions/8247243/highlighting-the-current-line-number-in-vim
+hi CursorLineNr guifg=#838383
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+hi MatchParen guibg=#FFFF80 ctermbg=yellow
 
 " syntax highlighting groups
 hi Comment guifg=#DEDAE0 ctermfg=lightgrey
@@ -121,10 +140,7 @@ hi Number guifg=#267f99
 
 hi Float guifg=#000080 ctermfg=darkblue
 hi String guifg=#FF0000 ctermfg=red
-"hi Underlined	
-"hi Ignore		
-"hi Error		
-"hi Todo		
+
 hi Structure ctermfg=black cterm=bold guifg=black gui=bold
 
 " completely ignore error highlighting, individual syntax files can turn it on
@@ -139,7 +155,10 @@ highlight SpecialKey guifg=#b9e2ff
 
 hi NonReservedKeyword guifg=black ctermfg=black cterm=bold gui=bold
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " python specific highlighting
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 hi pythonFormatStrTemplate guifg=#800000 ctermfg=magenta
 hi pythonBytesEscape guifg=#800000 ctermfg=magenta
 "hi pythonFormatStrTemplate guifg=#660000
@@ -148,17 +167,24 @@ hi pythonStrFormat guifg=#CC0000 ctermfg=magenta
 hi pythonMagicMethod guifg=#0000FF ctermfg=blue cterm=bold gui=bold
 hi pythonMathOperator guifg=#AF00DB
 hi pythonClass guifg=#AF00DB ctermfg=DarkMagenta
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " markdown specific highlighting
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 highlight markdownH1 ctermfg=5 guifg=#FF00AF
 highlight markdownH2 ctermfg=4 guifg=#FF00D7
 highlight markdownH3 ctermfg=13 guifg=#FF00FF
 highlight markdownH4 ctermfg=12 guifg=#FF0087
 highlight markdownH5 ctermfg=163 guifg=#FF005F
 highlight markdownH6 ctermfg=56 guifg=#FF5FFF
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Ruby specific highlighting
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 hi rubyStringDelimiter guifg=#CC0000 ctermfg=magenta
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 

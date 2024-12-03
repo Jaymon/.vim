@@ -3,13 +3,17 @@
 " https://developer.apple.com/documentation/appkit/nsfontweight
 set guifont=-monospace-Light:h10:cANSI
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Save the size and position
+"
 " based off of this script:
 " http://vim.wikia.com/wiki/Restore_screen_size_and_position
 "
 " This seems to work, the problem is it will set a certain size for the big
 " monitor, and then that will be huge for the laptop screen, but it's better
 " than the full size the GUIEnter was giving me on Mac
-
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " set this for the size to be saved at all
 let g:screen_size_restore = (exists("g:screen_size_restore")) ? g:screen_size_restore : 1
 " set this to restore the screen position of the window, not just the size
@@ -82,13 +86,24 @@ endfunction
 
 autocmd VimEnter * if g:screen_size_restore == 1 | call ScreenRestore() | endif
 autocmd VimLeavePre * if g:screen_size_restore == 1 | call ScreenSave() | endif
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Whitespace delims
 " http://www.utf8-chartable.de/unicode-utf8-table.pl?start=8192
+"
+" Characters until 12-3-2024: ‧․
+" 
+" Current characters: \u0701 and \u0702
+"   https://www.compart.com/en/unicode/category/Po
+"   https://www.compart.com/en/unicode/scripts/Syrc
 "set listchars=tab:‧\ ,space:‧,eol:․,trail:‧,extends:‧,precedes:‧
 "set listchars=tab:‧\ ,leadmultispace:‧\ \ \ ,eol:․,trail:‧,extends:‧,precedes:‧
-set listchars=tab:܁\ ,leadmultispace:܁\ \ \ ,eol:․,trail:܁,extends:܁,precedes:܁
+"set listchars=tab:܁\ ,leadmultispace:܁\ \ \ ,eol:․,trail:܁,extends:܁,precedes:܁
+set listchars=tab:܁\ ,leadmultispace:܁\ \ \ ,eol:܂,trail:܁,extends:܁,precedes:܁
 set list
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -124,23 +139,23 @@ function! SyntaxInfo()
 
 endfunction
 
-"hi User1 guibg=#ECF7FF guifg=#A0A0A0
 set laststatus=2
 set statusline=   " clear the statusline for when vimrc is reloaded
 set statusline+=%1* " switch to User1 highlight
 set statusline+=%{repeat('\ ',LineNumberBuffer())}
-"set statusline+=%f\                          " file name
-set statusline+=[%n]\ %.80F\                  " buffer number and file (max 80 chars of path)
-set statusline+=%h%m%r%w                     " flags
-set statusline+=[%{strlen(&ft)?&ft:'none'},\  " filetype
+"set statusline+=%f\                            " file name
+set statusline+=[%n]\ %.80F\                    " buffer number and file (max 80 chars of path)
+set statusline+=%h%m%r%w                        " flags
+set statusline+=[%{strlen(&ft)?&ft:'none'},\    " filetype
 "set statusline+=[%y,\  " filetype
-set statusline+=%{strlen(&fenc)?&fenc:&enc},\  " encoding
-set statusline+=%{&fileformat}]              " file format
-set statusline+=%=                           " right align
+set statusline+=%{strlen(&fenc)?&fenc:&enc},\   " encoding
+set statusline+=%{&fileformat}]                 " file format
+set statusline+=%=                              " right align
 "set statusline+=%-2.10{v:register}
 set statusline+=%{v:register}\ 
 set statusline+=%{SyntaxInfo()}
-set statusline+=%15.15(%c\ %l/%L%)\   "cursor_column current_line/total_lines
+set statusline+=%15.15(%c\ %l/%L%)\             " cursor_column current_line/total_lines
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -151,4 +166,5 @@ if exists('+colorcolumn')
   set colorcolumn=+1,+41
 
 endif
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
