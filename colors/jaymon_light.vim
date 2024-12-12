@@ -144,8 +144,10 @@ hi String guifg=#FF0000 ctermfg=red
 hi Structure ctermfg=black cterm=bold guifg=black gui=bold
 
 " completely ignore error highlighting, individual syntax files can turn it on
-" but I absolutely hate it, I don't think this does anything though
-syn clear Error
+" but I absolutely hate it
+" https://superuser.com/a/654947
+hi Error NONE
+hi ErrorMsg NONE
 
 " http://stackoverflow.com/questions/8309815/vim-conceal-with-more-than-one-character
 hi conceal ctermfg=DarkBlue ctermbg=NONE guifg=#D4CED4 guibg=NONE
