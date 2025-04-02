@@ -1,3 +1,7 @@
-# Javascript syntax plugin
+# Javascript/Typescript syntax plugin
 
-This will try and stick to [StandardJS](https://standardjs.com/) as closely as possible
+Order of formatting:
+
+* [Prettier](https://prettier.io/docs/options)
+* [StandardJS](https://standardjs.com/rules)
+* Custom when I think both Prettier and SJS are wrong.
