@@ -83,6 +83,7 @@ syn region pythonByteString matchgroup=pythonQuotes start=+[bB]\z(['"]\)+ end="\
 " 1-6-2023 - matches {...} inside a string (as long as the first { isn't preceded by {
 " update 1-28-2023 to remove the \zs in favor of a negative look-behind
 syn match pythonFormatStrTemplate "{\@<!{[^}{]*}" contained containedin=pythonString,pythonRawString,pythonFormatString
+hi link pythonFormatStrTemplate Special
 
 " multi-line strings not assigned to a variable should be treated as comments
 " the \zs in the regex means start the matching right before the next match (so it
@@ -105,9 +106,10 @@ syn match pythonStatementOperator "[:]"
 " more hilighting of special comments I tend to use
 " http://stackoverflow.com/a/1819151/5006
 " http://learnvimscriptthehardway.stevelosh.com/chapters/46.html
-syn keyword pythonTodo DEPRECATED WARNING WARN
+syn keyword pythonTodo contained DEPRECATED WARNING WARN
 " allow ??? or !!! similar to XCode
 syn match pythonNote "[?!]\{3,\}" containedin=PythonComment,pythonDocBlock
+hi link pythonNote pythonTodo
 
 
 " I like these (eg, and in is not or) better as the same color as for loops and stuff
@@ -126,7 +128,4 @@ hi link PythonClassVar NonReservedKeyword
 
 hi link pythonFormatString String
 hi link pythonByteString String
-hi link pythonFormatStrTemplate Special
-
-hi link pythonNote pythonTodo
 

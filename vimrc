@@ -115,6 +115,10 @@ set fo-=t fo+=crl
 
 " don't automatically insert a comment leader if hitting o in a comment
 set fo-=o
+" But this option seems to be set by specific filetypes, so let's be more
+" aggressive with removing it because it drives me nuts
+" https://superuser.com/a/271024
+autocmd BufEnter * setlocal fo-=o
 
 " Delete comment characters when joining lines
 set formatoptions+=j

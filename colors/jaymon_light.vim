@@ -9,6 +9,11 @@
 " * :he highlight-groups
 " * :he cterm-colors
 "
+" Current colors:
+"
+" * #FF8000 - orange (import)
+" * #AF00DB - purple (class names)
+"
 " a list of the 256 available colors
 " http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
 " http://www.vim.org/scripts/script.php?script_id=3412
@@ -159,6 +164,14 @@ hi NonReservedKeyword guifg=black ctermfg=black cterm=bold gui=bold
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vimscript specific highlighting
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" For some reason strings in a comment are highlighted like normal strings
+hi link VimCommentString VimLineComment
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " python specific highlighting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 hi pythonFormatStrTemplate guifg=#800000 ctermfg=magenta
@@ -188,5 +201,28 @@ highlight markdownH6 ctermfg=56 guifg=#FF5FFF
 " Ruby specific highlighting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 hi rubyStringDelimiter guifg=#CC0000 ctermfg=magenta
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" javascript/typescript specific highlighting
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+hi typescriptExport guifg=#FF8000 ctermfg=magenta cterm=bold gui=bold
+hi typescriptImport guifg=#FF8000 ctermfg=magenta cterm=bold gui=bold
+hi typescriptImportType guifg=#FF8000 ctermfg=magenta cterm=bold gui=bold
+
+" arguments in definitions, calls, and classes
+hi typescriptCall guifg=black ctermfg=black
+hi typescriptFuncCallArg guifg=black ctermfg=black
+hi typescriptMember NONE
+
+" class definitions
+hi typescriptClassName guifg=#AF00DB ctermfg=DarkMagenta
+hi link typescriptClassHeritage typescriptClassName
+
+" operators: =
+hi typescriptDefaultParam guifg=#AF00DB
+hi typescriptAssign guifg=#AF00DB
+hi typescriptKeywordOp guifg=#FF8000 ctermfg=magenta cterm=bold gui=bold
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
