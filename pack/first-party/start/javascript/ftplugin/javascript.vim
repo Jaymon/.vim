@@ -6,24 +6,24 @@ endif
 let b:did_ftplugin_javascript = 1
 
 
+""
+" This is called when the linter job is finished, it is defined in `job_start`
+""
 function! RanLinter(channel)
-  " I was trying to delete the newline so `done` stays on the same line, it
-  " didn't work
-  "1echow "\x08\x08 done"
-  "1echow "done"
-  "echomsg "done"
-  "redraw!
+  " save the cursor position because `edit` will sometimes change it but it's
+  " maddeningly incosistent on when it does it and where it puts it
+  let view = winsaveview()
+  "let save_pos = getpos('.')
+
+  " refresh the buffer so the changes are reflected
   edit
-  "source %
+
+  " restore the cursor position
+  "call setpos('.', save_pos)
+  " Restore scroll/view position
+  call winrestview(view)
 
 endfunc
-
-"function! RunningLinter(channel, msg) 
-"  "while ch_status(a:channel, {"part": "out"}) == "buffered"
-"  "echomsg ch_read(a:channel)
-"  "endwhile
-"  "echom "."
-"endfunction
 
 
 ""
@@ -41,19 +41,12 @@ function! RunLinter()
     1echow cmd
 
     " https://vimhelp.org/channel.txt.html#job-start
-    "call job_start(cmd, {"close_cb": "RanLinter", "callback": "RunningLinter", "out_timeout": 10})
     call job_start(cmd, {"close_cb": "RanLinter"})
-
-    "echom "Linting"
-    "echom cmd
-    "silent! execute "!" . cmd
-    "echom "Done running: " . cmd
 
   endif
 
 endfunction
 
 
-"autocmd BufWritePost * :echo "File saved!"
 autocmd BufWritePost * call RunLinter()
 
