@@ -1,7 +1,19 @@
 " Python-mode motion functions
+" This is a modified version of this file:
+"	https://github.com/python-mode/python-mode/blob/develop/autoload/pymode/motion.vim
+"
+" As of 2025-04-10 I think I've only modified the pymode#motion#move function
+"
+" This requires `&magic` to be set, which it is by default
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
+""
 " Jay has completely changed this method (9-18-2024)
+" python motion to move to the end of a file when [[ is ran but there are no
+" more matching blocks. It will move to the top of the file when ]] runs out of
+" blocks
+""
 fun! pymode#motion#move(pattern, flags, ...) "{{{
 	" flags:
 	" * W: Do not wrap around the end of the file (search only in the direction
@@ -60,6 +72,7 @@ fun! pymode#motion#pos_le(pos1, pos2) "{{{
     return ((a:pos1[0] < a:pos2[0]) || (a:pos1[0] == a:pos2[0] && a:pos1[1] <= a:pos2[1]))
 endfunction "}}}
 
+
 fun! pymode#motion#select(first_pattern, second_pattern, inner) "{{{
     let cnt = v:count1 - 1
     let orig = getpos('.')[1:2]
@@ -88,9 +101,11 @@ fun! pymode#motion#select(first_pattern, second_pattern, inner) "{{{
     endif
 endfunction "}}}
 
+
 fun! pymode#motion#select_c(pattern, inner) "{{{
     call pymode#motion#select(a:pattern, a:pattern, a:inner)
 endfunction "}}}
+
 
 fun! s:BlockStart(lnum, first_pattern, second_pattern) "{{{
     let lnum = a:lnum + 1
@@ -134,4 +149,4 @@ fun! s:BlockEnd(lnum, ...) "{{{
     endwhile
     return line('$')
 endfunction "}}}
-" vim: fdm=marker:fdl=0
+

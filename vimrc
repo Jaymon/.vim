@@ -5,6 +5,7 @@
 "
 " stuff I always forget: g:, l:, s: variables definitions can be found by
 " running `:help internal-variables`
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 call env#setup()
 
@@ -85,9 +86,9 @@ set ignorecase
 set smartcase
 
 
-"##############################################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Indentation stuff
-"##############################################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " http://www.jonlee.ca/hacking-vim-the-ultimate-vimrc/
 " http://www.cs.swarthmore.edu/help/vim/indenting.html
 set autoindent
@@ -150,9 +151,9 @@ augroup vimrc
 augroup END
 
 
-"##############################################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Syntax and Highlighting
-"##############################################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " turn on syntax highlighting
 filetype plugin indent on " indent depends on filetype
@@ -180,9 +181,9 @@ augroup END
 set redrawtime=10000
 
 
-"##############################################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Backup and saving stuff
-"##############################################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set history=1000
 set backupcopy=yes
 set backup
@@ -241,9 +242,9 @@ set sessionoptions+=resize
 set autoread
 
 
-"##############################################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Handle copy/paste better
-"##############################################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " make Y behave like D and C
 nmap Y y$
@@ -291,7 +292,7 @@ vnoremap p p:let @*=@0<CR>
 " http://superuser.com/a/296308
 set clipboard+=unnamed
 
-"##############################################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " http://vim.wikia.com/wiki/VimTip1066
 " http://vim.wikia.com/wiki/Insert_newline_without_entering_insert_mode
@@ -333,9 +334,9 @@ nnoremap ˙ 10h
 nnoremap ¬ 10l
 
 
-"##############################################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " configure tab buffers
-"##############################################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup vimrc
   " http://stackoverflow.com/questions/2468939/
   " http://stackoverflow.com/questions/11595301/controlling-tab-names-in-vim
@@ -375,7 +376,7 @@ nmap <leader>7 7gt<CR>
 nmap <leader>8 8gt<CR>
 nmap <leader>9 9gt<CR>
 
-"##############################################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 augroup vimrc
@@ -388,7 +389,7 @@ augroup END
 " make it easier to change current working directory pwd to current file's dir
 " http://vim.wikia.com/wiki/Set_working_directory_to_the_current_file
 " CDC = Change to Directory of Current file
-"command! CDC lcd %:p:h
+command! CDC lcd %:p:h
 " to get NerdTree to change to the directory also, open the NT buffer and type
 " CD
 
