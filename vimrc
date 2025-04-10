@@ -13,6 +13,13 @@ set nocompatible
 " http://stackoverflow.com/questions/7178964/how-to-turn-off-auto-insert-when-selecting-text-with-gvim?rq=1
 behave xterm
 
+
+augroup vimrc
+  " reset all autocmds for this file in case it is reloaded
+  autocmd!
+augroup END
+
+
 " When I upgraded to macos montery (March 2022) I all of a sudden had a a
 " sound when doing certain things (it was the Funky system sound), I figured
 " out how to reproduce it (hit j when on the last line of a file) and this was
@@ -40,12 +47,15 @@ if has("multi_byte")
   set fileencodings=ucs-bom,utf-8,latin1
 endif
 
-" this is from vimrc_example.vim
-" When editing a file, always jump to the last known cursor position.
-autocmd BufReadPost *
-  \ if line("'\"") > 1 && line("'\"") <= line("$") |
-  \   exe "normal! g`\"" |
-  \ endif
+augroup vimrc
+  " this is from vimrc_example.vim
+  " When editing a file, always jump to the last known cursor position.
+  autocmd BufReadPost *
+    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \ endif
+augroup END
+
 
 " mess with the status bar
 set ruler " show the cursor position all the time
@@ -115,10 +125,13 @@ set fo-=t fo+=crl
 
 " don't automatically insert a comment leader if hitting o in a comment
 set fo-=o
-" But this option seems to be set by specific filetypes, so let's be more
-" aggressive with removing it because it drives me nuts
-" https://superuser.com/a/271024
-autocmd BufEnter * setlocal fo-=o
+
+augroup vimrc
+  " But this option seems to be set by specific filetypes, so let's be more
+  " aggressive with removing it because it drives me nuts
+  " https://superuser.com/a/271024
+  autocmd BufEnter * setlocal fo-=o
+augroup END
 
 " Delete comment characters when joining lines
 set formatoptions+=j
@@ -130,9 +143,11 @@ set formatoptions+=n
 " allow dashes to be used as a list also
 let &formatlistpat .= '\|^\s*-\s*'
 
-" on opening a new file we will only set the textwidth if it hasn't been set
-" by something else
-autocmd BufRead * if &textwidth == 0 | set textwidth=79 | endif
+augroup vimrc
+  " on opening a new file we will only set the textwidth if it hasn't been set
+  " by something else
+  autocmd BufRead * if &textwidth == 0 | set textwidth=79 | endif
+augroup END
 
 
 "##############################################################################
@@ -148,12 +163,15 @@ colorscheme jaymon_light
 nmap <leader>rs :syn sync fromstart<CR>
 nmap <leader>parse :syn sync fromstart<CR>
 
-" Added 8-26-2022, I'm sick of dealing with wonky syntax, I think my computer is
-" fast enough that syntax highlighting should never be a problem
-" https://vim.fandom.com/wiki/Fix_syntax_highlighting
-" https://stackoverflow.com/a/43419018/5006
-"syn sync minlines=2000
-autocmd BufEnter * :syntax sync fromstart
+augroup vimrc
+  " Added 8-26-2022, I'm sick of dealing with wonky syntax, I think my computer
+  " is fast enough that syntax highlighting should never be a problem
+  " https://vim.fandom.com/wiki/Fix_syntax_highlighting
+  " https://stackoverflow.com/a/43419018/5006
+  "syn sync minlines=2000
+  autocmd BufEnter * :syntax sync fromstart
+augroup END
+
 " disabled 1-3-2023, these caused noticeable lag
 "autocmd Insertleave * :syntax sync minlines=200 maxlines=200
 "autocmd CursorMoved * :syntax sync minlines=100 maxlines=100
@@ -176,10 +194,25 @@ set undoreload=10000
 " http://stackoverflow.com/questions/2823608/
 set backupdir-=.
 set backupdir^=$VIMTEMP//
-" sadly, backupdir doesn't respect the //, but this hack using the 'backupext' will make unique backup files
-" The path is appended on the end of the file: '/home/docwhat/.vimrc' becomes '.vimrc%home%docwhat~'
-" http://stackoverflow.com/a/9528517
-au BufWritePre * let &backupext ='@'.substitute(substitute(substitute(expand('%:p:h'), '/', '%', 'g'), '\', '%', 'g'),  ':', '', 'g').'~'
+
+augroup vimrc
+  " sadly, backupdir doesn't respect the //, but this hack using the
+  " 'backupext' will make unique backup files The path is appended on the end
+  " of the file: '/home/docwhat/.vimrc' becomes '.vimrc%home%docwhat~'
+  " http://stackoverflow.com/a/9528517
+  au BufWritePre *
+        \ let &backupext ='@'.substitute(
+        \   substitute(
+        \     substitute(
+        \       expand('%:p:h'),
+        \       '/', '%', 'g'
+        \     ),
+        \     '\', '%', 'g'
+        \   ),
+        \   ':', '', 'g'
+        \ ).'~'
+augroup END
+  
 " this is for the .swp files
 " http://vim.wikia.com/wiki/Remove_swap_and_backup_files_from_your_working_directory
 set directory-=.
@@ -189,12 +222,17 @@ set undodir-=.
 set undodir^=$VIMTEMP//
 " vim will save view state so the same view gets reloaded on file reopen
 " http://vim.wikia.com/wiki/Make_views_automatic
-set viewoptions-=options " preserving option state was annoying me, cursor and folding good, options bad
+" preserving option state was annoying me, cursor and folding good, options bad
+set viewoptions-=options
 set viewdir=$VIMTEMP//
 
-" NOTE -- these might need to be commented out when writing/testing vimscript
-au BufWinLeave * silent! mkview "make vim save view (state) (folds, cursor, etc)
-au BufWinEnter * silent! loadview "make vim load view (state) (folds, cursor, etc)
+augroup vimrc
+  " NOTE -- these might need to be commented out when writing/testing vimscript
+  " make vim save view (state) (folds, cursor, etc)
+  au BufWinLeave * silent! mkview
+  " make vim load view (state) (folds, cursor, etc)
+  au BufWinEnter * silent! loadview
+augroup END
 
 " http://stackoverflow.com/questions/594838/is-it-possible-to-get-gvim-to-remember-window-size
 set sessionoptions+=resize
@@ -298,15 +336,12 @@ nnoremap ¬ 10l
 "##############################################################################
 " configure tab buffers
 "##############################################################################
-" http://stackoverflow.com/questions/2468939/
-" http://stackoverflow.com/questions/11595301/controlling-tab-names-in-vim
-" `:help statusline` for a description of the modifiers
-autocmd bufEnter * set guitablabel=\[%N\]\ %t\ %M\[%N\]
-" I also thought about using <C-<> :tabprev and <c->> :tabnext
-"nnoremap <A-.> :tabn<CR>
-"nnoremap <A-,> :tabp<CR>
-" http://vim.wikia.com/wiki/Alternative_tab_navigation
-" http://vim.wikia.com/wiki/Using_tab_pages
+augroup vimrc
+  " http://stackoverflow.com/questions/2468939/
+  " http://stackoverflow.com/questions/11595301/controlling-tab-names-in-vim
+  " `:help statusline` for a description of the modifiers
+  autocmd bufEnter * set guitablabel=\[%N\]\ %t\ %M\[%N\]
+augroup END
 
 " go back to the previous tab, sadly, tabp just goes to tab to the
 " left, and :tabl goes to the very last tab, so :tabt will have to do
@@ -316,7 +351,17 @@ nmap <leader>t :exe "tabn ".g:lasttab<CR>
 " everytime we leave a tab update the lasttab value so the leader t command
 " above works
 let g:lasttab = 1
-autocmd TabLeave * let g:lasttab = tabpagenr()
+
+augroup vimrc
+  autocmd TabLeave * let g:lasttab = tabpagenr()
+
+  " put the opened tab at the end of the list, I prefer that to opening next to
+  " the tab in which it was opened
+  " this puts the tab always on the far right, not next to the last tab
+  " move tabs to the end for new, single buffers (exclude splits)
+  " http://stackoverflow.com/questions/3998752/nerdtree-open-in-a-new-tab-as-last-tab-in-gvim
+  autocmd BufNew * if winnr('$') == 1 | tabmove | endif
+augroup END
 
 " Number keys map to the same tab, over the years, this has become the primary
 " way I jump between tabs
@@ -330,25 +375,20 @@ nmap <leader>7 7gt<CR>
 nmap <leader>8 8gt<CR>
 nmap <leader>9 9gt<CR>
 
-" put the opened tab at the end of the list, I prefer that to opening next to
-" the tab in which it was opened
-" this puts the tab always on the far right, not next to the last tab
-" move tabs to the end for new, single buffers (exclude splits)
-" http://stackoverflow.com/questions/3998752/nerdtree-open-in-a-new-tab-as-last-tab-in-gvim
-autocmd BufNew * if winnr('$') == 1 | tabmove | endif
-
 "##############################################################################
 
 
-" automatically open a file in readonly mode when swap exists
-" http://apple.stackexchange.com/questions/53732/
-autocmd SwapExists * :let v:swapchoice='o'
+augroup vimrc
+  " automatically open a file in readonly mode when swap exists
+  " http://apple.stackexchange.com/questions/53732/
+  autocmd SwapExists * :let v:swapchoice='o'
+augroup END
 
 
 " make it easier to change current working directory pwd to current file's dir
 " http://vim.wikia.com/wiki/Set_working_directory_to_the_current_file
 " CDC = Change to Directory of Current file
-command! CDC lcd %:p:h
+"command! CDC lcd %:p:h
 " to get NerdTree to change to the directory also, open the NT buffer and type
 " CD
 

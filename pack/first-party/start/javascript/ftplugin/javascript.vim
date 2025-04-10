@@ -1,9 +1,9 @@
 
 " Only load this when no other was loaded.
-if exists("b:did_ftplugin_javascript")
+if exists("g:loaded_javascript_ftplugin")
     finish
 endif
-let b:did_ftplugin_javascript = 1
+let g:loaded_javascript_ftplugin = "v0.1"
 
 
 ""
@@ -47,6 +47,14 @@ function! RunLinter()
 
 endfunction
 
+augroup javascript_linter
+  " Clear autocommands in this group, when I was opening up more buffers/files
+  " I was noticing that my linter call was running multiple times, this is
+  " because each new buffer added a new autocmd, this makes sure that doesn't
+  " happen anymore
+  autocmd!
 
-autocmd BufWritePost * call RunLinter()
+  autocmd BufWritePost * call RunLinter()
+
+augroup END
 

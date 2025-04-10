@@ -4,6 +4,12 @@
 set guifont=-monospace-Light:h10:cANSI
 
 
+augroup gvimrc
+  " reset all autocmds for this file in case it is reloaded
+  autocmd!
+augroup END
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Save the size and position
 "
@@ -84,8 +90,10 @@ function! ScreenSave()
   endif
 endfunction
 
-autocmd VimEnter * if g:screen_size_restore == 1 | call ScreenRestore() | endif
-autocmd VimLeavePre * if g:screen_size_restore == 1 | call ScreenSave() | endif
+augroup gvimrc
+  autocmd VimEnter * if g:screen_size_restore == 1 | call ScreenRestore() | endif
+  autocmd VimLeavePre * if g:screen_size_restore == 1 | call ScreenSave() | endif
+augroup END
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
@@ -122,6 +130,7 @@ function! LineNumberBuffer()
   let l:line_number_len = len(line('$')) + 1
   " not sure why this needs the +1 here, but it does
   return l:line_number_len > &numberwidth ? l:line_number_len + 1 : &numberwidth + 1
+
 endfunction
 
 " Get a string of the syntax rule and any linked syntax rule
@@ -130,11 +139,15 @@ function! SyntaxInfo()
   let l:s = synID(line('.'),col('.'),1)
   let l:syntax_name = synIDattr(s, 'name')
   let l:syntax_group = synIDattr(synIDtrans(s), 'name')
-  if len(l:syntax_group) > 0
+
+  if len(l:syntax_group) > 0 && l:syntax_name !=? l:syntax_group
     let l:syntax_info = l:syntax_name . ' (' . l:syntax_group . ')'
+
   else
     let l:syntax_info = l:syntax_name
+
   endif
+
   return l:syntax_info
 
 endfunction

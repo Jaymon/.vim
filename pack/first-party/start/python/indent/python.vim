@@ -35,10 +35,10 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Only load this indent file when no other was loaded.
-if exists("b:did_indent")
+if exists("b:python_indent")
     finish
 endif
-let b:did_indent = 1
+let b:python_indent = 1
 
 setlocal tabstop=4
 setlocal softtabstop=4

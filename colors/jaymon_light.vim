@@ -168,6 +168,9 @@ hi NonReservedKeyword guifg=black ctermfg=black cterm=bold gui=bold
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " For some reason strings in a comment are highlighted like normal strings
 hi link VimCommentString VimLineComment
+
+" make titles in comments (eg `" Foo:`) just a darker shade of gray
+hi VimCommentTitle term=bold ctermfg=5 guifg=#A0A0A0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
