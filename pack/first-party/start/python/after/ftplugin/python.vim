@@ -17,11 +17,6 @@ endif
 " set comments+=sf:\"\"\",eb:\"\"\"
 
 
-" Ignore files matching these patterns when opening files based on a
-" glob pattern. Turns out this is in the $VIMRUNTIME python file now
-"set wildignore+=.pyc
-
-
 " python folding
 " https://stackoverflow.com/a/360634
 "set foldmethod=indent
