@@ -393,3 +393,43 @@ command! CDC lcd %:p:h
 " to get NerdTree to change to the directory also, open the NT buffer and type
 " CD
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" expand motion commands, these work for python and javascript and are
+" hopefully generic for more motion, it seems vim's decently standard defaults
+" are [[, ]], [m, and ]m
+"
+" These were previously in python/after/ftplugin/python.vim but I moved them
+" here when I realized I was going to have to define all the same commands for
+" javascript also if I didn't move them
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Expand class next motion mappings
+nnoremap <silent> <buffer> ]C :<C-U>execute "normal " . v:count1 . "]]"<CR>
+onoremap <silent> <buffer> ]C :<C-U>execute "normal " . v:count1 . "]]"<CR>
+xnoremap <silent> <buffer> ]C :<C-U>execute "normal gv" . v:count1 . "]]"<CR>
+
+nnoremap <silent> <buffer> ]c :<C-U>execute "normal " . v:count1 . "]]"<CR>
+onoremap <silent> <buffer> ]c :<C-U>execute "normal " . v:count1 . "]]"<CR>
+xnoremap <silent> <buffer> ]c :<C-U>execute "normal gv" . v:count1 . "]]"<CR>
+
+" Expand class previous motion mappings
+nnoremap <silent> <buffer> [C :<C-U>execute "normal " . v:count1 . "[["<CR>
+onoremap <silent> <buffer> [C :<C-U>execute "normal " . v:count1 . "[["<CR>
+xnoremap <silent> <buffer> [C :<C-U>execute "normal gv" . v:count1 . "[["<CR>
+
+nnoremap <silent> <buffer> [c :<C-U>execute "normal " . v:count1 . "[["<CR>
+onoremap <silent> <buffer> [c :<C-U>execute "normal " . v:count1 . "[["<CR>
+xnoremap <silent> <buffer> [c :<C-U>execute "normal gv" . v:count1 . "[["<CR>
+
+" Expand method next motion mappings
+nnoremap <silent> <buffer> ]} :<C-U>execute "normal " . v:count1 . "]m"<CR>
+onoremap <silent> <buffer> ]} :<C-U>execute "normal " . v:count1 . "]m"<CR>
+xnoremap <silent> <buffer> ]} :<C-U>execute "normal gv" . v:count1 . "]m"<CR>
+
+" Expand method previous motion mappings
+nnoremap <silent> <buffer> [{ :<C-U>execute "normal " . v:count1 . "[m"<CR>
+onoremap <silent> <buffer> [{ :<C-U>execute "normal " . v:count1 . "[m"<CR>
+xnoremap <silent> <buffer> [{ :<C-U>execute "normal gv" . v:count1 . "[m"<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+

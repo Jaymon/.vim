@@ -1,15 +1,45 @@
-"##############################################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " configure NERDTree
 " https://github.com/scrooloose/nerdtree
 "
 " This should load before pack/third-party/start/NERDTree, you can verify this
 " by running `:scriptnames` and verifying this loaded before any other
 " Nerdtree things
-"##############################################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"autocmd bufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-"nnoremap RN :NERDTreeTabsToggle<CR>
-nnoremap RN :NERDTreeMirrorToggle<CR>
+""
+" vim nerdtree open and expand to current file
+"
+" Toggle NERDTree's tab and open to the opened file in relation to the current
+" working directory
+"
+" https://github.com/preservim/nerdtree/issues/480
+" https://vi.stackexchange.com/a/5340
+"
+" I was hopeful this answer would work, but it didn't:
+"   https://superuser.com/a/567013
+""
+function! NERDTreeFindToggle()
+  if (exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1)
+    NERDTreeClose
+
+  else
+    if (expand("%:t") != '')
+      NERDTreeFind
+
+    else
+      NERDTreeToggle
+
+    endif
+
+  endif
+
+endfunction
+
+
+nnoremap RN :call NERDTreeFindToggle()<CR>
+"nnoremap RN :NERDTreeMirrorToggle<CR>
+
 let NERDTreeIgnore = ['\.pyc$[[file]]', '__pycache__$[[dir]]']
 let NERDTreeQuitOnOpen = 1
 let g:nerdtree_tabs_open_on_gui_startup = 0

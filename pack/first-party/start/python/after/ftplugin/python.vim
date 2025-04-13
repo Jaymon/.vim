@@ -26,32 +26,3 @@ set foldmethod=expr
 " the buffer
 set foldexpr=pyfold#fold()
 
-
-" Expand class next motion mappings
-nnoremap <silent> <buffer> ]C :<C-U>execute "normal " . v:count1 . "]]"<CR>
-onoremap <silent> <buffer> ]C :<C-U>execute "normal " . v:count1 . "]]"<CR>
-xnoremap <silent> <buffer> ]C :<C-U>execute "normal gv" . v:count1 . "]]"<CR>
-
-nnoremap <silent> <buffer> ]c :<C-U>execute "normal " . v:count1 . "]]"<CR>
-onoremap <silent> <buffer> ]c :<C-U>execute "normal " . v:count1 . "]]"<CR>
-xnoremap <silent> <buffer> ]c :<C-U>execute "normal gv" . v:count1 . "]]"<CR>
-
-" Expand class previous motion mappings
-nnoremap <silent> <buffer> [C :<C-U>execute "normal " . v:count1 . "[["<CR>
-onoremap <silent> <buffer> [C :<C-U>execute "normal " . v:count1 . "[["<CR>
-xnoremap <silent> <buffer> [C :<C-U>execute "normal gv" . v:count1 . "[["<CR>
-
-nnoremap <silent> <buffer> [c :<C-U>execute "normal " . v:count1 . "[["<CR>
-onoremap <silent> <buffer> [c :<C-U>execute "normal " . v:count1 . "[["<CR>
-xnoremap <silent> <buffer> [c :<C-U>execute "normal gv" . v:count1 . "[["<CR>
-
-" Expand method next motion mappings
-nnoremap <silent> <buffer> ]} :<C-U>execute "normal " . v:count1 . "]m"<CR>
-onoremap <silent> <buffer> ]} :<C-U>execute "normal " . v:count1 . "]m"<CR>
-xnoremap <silent> <buffer> ]} :<C-U>execute "normal gv" . v:count1 . "]m"<CR>
-
-" Expand method previous motion mappings
-nnoremap <silent> <buffer> [{ :<C-U>execute "normal " . v:count1 . "[m"<CR>
-onoremap <silent> <buffer> [{ :<C-U>execute "normal " . v:count1 . "[m"<CR>
-xnoremap <silent> <buffer> [{ :<C-U>execute "normal gv" . v:count1 . "[m"<CR>
-
