@@ -2,6 +2,8 @@
 " configure NERDTree
 " https://github.com/scrooloose/nerdtree
 "
+" NERDTree is a file browser
+"
 " This should load before pack/third-party/start/NERDTree, you can verify this
 " by running `:scriptnames` and verifying this loaded before any other
 " Nerdtree things

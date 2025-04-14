@@ -54,7 +54,12 @@ It depends on [ctags](https://github.com/universal-ctags/ctags), which can be in
 
 I set this up with:
 
-    $ git submodule add -b master https://github.com/majutsushi/tagbar.git bundle/tagbar
+    $ git submodule add -b master https://github.com/preservim/tagbar.git pack/third-party/start/tagbar
+    
+I last updated it on April 14, 2025 to get javascript/typescript working:
+
+    $ cd pack/third-party/start/tagbar
+    $ git pull origin master
 
 
 ### [NerdTree](https://github.com/scrooloose/nerdtree)
@@ -133,15 +138,23 @@ Setup:
 
 This actually has dependencies, so setup was a bit more involved:
 
-    $ git submodule add -b master https://github.com/tomtom/tlib_vim.git bundle/tlib
-    $ git submodule add -b master https://github.com/MarcWeber/vim-addon-mw-utils.git bundle/addon_mw_utils
-    $ git submodule add -b master https://github.com/garbas/vim-snipmate.git bundle/snipmate
+    $ git submodule add -b master https://github.com/garbas/vim-snipmate.git pack/third-party/start/snipmate
+    $ git submodule add -b master https://github.com/MarcWeber/vim-addon-mw-utils.git pack/third-party/start/addon_mw_utils
 
 I thought about using [ultisnips](https://github.com/SirVer/ultisnips) instead but that requires python and I prefer to use pure vimscript plugins when I can.
 
 [vim-snippets](https://github.com/honza/vim-snippets/blob/master/snippets/python.snippets) contains lots of snippet files for reference.
 
 When in *insert* mode you can do `ctrl-R tab` (`<C-R><Tab>`) to get all the matching snippets. I've also added `:Snippets` to open the corresponding `$VIMHOME/snippets/<FILETYPE>.snippets` file.
+
+
+#### April 14, 2025
+
+I removed `tlib` since I've never used the `:SnipMateOpenSnippetFiles` command and it doesn't make any sense to keep a whole dependency around for it
+
+    $ git rm pack/third-party/start/tlib
+
+I also updated the installation instructions.
 
 
 ### [Applescript syntax](https://www.vim.org/scripts/script.php?script_id=1736)

@@ -26,10 +26,6 @@
 	path = pack/third-party/opt/pydiction
 	url = https://github.com/rkulla/pydiction.git
 	branch = master
-[submodule "bundle/tlib"]
-	path = pack/third-party/start/tlib
-	url = https://github.com/tomtom/tlib_vim.git
-	branch = master
 [submodule "bundle/addon_mw_utils"]
 	path = pack/third-party/start/addon_mw_utils
 	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
