@@ -1,7 +1,7 @@
 " Vim indent file
 " Language:         Python
 " Maintainer:	    Jay Marcyes <vim@marcyes.com>
-" Last Change:      2024 Mar 5
+" Last Change:      2025 April 14
 " Credits:          David Bustos <bustos@caltech.edu>
 "                   Eric Mc Sween <em@tomcom.de>
 "                   Bram Moolenaar <Bram@vim.org>
@@ -189,10 +189,14 @@ function! GetPythonIndent(lnum)
         " ADDED BY JAY ON 2021-01-04
         if closing_paren
             return indent(parlnum)
+
         else
-            let l:indent_width = (g:pymode_indent_hanging_width > 0 ?
-                        \ g:pymode_indent_hanging_width : &shiftwidth)
-            return indent(parlnum) + l:indent_width
+            " modified by Jay 2025-04-14, removed the variable
+            " `g:pymode_indent_hanging_width` and just used `&shiftwidth`
+            " since that was what setting it to 0 effectively did and that's
+            " the behavior I wanted
+            return indent(parlnum) + &shiftwidth
+
         endif
 
     endif
