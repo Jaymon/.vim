@@ -183,3 +183,51 @@ I've actually installed this previously, but decided to give it another try (6-2
 
 Disabled this again on 9-2-2019 because it totally borks php syntax highlighting and it was pretty subtle with python so I doubt I'll really miss it
 
+
+### [Pydiction](https://github.com/rkulla/pydiction)
+
+#### April 14, 2025
+
+I removed this with:
+
+```
+$ git rm pack/third-party/opt/pydiction
+```
+
+It didn't even work and my `plugin/pydiction.vim` didn't even point to the right path, so I figured I haven't used this plugin in years and years.
+
+
+#### Original description
+
+Moved to `pack/third-party/opt` on 3-5-2023. I just don't use this much.
+
+Setup:
+
+    $ git submodule add -b master https://github.com/rkulla/pydiction.git bundle/pydiction
+
+
+### [CtrlP](https://github.com/kien/ctrlp.vim)
+
+#### April 14, 2025
+
+I just loaded this plugin with `:packadd ctrlp` and did `\r` and did some searches, it's really cool but I just don't open files this way, and having to move to the arrow keys to actually select the file was annoying, I use NERDTree after I open the first file.
+
+```
+$ git rm pack/third-party/opt/ctrlp
+$ rm plugin/ctrlp.vim
+```
+
+
+#### Original description
+
+Moved to `pack/third-party/opt` on 3-5-2023, I don't think I've ever used this plugin, this just isn't how I open files. If I don't miss it then I will probably remove it.
+
+
+found [via](http://www.bestofvim.com/plugin/ctrl-p/)
+
+configured to always open in a tab using [this](https://github.com/kien/ctrlp.vim/issues/160)
+
+I set this up with:
+
+    $ git submodule add -b master https://github.com/kien/ctrlp.vim.git bundle/ctrlp
+

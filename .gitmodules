@@ -18,14 +18,6 @@
 	path = pack/third-party/start/surround
 	url = https://github.com/tpope/vim-surround.git
 	branch = master
-[submodule "bundle/ctrlp"]
-	path = pack/third-party/opt/ctrlp
-	url = https://github.com/kien/ctrlp.vim.git
-	branch = master
-[submodule "bundle/pydiction"]
-	path = pack/third-party/opt/pydiction
-	url = https://github.com/rkulla/pydiction.git
-	branch = master
 [submodule "bundle/addon_mw_utils"]
 	path = pack/third-party/start/addon_mw_utils
 	url = https://github.com/MarcWeber/vim-addon-mw-utils.git

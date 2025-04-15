@@ -42,6 +42,12 @@ $ git submodule update
 to update all the submodules:
 
     $ git submodule foreach git pull origin master
+    
+To update a specific submodule, from repo root directory:
+
+    $ cd pack/third-party/<PATH-TO-SUBMODULE>
+    $ git pull origin master
+    $ cd -
 
 
 ### [Tagbar](https://github.com/preservim/tagbar)
@@ -77,20 +83,6 @@ I set this up with:
 * 5-18-2016 - I couldn't do it, I re-activated NERDTree
 
 
-### [CtrlP](https://github.com/kien/ctrlp.vim)
-
-Moved to `pack/third-party/opt` on 3-5-2023, I don't think I've ever used this plugin, this just isn't how I open files. If I don't miss it then I will probably remove it.
-
-
-found [via](http://www.bestofvim.com/plugin/ctrl-p/)
-
-configured to always open in a tab using [this](https://github.com/kien/ctrlp.vim/issues/160)
-
-I set this up with:
-
-    $ git submodule add -b master https://github.com/kien/ctrlp.vim.git bundle/ctrlp
-
-
 ### [Commentify](https://github.com/Jaymon/vim-commentify)
 
 
@@ -123,15 +115,6 @@ Currently an internal syntax plugin that brings together the good parts of some 
 ### Utils
 
 Internal plugin that contains misc functions and commands that I love, compiled from around the internet, and maybe even kind of written by me, in order to make this a little more portable.
-
-
-### [Pydiction](https://github.com/rkulla/pydiction)
-
-Moved to `pack/third-party/opt` on 3-5-2023. I just don't use this much.
-
-Setup:
-
-    $ git submodule add -b master https://github.com/rkulla/pydiction.git bundle/pydiction
 
 
 ### [SnipMate](https://github.com/garbas/vim-snipmate)
