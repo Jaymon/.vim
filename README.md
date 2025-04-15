@@ -140,15 +140,12 @@ I removed `tlib` since I've never used the `:SnipMateOpenSnippetFiles` command a
 I also updated the installation instructions.
 
 
-### [Applescript syntax](https://www.vim.org/scripts/script.php?script_id=1736)
+### Colcol
 
-Moved to `pack/third-party/opt` on 3-5-2023. I don't think I'll miss it so I will most likely delete it in the future.
+April 14, 2025 - I have no idea when I added this, it's not a submodule, so I'm the one that added it and it's actually pretty cool. It places a `ColorColumn` (a column background color that goes from the top of the file to the bottom of the file) at the cursor position
 
-    $ git submodule add -b master https://github.com/vim-scripts/applescript.vim bundle/applescript
-
-
-* search: vim applescript syntax
-* Added 2019-08-20.
+* `<LEADER>c` - toggle a color column at the current cursor position
+* `<LEADER>C` - toggle off all color columns, be careful with this as it will turn off the preset ones at 80 and 120 also.
 
 
 -------------------------------------------------------------------------------

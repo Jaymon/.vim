@@ -1,11 +1,4 @@
-" Exit if already loaded
-if exists("g:loaded_indentify")
-  finish
-endif
-let g:loaded_indentify="v0.3"
-
-
-"##############################################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " auto-discover the file's actual indentation
 "
 " This will infer the indent of the file based on the first N lines of the
@@ -17,7 +10,14 @@ let g:loaded_indentify="v0.3"
 " approach the problem.
 "
 " https://psy.swansea.ac.uk/staff/carter/vim/vim_indent.htm
-"##############################################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Exit if already loaded
+if exists("g:loaded_indentify")
+  finish
+endif
+let g:loaded_indentify="v0.3"
+
 
 " the default tab width (how many spaces a tab should visually occupy)
 if !exists("g:indentify_tabwidth")
@@ -26,8 +26,15 @@ if !exists("g:indentify_tabwidth")
 endif
 
 
+" don't set a tabwidth smaller than this value
+if !exists("g:indentify_minimum_tabwidth")
+  let g:indentify_minimum_tabwidth = 2
+
+endif
+
+
 " get the minimum value from `a` and `b` but don't go lower than `minimum`
-function! s:Min(a, b, minimum=2)
+function! s:Min(a, b, minimum=g:indentify_minimum_tabwidth)
   if a:a < a:b
     if a:a < a:minimum
       return a:minimum
@@ -47,6 +54,7 @@ function! s:Min(a, b, minimum=2)
 
   endif
 endfunction
+
 
 " Goes through `lines` of the current file to decide the actual tabstop value
 " of the file. Also decide if tabs or spaces are in use. This returns a list
@@ -92,25 +100,25 @@ function! s:OverrideIndentation()
   let l:file_indent = l:result[0]
   let l:uses_tabs = l:result[1]
 
-	" https://tedlogan.com/techblog3.html
-	"
-	" tabstop Set tabstop to tell vim how many columns a tab counts for. Linux
-	" kernel code expects each tab to be eight columns wide. Visual Studio
-	" expects each tab to be four columns wide.  This is the only command here
-	" that will affect how existing text displays.
-	"
-	" expandtab When expandtab is set, hitting Tab in insert mode will produce
-	" the appropriate number of spaces.
-	"
-	" shiftwidth Set shiftwidth to control how many columns text is indented with
-	" the reindent operations (<< and >>) and automatic C-style indentation.
-	"
-	" softtabstop Set softtabstop to control how many columns vim uses when you
-	" hit Tab in insert mode. If softtabstop is less than tabstop and expandtab
-	" is not set, vim will use a combination of tabs and spaces to make up the
-	" desired spacing. If softtabstop equals tabstop and expandtab is not set,
-	" vim will always use tabs. When expandtab is set, vim will always use the
-	" appropriate number of spaces.
+  " https://tedlogan.com/techblog3.html
+  "
+  " tabstop Set tabstop to tell vim how many columns a tab counts for. Linux
+  " kernel code expects each tab to be eight columns wide. Visual Studio
+  " expects each tab to be four columns wide.  This is the only command here
+  " that will affect how existing text displays.
+  "
+  " expandtab When expandtab is set, hitting Tab in insert mode will produce
+  " the appropriate number of spaces.
+  "
+  " shiftwidth Set shiftwidth to control how many columns text is indented with
+  " the reindent operations (<< and >>) and automatic C-style indentation.
+  "
+  " softtabstop Set softtabstop to control how many columns vim uses when you
+  " hit Tab in insert mode. If softtabstop is less than tabstop and expandtab
+  " is not set, vim will use a combination of tabs and spaces to make up the
+  " desired spacing. If softtabstop equals tabstop and expandtab is not set,
+  " vim will always use tabs. When expandtab is set, vim will always use the
+  " appropriate number of spaces.
 
   if l:uses_tabs > 0
     execute "set tabstop=" . g:indentify_tabwidth
@@ -123,7 +131,7 @@ function! s:OverrideIndentation()
       execute "set tabstop=" . l:file_indent
       execute "set softtabstop=" . &tabstop
       execute "set shiftwidth=" . &tabstop
-			set expandtab
+      set expandtab
 
     endif
 
@@ -132,11 +140,10 @@ function! s:OverrideIndentation()
 endfunction
 
 
-augroup utils
+augroup indentify
   autocmd!
 
   " Run after all other ftplugins (the nested keyword)
   autocmd FileType * nested call s:OverrideIndentation()
 augroup END
-"##############################################################################
 

@@ -6,12 +6,12 @@ endif
 let g:loaded_utils="v0.1"
 
 
-"##############################################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " allows * and # to search current selection just like it searchs for current
 " word under cursor
 "
 " http://vimingwithbuttar.googlecode.com/hg/.vimrc
-"##############################################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! VisualSearch(direction) range
   let l:saved_reg = @"
   execute "normal! vgvy"
@@ -29,15 +29,15 @@ endfunction
 
 vnoremap <silent> * :call VisualSearch('/')<CR>:set hlsearch<CR>
 vnoremap <silent> # :call VisualSearch('?')<CR>:set hlsearch<CR>
-"##############################################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-"##############################################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " this will launch the default browser window with the first url found on line
 "
 " http://waoewaoe.wordpress.com/2009/05/05/open-a-website-in-a-browser-from-commandline/
 " http://vim.wikia.com/wiki/Open_a_web-browser_with_the_URL_in_the_current_line
-"##############################################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! LaunchBrowser()
   if has('gui')
     let l:uri = matchstr(getline("."), 'https\?:\/\/\S\+\c')
@@ -68,5 +68,5 @@ endfunction
 
 
 map <silent> <leader>b :call LaunchBrowser()<CR>:redraw!<CR>
-"##############################################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 

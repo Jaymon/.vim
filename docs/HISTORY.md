@@ -231,3 +231,24 @@ I set this up with:
 
     $ git submodule add -b master https://github.com/kien/ctrlp.vim.git bundle/ctrlp
 
+
+### [Applescript syntax](https://www.vim.org/scripts/script.php?script_id=1736)
+
+#### April 14, 2025
+
+Removed
+
+```
+$ git rm pack/third-party/opt/applescript
+```
+
+
+#### Original description
+
+Moved to `pack/third-party/opt` on 3-5-2023. I don't think I'll miss it so I will most likely delete it in the future.
+
+    $ git submodule add -b master https://github.com/vim-scripts/applescript.vim bundle/applescript
+
+
+* search: vim applescript syntax
+* Added 2019-08-20.

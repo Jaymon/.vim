@@ -30,7 +30,3 @@
 	path = bundle/rainbow
 	url = https://github.com/luochen1990/rainbow.git
 	branch = master
-[submodule "bundle/applescript"]
-	path = pack/third-party/opt/applescript
-	url = https://github.com/vim-scripts/applescript.vim
-	branch = master
