@@ -94,6 +94,17 @@ hi link pythonFormatStrTemplate Special
 "syn region pythonDocBlock start=+^\s*\zs'''+ skip=+\\'+ end=+'''+ contains=pythonDocTest,pythonSpaceError,@Spell,pythonTodo
 "syn region pythonDocBlock start=+^\s*\zs"""+ skip=+\\"+ end=+"""+ contains=pythonDocTest,pythonSpaceError,@Spell,pythonTodo
 syn region pythonDocBlock start=+^\s*\zs[rR]\?\z('''\|"""\)+ end="\z1" keepend contains=pythonDocTest,pythonSpaceError,@Spell,pythonTodo
+hi link pythonDocBlock Comment
+
+" match docblock tags (eg, `:param ...:`) in python docblocks
+" I really liked this highlighting on javascript code and so I've copied it for
+" python
+syn match pythonDocTag "\s*:\zs[^ :]*" containedin=pythonDocBlock
+hi link pythonDocTag Special
+
+" match docblock directives (eg, `.. directive::`) in python docblocks
+syn match pythonDocDirective "\s*..\s\zs[^:]*\ze::" containedin=pythonDocBlock
+hi link pythonDocDirective Special
 
 " 3-17-2023 - highlight operators
 "syn keyword pythonMathOperator + - * / % = > < ! contains=ALLBUT,String,Comment
@@ -121,7 +132,6 @@ hi link pythonMethod Function
 hi link pythonFunctionCall Function
 hi link pythonMagicMethod pythonMethod
 hi link NonReservedKeyword Special
-hi link pythonDocBlock Comment
 hi link pythonBuiltinObj Structure
 hi link pythonBuiltin Structure
 hi link PythonClassVar NonReservedKeyword

@@ -13,6 +13,8 @@
 "
 " * #FF8000 - orange (import)
 " * #AF00DB - purple (class names)
+" * #800000 - darker red for highlights in strings
+" * #0000FF - blue, method names and method calls
 "
 " a list of the 256 available colors
 " http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
@@ -214,6 +216,12 @@ hi typescriptExport guifg=#FF8000 ctermfg=magenta cterm=bold gui=bold
 hi typescriptImport guifg=#FF8000 ctermfg=magenta cterm=bold gui=bold
 hi typescriptImportType guifg=#FF8000 ctermfg=magenta cterm=bold gui=bold
 
+" dict keys without quotes
+hi typescriptObjectLabel guifg=#800000 ctermfg=magenta cterm=none gui=none
+
+" Make `console.log` look like any other method call
+hi link typescriptConsoleMethod Identifier
+
 " arguments in definitions, calls, and classes
 hi typescriptCall guifg=black ctermfg=black
 hi typescriptFuncCallArg guifg=black ctermfg=black
@@ -227,5 +235,6 @@ hi link typescriptClassHeritage typescriptClassName
 hi typescriptDefaultParam guifg=#AF00DB
 hi typescriptAssign guifg=#AF00DB
 hi typescriptKeywordOp guifg=#FF8000 ctermfg=magenta cterm=bold gui=bold
+hi typescriptArrowFunction guifg=#FF8000 ctermfg=magenta cterm=none gui=none
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
