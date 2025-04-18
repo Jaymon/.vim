@@ -15,6 +15,7 @@
 " * #AF00DB - purple (class names)
 " * #800000 - darker red for highlights in strings
 " * #0000FF - blue, method names and method calls
+" * #F3FAFF - light blue highlight background of linenumbers and highlight line
 "
 " a list of the 256 available colors
 " http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
@@ -164,6 +165,9 @@ highlight SpecialKey guifg=#b9e2ff
 
 hi NonReservedKeyword guifg=black ctermfg=black cterm=bold gui=bold
 
+" Customize the popup window that can appear when running jobs
+hi MessageWindow guifg=#BCBCBC guibg=#F3FAFF
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vimscript specific highlighting
@@ -221,6 +225,8 @@ hi typescriptObjectLabel guifg=#800000 ctermfg=magenta cterm=none gui=none
 
 " Make `console.log` look like any other method call
 hi link typescriptConsoleMethod Identifier
+" Methods like .bind should also look like any other method call
+hi link typescriptFunctionMethod Identifier
 
 " arguments in definitions, calls, and classes
 hi typescriptCall guifg=black ctermfg=black
@@ -234,7 +240,13 @@ hi link typescriptClassHeritage typescriptClassName
 " operators: =
 hi typescriptDefaultParam guifg=#AF00DB
 hi typescriptAssign guifg=#AF00DB
+" =>
+hi typescriptArrowFunc guifg=#AF00DB ctermfg=magenta cterm=none gui=none
+" instanceof
 hi typescriptKeywordOp guifg=#FF8000 ctermfg=magenta cterm=bold gui=bold
-hi typescriptArrowFunction guifg=#FF8000 ctermfg=magenta cterm=none gui=none
+" typeof
+hi typescriptOperator guifg=#FF8000 ctermfg=magenta cterm=bold gui=bold
+" declare
+hi typescriptAmbientDeclaration guifg=#FF8000 ctermfg=magenta cterm=bold gui=bold
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 

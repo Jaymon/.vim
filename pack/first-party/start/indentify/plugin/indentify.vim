@@ -20,21 +20,25 @@ let g:loaded_indentify="v0.3"
 
 
 " the default tab width (how many spaces a tab should visually occupy)
-if !exists("g:indentify_tabwidth")
-  let g:indentify_tabwidth = 4
-
+if !exists("g:indentify_tabstop")
+  let g:indentify_tabstop = 4
 endif
 
 
 " don't set a tabwidth smaller than this value
-if !exists("g:indentify_minimum_tabwidth")
-  let g:indentify_minimum_tabwidth = 2
+if !exists("g:indentify_minimum_tabstop")
+  let g:indentify_minimum_tabstop = 2
+endif
 
+
+" How many lines to check to infer the indentation
+if !exists("g:indentify_infer_lines")
+  let g:indentify_infer_lines = 100
 endif
 
 
 " get the minimum value from `a` and `b` but don't go lower than `minimum`
-function! s:Min(a, b, minimum=g:indentify_minimum_tabwidth)
+function! s:Min(a, b, minimum=g:indentify_minimum_tabstop)
   if a:a < a:b
     if a:a < a:minimum
       return a:minimum
@@ -60,42 +64,40 @@ endfunction
 " of the file. Also decide if tabs or spaces are in use. This returns a list
 " where index 0 is the tabstop value and index 1 is 1 if tabs are in use, 0
 " otherwise
-function! s:InferIndentation(lines=100)
+function! s:InferIndentation(lines=g:indentify_infer_lines)
   let l:max_lines = s:Min(a:lines, line('$'))
   let l:file_indent = 0
-  let l:uses_tabs = 0
+
+  " keep track of how many lines start with spaces as opposed to tabs, these
+  " are used to calculate if this file is considered to use tabs or spaces
+  let l:spaces_count = 0
+  let l:tabs_count = 0
 
   for i in range(1, l:max_lines)
     let l:line_indent = indent(i)
     if l:line_indent > 0
-      if l:file_indent == 0
-        let l:file_indent = l:line_indent
-
-      else
-        let l:file_indent = s:Min(l:line_indent, l:file_indent)
-
-      endif
-
       if getline(i) =~ '^\t'
-        let l:uses_tabs = 1
-        break
+        let l:tabs_count += 1
 
       else
-        let l:uses_tabs = 0
+        let l:spaces_count += 1
 
+        if l:file_indent == 0
+          let l:file_indent = l:line_indent
+
+        else
+          let l:file_indent = s:Min(l:line_indent, l:file_indent)
+        endif
       endif
-
     endif
-
   endfor
 
-  return [l:file_indent, l:uses_tabs]
+  return [l:file_indent, l:tabs_count >= l:spaces_count]
 endfunction
 
 
 " This function is run after any file is loaded
 function! s:OverrideIndentation()
-
   let l:result = s:InferIndentation()
   let l:file_indent = l:result[0]
   let l:uses_tabs = l:result[1]
@@ -121,9 +123,9 @@ function! s:OverrideIndentation()
   " appropriate number of spaces.
 
   if l:uses_tabs > 0
-    execute "set tabstop=" . g:indentify_tabwidth
-    execute "set softtabstop=" . g:indentify_tabwidth
-    execute "set shiftwidth=" . g:indentify_tabwidth
+    execute "set tabstop=" . g:indentify_tabstop
+    execute "set softtabstop=" . g:indentify_tabstop
+    execute "set shiftwidth=" . g:indentify_tabstop
     set noexpandtab
 
   else
@@ -136,7 +138,6 @@ function! s:OverrideIndentation()
     endif
 
   endif
-
 endfunction
 
 

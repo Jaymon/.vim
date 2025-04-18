@@ -1,9 +1,15 @@
 
 " Only load this when no other was loaded.
 if exists("g:loaded_javascript_after_ftplugin")
-    finish
+  finish
 endif
-let g:loaded_javascript_after_ftplugin = "v0.2"
+let g:loaded_javascript_after_ftplugin = "v0.3"
+
+
+" Set the linter script/binary
+if !exists("g:javascript_linter")
+  let g:javascript_linter = "./node_modules/eslint/bin/eslint.js"
+endif
 
 
 augroup javascript_after_ftplugin
@@ -22,43 +28,42 @@ function! RanLinter(channel)
   " save the cursor position because `edit` will sometimes change it but it's
   " maddeningly incosistent on when it does it and where it puts it
   let view = winsaveview()
-  "let save_pos = getpos('.')
 
   " refresh the buffer so the changes are reflected
   edit
 
   " restore the cursor position
-  "call setpos('.', save_pos)
-  " Restore scroll/view position
   call winrestview(view)
-
-endfunc
+endfunction
 
 
 ""
 " Run a linter on the given buffer's filepath. Currently the linter is
 " hardcoded to eslint found in the current directory
 ""
-function! RunLinter()
-  let binscript = "./node_modules/eslint/bin/eslint.js"
-  let filepath = expand('%:p')
+function! RunLinter(modified)
+  if a:modified
+    let binscript = g:javascript_linter
+    let filepath = expand('%:p')
 
-  if filereadable(binscript)
-    let cmd = "node \"" . binscript . "\" --fix --quiet \"" . filepath . "\""
+    if filereadable(binscript)
+      let cmd = "node \"" . binscript . "\" --fix --quiet \"" . filepath . "\""
 
-    " print the command in a window at the bottom of the buffer for 1 second
-    1echow cmd
+      " print the command in a window at the bottom of the buffer for 1 second
+      1echow cmd
 
-    " https://vimhelp.org/channel.txt.html#job-start
-    call job_start(cmd, {"close_cb": "RanLinter"})
+      " https://vimhelp.org/channel.txt.html#job-start
+      call job_start(cmd, {"close_cb": "RanLinter"})
 
+    endif
   endif
-
 endfunction
 
 
 augroup javascript_after_ftplugin
-  autocmd BufWritePost * call RunLinter()
+  " https://vimhelp.org/autocmd.txt.html#BufWritePre
+  "autocmd BufWritePost * call RunLinter(s:modified)
+  autocmd BufWritePre * call RunLinter(&modified)
 augroup END
 
 
@@ -119,6 +124,5 @@ if !exists('g:no_plugin_maps') && !exists('g:no_javascript_maps')
   execute "nnoremap <silent> <buffer> [m :<C-U>call <SID>Jump('n', '". s:function_pattern ."', 'Wb', v:count1)<cr>"
   execute "onoremap <silent> <buffer> [m :call <SID>Jump('o', '". s:function_pattern ."', 'Wb', v:count1)<cr>"
   execute "xnoremap <silent> <buffer> [m :call <SID>Jump('x', '". s:function_pattern ."', 'Wb', v:count1)<cr>"
-
 endif
 
