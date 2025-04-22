@@ -21,18 +21,27 @@
 
 " Single out python class definitions so they can be highlighted differently
 " than python functions
-syn match pythonClass "\(class\s\+\)\@<=\h\w*"
+syn match pythonClass "\%(class\s\+\)\@<=\h\w*"
 syn keyword pythonStatement	class nextgroup=pythonClass skipwhite
 
 
 " http://ssiaf.blogspot.com/2009/07/negative-lookbehind-in-vim.html
-syn match pythonMethod "\.[a-zA-Z0-9_]*(\@="
+"syn match pythonMethod "\.[a-zA-Z0-9_]*(\@="
+"syn match pythonMethod "\.\h\w*(\@="
+syn match pythonMethodCall "\.\@<=\h\w*(\@="
+
+
+"syn match pythonMethod /\S\.\zs[a-zA-Z0-9_]\+\ze(/
+"syn match pythonMethod "\.\zs[a-zA-Z0-9_]\+\ze("
 "syn match pythonFunctionCall "\(def\s\+\|[\S\.]\)\@<!\(\s\)\@<![a-z][a-zA-Z0-9_]\+(\@="
+"syn match pythonFunctionCall "\%(def\s\+\|[\S\.]\)\@<!\(\s\)\@<!\%(\h\w\)\+(\@="
 
 " A function call is a method call that doesn't start with `def `, a period.
 " Basically, it has to be proceeded by the start of the file, a whitespace, or
 " a non-alphanum character. The call must end with a left paren
-syn match pythonFunctionCall "\(def\s\+\|[\.]\)\@<!\(\s\|^\|[^0-9A-Za-z_]\)\@<=[a-z][a-zA-Z0-9_]\+(\@="
+"syn match pythonFunctionCall "\(def\s\+\|[\.]\)\@<!\(\s\|^\|[^0-9A-Za-z_]\)\@<=[a-z][a-zA-Z0-9_]\+(\@="
+syn match pythonFunctionCall "\%(def\s\+\|[\.]\)\@<!\%(\s\|^\)\@<=\%(\h\w\)\+(\@="
+"syn match pythonFunctionCall "\%(def\s\+\|[\S\.]\)\@<!\(\s\)\@<!\%(\h\w\)\+(\@="
 
 syn keyword NonReservedKeyword self cls
 syn keyword pythonBuiltinObj __class__ __builtin__ __module__ __dict__ __metaclass__
@@ -113,6 +122,13 @@ hi link pythonDocDirective Special
 syn match pythonMathOperator "[+=*/%><!^|\-]\+"
 syn match pythonStatementOperator "[:]"
 
+" highlight the object member separator
+" I tried to make this work with \zs and \ze but it didn't match correctly
+" so I had to switch to the positive look behind and ahead
+syn match pythonDotNotation "\w\@<=\.\h\@="
+"syn match pythonDotNotation "\w\zs\.\ze\h" display nextgroup=pythonFunction
+"syn match pythonDotNotation "\w\zs\.\ze\h" display
+
 
 " more hilighting of special comments I tend to use
 " http://stackoverflow.com/a/1819151/5006
@@ -128,7 +144,7 @@ hi link pythonNote pythonTodo
 hi link pythonMathOperator Operator
 hi link pythonStatementOperator Operator
 
-hi link pythonMethod Function
+hi link pythonMethodCall Function
 hi link pythonFunctionCall Function
 hi link pythonMagicMethod pythonMethod
 hi link NonReservedKeyword Special

@@ -191,6 +191,7 @@ hi pythonStrFormat guifg=#CC0000 ctermfg=magenta
 hi pythonMagicMethod guifg=#0000FF ctermfg=blue cterm=bold gui=bold
 hi pythonMathOperator guifg=#AF00DB
 hi pythonClass guifg=#AF00DB ctermfg=DarkMagenta
+hi pythonDotNotation guifg=#AF00DB
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
@@ -227,26 +228,64 @@ hi typescriptObjectLabel guifg=#800000 ctermfg=magenta cterm=none gui=none
 hi link typescriptConsoleMethod Identifier
 " Methods like .bind should also look like any other method call
 hi link typescriptFunctionMethod Identifier
+" .replace
+hi link typescriptBOMLocationMethod Identifier
+" .push method
+hi link typescriptBOMNavigatorProp typescriptProp
+" .type method
+hi link typescriptDOMEventProp typescriptProp
+" .parent
+hi link typescriptBOMWindowProp typescriptProp
+" method calls (eg, 'bar` would be highlighted in `foo.bar()`)
+hi link typescriptMethodCall Identifier
+" I'm not sure why this set of syntax groups exists in the runtime typescript
+" $VIMRUNTIME/syntax/shared/typescriptcommon.vim
+hi typescriptPaymentShippingOptionProp guifg=black ctermfg=black cterm=none gui=none
 
 " arguments in definitions, calls, and classes
 hi typescriptCall guifg=black ctermfg=black
 hi typescriptFuncCallArg guifg=black ctermfg=black
-hi typescriptMember NONE
+" members in a class definition
+hi typescriptMember guifg=black ctermfg=black
 
 " class definitions
 hi typescriptClassName guifg=#AF00DB ctermfg=DarkMagenta
 hi link typescriptClassHeritage typescriptClassName
+hi typescriptInstantiation guifg=#AF00DB ctermfg=DarkMagenta
 
 " operators: =
 hi typescriptDefaultParam guifg=#AF00DB
 hi typescriptAssign guifg=#AF00DB
 " =>
 hi typescriptArrowFunc guifg=#AF00DB ctermfg=magenta cterm=none gui=none
+
 " instanceof
-hi typescriptKeywordOp guifg=#FF8000 ctermfg=magenta cterm=bold gui=bold
+hi typescriptKeywordOp guifg=#FF8000 ctermfg=magenta cterm=none gui=none
+
 " typeof
-hi typescriptOperator guifg=#FF8000 ctermfg=magenta cterm=bold gui=bold
+hi typescriptOperator guifg=#FF8000 ctermfg=magenta cterm=none gui=none
+
 " declare
 hi typescriptAmbientDeclaration guifg=#FF8000 ctermfg=magenta cterm=bold gui=bold
+
+" dot between instance and property (eg, the dot after foo in foo.bar)
+hi typescriptDotNotation guifg=#AF00DB
+
+" let, const
+hi typescriptVariable guifg=#FF8000
+
+" Regexes
+hi typescriptRegexpString guifg=#FF0000 ctermfg=red
+hi link typescriptRegexpCharClass typescriptRegexpString
+hi link typescriptRegexpBoundary typescriptRegexpString
+hi link typescriptRegexpBackRef typescriptRegexpString
+hi link typescriptRegexpQuantifier typescriptRegexpString
+hi link typescriptRegexpOr typescriptRegexpString
+hi link typescriptRegexpMod typescriptRegexpString
+hi link typescriptRegexpGroup typescriptRegexpString
+
+
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 

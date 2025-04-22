@@ -99,7 +99,8 @@ endfunction
 " This function is run after any file is loaded
 function! s:OverrideIndentation()
   let l:result = s:InferIndentation()
-  let l:file_indent = l:result[0]
+"  let l:file_indent = l:result[0]
+  let l:tabstop = l:result[0]
   let l:uses_tabs = l:result[1]
 
   " https://tedlogan.com/techblog3.html
@@ -123,20 +124,52 @@ function! s:OverrideIndentation()
   " appropriate number of spaces.
 
   if l:uses_tabs > 0
-    execute "set tabstop=" . g:indentify_tabstop
-    execute "set softtabstop=" . g:indentify_tabstop
-    execute "set shiftwidth=" . g:indentify_tabstop
-    set noexpandtab
+    call Indentify(g:indentify_tabstop . "t")
+"    execute "set tabstop=" . g:indentify_tabstop
+"    execute "set softtabstop=" . g:indentify_tabstop
+"    execute "set shiftwidth=" . g:indentify_tabstop
+"    set noexpandtab
 
   else
-    if l:file_indent > 0 && l:file_indent != &tabstop
-      execute "set tabstop=" . l:file_indent
-      execute "set softtabstop=" . &tabstop
-      execute "set shiftwidth=" . &tabstop
-      set expandtab
+    if l:tabstop > 0 && l:tabstop != &tabstop
+      call Indentify(l:tabstop)
+"      execute "set tabstop=" . l:file_indent
+"      execute "set softtabstop=" . &tabstop
+"      execute "set shiftwidth=" . &tabstop
+"      set expandtab
 
     endif
 
+  endif
+endfunction
+
+
+""
+" Actually set tabstop for the buffer
+"
+" Sometimes Indentify gets it wrong so you can call this manually.
+"
+" Set to 4 spaces:
+"
+"   :call Indentify(4)
+"
+" Set buffer indentation to tabs with 8 character width:
+"
+"   :call Indentify("8t")
+""
+function! Indentify(tabstop)
+  if a:tabstop =~ '[tT]$'
+    let l:tabstop = substitute(a:tabstop, '[tT]$', '', '')
+    execute "set tabstop=" . l:tabstop
+    execute "set softtabstop=" . l:tabstop
+    execute "set shiftwidth=" . l:tabstop
+    set noexpandtab
+
+  else
+    execute "set tabstop=" . a:tabstop
+    execute "set softtabstop=" . &tabstop
+    execute "set shiftwidth=" . &tabstop
+    set expandtab
   endif
 endfunction
 

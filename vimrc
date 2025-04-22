@@ -378,7 +378,6 @@ nmap <leader>9 9gt<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
 augroup vimrc
   " automatically open a file in readonly mode when swap exists
   " http://apple.stackexchange.com/questions/53732/
@@ -392,6 +391,12 @@ augroup END
 command! CDC lcd %:p:h
 " to get NerdTree to change to the directory also, open the NT buffer and type
 " CD
+
+" copy the current file's full path to the clipboard
+" https://stackoverflow.com/a/954336
+command! PWD let @+ = expand("%:p")
+" Copy Working Directory
+command! CWD let @+ = expand("%:p")
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
