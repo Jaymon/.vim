@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language:         Python
 " Maintainer:	    Jay Marcyes <vim@marcyes.com>
-" Last Change:      2024 September 28
+" Last Change:      2025 April 23
 "
 " This is Jay's python syntax customization file
 "
@@ -24,6 +24,9 @@
 syn match pythonClass "\%(class\s\+\)\@<=\h\w*"
 syn keyword pythonStatement	class nextgroup=pythonClass skipwhite
 
+syn match pythonInstantiation "\<[A-Z_]\w\+(\@="
+hi link pythonInstantiation pythonClass
+
 
 " http://ssiaf.blogspot.com/2009/07/negative-lookbehind-in-vim.html
 "syn match pythonMethod "\.[a-zA-Z0-9_]*(\@="
@@ -40,8 +43,10 @@ syn match pythonMethodCall "\.\@<=\h\w*(\@="
 " Basically, it has to be proceeded by the start of the file, a whitespace, or
 " a non-alphanum character. The call must end with a left paren
 "syn match pythonFunctionCall "\(def\s\+\|[\.]\)\@<!\(\s\|^\|[^0-9A-Za-z_]\)\@<=[a-z][a-zA-Z0-9_]\+(\@="
-syn match pythonFunctionCall "\%(def\s\+\|[\.]\)\@<!\%(\s\|^\)\@<=\%(\h\w\)\+(\@="
+"syn match pythonFunctionCall "\%(def\s\+\|[\.]\)\@<!\%(\s\|^\)\@<=\%(\h\w\)\+(\@="
+syn match pythonFunctionCall "\%(def\s\+\|[\.]\)\@<!\%(\s\|^\)\@<=\%([a-z_]\w\)\+(\@="
 "syn match pythonFunctionCall "\%(def\s\+\|[\S\.]\)\@<!\(\s\)\@<!\%(\h\w\)\+(\@="
+
 
 syn keyword NonReservedKeyword self cls
 syn keyword pythonBuiltinObj __class__ __builtin__ __module__ __dict__ __metaclass__
@@ -108,11 +113,11 @@ hi link pythonDocBlock Comment
 " match docblock tags (eg, `:param ...:`) in python docblocks
 " I really liked this highlighting on javascript code and so I've copied it for
 " python
-syn match pythonDocTag "\s*:\zs[^ :]*" containedin=pythonDocBlock
+syn match pythonDocTag "^\s*:\zs[^ :]*" containedin=pythonDocBlock
 hi link pythonDocTag Special
 
 " match docblock directives (eg, `.. directive::`) in python docblocks
-syn match pythonDocDirective "\s*..\s\zs[^:]*\ze::" containedin=pythonDocBlock
+syn match pythonDocDirective "^\s*..\s\zs[^:]*\ze::" containedin=pythonDocBlock
 hi link pythonDocDirective Special
 
 " 3-17-2023 - highlight operators
