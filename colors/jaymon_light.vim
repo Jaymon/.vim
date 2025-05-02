@@ -238,6 +238,10 @@ hi link typescriptDOMEventProp typescriptProp
 hi link typescriptBOMWindowProp typescriptProp
 " method calls (eg, 'bar` would be highlighted in `foo.bar()`)
 hi link typescriptMethodCall Identifier
+hi link typescriptFunctionCall typescriptMethodCall
+" .hasOwnProperty method
+hi link typescriptObjectMethod typescriptMethodCall
+
 " I'm not sure why this set of syntax groups exists in the runtime typescript
 " $VIMRUNTIME/syntax/shared/typescriptcommon.vim
 hi typescriptPaymentShippingOptionProp guifg=black ctermfg=black cterm=none gui=none
@@ -245,8 +249,14 @@ hi typescriptPaymentShippingOptionProp guifg=black ctermfg=black cterm=none gui=
 " arguments in definitions, calls, and classes
 hi typescriptCall guifg=black ctermfg=black
 hi typescriptFuncCallArg guifg=black ctermfg=black
+hi typescriptFuncComma guifg=black ctermfg=black
+
+""
+" Properties should just be black
+""
 " members in a class definition
 hi typescriptMember guifg=black ctermfg=black
+hi link typescriptURLUtilsProp typescriptMember
 
 " class definitions
 hi typescriptClassName guifg=#AF00DB ctermfg=DarkMagenta
@@ -259,17 +269,12 @@ hi typescriptAssign guifg=#AF00DB
 " =>
 hi typescriptArrowFunc guifg=#AF00DB ctermfg=magenta cterm=none gui=none
 
-" instanceof
-hi typescriptKeywordOp guifg=#FF8000 ctermfg=magenta cterm=none gui=none
-
-" typeof
-hi typescriptOperator guifg=#FF8000 ctermfg=magenta cterm=none gui=none
-
 " declare
 hi typescriptAmbientDeclaration guifg=#FF8000 ctermfg=magenta cterm=bold gui=bold
 
 " dot between instance and property (eg, the dot after foo in foo.bar)
-hi typescriptDotNotation guifg=#AF00DB
+"hi typescriptDotNotation guifg=#AF00DB
+"hi typescriptDotNotation guifg=black ctermfg=black
 
 " let, const
 hi typescriptVariable guifg=#FF8000
@@ -285,6 +290,29 @@ hi link typescriptRegexpMod typescriptRegexpString
 hi link typescriptRegexpGroup typescriptRegexpString
 
 
+hi javaScriptSemi guifg=#AF00DB
+
+""
+" I'm going to try something, make the block keywords (if, else if, const)
+" orange but not bold, and then make the outside block keywords (eg, protected,
+" class, function) orange and bold
+""
+hi javaScriptBlockStatement guifg=#FF8000 ctermfg=magenta cterm=none gui=none 
+
+hi link typescriptRepeat javaScriptBlockStatement
+hi link typescriptStatementKeyword javaScriptBlockStatement
+hi link typescriptConditional javaScriptBlockStatement
+
+" `in` in a for statement
+hi link typescriptForOperator javaScriptBlockStatement
+
+" instanceof, `in` in an if statement
+hi link typescriptKeywordOp javaScriptBlockStatement
+
+" typeof, new
+hi link typescriptOperator javaScriptBlockStatement
+
+hi link typescriptAsyncFuncKeyword javaScriptBlockStatement
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

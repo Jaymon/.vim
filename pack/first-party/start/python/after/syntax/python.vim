@@ -24,14 +24,15 @@
 syn match pythonClass "\%(class\s\+\)\@<=\h\w*"
 syn keyword pythonStatement	class nextgroup=pythonClass skipwhite
 
-syn match pythonInstantiation "\<[A-Z_]\w\+(\@="
+"syn match pythonInstantiation "\%(\<\|\.\@<=\)[A-Z_]\w\+(\@="
+syn match pythonInstantiation "\<[A-Z_]\w*[(\.]\@="
 hi link pythonInstantiation pythonClass
 
 
 " http://ssiaf.blogspot.com/2009/07/negative-lookbehind-in-vim.html
 "syn match pythonMethod "\.[a-zA-Z0-9_]*(\@="
 "syn match pythonMethod "\.\h\w*(\@="
-syn match pythonMethodCall "\.\@<=\h\w*(\@="
+syn match pythonMethodCall "\.\@<=[a-z_]\w*(\@="
 
 
 "syn match pythonMethod /\S\.\zs[a-zA-Z0-9_]\+\ze(/
@@ -44,8 +45,9 @@ syn match pythonMethodCall "\.\@<=\h\w*(\@="
 " a non-alphanum character. The call must end with a left paren
 "syn match pythonFunctionCall "\(def\s\+\|[\.]\)\@<!\(\s\|^\|[^0-9A-Za-z_]\)\@<=[a-z][a-zA-Z0-9_]\+(\@="
 "syn match pythonFunctionCall "\%(def\s\+\|[\.]\)\@<!\%(\s\|^\)\@<=\%(\h\w\)\+(\@="
-syn match pythonFunctionCall "\%(def\s\+\|[\.]\)\@<!\%(\s\|^\)\@<=\%([a-z_]\w\)\+(\@="
 "syn match pythonFunctionCall "\%(def\s\+\|[\S\.]\)\@<!\(\s\)\@<!\%(\h\w\)\+(\@="
+"syn match pythonFunctionCall "\%(def\s\+\|[\.]\)\@<!\%(\s\|^\)\@<=[a-z_]\w*(\@="
+syn match pythonFunctionCall "\%(def\s\+\|[\.]\)\@<!\<[a-z_]\w*(\@="
 
 
 syn keyword NonReservedKeyword self cls
@@ -130,9 +132,11 @@ syn match pythonStatementOperator "[:]"
 " highlight the object member separator
 " I tried to make this work with \zs and \ze but it didn't match correctly
 " so I had to switch to the positive look behind and ahead
-syn match pythonDotNotation "\w\@<=\.\h\@="
-"syn match pythonDotNotation "\w\zs\.\ze\h" display nextgroup=pythonFunction
-"syn match pythonDotNotation "\w\zs\.\ze\h" display
+"syn match pythonDotNotation "\w\@<=\.\h\@="
+" April 24, 2025 - I disabled this because it didn't work when the period
+" followed ] and ) and caused pythonMethodCall to fail sometimes
+"syn match pythonDotNotation "\%(\w\)\@<=\.\%(\h\)\@="
+"syn match pythonDotNotation "[\.]"
 
 
 " more hilighting of special comments I tend to use

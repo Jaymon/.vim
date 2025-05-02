@@ -11,4 +11,7 @@ hi link javaScriptCommentNote javaScriptCommentTodo
 
 "syn match javaScriptDotNotation "\w\@<=\.\h\@="
 
+" Match semi-colons
+" I can't get this working in typescript because of typescriptBlock
+"syn match javaScriptSemi ";\ze\%(\s\|$\)"
 
