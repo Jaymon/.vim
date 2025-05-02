@@ -1,7 +1,6 @@
 " Vim syntax file
 " Language:         Python
 " Maintainer:	    Jay Marcyes <vim@marcyes.com>
-" Last Change:      2025 April 23
 "
 " This is Jay's python syntax customization file
 "
@@ -22,11 +21,12 @@
 " Single out python class definitions so they can be highlighted differently
 " than python functions
 syn match pythonClass "\%(class\s\+\)\@<=\h\w*"
-syn keyword pythonStatement	class nextgroup=pythonClass skipwhite
+syn keyword pythonDefStatement class nextgroup=pythonClass skipwhite
 
 "syn match pythonInstantiation "\%(\<\|\.\@<=\)[A-Z_]\w\+(\@="
 syn match pythonInstantiation "\<[A-Z_]\w*[(\.]\@="
 hi link pythonInstantiation pythonClass
+syn keyword pythonDefStatement def nextgroup=pythonFunction skipwhite
 
 
 " http://ssiaf.blogspot.com/2009/07/negative-lookbehind-in-vim.html
@@ -163,4 +163,19 @@ hi link PythonClassVar NonReservedKeyword
 
 hi link pythonFormatString String
 hi link pythonByteString String
+
+
+""
+" Many of these are re-definitions from the builtin python file
+""
+syn keyword pythonAsyncDef async
+syn keyword pythonReturnStatement return
+syn keyword pythonRepeat pass continue
+
+""
+" `from` when used in imports should separte from its use everywhere else
+""
+syn clear pythonInclude
+syn match pythonIncludeFrom "^\s*\zsfrom\ze\s"
+syn keyword pythonInclude import
 

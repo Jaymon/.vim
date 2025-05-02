@@ -98,6 +98,13 @@ let g:colors_name="jaymon_light"
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Presets
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+hi blockStatement guifg=#FF8000 ctermfg=magenta cterm=none gui=none 
+hi defStatement guifg=#FF8000 ctermfg=magenta cterm=bold gui=bold
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " background highlight color
 "
 " Previous color was: #ECF7FF (changed 12-3-2024)
@@ -192,6 +199,29 @@ hi pythonMagicMethod guifg=#0000FF ctermfg=blue cterm=bold gui=bold
 hi pythonMathOperator guifg=#AF00DB
 hi pythonClass guifg=#AF00DB ctermfg=DarkMagenta
 hi pythonDotNotation guifg=#AF00DB
+
+""
+" block statements are the orange keywords in the body of the code
+""
+" for, while
+hi link pythonRepeat blockStatement
+hi link pythonOperator blockStatement
+hi link pythonAsync blockStatement
+hi link pythonReturnStatement blockStatement
+hi link pythonException blockStatement
+hi link pythonConditional blockStatement
+hi link pythonStatementOperator blockStatement
+hi link pythonStatement blockStatement
+
+""
+" Definition statements are orange and bold
+""
+hi link pythonAsyncDef defStatement
+hi link pythonInclude defStatement
+hi link pythonIncludeFrom defStatement
+hi link pythonDefStatement defStatement
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
@@ -293,27 +323,28 @@ hi link typescriptRegexpGroup typescriptRegexpString
 hi javaScriptSemi guifg=#AF00DB
 
 ""
-" I'm going to try something, make the block keywords (if, else if, const)
-" orange but not bold, and then make the outside block keywords (eg, protected,
-" class, function) orange and bold
+" Block keywords/statements
 ""
-hi javaScriptBlockStatement guifg=#FF8000 ctermfg=magenta cterm=none gui=none 
-
-hi link typescriptRepeat javaScriptBlockStatement
-hi link typescriptStatementKeyword javaScriptBlockStatement
-hi link typescriptConditional javaScriptBlockStatement
+hi link typescriptRepeat blockStatement
+hi link typescriptStatementKeyword blockStatement
+hi link typescriptConditional blockStatement
 
 " `in` in a for statement
-hi link typescriptForOperator javaScriptBlockStatement
+hi link typescriptForOperator blockStatement
 
 " instanceof, `in` in an if statement
-hi link typescriptKeywordOp javaScriptBlockStatement
+hi link typescriptKeywordOp blockStatement
 
 " typeof, new
-hi link typescriptOperator javaScriptBlockStatement
+hi link typescriptOperator blockStatement
 
-hi link typescriptAsyncFuncKeyword javaScriptBlockStatement
+hi link typescriptAsyncFuncKeyword blockStatement
 
+
+""
+" definition keywords/statements
+""
+hi link javaScriptAsyncFuncDefKeyword defStatement
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 

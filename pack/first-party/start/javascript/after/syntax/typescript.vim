@@ -32,3 +32,5 @@ hi link typescriptCommentNote typescriptCommentTodo
 
 "syn keyword typescriptAsyncFuncDefKeyword async containedin=typescriptAsyncFuncKeyword skipwhite
 "syn keyword typescriptAsyncFuncDefKeyword async contains=typescriptAsyncFuncKeyword skipwhite
+"syn keyword typescriptAsyncFuncDefKeyword async
+

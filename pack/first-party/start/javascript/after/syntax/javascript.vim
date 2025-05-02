@@ -15,3 +15,4 @@ hi link javaScriptCommentNote javaScriptCommentTodo
 " I can't get this working in typescript because of typescriptBlock
 "syn match javaScriptSemi ";\ze\%(\s\|$\)"
 
+syn keyword javaScriptAsyncFuncDefKeyword async
