@@ -16,6 +16,17 @@
 "
 "    /Applications/MacVim.app/Contents/Resources/vim/runtime/syntax/python.vim
 "
+"
+" * \zs - start the matching right before the next match
+" * \ze - stop the match right before the next match
+" * \@<= - positiver look behind
+" * \@<! - negative look behind
+" * \@= - positive look ahead
+" * \< \> - word boundaries
+" * \%( \) - non-recording grouping
+" * \= - matches 0 or 1 more of the preceding characters
+"
+" http://ssiaf.blogspot.com/2009/07/negative-lookbehind-in-vim.html
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Single out python class definitions so they can be highlighted differently
@@ -23,30 +34,14 @@
 syn match pythonClass "\%(class\s\+\)\@<=\h\w*"
 syn keyword pythonDefStatement class nextgroup=pythonClass skipwhite
 
-"syn match pythonInstantiation "\%(\<\|\.\@<=\)[A-Z_]\w\+(\@="
 syn match pythonInstantiation "\<[A-Z_]\w*[(\.]\@="
 hi link pythonInstantiation pythonClass
-syn keyword pythonDefStatement def nextgroup=pythonFunction skipwhite
-
-
-" http://ssiaf.blogspot.com/2009/07/negative-lookbehind-in-vim.html
-"syn match pythonMethod "\.[a-zA-Z0-9_]*(\@="
-"syn match pythonMethod "\.\h\w*(\@="
 syn match pythonMethodCall "\.\@<=[a-z_]\w*(\@="
-
-
-"syn match pythonMethod /\S\.\zs[a-zA-Z0-9_]\+\ze(/
-"syn match pythonMethod "\.\zs[a-zA-Z0-9_]\+\ze("
-"syn match pythonFunctionCall "\(def\s\+\|[\S\.]\)\@<!\(\s\)\@<![a-z][a-zA-Z0-9_]\+(\@="
-"syn match pythonFunctionCall "\%(def\s\+\|[\S\.]\)\@<!\(\s\)\@<!\%(\h\w\)\+(\@="
+syn keyword pythonDefStatement def nextgroup=pythonFunction skipwhite
 
 " A function call is a method call that doesn't start with `def `, a period.
 " Basically, it has to be proceeded by the start of the file, a whitespace, or
 " a non-alphanum character. The call must end with a left paren
-"syn match pythonFunctionCall "\(def\s\+\|[\.]\)\@<!\(\s\|^\|[^0-9A-Za-z_]\)\@<=[a-z][a-zA-Z0-9_]\+(\@="
-"syn match pythonFunctionCall "\%(def\s\+\|[\.]\)\@<!\%(\s\|^\)\@<=\%(\h\w\)\+(\@="
-"syn match pythonFunctionCall "\%(def\s\+\|[\S\.]\)\@<!\(\s\)\@<!\%(\h\w\)\+(\@="
-"syn match pythonFunctionCall "\%(def\s\+\|[\.]\)\@<!\%(\s\|^\)\@<=[a-z_]\w*(\@="
 syn match pythonFunctionCall "\%(def\s\+\|[\.]\)\@<!\<[a-z_]\w*(\@="
 
 
@@ -89,7 +84,6 @@ syn keyword pythonMagicMethod __new__ __init__ __del__
 
 
 " 1-6-2023 - crazy that the default python syntax file doesn't support format strings
-" the \= means 'matches 0 or 1 more of the preceding characters'
 syn region pythonFormatString matchgroup=pythonQuotes start=+[fF]\=[rR]\z(['"]\)+ end="\z1" skip="\\\\\|\\\z1"
 syn region pythonFormatString matchgroup=pythonQuotes start=+[rR]\=[fF]\z(['"]\)+ end="\z1" skip="\\\\\|\\\z1"
 
@@ -97,21 +91,19 @@ syn region pythonFormatString matchgroup=pythonQuotes start=+[rR]\=[fF]\z(['"]\)
 syn region pythonByteString matchgroup=pythonQuotes start=+[bB]\z(['"]\)+ end="\z1" skip="\\\\\|\\\z1"
 
 " 1-6-2023 - matches {...} inside a string (as long as the first { isn't preceded by {
-" update 1-28-2023 to remove the \zs in favor of a negative look-behind
 syn match pythonFormatStrTemplate "{\@<!{[^}{]*}" contained containedin=pythonString,pythonRawString,pythonFormatString
 hi link pythonFormatStrTemplate Special
 
 " multi-line strings not assigned to a variable should be treated as comments
-" the \zs in the regex means start the matching right before the next match (so it
-" will highlight the starting triple quotes and ignore the matching whitespace)
 " Updated 8-5-2024, I added support for r-string docblocks but that means this
 " needs to be below pythonFormatStrings because otherwise those will take
 " precedence over the docblock
-"syn region pythonDocBlock start=+^\s*\zs'''+ skip=+\\'+ end=+'''+ contains=pythonDocTest,pythonSpaceError,@Spell,pythonTodo
-"syn region pythonDocBlock start=+^\s*\zs"""+ skip=+\\"+ end=+"""+ contains=pythonDocTest,pythonSpaceError,@Spell,pythonTodo
 syn region pythonDocBlock start=+^\s*\zs[rR]\?\z('''\|"""\)+ end="\z1" keepend contains=pythonDocTest,pythonSpaceError,@Spell,pythonTodo
 hi link pythonDocBlock Comment
 
+""
+" Python docblock highlighting
+""
 " match docblock tags (eg, `:param ...:`) in python docblocks
 " I really liked this highlighting on javascript code and so I've copied it for
 " python
@@ -122,21 +114,10 @@ hi link pythonDocTag Special
 syn match pythonDocDirective "^\s*..\s\zs[^:]*\ze::" containedin=pythonDocBlock
 hi link pythonDocDirective Special
 
+
 " 3-17-2023 - highlight operators
-"syn keyword pythonMathOperator + - * / % = > < ! contains=ALLBUT,String,Comment
-"setlocal iskeyword+=1-250
-"syn keyword pythonMathOperator + += - -= * *= / /= // //= % %= = == > >= < <= ! !=
 syn match pythonMathOperator "[+=*/%><!^|\-]\+"
 syn match pythonStatementOperator "[:]"
-
-" highlight the object member separator
-" I tried to make this work with \zs and \ze but it didn't match correctly
-" so I had to switch to the positive look behind and ahead
-"syn match pythonDotNotation "\w\@<=\.\h\@="
-" April 24, 2025 - I disabled this because it didn't work when the period
-" followed ] and ) and caused pythonMethodCall to fail sometimes
-"syn match pythonDotNotation "\%(\w\)\@<=\.\%(\h\)\@="
-"syn match pythonDotNotation "[\.]"
 
 
 " more hilighting of special comments I tend to use
@@ -149,7 +130,6 @@ hi link pythonNote pythonTodo
 
 
 " I like these (eg, and in is not or) better as the same color as for loops and stuff
-"hi link pythonOperator Statement
 hi link pythonMathOperator Operator
 hi link pythonStatementOperator Operator
 
