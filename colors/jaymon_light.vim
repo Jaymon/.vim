@@ -256,16 +256,25 @@ hi typescriptObjectLabel guifg=#800000 ctermfg=magenta cterm=none gui=none
 
 " Make `console.log` look like any other method call
 hi link typescriptConsoleMethod Identifier
+
 " Methods like .bind should also look like any other method call
 hi link typescriptFunctionMethod Identifier
+
 " .replace
 hi link typescriptBOMLocationMethod Identifier
+
 " .push method
 hi link typescriptBOMNavigatorProp typescriptProp
+
 " .type method
 hi link typescriptDOMEventProp typescriptProp
+
 " .parent
 hi link typescriptBOMWindowProp typescriptProp
+
+" .attributes
+hi link typescriptDOMNodeProp typescriptProp
+
 " method calls (eg, 'bar` would be highlighted in `foo.bar()`)
 hi link typescriptMethodCall Identifier
 hi link typescriptFunctionCall typescriptMethodCall
@@ -328,6 +337,9 @@ hi javaScriptSemi guifg=#AF00DB
 hi link typescriptRepeat blockStatement
 hi link typescriptStatementKeyword blockStatement
 hi link typescriptConditional blockStatement
+
+" `as`
+hi link typescriptCastKeyword blockStatement
 
 " `in` in a for statement
 hi link typescriptForOperator blockStatement
