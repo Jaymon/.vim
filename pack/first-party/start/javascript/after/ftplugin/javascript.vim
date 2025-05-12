@@ -63,7 +63,7 @@ endfunction
 augroup javascript_after_ftplugin
   " https://vimhelp.org/autocmd.txt.html#BufWritePre
   "autocmd BufWritePost * call RunLinter(s:modified)
-  autocmd BufWritePre * call RunLinter(&modified)
+  autocmd BufWritePre *.js,*.ts,*.jsx,*.tsx call RunLinter(&modified)
 augroup END
 
 
