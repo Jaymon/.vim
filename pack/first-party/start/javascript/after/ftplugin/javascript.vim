@@ -8,7 +8,24 @@ let g:loaded_javascript_after_ftplugin = "v0.3"
 
 " Set the linter script/binary
 if !exists("g:javascript_linter")
-  let g:javascript_linter = "./node_modules/eslint/bin/eslint.js"
+  " starting at the current working directory and working backwards try and
+  " find a valid eslint binscript
+  let s:rootpath = getcwd()
+
+  while s:rootpath !=# "/" && s:rootpath !=# ""
+    let s:javascript_linter = s:rootpath . "/node_modules/eslint/bin/eslint.js"
+
+    if filereadable(s:javascript_linter)
+      let g:javascript_linter = s:javascript_linter
+      break
+
+    endif
+
+    let s:rootpath = fnamemodify(s:rootpath, ':h') " move up a level
+
+  endwhile
+
+  "let g:javascript_linter = "./node_modules/eslint/bin/eslint.js"
 endif
 
 
