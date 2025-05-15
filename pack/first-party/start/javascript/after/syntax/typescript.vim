@@ -22,3 +22,14 @@ hi link typescriptCommentTodo javaScriptCommentTodo
 syn match typescriptSemi "[;]" containedin=typescriptBlock
 hi link typescriptSemi javaScriptSemi
 
+
+"syn keyword typescriptTypeOf typeof containedin=typescriptTypeReference
+"hi link typescriptTypeOf typescriptTypeQuery
+
+syn clear typescriptTypeReference
+
+" since I cleared typescriptTypeReference things like `this` don't get picked
+" up in some contexts, this fixes that
+syn keyword typescriptPredefinedMember this containedin=typescriptMember
+hi link typescriptPredefinedMember typescriptPredefinedType
+

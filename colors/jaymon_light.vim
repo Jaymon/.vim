@@ -23,6 +23,11 @@
 "
 " It doesn't look like you can set colors in a variable without a bit of hassle
 "   https://vi.stackexchange.com/questions/10020/how-to-use-a-variable-value-in-a-colorscheme
+"
+"   You can reload the color scheme in any file by running:
+"
+"     :source $VIMHOME/colors/jaymon_light.vim
+"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set background=light
@@ -350,6 +355,9 @@ hi link typescriptKeywordOp blockStatement
 " typeof, new
 hi link typescriptOperator blockStatement
 
+" keyof
+hi link typescriptTypeQuery blockStatement
+
 hi link typescriptAsyncFuncKeyword blockStatement
 
 
@@ -357,6 +365,10 @@ hi link typescriptAsyncFuncKeyword blockStatement
 " definition keywords/statements
 ""
 hi link javaScriptAsyncFuncDefKeyword defStatement
+
+
+"hi typescriptTypeReference guifg=black ctermfg=black 
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 

@@ -60,11 +60,10 @@ endfunction
 ""
 function! RunLinter(modified)
   if a:modified
-    let binscript = g:javascript_linter
     let filepath = expand('%:p')
 
-    if filereadable(binscript)
-      let cmd = "node \"" . binscript . "\" --fix --quiet \"" . filepath . "\""
+    if exists("g:javascript_linter") && filereadable(g:javascript_linter)
+      let cmd = "node \"" . g:javascript_linter . "\" --fix --quiet \"" . filepath . "\""
 
       " print the command in a window at the bottom of the buffer for 1 second
       1echow cmd
