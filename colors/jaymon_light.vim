@@ -285,6 +285,8 @@ hi link typescriptMethodCall Identifier
 hi link typescriptFunctionCall typescriptMethodCall
 " .hasOwnProperty method
 hi link typescriptObjectMethod typescriptMethodCall
+" .getPrototypeOf
+hi link typescriptObjectStaticMethod typescriptMethodCall
 
 " I'm not sure why this set of syntax groups exists in the runtime typescript
 " $VIMRUNTIME/syntax/shared/typescriptcommon.vim
