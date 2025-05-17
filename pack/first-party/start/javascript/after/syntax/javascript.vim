@@ -10,4 +10,5 @@ hi link javaScriptCommentTodo Todo
 " Match semi-colons
 syn match javaScriptSemi "[;]"
 
-syn keyword javaScriptAsyncFuncDefKeyword async
+syn keyword javaScriptAsyncFuncDefKeyword async containedin=ALL
+

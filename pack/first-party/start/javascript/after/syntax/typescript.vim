@@ -41,3 +41,17 @@ hi link typescriptDefaultParam typescriptAssign
 hi link typescriptUnion typescriptAssign
 hi link typescriptBinaryOp typescriptAssign
 
+
+""
+" Handle `async` being highlighted differently than `await`
+""
+" I couldn't find another way around just clearing the original ruleset
+syn clear typescriptAsyncFuncKeyword
+
+" create a new group for `async` so it can be styled separately
+syn keyword typescriptAsyncFuncDefKeyword async containedin=ALL
+hi link typescriptAsyncFuncDefKeyword javaScriptAsyncFuncDefKeyword
+
+" restore `await` to the original group
+syn keyword typescriptAsyncFuncKeyword await
+
