@@ -6,6 +6,15 @@ endif
 let g:loaded_javascript_after_ftplugin = "v0.3"
 
 
+augroup javascript_after_ftplugin
+  " Clear autocommands in this group, when I was opening up more buffers/files
+  " I was noticing that my linter call was running multiple times, this is
+  " because each new buffer added a new autocmd, this makes sure that doesn't
+  " happen anymore
+  autocmd!
+augroup END
+
+
 " Set the linter script/binary
 if !exists("g:javascript_linter")
   " starting at the current working directory and working backwards try and
@@ -29,40 +38,30 @@ if !exists("g:javascript_linter")
 endif
 
 
-augroup javascript_after_ftplugin
-  " Clear autocommands in this group, when I was opening up more buffers/files
-  " I was noticing that my linter call was running multiple times, this is
-  " because each new buffer added a new autocmd, this makes sure that doesn't
-  " happen anymore
-  autocmd!
-augroup END
+if exists("g:javascript_linter") && filereadable(g:javascript_linter)
+  ""
+  " This is called when the linter job is finished, it is defined in `job_start`
+  ""
+  function! RanLinter(channel)
+    " save the cursor position because `edit` will sometimes change it but it's
+    " maddeningly incosistent on when it does it and where it puts it
+    let view = winsaveview()
 
+    " refresh the buffer so the changes are reflected
+    edit
 
-""
-" This is called when the linter job is finished, it is defined in `job_start`
-""
-function! RanLinter(channel)
-  " save the cursor position because `edit` will sometimes change it but it's
-  " maddeningly incosistent on when it does it and where it puts it
-  let view = winsaveview()
+    " restore the cursor position
+    call winrestview(view)
+  endfunction
 
-  " refresh the buffer so the changes are reflected
-  edit
+  ""
+  " Run a linter on the given buffer's filepath. Currently the linter is
+  " hardcoded to eslint found in the current directory
+  ""
+  function! RunLinter(modified)
+    if a:modified
+      let filepath = expand('%:p')
 
-  " restore the cursor position
-  call winrestview(view)
-endfunction
-
-
-""
-" Run a linter on the given buffer's filepath. Currently the linter is
-" hardcoded to eslint found in the current directory
-""
-function! RunLinter(modified)
-  if a:modified
-    let filepath = expand('%:p')
-
-    if exists("g:javascript_linter") && filereadable(g:javascript_linter)
       let cmd = "node \"" . g:javascript_linter . "\" --fix --quiet \"" . filepath . "\""
 
       " print the command in a window at the bottom of the buffer for 1 second
@@ -72,15 +71,15 @@ function! RunLinter(modified)
       call job_start(cmd, {"close_cb": "RanLinter"})
 
     endif
-  endif
-endfunction
+  endfunction
 
+  augroup javascript_after_ftplugin
+    " https://vimhelp.org/autocmd.txt.html#BufWritePre
+    "autocmd BufWritePost * call RunLinter(s:modified)
+    autocmd BufWritePre *.js,*.ts,*.jsx,*.tsx call RunLinter(&modified)
+  augroup END
 
-augroup javascript_after_ftplugin
-  " https://vimhelp.org/autocmd.txt.html#BufWritePre
-  "autocmd BufWritePost * call RunLinter(s:modified)
-  autocmd BufWritePre *.js,*.ts,*.jsx,*.tsx call RunLinter(&modified)
-augroup END
+endif
 
 
 if !exists('g:no_plugin_maps') && !exists('g:no_javascript_maps')
