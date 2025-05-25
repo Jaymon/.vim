@@ -34,7 +34,6 @@ if !exists("g:javascript_linter")
 
   endwhile
 
-  "let g:javascript_linter = "./node_modules/eslint/bin/eslint.js"
 endif
 
 
