@@ -31,6 +31,10 @@ hi link typescriptSemi javaScriptSemi
 syn clear typescriptTypeReference
 syn clear typescriptAliasDeclaration
 
+" when you are expanding variables from a return (eg, `const [one, two]` the
+" `one` and `two` have this syntax group)
+syn clear typescriptDestructureVariable
+
 " since I cleared typescriptTypeReference things like `this` don't get picked
 " up in some contexts, this fixes that
 syn keyword typescriptPredefinedMember this containedin=typescriptMember

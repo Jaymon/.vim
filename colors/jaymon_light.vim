@@ -280,6 +280,13 @@ hi link typescriptBOMWindowProp typescriptProp
 " .attributes
 hi link typescriptDOMNodeProp typescriptProp
 
+" I'm not sure why this set of syntax groups exists in the runtime typescript
+" $VIMRUNTIME/syntax/shared/typescriptcommon.vim
+hi link typescriptPaymentShippingOptionProp typescriptProp
+
+" .target
+hi link typescriptDOMFormProp typesecriptProp
+
 " method calls (eg, 'bar` would be highlighted in `foo.bar()`)
 hi link typescriptMethodCall Identifier
 hi link typescriptFunctionCall typescriptMethodCall
@@ -288,9 +295,8 @@ hi link typescriptObjectMethod typescriptMethodCall
 " .getPrototypeOf
 hi link typescriptObjectStaticMethod typescriptMethodCall
 
-" I'm not sure why this set of syntax groups exists in the runtime typescript
-" $VIMRUNTIME/syntax/shared/typescriptcommon.vim
-hi typescriptPaymentShippingOptionProp guifg=black ctermfg=black cterm=none gui=none
+" .stopPropagation
+hi link typescriptDOMEventMethod typescriptMethodCall
 
 " arguments in definitions, calls, and classes
 hi typescriptCall guifg=black ctermfg=black
@@ -370,7 +376,6 @@ hi link javaScriptAsyncFuncDefKeyword defStatement
 
 
 "hi typescriptTypeReference guifg=black ctermfg=black 
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
