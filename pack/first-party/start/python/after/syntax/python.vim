@@ -148,7 +148,13 @@ hi link pythonByteString String
 ""
 " Many of these are re-definitions from the builtin python file
 ""
-syn keyword pythonAsyncDef async
+syn clear pythonAsync
+syn keyword pythonAsync await
+syn match pythonAsyncDef "async\ze\s\+def"
+syn match pythonBlockAsync "async\ze\s\+\%(with\|for\)"
+hi link pythonBlockAsync pythonAsync
+"syn match pythonAsyncDef "async\%(\s\+def\)\@<="
+"syn match pythonBlockAsync "async\%(\s\+def\)\@<!"
 syn keyword pythonReturnStatement return
 syn keyword pythonRepeat pass continue
 
@@ -158,4 +164,8 @@ syn keyword pythonRepeat pass continue
 syn clear pythonInclude
 syn match pythonIncludeFrom "^\s*\zsfrom\ze\s"
 syn keyword pythonInclude import
+
+" regular from in block statements should be treated like other statements
+syn match pythonBlockFrom "\S\s*\zsfrom\ze\s"
+hi link pythonBlockFrom pythonStatement
 
