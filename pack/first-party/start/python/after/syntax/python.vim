@@ -111,7 +111,7 @@ syn match pythonDocTag "^\s*:\zs[^ :]*" containedin=pythonDocBlock
 hi link pythonDocTag Special
 
 " match docblock directives (eg, `.. directive::`) in python docblocks
-syn match pythonDocDirective "^\s*..\s\zs[^:]*\ze::" containedin=pythonDocBlock
+syn match pythonDocDirective "^\s*\.\.\s\zs[^:]*\ze::" containedin=pythonDocBlock
 hi link pythonDocDirective Special
 
 
