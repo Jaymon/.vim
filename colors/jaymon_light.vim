@@ -217,6 +217,7 @@ hi link pythonException blockStatement
 hi link pythonConditional blockStatement
 hi link pythonStatementOperator blockStatement
 hi link pythonStatement blockStatement
+hi link pythonDecorator blockStatement
 
 ""
 " Definition statements are orange and bold

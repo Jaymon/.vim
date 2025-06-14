@@ -169,3 +169,11 @@ syn keyword pythonInclude import
 syn match pythonBlockFrom "\S\s*\zsfrom\ze\s"
 hi link pythonBlockFrom pythonStatement
 
+
+""
+" Clear the python decorator so default syntax highlighting applies to
+" decorators also. Then redefine the at-symbol since clearing the decorator
+" name also nullifies pythonDecorator because it is "contained"
+syn clear pythonDecoratorName
+syn match pythonDecorator "^\s*\zs@"
+
