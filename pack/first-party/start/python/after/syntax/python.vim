@@ -29,13 +29,14 @@
 " http://ssiaf.blogspot.com/2009/07/negative-lookbehind-in-vim.html
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+
 " Single out python class definitions so they can be highlighted differently
 " than python functions
-syn match pythonClass "\%(class\s\+\)\@<=\h\w*"
-syn keyword pythonDefStatement class nextgroup=pythonClass skipwhite
+syn match pythonClass "\<[A-Z_]\w*\>"
+syn match pythonClassDef "\%(class\s\+\)\@<=\h\w*"
+hi link pythonClassDef pythonClass
+syn keyword pythonDefStatement class nextgroup=pythonClassDef skipwhite
 
-syn match pythonInstantiation "\<[A-Z_]\w*[(\.]\@="
-hi link pythonInstantiation pythonClass
 syn match pythonMethodCall "\.\@<=[a-z_]\w*(\@="
 syn keyword pythonDefStatement def nextgroup=pythonFunction skipwhite
 
