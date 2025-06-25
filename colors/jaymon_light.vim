@@ -224,7 +224,6 @@ hi link pythonDecorator blockStatement
 ""
 hi link pythonAsyncDef defStatement
 hi link pythonInclude defStatement
-hi link pythonIncludeFrom defStatement
 hi link pythonDefStatement defStatement
 
 

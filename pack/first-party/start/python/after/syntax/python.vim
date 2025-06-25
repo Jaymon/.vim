@@ -163,11 +163,15 @@ syn keyword pythonRepeat pass continue
 " `from` when used in imports should separte from its use everywhere else
 ""
 syn clear pythonInclude
-syn match pythonIncludeFrom "^\s*\zsfrom\ze\s"
+"syn match pythonIncludeFrom "^\s*\zsfrom\ze\s"
+"syn match pythonIncludeFrom "^from\>"
 syn keyword pythonInclude import
 
 " regular from in block statements should be treated like other statements
-syn match pythonBlockFrom "\S\s*\zsfrom\ze\s"
+"syn match pythonBlockFrom "\%(\S\|yield\)\s*\zsfrom\ze\s"
+"syn match pythonBlockFrom "\s\zsfrom\ze\s"
+"syn match pythonBlockFrom "\<from\>"
+syn keyword pythonBlockFrom from
 hi link pythonBlockFrom pythonStatement
 
 
