@@ -32,7 +32,7 @@
 
 " Single out python class definitions so they can be highlighted differently
 " than python functions
-syn match pythonClass "\<[A-Z_]\w*\>"
+syn match pythonClass "\<_\{-}[A-Z]\w*\>"
 syn match pythonClassDef "\%(class\s\+\)\@<=\h\w*"
 hi link pythonClassDef pythonClass
 syn keyword pythonDefStatement class nextgroup=pythonClassDef skipwhite
