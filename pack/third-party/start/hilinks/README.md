@@ -24,3 +24,9 @@ I first tried to use a `.vba` version but it didn't work even though it seems li
 * [Identify the syntax highlighting group used at the cursor](https://vim.fandom.com/wiki/Identify_the_syntax_highlighting_group_used_at_the_cursor) - this mentions hilink
 * [Hilinks](http://www.drchip.org/astronaut/vim/index.html#HILINKS) - this is where I found the hilinks.vba I originally tried to use.
 * [vim help](http://www.drchip.org/astronaut/vim/doc/hilinks.txt.html)
+
+
+#### July 3, 2025
+
+
+* [SyntaxAttr.vim : Show syntax highlighting attributes of character under cursor](https://www.vim.org/scripts/script.php?script_id=383) - this looks like a similar plugin and might be worth looking at.
