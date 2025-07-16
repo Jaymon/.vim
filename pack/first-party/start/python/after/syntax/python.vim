@@ -24,7 +24,7 @@
 " * \@= - positive look ahead
 " * \< \> - word boundaries
 " * \%( \) - non-recording grouping
-" * \= - matches 0 or 1 more of the preceding characters
+" * \= - matches 0 or 1 more of the preceding characters, \? also works
 "
 " http://ssiaf.blogspot.com/2009/07/negative-lookbehind-in-vim.html
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -85,21 +85,45 @@ syn keyword pythonMagicMethod __new__ __init__ __del__
 
 
 " 1-6-2023 - crazy that the default python syntax file doesn't support format strings
-syn region pythonFormatString matchgroup=pythonQuotes start=+[fF]\=[rR]\z(['"]\)+ end="\z1" skip="\\\\\|\\\z1"
-syn region pythonFormatString matchgroup=pythonQuotes start=+[rR]\=[fF]\z(['"]\)+ end="\z1" skip="\\\\\|\\\z1"
+"syn region pythonFormatString matchgroup=pythonQuotes start=+[fF]\=[rR]\z(['"]\)+ end="\z1" skip="\\\\\|\\\z1"
+"syn region pythonFormatString matchgroup=pythonQuotes start=+[rR]\=[fF]\z(['"]\)+ end="\z1" skip="\\\\\|\\\z1"
+syn region pythonFormatString matchgroup=pythonQuotes
+    \ start=+[fF]\z(['"]\)+ end="\z1" skip="\\\\\|\\\z1"
+hi link pythonFormatString String
+
+syn region  pythonFormatTripleString matchgroup=pythonTripleQuotes
+    \ start=+[fF]\z('''\|"""\)+ end="\z1" keepend
+    \ contains=pythonEscape,pythonSpaceError,pythonDoctest,@Spell
+hi link pythonFormatTripleString String
+
+" These are copied and modified from built-in python syntax file to allow
+" b and f modifiers on raw strings
+syn region  pythonRawString matchgroup=pythonQuotes
+      \ start=+[bBfF]\=[rR][fFbB]\=\z(['"]\)+ end="\z1" skip="\\\\\|\\\z1"
+      \ contains=@Spell
+syn region  pythonRawString matchgroup=pythonTripleQuotes
+      \ start=+[bBfF]\=[rR][fFbB]\=\z('''\|"""\)+ end="\z1" keepend
+      \ contains=pythonSpaceError,pythonDoctest,@Spell
 
 " 1-26-2023 - even crazier it doesn't support byte strings
-syn region pythonByteString matchgroup=pythonQuotes start=+[bB]\z(['"]\)+ end="\z1" skip="\\\\\|\\\z1"
+"syn region pythonByteString matchgroup=pythonQuotes start=+[bB]\z(['"]\)+ end="\z1" skip="\\\\\|\\\z1"
+syn region pythonByteString matchgroup=pythonQuotes
+    \ start=+[bB]\z(['"]\)+ end="\z1" skip="\\\\\|\\\z1"
+hi link pythonByteString String
 
 " 1-6-2023 - matches {...} inside a string (as long as the first { isn't preceded by {
-syn match pythonFormatStrTemplate "{\@<!{[^}{]*}" contained containedin=pythonString,pythonRawString,pythonFormatString
+syn match pythonFormatStrTemplate
+    \ "{\@<!{[^}{]*}" contained
+    \ containedin=pythonString,pythonRawString,pythonFormatString,pythonFormatTripleString
 hi link pythonFormatStrTemplate Special
 
 " multi-line strings not assigned to a variable should be treated as comments
 " Updated 8-5-2024, I added support for r-string docblocks but that means this
 " needs to be below pythonFormatStrings because otherwise those will take
 " precedence over the docblock
-syn region pythonDocBlock start=+^\s*\zs[rR]\?\z('''\|"""\)+ end="\z1" keepend contains=pythonDocTest,pythonSpaceError,@Spell,pythonTodo
+syn region pythonDocBlock
+    \ start=+^\s*\zs[rR]\=\z('''\|"""\)+ end="\z1" keepend
+    \ contains=pythonDocTest,pythonSpaceError,@Spell,pythonTodo
 hi link pythonDocBlock Comment
 
 ""
@@ -141,9 +165,6 @@ hi link NonReservedKeyword Special
 hi link pythonBuiltinObj Structure
 hi link pythonBuiltin Structure
 hi link PythonClassVar NonReservedKeyword
-
-hi link pythonFormatString String
-hi link pythonByteString String
 
 
 ""
