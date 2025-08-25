@@ -89,6 +89,7 @@ syn keyword pythonMagicMethod __new__ __init__ __del__
 "syn region pythonFormatString matchgroup=pythonQuotes start=+[rR]\=[fF]\z(['"]\)+ end="\z1" skip="\\\\\|\\\z1"
 syn region pythonFormatString matchgroup=pythonQuotes
     \ start=+[fF]\z(['"]\)+ end="\z1" skip="\\\\\|\\\z1"
+    \ contains=pythonEscape,@Spell
 hi link pythonFormatString String
 
 syn region  pythonFormatTripleString matchgroup=pythonTripleQuotes
