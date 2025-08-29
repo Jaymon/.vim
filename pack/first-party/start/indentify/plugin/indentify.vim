@@ -20,9 +20,9 @@ let g:loaded_indentify="v0.3"
 
 
 " the default tab width (how many spaces a tab should visually occupy)
-if !exists("g:indentify_tabstop")
-  let g:indentify_tabstop = 4
-endif
+"if !exists("g:indentify_tabstop")
+"  let g:indentify_tabstop = &tabstop
+"endif
 
 
 " don't set a tabwidth smaller than this value
@@ -92,7 +92,7 @@ function! s:InferIndentation(lines=g:indentify_infer_lines)
     endif
   endfor
 
-  return [l:file_indent, l:tabs_count >= l:spaces_count]
+  return [l:file_indent, l:tabs_count > 0 && (l:tabs_count >= l:spaces_count)]
 endfunction
 
 
@@ -124,7 +124,7 @@ function! s:OverrideIndentation()
   " appropriate number of spaces.
 
   if l:uses_tabs > 0
-    call Indentify(g:indentify_tabstop . "t")
+    call Indentify(&tabstop . "t")
 "    execute "set tabstop=" . g:indentify_tabstop
 "    execute "set softtabstop=" . g:indentify_tabstop
 "    execute "set shiftwidth=" . g:indentify_tabstop
