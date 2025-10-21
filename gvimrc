@@ -11,88 +11,54 @@ augroup END
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Save the size and position
+" Save/restore the window size
 "
 " based off of this script:
 " http://vim.wikia.com/wiki/Restore_screen_size_and_position
-"
-" This seems to work, the problem is it will set a certain size for the big
-" monitor, and then that will be huge for the laptop screen, but it's better
-" than the full size the GUIEnter was giving me on Mac
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " set this for the size to be saved at all
-let g:screen_size_restore = (exists("g:screen_size_restore")) ? g:screen_size_restore : 1
-" set this to restore the screen position of the window, not just the size
-let g:screen_size_restore_pos = (exists("g:screen_size_restore_pos")) ? g:screen_size_restore_pos : 0
-" set this to restore by window name instead of one global size for all windows
-let g:screen_size_by_vim_instance = (exists("g:screen_size_by_vim_instance")) ? g:screen_size_by_vim_instance : 1
+if !exists("g:screen_size_restore")
+  let g:screen_size_restore = 1
+endif
+
 
 function! ScreenFilename()
-  let vim_instance = (g:screen_size_by_vim_instance==1) ? (v:servername) : 'GVIM'
-  if has("win32")
-    return $VIMTEMP . '\vimsize_' . vim_instance . '.txt'
-  else
-    return $VIMTEMP . '/vimsize_' . vim_instance . '.txt'
-  endif
+  return $VIMTEMP . '/vimsize.txt'
 endfunction
+
 
 function! ScreenRestore()
   " Restore window size (columns and lines) and position
   " from values stored in vimsize file.
   " Must set font first so columns and lines are based on font size
-
-  " for comparison, get default values, and we will only save values if they
-  " have changed
-  let s:screen_size_ocolumns = &columns
-  let s:screen_size_olines = &lines
-  let s:screen_size_ox = getwinposx()<0?0:getwinposx()
-  let s:screen_size_oy = getwinposy()<0?0:getwinposy()
-  let f = ScreenFilename()
-  if g:screen_size_restore || g:screen_size_restore_pos
-    if filereadable(f)
-      for line in readfile(f)
-        let sizepos = split(line)
-        if len(sizepos) >= 3
-          if sizepos[0] == "size"
-            silent! execute "set columns=".sizepos[1]." lines=".sizepos[2]
-          endif
-          if sizepos[0] == "pos"
-            silent! execute "winpos ".sizepos[1]." ".sizepos[2]
-          endif
-        endif
-      endfor
+  if g:screen_size_restore
+    let f = ScreenFilename()
+    if g:screen_size_restore
+      if filereadable(f)
+        for line in readfile(f)
+          silent! execute line
+        endfor
+      endif
     endif
   endif
 endfunction
 
+
 function! ScreenSave()
   " Save window size and position if it has changed
-  let lines = []
   if g:screen_size_restore
-    let s:screen_size_columns = &columns
-    let s:screen_size_lines = &lines
-    if (s:screen_size_columns != s:screen_size_ocolumns) || (s:screen_size_lines != s:screen_size_olines)
-      let data = 'size ' . s:screen_size_columns . ' ' . s:screen_size_lines
-      call add(lines, data)
-    endif
-  endif
-  if g:screen_size_restore_pos
-    let s:screen_size_x = getwinposx()<0?0:getwinposx()
-    let s:screen_size_y = getwinposy()<0?0:getwinposy()
-    if (s:screen_size_x != s:screen_size_ox) || (s:screen_size_y != s:screen_size_oy)
-      let data = 'pos ' . s:screen_size_x . ' ' . s:screen_size_y
-      call add(lines, data)
-    endif
-  endif
-  if len(lines) > 0
+    let lines = []
+    let line = 'set columns=' . &columns . ' lines=' . &lines
+    call add(lines, line)
     let f = ScreenFilename()
     call writefile(lines, f)
   endif
 endfunction
 
+
 augroup gvimrc
-  autocmd VimEnter * if g:screen_size_restore == 1 | call ScreenRestore() | endif
-  autocmd VimLeavePre * if g:screen_size_restore == 1 | call ScreenSave() | endif
+  autocmd VimEnter * call ScreenRestore()
+  autocmd VimResized * call ScreenSave()
 augroup END
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -172,7 +138,7 @@ set statusline+=%15.15(%c\ %l/%L%)\             " cursor_column current_line/tot
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Set the colort column
+" Set the color column
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if exists('+colorcolumn')
   " the columns should be 1 and 41 after the set textwidth setting

@@ -409,32 +409,32 @@ command! CWD let @+ = expand("%:p")
 " javascript also if I didn't move them
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Expand class next motion mappings
-nnoremap <silent> <buffer> ]C :<C-U>execute "normal " . v:count1 . "]]"<CR>
-onoremap <silent> <buffer> ]C :<C-U>execute "normal " . v:count1 . "]]"<CR>
-xnoremap <silent> <buffer> ]C :<C-U>execute "normal gv" . v:count1 . "]]"<CR>
+nnoremap <silent> ]C :<C-U>execute "normal " . v:count1 . "]]"<CR>
+onoremap <silent> ]C :<C-U>execute "normal " . v:count1 . "]]"<CR>
+xnoremap <silent> ]C :<C-U>execute "normal gv" . v:count1 . "]]"<CR>
 
-nnoremap <silent> <buffer> ]c :<C-U>execute "normal " . v:count1 . "]]"<CR>
-onoremap <silent> <buffer> ]c :<C-U>execute "normal " . v:count1 . "]]"<CR>
-xnoremap <silent> <buffer> ]c :<C-U>execute "normal gv" . v:count1 . "]]"<CR>
+nnoremap <silent> ]c :<C-U>execute "normal " . v:count1 . "]]"<CR>
+onoremap <silent> ]c :<C-U>execute "normal " . v:count1 . "]]"<CR>
+xnoremap <silent> ]c :<C-U>execute "normal gv" . v:count1 . "]]"<CR>
 
 " Expand class previous motion mappings
-nnoremap <silent> <buffer> [C :<C-U>execute "normal " . v:count1 . "[["<CR>
-onoremap <silent> <buffer> [C :<C-U>execute "normal " . v:count1 . "[["<CR>
-xnoremap <silent> <buffer> [C :<C-U>execute "normal gv" . v:count1 . "[["<CR>
+nnoremap <silent> [C :<C-U>execute "normal " . v:count1 . "[["<CR>
+onoremap <silent> [C :<C-U>execute "normal " . v:count1 . "[["<CR>
+xnoremap <silent> [C :<C-U>execute "normal gv" . v:count1 . "[["<CR>
 
-nnoremap <silent> <buffer> [c :<C-U>execute "normal " . v:count1 . "[["<CR>
-onoremap <silent> <buffer> [c :<C-U>execute "normal " . v:count1 . "[["<CR>
-xnoremap <silent> <buffer> [c :<C-U>execute "normal gv" . v:count1 . "[["<CR>
+nnoremap <silent> [c :<C-U>execute "normal " . v:count1 . "[["<CR>
+onoremap <silent> [c :<C-U>execute "normal " . v:count1 . "[["<CR>
+xnoremap <silent> [c :<C-U>execute "normal gv" . v:count1 . "[["<CR>
 
 " Expand method next motion mappings
-nnoremap <silent> <buffer> ]} :<C-U>execute "normal " . v:count1 . "]m"<CR>
-onoremap <silent> <buffer> ]} :<C-U>execute "normal " . v:count1 . "]m"<CR>
-xnoremap <silent> <buffer> ]} :<C-U>execute "normal gv" . v:count1 . "]m"<CR>
+nnoremap <silent> ]} :<C-U>execute "normal " . v:count1 . "]m"<CR>
+onoremap <silent> ]} :<C-U>execute "normal " . v:count1 . "]m"<CR>
+xnoremap <silent> ]} :<C-U>execute "normal gv" . v:count1 . "]m"<CR>
 
 " Expand method previous motion mappings
-nnoremap <silent> <buffer> [{ :<C-U>execute "normal " . v:count1 . "[m"<CR>
-onoremap <silent> <buffer> [{ :<C-U>execute "normal " . v:count1 . "[m"<CR>
-xnoremap <silent> <buffer> [{ :<C-U>execute "normal gv" . v:count1 . "[m"<CR>
+nnoremap <silent> [{ :<C-U>execute "normal " . v:count1 . "[m"<CR>
+onoremap <silent> [{ :<C-U>execute "normal " . v:count1 . "[m"<CR>
+xnoremap <silent> [{ :<C-U>execute "normal gv" . v:count1 . "[m"<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
