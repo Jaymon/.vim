@@ -36,6 +36,7 @@ function! ScreenRestore()
     if g:screen_size_restore
       if filereadable(f)
         for line in readfile(f)
+          "echom line
           silent! execute line
         endfor
       endif
