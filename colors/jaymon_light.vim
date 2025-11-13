@@ -108,6 +108,10 @@ let g:colors_name="jaymon_light"
 hi blockStatement guifg=#FF8000 ctermfg=magenta cterm=none gui=none 
 hi defStatement guifg=#FF8000 ctermfg=magenta cterm=bold gui=bold
 
+hi Class guifg=#AF00DB ctermfg=DarkMagenta
+hi StringTemplate guifg=#800000 ctermfg=magenta
+
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " background highlight color
@@ -202,8 +206,11 @@ hi pythonStrFormatting guifg=#CC0000 ctermfg=magenta
 hi pythonStrFormat guifg=#CC0000 ctermfg=magenta
 hi pythonMagicMethod guifg=#0000FF ctermfg=blue cterm=bold gui=bold
 hi pythonMathOperator guifg=#AF00DB
-hi pythonClass guifg=#AF00DB ctermfg=DarkMagenta
+"hi pythonClass guifg=#AF00DB ctermfg=DarkMagenta
 hi pythonDotNotation guifg=#AF00DB
+
+
+hi link pythonClass Class
 
 ""
 " block statements are the orange keywords in the body of the code
