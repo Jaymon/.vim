@@ -18,6 +18,9 @@ hi link goMethodCall Function
 syn match goFunctionCall "\%([\.]\)\@<!\<[A-Za-z_]\w*(\@="
 hi link goFunctionCall Function
 
+syn match goTypeCall "[A-Za-z_]\w*{\@="
+hi link goTypeCall Class
+
 
 syn match goTypeDef "\%(type\s\+\)\@<=\h\w*"
 hi link goTypeDef Class
@@ -42,6 +45,7 @@ hi link goStatement blockStatement
 hi link goConditional blockStatement
 hi link goRepeat blockStatement
 hi link goMathOperator blockStatement
+hi link goVar blockStatement
 
 
 ""
