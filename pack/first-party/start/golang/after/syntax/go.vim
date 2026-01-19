@@ -46,6 +46,8 @@ hi link goConditional blockStatement
 hi link goRepeat blockStatement
 hi link goMathOperator blockStatement
 hi link goVar blockStatement
+" case, default
+hi link goLabel blockStatement
 
 
 ""
