@@ -199,11 +199,11 @@ hi VimCommentTitle term=bold ctermfg=5 guifg=#A0A0A0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " python specific highlighting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-hi pythonFormatStrTemplate guifg=#800000 ctermfg=magenta
+hi pythonFormatStringTemplate guifg=#800000 ctermfg=magenta
 hi pythonBytesEscape guifg=#800000 ctermfg=magenta
 "hi pythonFormatStrTemplate guifg=#660000
-hi pythonStrFormatting guifg=#CC0000 ctermfg=magenta
-hi pythonStrFormat guifg=#CC0000 ctermfg=magenta
+hi pythonStringFormatting guifg=#CC0000 ctermfg=magenta
+hi pythonStringFormat guifg=#CC0000 ctermfg=magenta
 hi pythonMagicMethod guifg=#0000FF ctermfg=blue cterm=bold gui=bold
 hi pythonMathOperator guifg=#AF00DB
 "hi pythonClass guifg=#AF00DB ctermfg=DarkMagenta

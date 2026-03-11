@@ -144,7 +144,7 @@ function! s:BlockMatcher(lnum, block_start_re)
     let lnum = a:lnum
     let lindent = indent(lnum)
     while lnum > 1
-        echom "lnum: ".lnum
+        "echom "lnum: ".lnum
         let lnum = prevnonblank(lnum - 1)
         let pindent = indent(lnum)
         if pindent <= lindent
@@ -182,6 +182,7 @@ function! GetPythonIndent(lnum)
     " If we can find an open parenthesis/bracket/brace, line up with it.
     call cursor(a:lnum, 1)
     let parlnum = s:SearchParensPair()
+    "echom parlnum
     if parlnum > 0
         let parcol = col('.')
         let closing_paren = match(getline(a:lnum), '^\s*[])}]') != -1

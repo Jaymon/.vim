@@ -27,6 +27,12 @@
 " * \= - matches 0 or 1 more of the preceding characters, \? also works
 "
 " http://ssiaf.blogspot.com/2009/07/negative-lookbehind-in-vim.html
+"
+"
+" Sring and Comment group names that affect strings and comments have to
+" use `string` and `comment` so they get picked up by indentation. So
+" `FooStr` is bad but `FooString` is ok
+"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
@@ -113,10 +119,13 @@ syn region pythonByteString matchgroup=pythonQuotes
 hi link pythonByteString String
 
 " 1-6-2023 - matches {...} inside a string (as long as the first { isn't preceded by {
-syn match pythonFormatStrTemplate
+syn match pythonFormatStringTemplate
     \ "{\@<!{[^}{]*}" contained
     \ containedin=pythonString,pythonRawString,pythonFormatString,pythonFormatTripleString
-hi link pythonFormatStrTemplate Special
+"hi link pythonFormatStrTemplate Special
+" 2026-02-26 - this doesn't work because the group has setings, so this is a
+" `E414: Group has settings, highlight link ignored`
+hi link pythonFormatStringTemplate String
 
 " multi-line strings not assigned to a variable should be treated as comments
 " Updated 8-5-2024, I added support for r-string docblocks but that means this

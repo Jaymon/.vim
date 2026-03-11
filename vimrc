@@ -156,9 +156,12 @@ augroup END
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " turn on syntax highlighting
-filetype plugin indent on " indent depends on filetype
 syntax on
+filetype plugin indent on " indent depends on filetype
 colorscheme jaymon_light
+" 2026-02-26 - this causes all sorts of highlighting problems to load the color
+" scheme after everything else
+"autocmd VimEnter * colorscheme jaymon_light
 
 " re-parse the file to fix syntax errors
 nmap <leader>rs :syn sync fromstart<CR>
