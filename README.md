@@ -25,32 +25,22 @@ This is here for my convenience so I can easily keep my vim environment consiste
     $ $HOME/.vim/install.sh
     ```
 
-
-### Re-initialize Submodules
-
-I moved (March 2023) the submodules from `bundle` to `pack/third-party/start` and this is how I re-initialized the modules:
-
-```
-$ git submodule init
-$ git submodule update
-```
-
 -------------------------------------------------------------------------------
 
 ## Plugins
 
-to update all the submodules:
+### Third party
 
-    $ git submodule foreach git pull origin master
-    
-To update a specific submodule, from repo root directory:
+Plugins are found in:
 
-    $ cd pack/third-party/<PATH-TO-SUBMODULE>
-    $ git pull origin master
-    $ cd -
+* `pack` - this is where I put first-party and manually installed third-party plugins.
+* `plugged` - this is where the [vim-plug](https://github.com/junegunn/vim-plug) plugins configured in `vimrc` are located.
+* `plugin` - handles plugin specific configuration.
 
 
-### [Tagbar](https://github.com/preservim/tagbar)
+#### [Tagbar](https://github.com/preservim/tagbar)
+
+Managed by vim-plug.
 
 This replaced Taglist because I like the hierarchical code tree better.
 
@@ -58,94 +48,93 @@ It depends on [ctags](https://github.com/universal-ctags/ctags), which can be in
 
     $ brew install universal-ctags
 
-I set this up with:
 
-    $ git submodule add -b master https://github.com/preservim/tagbar.git pack/third-party/start/tagbar
-    
-I last updated it on April 14, 2025 to get javascript/typescript working:
+#### [NerdTree](https://github.com/scrooloose/nerdtree)
 
-    $ cd pack/third-party/start/tagbar
-    $ git pull origin master
+Managed by vim-plug
 
 
-### [NerdTree](https://github.com/scrooloose/nerdtree)
+#### [Commentify](https://github.com/Jaymon/vim-commentify)
 
-
-I've also added the [Nerdtree tab plugin](https://github.com/jistr/vim-nerdtree-tabs) ([via](stackoverflow.com/questions/2283417/vim-and-nerd-tree-can-nerd-tree-persist-across-tabs-in-macvim))
-
-I set this up with:
-
-    $ git submodule add -b master https://github.com/scrooloose/nerdtree.git bundle/nerdtree
-    $ git submodule add -b master https://github.com/jistr/vim-nerdtree-tabs.git bundle/nerdtree-tabs
-
-
-* 5-17-2016 - I'm currently trying to use [netrw instead of NERDTree](https://blog.mozhu.info/vimmers-you-dont-need-nerdtree-18f627b561c3#.6p2s7r8ir)
-* 5-18-2016 - I couldn't do it, I re-activated NERDTree
-
-
-### [Commentify](https://github.com/Jaymon/vim-commentify)
+Managed by vim-plug
 
 
 A really lightweight plugin to comment/uncomment code, basically a lightweight
 [NERD Commenter](https://github.com/scrooloose/nerdcommenter) or an updated [comments](http://www.vim.org/scripts/script.php?script_id=1528).
 
-I set this up with:
 
-    $ git submodule add -b master git@github.com:Jaymon/vim-commentify.git bundle/commentify
+#### [Surround](https://github.com/tpope/vim-surround)
 
+Managed by vim-plug
 
-### [Surround](https://github.com/tpope/vim-surround)
+visual surround:
 
-While moving this into the `pack` directory I was going to just disable it, but I've decided to give it one final final chance. I always forget this exists.
+* select the text in visual mode
+* press `S` (capital S) and then the character you want to surround the selection with
 
-trying this again. I've had this bundle for years and never remember the shortcut to run it, but I decided to keep it one more time.
+Surround current word:
 
-I'm pretty sure this uses `s` as the command to "surround".
+* `ysiw<CHAR>` - so to surround the current word with a double quote: `ysiw"`
 
-I set this up with:
+Surround current non-whitespace under selection:
 
-    $ git submodule add -b master https://github.com/tpope/vim-surround.git bundle/surround
-
-
-### Python
-
-Currently an internal syntax plugin that brings together the good parts of some other plugins into a python environment that I like to use.
+* `ysiW<CHAR>`
 
 
-### Utils
+#### Colcol
 
-Internal plugin that contains misc functions and commands that I love, compiled from around the internet, and maybe even kind of written by me, in order to make this a little more portable.
-
-
-### [SnipMate](https://github.com/garbas/vim-snipmate)
-
-This actually has dependencies, so setup was a bit more involved:
-
-    $ git submodule add -b master https://github.com/garbas/vim-snipmate.git pack/third-party/start/snipmate
-    $ git submodule add -b master https://github.com/MarcWeber/vim-addon-mw-utils.git pack/third-party/start/addon_mw_utils
-
-I thought about using [ultisnips](https://github.com/SirVer/ultisnips) instead but that requires python and I prefer to use pure vimscript plugins when I can.
-
-[vim-snippets](https://github.com/honza/vim-snippets/blob/master/snippets/python.snippets) contains lots of snippet files for reference.
-
-When in *insert* mode you can do `ctrl-R tab` (`<C-R><Tab>`) to get all the matching snippets. I've also added `:Snippets` to open the corresponding `$VIMHOME/snippets/<FILETYPE>.snippets` file.
-
-
-#### April 14, 2025
-
-I removed `tlib` since I've never used the `:SnipMateOpenSnippetFiles` command and it doesn't make any sense to keep a whole dependency around for it
-
-    $ git rm pack/third-party/start/tlib
-
-I also updated the installation instructions.
-
-
-### Colcol
+Manually installed
 
 April 14, 2025 - I have no idea when I added this, it's not a submodule, so I'm the one that added it and it's actually pretty cool. It places a `ColorColumn` (a column background color that goes from the top of the file to the bottom of the file) at the cursor position
 
 * `<LEADER>c` - toggle a color column at the current cursor position
 * `<LEADER>C` - toggle off all color columns, be careful with this as it will turn off the preset ones at 80 and 120 also.
+
+
+#### Hilinks
+
+Manually installed
+
+See highlights for text under cursor:
+
+```
+:HLT
+```
+
+
+#### [Vim-Plug](https://github.com/junegunn/vim-plug)
+
+Manually installed, manages other plugins. Configured in `vimrc`.
+
+[Usage](https://github.com/junegunn/vim-plug#usage):
+
+* `:PlugInstall` to install the plugins
+* `:PlugUpdate` to install or update the plugins
+* `:PlugDiff` to review the changes from the last update
+* `:PlugClean` to remove plugins no longer in the list
+
+
+
+### First party
+
+#### Python
+
+Currently an internal syntax plugin that brings together the good parts of some other plugins into a python environment that I like to use.
+
+
+#### Utils
+
+Internal plugin that contains misc functions and commands that I love, compiled from around the internet, and maybe even kind of written by me, in order to make this a little more portable.
+
+
+#### Env
+
+Sets up certain paths so they can be used in configuration.
+
+
+#### Indentify
+
+Auto sets tabstop depending on the indentation of the file.
 
 
 -------------------------------------------------------------------------------

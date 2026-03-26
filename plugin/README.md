@@ -1,6 +1,6 @@
 # Plugin Directory
 
-This directory used to be for Vim plugins, but that functionality has been superseded by `pack/*/start` and looking at `:scriptnames` it appears files loaded in this directory are loaded before `pack/*/start` so I decided to repurpose this directory for plugin specific configuration.
+This directory used to be for Vim plugins, but that functionality has been superseded by `pack/*/start` and `plugged`. Looking at `:scriptnames` it appears files loaded in this directory are loaded before `pack/*/start` so I decided to repurpose this directory for plugin specific configuration.
 
 On March 6, 2023 I moved all the plugin specific configuration I had in my `vimrc` into separate files in this directory, and that is how I plan on using it going forward. If I install a plugin and need to configure it, I should create a matching `plugin/<PLUGIN-NAME>.vim` file and add the configuration there. This should roughly be the same as adding the configuration to the end of my `vimrc`.
 

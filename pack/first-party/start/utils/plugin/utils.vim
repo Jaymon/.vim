@@ -70,3 +70,27 @@ endfunction
 map <silent> <leader>b :call LaunchBrowser()<CR>:redraw!<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vim exposes `mkview` and `loadview` but not `deleteview` for some reason
+"
+" This adds `DelView` to delete the view file, it replaces a previous
+" script `bin/delview`
+"
+" https://github.com/Jaymon/.vim/issues/16
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Vim doesn't expose the encoding it uses to create the view files, so this is
+" my attempt to mimic vim's view file encoding
+function! GetViewFile()
+  let p = substitute(expand('%:p'), '^' . expand('~'), '~', '')
+  let p = substitute(p, '/', '=+', 'g')
+  return expand(&viewdir) . p . '='
+endfunction
+
+" `:call DelView()` to run when the file is open
+function! DelView()
+  call delete(GetViewFile())
+endfunction
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+

@@ -14,7 +14,6 @@ set nocompatible
 " http://stackoverflow.com/questions/7178964/how-to-turn-off-auto-insert-when-selecting-text-with-gvim?rq=1
 behave xterm
 
-
 augroup vimrc
   " reset all autocmds for this file in case it is reloaded
   autocmd!
@@ -87,6 +86,26 @@ set smartcase
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-plug
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call plug#begin()
+
+" https://github.com/preservim/tagbar
+Plug 'preservim/tagbar'
+
+" https://github.com/preservim/nerdtree
+Plug 'preservim/nerdtree'
+
+" https://github.com/tpope/vim-surround
+Plug 'tpope/vim-surround'
+
+" https://github.com/Jaymon/vim-commentify
+Plug 'Jaymon/vim-commentify'
+
+call plug#end()
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Indentation stuff
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " http://www.jonlee.ca/hacking-vim-the-ultimate-vimrc/
@@ -156,7 +175,7 @@ augroup END
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " turn on syntax highlighting
-syntax on
+syntax enable
 filetype plugin indent on " indent depends on filetype
 colorscheme jaymon_light
 " 2026-02-26 - this causes all sorts of highlighting problems to load the color
