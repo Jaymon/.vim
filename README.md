@@ -114,6 +114,8 @@ Manually installed, manages other plugins. Configured in `vimrc`.
 * `:PlugClean` to remove plugins no longer in the list
 
 
+#### [Vim-LSP](https://github.com/prabirshrestha/vim-lsp)
+
 
 ### First party
 

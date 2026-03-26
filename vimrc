@@ -102,6 +102,9 @@ Plug 'tpope/vim-surround'
 " https://github.com/Jaymon/vim-commentify
 Plug 'Jaymon/vim-commentify'
 
+" https://github.com/prabirshrestha/vim-lsp
+Plug 'prabirshrestha/vim-lsp'
+
 call plug#end()
 
 
