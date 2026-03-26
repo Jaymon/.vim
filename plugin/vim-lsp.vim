@@ -2,21 +2,24 @@
 " configure vim-lsp
 "
 " https://github.com/prabirshrestha/vim-lsp
+"
+" LSP servers are installed using vim-lsp-settings
+"   https://github.com/mattn/vim-lsp-settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Python configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let s:pylsp = $VIMHOME . "/.venv3.12.11/bin/pylsp"
-
-if executable(s:pylsp)
-    " pip install python-lsp-server
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pylsp',
-        \ 'cmd': {server_info->[s:pylsp]},
-        \ 'allowlist': ['python'],
-        \ })
-endif
+"let s:pylsp = $VIMHOME . "/.venv3.12.11/bin/pylsp"
+"
+"if executable(s:pylsp)
+"    " pip install python-lsp-server
+"    au User lsp_setup call lsp#register_server({
+"        \ 'name': 'pylsp',
+"        \ 'cmd': {server_info->[s:pylsp]},
+"        \ 'allowlist': ['python'],
+"        \ })
+"endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
@@ -47,6 +50,9 @@ set foldmethod=expr
 " turn off warnings
 let g:lsp_diagnostics_enabled = 0
 
+" vim-lsp-settings installation directory
+let g:lsp_settings_servers_dir = $VIMTEMP . '/vim-lsp-settings/servers'
+
 " ctrl-j triggers autocomplete
 inoremap <C-J> <C-X><C-O>
 " ctrl-space also triggers autocomplete
@@ -59,7 +65,7 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 
 set completeopt=menuone,noinsert,noselect,preview
 set infercase
-shortmess+=c
+set shortmess+=c
 
 set autocomplete
 

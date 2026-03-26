@@ -116,6 +116,22 @@ Manually installed, manages other plugins. Configured in `vimrc`.
 
 #### [Vim-LSP](https://github.com/prabirshrestha/vim-lsp)
 
+Managed by vim-plug.
+
+I installed [vim-lsp-settings](https://github.com/mattn/vim-lsp-settings) plugin (also managed by vim-plug) to manage the LSP servers, you install a server like this:
+
+```
+:LspInstallServer <NAME>
+```
+
+The [names you can install can be found here](https://github.com/mattn/vim-lsp-settings#supported-languages).
+
+[This](https://github.com/python-lsp/python-lsp-server) is the Python LSP server I installed:
+
+```
+:LspInstallServer pylsp
+```
+
 
 ### First party
 

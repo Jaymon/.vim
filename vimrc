@@ -105,6 +105,9 @@ Plug 'Jaymon/vim-commentify'
 " https://github.com/prabirshrestha/vim-lsp
 Plug 'prabirshrestha/vim-lsp'
 
+" https://github.com/mattn/vim-lsp-settings
+Plug 'mattn/vim-lsp-settings'
+
 call plug#end()
 
 
