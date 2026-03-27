@@ -11,8 +11,15 @@ call env#setup()
 
 set nocompatible
 
+" 
 " http://stackoverflow.com/questions/7178964/how-to-turn-off-auto-insert-when-selecting-text-with-gvim?rq=1
-behave xterm
+"#behave xterm
+" 2026-03-27 - chatGPT recommended for explicit xterm behavior, I tested both
+" and it seems like nothing changes in macvim with or without these settings,
+" I'm guessing this is just a legacy setting now
+"set mouse=a
+"set selection=inclusive
+"set mousemodel=popup
 
 augroup vimrc
   " reset all autocmds for this file in case it is reloaded
@@ -39,12 +46,17 @@ set showmode
 " http://vim.wikia.com/wiki/Working_with_Unicode
 " http://vim.1045645.n5.nabble.com/what-s-a-quot-conversion-error-quot-and-how-do-I-correct-it-td4416508.html
 if has("multi_byte")
-  if &termencoding == ""
-    let &termencoding = &encoding
-  endif
   set encoding=utf-8
   setglobal fileencoding=utf-8
   set fileencodings=ucs-bom,utf-8,latin1
+
+  if &termencoding == ""
+    let &termencoding = &encoding
+  endif
+endif
+
+if has("termguicolors")
+  set termguicolors
 endif
 
 augroup vimrc
@@ -464,5 +476,85 @@ nnoremap <silent> [{ :<C-U>execute "normal " . v:count1 . "[m"<CR>
 onoremap <silent> [{ :<C-U>execute "normal " . v:count1 . "[m"<CR>
 xnoremap <silent> [{ :<C-U>execute "normal gv" . v:count1 . "[m"<CR>
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Whitespace delims
+" http://www.utf8-chartable.de/unicode-utf8-table.pl?start=8192
+"
+" Characters until 12-3-2024: ‧․
+" 
+" Current characters: \u0701 and \u0702
+"   https://www.compart.com/en/unicode/category/Po
+"   https://www.compart.com/en/unicode/scripts/Syrc
+"set listchars=tab:‧\ ,space:‧,eol:․,trail:‧,extends:‧,precedes:‧
+"set listchars=tab:‧\ ,leadmultispace:‧\ \ \ ,eol:․,trail:‧,extends:‧,precedes:‧
+"set listchars=tab:܁\ ,leadmultispace:܁\ \ \ ,eol:․,trail:܁,extends:܁,precedes:܁
+set listchars=tab:܁\ ,leadmultispace:܁\ \ \ ,eol:܂,trail:܁,extends:܁,precedes:܁
+set list
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" set the status line
+" :help statusline
+" http://learnvimscriptthehardway.stevelosh.com/chapters/17.html
+" http://stackoverflow.com/questions/5375240/a-more-useful-statusline-in-vim
+" http://got-ravings.blogspot.com/2008/08/vim-pr0n-making-statuslines-that-own.html
+" http://vim.wikia.com/wiki/Writing_a_valid_statusline
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" this function is used to figure out how much left side space buffering is
+" needed to position the start of the status line at the end of the line
+" number gutter
+function! LineNumberBuffer()
+  let l:line_number_len = len(line('$')) + 1
+  " not sure why this needs the +1 here, but it does
+  return l:line_number_len > &numberwidth ? l:line_number_len + 1 : &numberwidth + 1
+
+endfunction
+
+" Get a string of the syntax rule and any linked syntax rule
+function! SyntaxInfo()
+  " https://stackoverflow.com/a/36993989
+  let l:s = synID(line('.'),col('.'),1)
+  let l:syntax_name = synIDattr(s, 'name')
+  let l:syntax_group = synIDattr(synIDtrans(s), 'name')
+
+  if len(l:syntax_group) > 0 && l:syntax_name !=? l:syntax_group
+    let l:syntax_info = l:syntax_name . ' (' . l:syntax_group . ')'
+
+  else
+    let l:syntax_info = l:syntax_name
+
+  endif
+
+  return l:syntax_info
+
+endfunction
+
+set laststatus=2
+set statusline=   " clear the statusline for when vimrc is reloaded
+set statusline+=%1* " switch to User1 highlight
+set statusline+=%{repeat('\ ',LineNumberBuffer())}
+set statusline+=[%n]\ %.80F\                    " buffer number and file (max 80 chars of path)
+set statusline+=%h%m%r%w                        " flags
+set statusline+=[%{strlen(&ft)?&ft:'none'},\    " filetype
+set statusline+=%{strlen(&fenc)?&fenc:&enc},\   " encoding
+set statusline+=%{&fileformat}]                 " file format
+set statusline+=%=                              " right align
+"set statusline+=%-2.10{v:register}
+set statusline+=%{v:register}\ 
+set statusline+=%{SyntaxInfo()}
+set statusline+=%15.15(%c\ %l/%L%)\             " cursor_column current_line/total_lines
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Set the color column
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if exists('+colorcolumn')
+  " the columns should be 1 and 41 after the set textwidth setting
+  set colorcolumn=+1,+41
+
+endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
