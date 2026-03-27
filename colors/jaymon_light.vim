@@ -102,14 +102,22 @@ let g:colors_name="jaymon_light"
 " dark blue: #000080
 
 
+" I could switch all the hardcoded values to variables and then do something
+" like this
+"if has("termguicolors")
+"  execute "hi Class guifg=" . s:class_fg_gui
+"else
+"  execute "hi Class ctermfg=" . s:class_fg_cterm
+"endif
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Presets
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-hi blockStatement guifg=#FF8000 ctermfg=magenta cterm=none gui=none 
-hi defStatement guifg=#FF8000 ctermfg=magenta cterm=bold gui=bold
+hi blockStatement guifg=#FF8000  gui=none 
+hi defStatement guifg=#FF8000  gui=bold
 
-hi Class guifg=#AF00DB ctermfg=DarkMagenta
-hi StringTemplate guifg=#800000 ctermfg=magenta
+hi Class guifg=#AF00DB
+hi StringTemplate guifg=#800000
 
 
 
@@ -120,9 +128,9 @@ hi StringTemplate guifg=#800000 ctermfg=magenta
 "   https://www.color-hex.com/color/ecf7ff
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " http://vim.wikia.com/wiki/Highlight_current_line
-hi cursorLine guibg=#F3FAFF cterm=None term=None
+hi cursorLine guibg=#F3FAFF
 
-hi ColorColumn ctermbg=None guibg=#F3FAFF
+hi ColorColumn guibg=#F3FAFF
 
 " this was previously in the status line section of my gvimrc, I have no idea
 " what it highlights
@@ -136,36 +144,36 @@ hi CursorLineNr guifg=#838383
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-hi MatchParen guibg=#FFFF80 ctermbg=yellow
+hi MatchParen guibg=#FFFF80
 
 " syntax highlighting groups
-hi Comment guifg=#DEDAE0 ctermfg=lightgrey
-hi Constant guifg=#000000 cterm=bold gui=bold
+hi Comment guifg=#DEDAE0
+hi Constant guifg=#000000 gui=bold
 " python: method names, .func()
 " hi Identifier	guifg=#000080 
-hi Identifier guifg=#0000FF ctermfg=blue
+hi Identifier guifg=#0000FF
 
 " python: for and or in
-"hi Operator	guifg=#000080 ctermfg=darkblue
-hi Operator	guifg=#FF8000 cterm=bold gui=bold
+"hi Operator	guifg=#000080
+hi Operator	guifg=#FF8000 gui=bold
 
 " python: if, else, return, def
 hi Statement guifg=#FF8000 
-"hi Statement guifg=#FF8000 cterm=bold gui=bold  
-"hi Statement guifg=#000000 cterm=bold gui=bold  
+"hi Statement guifg=#FF8000 gui=bold
+"hi Statement guifg=#000000 gui=bold
 " python: import statements
 hi PreProc guifg=#FF8000 
 " hi Type guifg=#0000FF
-hi Type guifg=#000000 cterm=bold gui=bold  
+hi Type guifg=#000000 gui=bold  
 hi Special guifg=#A0A0A0
 
-"hi Number guifg=#000080 ctermfg=darkblue
+"hi Number guifg=#000080
 hi Number guifg=#267f99
 
-hi Float guifg=#000080 ctermfg=darkblue
-hi String guifg=#FF0000 ctermfg=red
+hi Float guifg=#000080
+hi String guifg=#FF0000
 
-hi Structure ctermfg=black cterm=bold guifg=black gui=bold
+hi Structure guifg=black gui=bold
 
 " completely ignore error highlighting, individual syntax files can turn it on
 " but I absolutely hate it
@@ -174,12 +182,12 @@ hi Error NONE
 hi ErrorMsg NONE
 
 " http://stackoverflow.com/questions/8309815/vim-conceal-with-more-than-one-character
-hi conceal ctermfg=DarkBlue ctermbg=NONE guifg=#D4CED4 guibg=NONE
+hi conceal guifg=#D4CED4 guibg=NONE
 " for highlighting chars like newline and tab
 highlight NonText guifg=#b9e2ff
 highlight SpecialKey guifg=#b9e2ff
 
-hi NonReservedKeyword guifg=black ctermfg=black cterm=bold gui=bold
+hi NonReservedKeyword guifg=black gui=bold
 
 " Customize the popup window that can appear when running jobs
 hi MessageWindow guifg=#BCBCBC guibg=#F3FAFF
@@ -192,21 +200,21 @@ hi MessageWindow guifg=#BCBCBC guibg=#F3FAFF
 hi link VimCommentString VimLineComment
 
 " make titles in comments (eg `" Foo:`) just a darker shade of gray
-hi VimCommentTitle term=bold ctermfg=5 guifg=#A0A0A0
+hi VimCommentTitle term=bold guifg=#A0A0A0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " python specific highlighting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-hi pythonFormatStringTemplate guifg=#800000 ctermfg=magenta
-hi pythonBytesEscape guifg=#800000 ctermfg=magenta
+hi pythonFormatStringTemplate guifg=#800000
+hi pythonBytesEscape guifg=#800000
 "hi pythonFormatStrTemplate guifg=#660000
-hi pythonStringFormatting guifg=#CC0000 ctermfg=magenta
-hi pythonStringFormat guifg=#CC0000 ctermfg=magenta
-hi pythonMagicMethod guifg=#0000FF ctermfg=blue cterm=bold gui=bold
+hi pythonStringFormatting guifg=#CC0000
+hi pythonStringFormat guifg=#CC0000
+hi pythonMagicMethod guifg=#0000FF gui=bold
 hi pythonMathOperator guifg=#AF00DB
-"hi pythonClass guifg=#AF00DB ctermfg=DarkMagenta
+"hi pythonClass guifg=#AF00DB
 hi pythonDotNotation guifg=#AF00DB
 
 
@@ -240,31 +248,31 @@ hi link pythonDefStatement defStatement
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " markdown specific highlighting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-highlight markdownH1 ctermfg=5 guifg=#FF00AF
-highlight markdownH2 ctermfg=4 guifg=#FF00D7
-highlight markdownH3 ctermfg=13 guifg=#FF00FF
-highlight markdownH4 ctermfg=12 guifg=#FF0087
-highlight markdownH5 ctermfg=163 guifg=#FF005F
-highlight markdownH6 ctermfg=56 guifg=#FF5FFF
+highlight markdownH1 guifg=#FF00AF
+highlight markdownH2 guifg=#FF00D7
+highlight markdownH3 guifg=#FF00FF
+highlight markdownH4 guifg=#FF0087
+highlight markdownH5 guifg=#FF005F
+highlight markdownH6 guifg=#FF5FFF
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Ruby specific highlighting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-hi rubyStringDelimiter guifg=#CC0000 ctermfg=magenta
+hi rubyStringDelimiter guifg=#CC0000
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " javascript/typescript specific highlighting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-hi typescriptExport guifg=#FF8000 ctermfg=magenta cterm=bold gui=bold
-hi typescriptImport guifg=#FF8000 ctermfg=magenta cterm=bold gui=bold
-hi typescriptImportType guifg=#FF8000 ctermfg=magenta cterm=bold gui=bold
+hi typescriptExport guifg=#FF8000 gui=bold
+hi typescriptImport guifg=#FF8000 gui=bold
+hi typescriptImportType guifg=#FF8000 gui=bold
 
 " dict keys without quotes
-hi typescriptObjectLabel guifg=#800000 ctermfg=magenta cterm=none gui=none
+hi typescriptObjectLabel guifg=#800000 gui=none
 
 " Make `console.log` look like any other method call
 hi link typescriptConsoleMethod Identifier
@@ -306,40 +314,40 @@ hi link typescriptObjectStaticMethod typescriptMethodCall
 hi link typescriptDOMEventMethod typescriptMethodCall
 
 " arguments in definitions, calls, and classes
-hi typescriptCall guifg=black ctermfg=black
-hi typescriptFuncCallArg guifg=black ctermfg=black
-hi typescriptFuncComma guifg=black ctermfg=black
+hi typescriptCall guifg=black
+hi typescriptFuncCallArg guifg=black
+hi typescriptFuncComma guifg=black
 
 ""
 " Properties should just be black
 ""
 " members in a class definition
-hi typescriptMember guifg=black ctermfg=black
+hi typescriptMember guifg=black
 hi link typescriptURLUtilsProp typescriptMember
 
 " class definitions
-hi typescriptClassName guifg=#AF00DB ctermfg=DarkMagenta
+hi typescriptClassName guifg=#AF00DB
 hi link typescriptClassHeritage typescriptClassName
-hi typescriptInstantiation guifg=#AF00DB ctermfg=DarkMagenta
+hi typescriptInstantiation guifg=#AF00DB
 
 " operators: =
 hi typescriptDefaultParam guifg=#AF00DB
 hi typescriptAssign guifg=#AF00DB
 " =>
-hi typescriptArrowFunc guifg=#AF00DB ctermfg=magenta cterm=none gui=none
+hi typescriptArrowFunc guifg=#AF00DB gui=none
 
 " declare
-hi typescriptAmbientDeclaration guifg=#FF8000 ctermfg=magenta cterm=bold gui=bold
+hi typescriptAmbientDeclaration guifg=#FF8000 gui=bold
 
 " dot between instance and property (eg, the dot after foo in foo.bar)
 "hi typescriptDotNotation guifg=#AF00DB
-"hi typescriptDotNotation guifg=black ctermfg=black
+"hi typescriptDotNotation guifg=black
 
 " let, const
 hi typescriptVariable guifg=#FF8000
 
 " Regexes
-hi typescriptRegexpString guifg=#FF0000 ctermfg=red
+hi typescriptRegexpString guifg=#FF0000
 hi link typescriptRegexpCharClass typescriptRegexpString
 hi link typescriptRegexpBoundary typescriptRegexpString
 hi link typescriptRegexpBackRef typescriptRegexpString
@@ -382,7 +390,7 @@ hi link typescriptAsyncFuncKeyword blockStatement
 hi link javaScriptAsyncFuncDefKeyword defStatement
 
 
-"hi typescriptTypeReference guifg=black ctermfg=black 
+"hi typescriptTypeReference guifg=black
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
