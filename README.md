@@ -159,7 +159,6 @@ Auto sets tabstop depending on the indentation of the file.
 
 ## Warnings
 
-This currently does not work as well on the console version of Vim, I've spent time tuning the *GUI* version,
-not so much the console version.
+This currently does not work as well on the console version of Vim, I've spent time tuning the *GUI* version, not so much the console version.
 
 
