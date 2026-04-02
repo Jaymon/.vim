@@ -48,7 +48,11 @@ inoremap <C-J> <C-X><C-O>
 inoremap <C-Space> <C-x><C-o>
 
 " use TAB for navigating the autocomplete menu and ENTER to accept
-inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" select the first value if `tab` is clicked if nothing is currently selected
+" https://www.tobymackenzie.com/blog/2022/10/14/vim-autocomplete-setup/
+inoremap <expr> <Tab> pumvisible() ? (complete_info()['selected'] == -1 ? "\<C-n>" : "\<C-y>") : "\<Tab>"
+"inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 
@@ -56,5 +60,12 @@ set completeopt=menuone,noinsert,noselect,preview
 set infercase
 set shortmess+=c
 
-set autocomplete
+" make sure dictionary and spell is turned off
+"set complete-=k
+"set complete-=s
+"set complete=.,w,b,u
+" let LSP server do the heavy lifting
+"set complete=.
+
+"set autocomplete
 

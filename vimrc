@@ -491,7 +491,6 @@ xnoremap <silent> [{ :<C-U>execute "normal gv" . v:count1 . "[m"<CR>
 "set listchars=tab:܁\ ,leadmultispace:܁\ \ \ ,eol:․,trail:܁,extends:܁,precedes:܁
 set listchars=tab:܁\ ,leadmultispace:܁\ \ \ ,eol:܂,trail:܁,extends:܁,precedes:܁
 set list
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
