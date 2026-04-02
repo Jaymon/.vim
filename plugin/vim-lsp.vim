@@ -55,10 +55,8 @@ let g:lsp_diagnostics_enabled = 0
 " vim-lsp-settings installation directory
 let g:lsp_settings_servers_dir = $VIMTEMP . '/vim-lsp-settings/servers'
 
-" Disable auto signature help popup
-"let g:lsp_signature_help_enable = 0
+" Disable auto signature/preview help popup
 let g:lsp_signature_help_enabled = 0
-"let g:lsp_completion_documentation_enabled = 0
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -73,16 +71,6 @@ inoremap <C-J> <C-X><C-O>
 " use as a keyboard shortcut
 inoremap <C-Space> <C-X><C-O>
 
-" I used these to test what ctrl-space was doing
-"nnoremap <C-Space> :echom "Ctrl-Space"<CR>
-"nnoremap <C-@> :echom "Ctrl-At"<CR>
-
-" use TAB for navigating the autocomplete menu and ENTER to accept
-
-" select the first value if `tab` is clicked if nothing is currently selected
-" https://www.tobymackenzie.com/blog/2022/10/14/vim-autocomplete-setup/
-"inoremap <expr> <Tab> pumvisible() ? (complete_info()['selected'] == -1 ? "\<C-n>" : "\<C-y>") : "\<Tab>"
-"inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 " TAB selects first value if it is the only value and nothing has been
 " selected, otherwise it just tabs through values top to bottom.
 inoremap <expr> <Tab> pumvisible()
@@ -101,110 +89,6 @@ set completeopt=menuone,noinsert,noselect
 set infercase
 set shortmess+=c
 
-"call <SID>close_floating_window()
-
-
-
-"function! ToggleDocs()
-"  " If it's a Vim file, just open help (no toggle)
-"  if &filetype ==# 'vim'
-"    execute 'help ' . expand('<cword>')
-"    return
-"  endif
-"
-"  let l:winid = lsp#internal#document_hover#under_cursor#getpreviewwinid()
-"  "echo "winid: " . l:winid
-"  "echo "bufwinner: " . bufwinnr(l:winid)
-"  "echo "winnr: " . win_id2win(l:winid)
-"
-"  "let l:winid = win_getid()
-"  if l:winid != 0 && win_id2win(l:winid) != -1
-"    "let l:save_pos = getpos('.')
-"    "echo "winid: " . win_id2win(l:winid)
-"    call popup_close(l:winid)
-"
-"    "execute win_id2win(l:winid) . 'wincmd c'
-"  else
-"    call lsp#internal#document_hover#under_cursor#do({})
-"  endif
-"
-""  let l:doc_win = <SID>get_doc_win()
-""  if l:doc_win.is_visible()
-""    call <SID>close_floating_window()
-""  else
-""    call lsp#internal#document_hover#under_cursor#do({})
-""  endif
-"
-"  " Check if LSP hover is available
-""  call lsp#internal#document_hover#under_cursor#do({})
-""  if exists('*lsp#ui#vim#hover')
-""    call lsp#ui#vim#hover()
-""
-"""    let l:doc_win = <SID>get_doc_win()
-"""    if l:doc_win.is_visible()
-"""      call <SID>close_floating_window()
-"""    else
-"""      "call <plug>(lsp-hover)
-"""      call lsp#ui#vim#hover()
-"""    endif
-""  endif
-"endfunction
-"
-"" Map normal mode K to toggle docs
-"nnoremap K :call ToggleDocs()<CR>
-
-
-
-
-
-"function! ShowDocs()
-"  " Use Vim help for Vimscript files
-"  if &filetype ==# 'vim'
-"    execute 'help ' . expand('<cword>')
-"    return
-"  endif
-"
-"  " Check if LSP is attached
-"  if exists('*lsp#ui#vim#hover')
-"    " Show hover in preview window
-"    call lsp#ui#vim#hover()
-"    return
-"  endif
-"endfunction
-"
-"" Keep track of preview window ID
-"let s:hover_winid = 0
-"
-"function! ToggleDocs()
-"  " If it's a Vim file, just open help (no toggle)
-"  if &filetype ==# 'vim'
-"    execute 'help ' . expand('<cword>')
-"    return
-"  endif
-"
-"  " Check if LSP hover is available
-"  if exists('*lsp#ui#vim#hover')
-"    " If hover window already open, close it
-"    if g:hover_winid != 0 && bufwinnr(g:hover_winid) != -1
-"      " Close the preview window
-"      execute bufwinnr(g:hover_winid) . 'wincmd c'
-"      let g:hover_winid = 0
-"      return
-"    endif
-"  endif
-"
-"  " Open hover
-"  call lsp#ui#vim#hover()
-"  " Store the preview window ID
-"  let g:hover_winid = win_getid()
-"endfunction
-"
-"" Map normal mode K to toggle docs
-"nnoremap K :call ToggleDocs()<CR>
-"
-"
-"
-"nnoremap K :call ShowDocs()<CR>
 
 " make sure dictionary and spell is turned off
 "set complete-=k
