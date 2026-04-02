@@ -80,6 +80,14 @@ Surround current non-whitespace under selection:
 
 * `ysiW<CHAR>`
 
+Switch `<CHAR1>` to `<CHAR2>`:
+
+* `cs<CHAR1><CHAR2>`
+
+Remove surrounding `<CHAR>`:
+
+* `ds<CHAR>`
+
 
 #### Colcol
 
