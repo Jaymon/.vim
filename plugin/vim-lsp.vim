@@ -16,9 +16,9 @@ function! s:on_lsp_buffer_enabled() abort
   nmap <buffer> gr <plug>(lsp-references)
   "nmap <buffer> K <plug>(lsp-hover)
 
-  set foldmethod=expr
-    \ foldexpr=lsp#ui#vim#folding#foldexpr()
-    \ foldtext=lsp#ui#vim#folding#foldtext()
+"  set foldmethod=expr
+"    \ foldexpr=lsp#ui#vim#folding#foldexpr()
+"    \ foldtext=lsp#ui#vim#folding#foldtext()
 
   ""
   " Either open or close the preview doc window
@@ -38,6 +38,21 @@ function! s:on_lsp_buffer_enabled() abort
   " hitting `K` (shift-k) brings up the preview popup, hitting it again will
   " close the popup window
   nnoremap K :call ToggleDocs()<CR>
+
+  " Use current working directory as root for all LSP servers
+"  if exists('*lsp#register_server')
+"    function! UseCWDAsRoot(server_info) abort
+"      " Override the root_uri to cwd
+"      let l:cwd = getcwd()
+"      " lsp#register_server expects root_uri as a URI, not path
+"      let a:server_info['root_uri'] = 'file://' . l:cwd
+"      return a:server_info
+"    endfunction
+"
+"    " This hook runs before any server is started
+"    let g:lsp#register_server_hook = function('UseCWDAsRoot')
+"  endif
+
 endfunction
 
 
@@ -57,6 +72,21 @@ let g:lsp_settings_servers_dir = $VIMTEMP . '/vim-lsp-settings/servers'
 
 " Disable auto signature/preview help popup
 let g:lsp_signature_help_enabled = 0
+
+" Disable auto-highlighting of variable under the cursor, this doesn't seem to
+" be overly reliable and it leaves highlights up after the cursor is moved.
+" I'd actually like to switch * to do this, so it only highlights in the
+" current scope
+let g:lsp_document_highlight_enabled = 0
+
+" turn off folding, which can be expensive
+let g:lsp_fold_enabled = 0
+
+" turn off all diagnostics, which can be expensive
+let g:lsp_diagnostics_enabled = 0
+
+" sshould be off by default, but just in case
+let g:lsp_semantic_enabled = 0
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
