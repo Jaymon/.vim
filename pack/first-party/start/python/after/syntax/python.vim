@@ -19,8 +19,8 @@
 "
 " * \zs - start the matching right before the next match
 " * \ze - stop the match right before the next match
-" * \@<= - positiver look behind
-" * \@<! - negative look behind
+" * \@<= - positive look behind (must match)
+" * \@<! - negative look behind (must not match)
 " * \@= - positive look ahead
 " * \< \> - word boundaries
 " * \%( \) - non-recording grouping
@@ -39,8 +39,13 @@
 " Single out python class definitions so they can be highlighted differently
 " than python functions
 syn match pythonClass "\<_\{-}[A-Z]\w*\>"
+
+syn match pythonClassProperty "\.\@<=\<_\{-}[A-Z]\w*\>"
+hi link pythonClassProperty pythonClass
+
 syn match pythonClassDef "\%(class\s\+\)\@<=\h\w*"
 hi link pythonClassDef pythonClass
+
 syn keyword pythonDefStatement class nextgroup=pythonClassDef skipwhite
 
 syn match pythonMethodCall "\.\@<=[a-z_]\w*(\@="
