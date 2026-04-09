@@ -1,6 +1,14 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " configure vim-lsp
 "
+" Start the LSP server:
+"
+"   :call lsp#enable()
+"
+" Turn off the LSP server:
+"
+"   :call lsp#disable()
+"
 " https://github.com/prabirshrestha/vim-lsp
 "
 " LSP servers are installed using vim-lsp-settings
@@ -63,6 +71,11 @@ augroup lsp_install
     autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
 
+
+" Don't auto-start the LSP
+" Start the server: `:call lsp#enable()`
+" Stop the server: `:call lsp#disable()`
+let g:lsp_auto_enable = 0
 
 " turn off warnings
 let g:lsp_diagnostics_enabled = 0
