@@ -238,15 +238,6 @@ hi link pythonBoolean Constant
 " `id` and `type` rules and then redefine `id` and `type` to only be
 " considered as builtins when they are function calls
 """
-"syntax match MyNeutral /\<\(id\|type\)\>/
-"syntax match MyNeutral /\<\(id\|type\)\>/ containedin=ALL
-"highlight link MyNeutral NONE
-"syntax iskeyword pythonBuiltin id
-"syntax keyword MyOverride id transparent
-"syntax clear MyOverride
-"syntax match pythonId "\<id\ze("
-"syntax match pythonType2 "\<type\ze\([([]\)"
-
 syntax clear pythonBuiltin
 syn keyword pythonBuiltin	quit exit copyright credits license
 syn keyword pythonBuiltin	abs all any ascii bin bool breakpoint bytearray
