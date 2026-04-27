@@ -218,3 +218,47 @@ hi link pythonBlockFrom pythonStatement
 syn clear pythonDecoratorName
 syn match pythonDecorator "^\s*\zs@"
 
+
+"""
+" `type ...` doesn't need a special syntax, it can inherit
+"""
+syn clear pythonType
+
+
+"""
+" Vim 9.2 changed these from Constant to Identifier, this changes them back
+" since `True|False` and `None` seem more like constants than identifiers
+"""
+hi link pythonConstant Constant
+hi link pythonBoolean Constant
+
+
+"""
+" Completely redefine the built-in pythonBuiltin to remove the default
+" `id` and `type` rules and then redefine `id` and `type` to only be
+" considered as builtins when they are function calls
+"""
+"syntax match MyNeutral /\<\(id\|type\)\>/
+"syntax match MyNeutral /\<\(id\|type\)\>/ containedin=ALL
+"highlight link MyNeutral NONE
+"syntax iskeyword pythonBuiltin id
+"syntax keyword MyOverride id transparent
+"syntax clear MyOverride
+"syntax match pythonId "\<id\ze("
+"syntax match pythonType2 "\<type\ze\([([]\)"
+
+syntax clear pythonBuiltin
+syn keyword pythonBuiltin	quit exit copyright credits license
+syn keyword pythonBuiltin	abs all any ascii bin bool breakpoint bytearray
+syn keyword pythonBuiltin	bytes callable chr classmethod compile complex
+syn keyword pythonBuiltin	delattr dict dir divmod enumerate eval exec
+syn keyword pythonBuiltin	filter float format frozenset getattr globals
+syn keyword pythonBuiltin	hasattr hash help hex input int isinstance
+syn keyword pythonBuiltin	issubclass iter len list locals map max
+syn keyword pythonBuiltin	memoryview min next object oct open ord pow
+syn keyword pythonBuiltin	print property range repr reversed round set
+syn keyword pythonBuiltin	setattr slice sorted staticmethod str sum super
+syn keyword pythonBuiltin	tuple vars zip __import__
+syntax match pythonBuiltin "\<id\ze("
+syntax match pythonBuiltin "\<type\ze\([([]\)"
+
