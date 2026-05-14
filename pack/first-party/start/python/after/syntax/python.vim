@@ -220,12 +220,6 @@ syn match pythonDecorator "^\s*\zs@"
 
 
 """
-" `type ...` doesn't need a special syntax, it can inherit
-"""
-syn clear pythonType
-
-
-"""
 " Vim 9.2 changed these from Constant to Identifier, this changes them back
 " since `True|False` and `None` seem more like constants than identifiers
 """
@@ -234,10 +228,22 @@ hi link pythonBoolean Constant
 
 
 """
-" Completely redefine the built-in pythonBuiltin to remove the default
-" `id` and `type` rules and then redefine `id` and `type` to only be
-" considered as builtins when they are function calls
+" `type ...` doesn't need a special syntax, it can inherit
 """
+syn clear pythonType
+
+
+"""
+" Completely redefine the built-in `pythonBuiltin` and `pythonStatement` to
+" remove the default `id` and/or `type` rules and then redefine `id` and
+" `type` to only be considered as builtins when they are function calls
+"""
+syntax clear pythonStatement
+syn keyword pythonStatement	as assert break continue del global
+syn keyword pythonStatement	lambda nonlocal pass return with yield
+syn keyword pythonStatement	class nextgroup=pythonClass skipwhite
+syn keyword pythonStatement	def nextgroup=pythonFunction skipwhite
+
 syntax clear pythonBuiltin
 syn keyword pythonBuiltin	quit exit copyright credits license
 syn keyword pythonBuiltin	abs all any ascii bin bool breakpoint bytearray
@@ -252,4 +258,5 @@ syn keyword pythonBuiltin	setattr slice sorted staticmethod str sum super
 syn keyword pythonBuiltin	tuple vars zip __import__
 syntax match pythonBuiltin "\<id\ze("
 syntax match pythonBuiltin "\<type\ze\([([]\)"
+
 
